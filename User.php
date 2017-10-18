@@ -7,149 +7,157 @@
  */
 
 /**
- * Description of User
+ * Description of user
  *
- * @author BASEM
+ * @author Ahlam Alkhuzai
  */
+
 class User {
-   private $id,$username,$email,$password; 
-   
-    function __construct() {
-        require_once 'connect.php';
+    private $id;
+    private $username;
+    private $email;
+    private $password;
+    private $connect;
+    function __construct() { 
+        require_once 'DB_Connector.php';
+        $this->connect = new DB_Connector();
     }
     
-    function AddUser($username,$email,$password)
-    {        
-        $isRbConnected=R::testConnection();       
-        if($isRbConnected)
-        {
-            try {
-            $user = R::dispense( 'user' );
-            $user->username = $username;
-            $user->password =$password;
-            $user->email = $email;
-            $this->id = R::store( $user );       
-            return $this->id;
-            } 
-            catch (Exception $e ) {
-                return  $e->getTraceAsString(); 
-            }
-        }
-        else {
-            return false;
-        }
+    function __deconstruct() { 
+       
+        $this->connect->closeConnection();
     }
     
-    function validateUser($username,$email,$password)
+    function setID($id)
     {
-        $isRbConnected=R::testConnection();
-        if($isRbConnected)
-        {
-            $user = R::getrow( 'SELECT * FROM user WHERE username= :username', array(":username"=>$username));         
-            if($user)
-            {
-                if($password==$user['password'])
-                {
-                    $this->email=$email;
-                    $this->id=$user['id'];
-                    $this->password=$password;
-                    $this->username=$username;
-                    return $user['id'];
-                }
-                else
-                    return "كلمة المرور المدخلة غير صحيحة";
-              
-            } 
-            else 
-                return "اسم المستخدم المدخل غير صحيح";
-        } 
-        else{
-            return false;
-        }       
+        $this->id=$id;
+    }
+    function setUsername($username)
+    {
+        $this->username=$username;
+    }
+    function setPassword($password)
+    {
+        $this->password=$password;
     }
     
-    function neverUseUsername($username)
+    function setEmail($email)
     {
-        $isRbConnected=R::testConnection();
-        if($isRbConnected)
-        {
-            $user = R::getrow( 'SELECT username FROM user WHERE username= :username', array(":username"=>$username));         
-            if($user)
-            {
-                return "اسم المستخدم موجود مسبقاً";              
-            } 
-            else 
-                return true;
-        } 
-        else{
-            return false;
-        }   
+        $this->email=$email;
     }
     
-        function neverUseEmail($email)
-    {
-        $isRbConnected=R::testConnection();
-        if($isRbConnected)
-        {
-            $user = R::getrow( 'SELECT email FROM user WHERE email= :email', array(":email"=>$email));         
-            if($user)
-            {
-                return "البريد الالكتروني موجود مسبقاً";              
-            } 
-            else 
-                return true;
-        } 
-        else{
-            return false;
-        }   
-    }
-    
-    function getUsername($id)
-    {
-        $isRbConnected=R::testConnection();
-        if($isRbConnected)
-        {
-            $user = R::getrow( 'SELECT username FROM user WHERE id= :id', array(":id"=>$id));         
-            if($user)
-            {
-                    return $user['username'];              
-            } 
-            else 
-                return -1;
-        } 
-        else{
-            return false;
-        }    
-    }
-    function getEmail($id)
-    {
-        $isRbConnected=R::testConnection();
-        if($isRbConnected)
-        {
-            $user = R::getrow( 'SELECT email FROM user WHERE id= :id', array(":id"=>$id));         
-            if ($user) {
-                return $user['email'];
-            } else {
-                return -1;
-            }
-        } 
-        else{
-            return false;
-        } 
-    }
-    function getId()
+    function getID()
     {
         return $this->id;
     }
     
-    function validEmail($email)
-{
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
-    { 
-        return "البريد الالكتروني غير صحيح";
+    function getEmail()
+    {
+        return $this->email;
     }
-    else 
-         return true; 
-}
-}
+    function getPassword()
+    {
+        return $this->password;
+    }
+    function getUsername()
+    {
+        return $this->username;
+    }
+    
+    function getUser($id)
+    {
+        $isRbConnected=R::testConnection();
+        if($isRbConnected)
+        {
+            $user = R::load('user', $id);         
+            if(!$user->id)
+               return false;
+           else
+               return $user; 
+        } 
+        else{
+            return false;
+        } 
+    }
+    
+    function getUserByUsername($username)
+    {
+       $isRbConnected=R::testConnection();
+        if($isRbConnected)
+        {
+            $user = R::getrow( 'SELECT * FROM user WHERE username= :usrname', array(":usrname"=>$username));          
+            if ($user['id']) {
+                return $user;
+            } else {
+                return false;
+            }
+        } 
+        else{
+            return false;
+        } 
+    }
+    
+    function deleteUser($id)
+    {
+        $isConnected = R::testConnection();
+        if($isConnected)
+        {
+            try{
+                $r=R::exec('delete from user WHERE id =:id',array(":id"=>$id));
+                if($r)
+                    return $r;   
+                else 
+                    return false;
+            }catch(Exception $e){
+                return $e->getTraceAsString();
+            }
+        }
+         else
+        {     
+            return false;
+        }
+    }
+    
+    function AddOrUpdateUser($username,$password,$email)
+    {
+        $isConnected = R::testConnection();
+        if($isConnected)
+        {
+            try{
+        
+                $user = R::findOne('user', 'username = ?', array($username));
+                if($user->id)
+                {
+                    $user->username=$username;
+                    $user->password=$password;
+                    $user->email=$email;
+                    $result=R::store($user);
+                    if($result)
+                        return true;
+                    else 
+                        return false;
+                }
+                else 
+                {
+                    $user=R::dispense('user');
+                    $user->username=$username;
+                    $user->password=$password;
+                    $user->email=$email;
+                    $result=R::store($user);
+                    if($result)
+                        return true;
+                    else 
+                        return false;
+                }
+            }catch(Exception $e){
+                return $e->getTraceAsString();
+            }
+        }
+         else
+        {     
+            return false;
+        }
+    }
+    
+    }
 ?>

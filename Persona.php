@@ -7,12 +7,16 @@
  */
 
 /**
- * Description of TrainingCourse
+ * Description of Persona
  *
- * @author BASEM
+ * @author Ahlam Alkhuzai
  */
-class TrainingCourse {
-   
+
+require_once 'User.php';
+
+class Persona extends User {
+
     
 }
+
 ?>

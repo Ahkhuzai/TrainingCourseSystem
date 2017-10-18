@@ -1,35 +1,23 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <?php
-require_once('Assist/config/smarty/libs/Smarty.class.php');
 require_once 'User.php';
-require_once 'Trainee.php';
-$smarty = new Smarty();
+require_once 'Rate.php';
+$user=new User();
+$user->getUser(1);
+$user->getUser(100);
+$user->getUserByUsername("ahlamnam");
+$user->getUserByUsername("AHLAM");  
+$user->deleteUser(10);
+$user->AddOrUpdateUser('ahlamnam', '123123123123', 'we@we.com');
+$user->AddOrUpdateUser('ahlamnam0', '123123123123', 'we@we.ocom');
 
-$userO= new User();
-$trainee=new Trainee();
-
- 
-
-   
+$rate=new Rate();
+$rate->getValueOfRate("agree");
 
 
-
-/* 
-$reg_id=$trainee->registerForCourse(1,2);
-echo $trainee->ExcusedForCourse($reg_id);
-echo $trainee->addAttendance(10,1,1);
-$result= $userO->validateUser("ahlamnam","test@gmai.com",md5("3124"));
-if($result>0)
-   echo $result;
-
-echo $userO->neverUseUsername("Ahlamnam");
-echo $userO->neverUseUsername("hassan");
-
-echo $userO->neverUseEmail("ahalkhuzai.uqu@gmail.com");
-echo $userO->neverUseEmail("hassan@g.com");
-
-echo $userO->validEmail("hassan@g.com");
-echo $userO->validEmail("j.com");*/
-
-$smarty->display("index.tpl");
 ?>
-
