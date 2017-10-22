@@ -25,18 +25,22 @@ class UserRepo {
     
     public function fetchById($id)
     {
-        $user = R::load('user', $id);         
-        if(!$user->id)
-            return false;
-        else
-            return $user;        
+        try{
+            $user = R::load('user', $id);         
+            if(!$user->id)
+                return false;
+            else
+                return $user;
+        } catch (Exception $e)
+        {return false;}
     }
     
 
     public function fetchAll()
     {
-        $user = R::findAll('user');  
-        if(!$user->id)
+        $user = R::findAll('user'); 
+       
+        if(!$user)
            return false;
         else
            return $user;  
@@ -45,15 +49,14 @@ class UserRepo {
     public function delete($id)
     {
         try{
-            $user = $this->fetchById($id);
-            $result=R::trash($user);           
-            if($resrult)
-                return $r;   
+            $result = R::exec('DELETE FROM user WHERE id = :id', array('id' => $id));
+            if($result)
+                return $result;   
             else 
                 return false;
         }
         catch(Exception $e){
-            return $e->getTraceAsString();
+            return FALSE;
         }
     }        
     public function save($id,$username,$password,$email)
@@ -85,7 +88,7 @@ class UserRepo {
             }
         }
         catch(Exception $e){
-        return $e->getTraceAsString();
+        return FALSE;
         }       
     }
 }

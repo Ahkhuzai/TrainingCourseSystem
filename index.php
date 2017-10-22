@@ -5,19 +5,13 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <?php
-require_once 'User.php';
-require_once 'Rate.php';
-$user=new User();
-$user->getUser(1);
-$user->getUser(100);
-$user->getUserByUsername("ahlamnam");
-$user->getUserByUsername("AHLAM");  
-$user->deleteUser(10);
-$user->AddOrUpdateUser('ahlamnam', '123123123123', 'we@we.com');
-$user->AddOrUpdateUser('ahlamnam0', '123123123123', 'we@we.ocom');
+require_once 'UserRepo.php';
+$user = new UserRepo();
+$result=$user->fetchAll();
+ECHO $result = $user->save(0,'$use44rname','$password','$5email');
 
-$rate=new Rate();
-$rate->getValueOfRate("agree");
+     
+
 
 
 ?>
