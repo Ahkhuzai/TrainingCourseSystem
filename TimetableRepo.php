@@ -7,11 +7,11 @@
  */
 
 /**
- * Description of RateRepo
+ * Description of TimetableRepo
  *
  * @author ahkhuzai
  */
-class RateRepo {
+class TimetableRepo {
     
     private $connect;
     public function __construct() { 
@@ -28,31 +28,27 @@ class RateRepo {
     
     public function fetchByID($id)
     {
-        $rate = R::load('rate', $id);         
-        if(!$rate->id)
+        $timetable = R::load('timetable', $id);         
+        if(!$timetable->id)
             return false;
         else
-            return $rate;  
-        
+            return $timetable;     
     } 
               
     public function fetchAll()
-    {
-        
-        $rate = R::findAll('rate');  
-        if(!$rate->id)
+    {   
+        $timetable = R::findAll('timetable');  
+        if(!$timetable->id)
            return false;
         else
-           return $rate; 
-         
+           return $timetable;        
     }
     
     public function delete($id)
-    {
-        
+    {   
         try{
-            $rate= $this->fetchById($id);
-            $result=R::trash($rate);       
+            $timetable= $this->fetchById($id);
+            $result=R::trash($timetable);       
             if($result){
                 return $result;
             } else {
@@ -64,18 +60,21 @@ class RateRepo {
         }  
     }
     
-    public function save($rId,$tcId,$trId,$tcAvg,$trAvg)
+    public function save($id,$tcId,$trId,$startDate, $endDate, $duration, $startAt, $location)
     {
         try{
 
-            $rate = R::findOne('rate', 'id = ?', array($rId));
-            if($rate->id)
+            $timetable = R::findOne('timetable', 'id = ?', array($id));
+            if($timetable->id)
             {
-                $rate->tc_id=$tcId;
-                $rate->tr_id=$trId;
-                $rate->tr_total_avg_rate=$trAvg;
-                $rate->tc_total_avg_rate=$tcAvg;
-                $result=R::store($rate);
+                $timetable->tc_id=$tcId;
+                $timetable->tr_id=$trId;
+                $timetable->start_date=$trAvg;
+                $timetable->end_date=$tcAvg;
+                $timetable->location=$tcAvg;
+                $timetable->duration=$tcAvg;
+                $timetable->start_at=$tcAvg;
+                $result=R::store($timetable);
                 if($result)
                     return true;
                 else 
@@ -83,12 +82,17 @@ class RateRepo {
             }
             else 
             {
-                $rate=R::dispense('rate');
-                $rate->tc_id=$tcId;
-                $rate->tr_id=$trId;
-                $rate->tr_total_avg_rate=$trAvg;
-                $rate->tc_total_avg_rate=$tcAvg;
-                $result=R::store($rate);
+                $timetable=R::dispense('timetable');
+                
+                $timetable->tc_id=$tcId;
+                $timetable->tr_id=$trId;
+                $timetable->start_date=$trAvg;
+                $timetable->end_date=$tcAvg;
+                $timetable->location=$tcAvg;
+                $timetable->duration=$tcAvg;
+                $timetable->start_at=$tcAvg;
+                
+                $result=R::store($timetable);
                 if($result)
                     return $result;
                 else 
@@ -98,6 +102,5 @@ class RateRepo {
             return $e->getTraceAsString();
         }
     }
-    }
-
+}
 ?>

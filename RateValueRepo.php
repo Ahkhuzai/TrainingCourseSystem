@@ -7,11 +7,11 @@
  */
 
 /**
- * Description of RateRepo
+ * Description of RateValueRepo
  *
  * @author ahkhuzai
  */
-class RateRepo {
+class RateValueRepo {
     
     private $connect;
     public function __construct() { 
@@ -28,7 +28,7 @@ class RateRepo {
     
     public function fetchByID($id)
     {
-        $rate = R::load('rate', $id);         
+        $rate = R::load('ratevalue', $id);         
         if(!$rate->id)
             return false;
         else
@@ -39,7 +39,7 @@ class RateRepo {
     public function fetchAll()
     {
         
-        $rate = R::findAll('rate');  
+        $rate = R::findAll('ratevalue');  
         if(!$rate->id)
            return false;
         else
@@ -64,17 +64,15 @@ class RateRepo {
         }  
     }
     
-    public function save($rId,$tcId,$trId,$tcAvg,$trAvg)
+    public function save($rId,$ans,$value)
     {
         try{
 
-            $rate = R::findOne('rate', 'id = ?', array($rId));
+            $rate = R::findOne('ratevalue', 'id = ?', array($rId));
             if($rate->id)
             {
-                $rate->tc_id=$tcId;
-                $rate->tr_id=$trId;
-                $rate->tr_total_avg_rate=$trAvg;
-                $rate->tc_total_avg_rate=$tcAvg;
+                $rate->ans=$ans;
+                $rate->value=$value;                
                 $result=R::store($rate);
                 if($result)
                     return true;
@@ -83,11 +81,9 @@ class RateRepo {
             }
             else 
             {
-                $rate=R::dispense('rate');
-                $rate->tc_id=$tcId;
-                $rate->tr_id=$trId;
-                $rate->tr_total_avg_rate=$trAvg;
-                $rate->tc_total_avg_rate=$tcAvg;
+                $rate=R::dispense('ratevalue');
+                $rate->ans=$ans;
+                $rate->value=$value;                
                 $result=R::store($rate);
                 if($result)
                     return $result;
@@ -98,6 +94,6 @@ class RateRepo {
             return $e->getTraceAsString();
         }
     }
-    }
-
+    
+}
 ?>

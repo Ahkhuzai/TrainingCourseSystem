@@ -7,12 +7,12 @@
  */
 
 /**
- * Description of RateRepo
+ * Description of RegistrationRepo
  *
  * @author ahkhuzai
  */
-class RateRepo {
-    
+class RegistrationRepo {
+  
     private $connect;
     public function __construct() { 
         require_once 'DB_Connector.php';
@@ -28,31 +28,27 @@ class RateRepo {
     
     public function fetchByID($id)
     {
-        $rate = R::load('rate', $id);         
-        if(!$rate->id)
+        $register = R::load('registration', $id);         
+        if(!$register->id)
             return false;
         else
-            return $rate;  
-        
+            return $register;     
     } 
               
     public function fetchAll()
-    {
-        
-        $rate = R::findAll('rate');  
-        if(!$rate->id)
+    {   
+        $register = R::findAll('registration');  
+        if(!$register->id)
            return false;
         else
-           return $rate; 
-         
+           return $register;        
     }
     
     public function delete($id)
-    {
-        
+    {   
         try{
-            $rate= $this->fetchById($id);
-            $result=R::trash($rate);       
+            $register= $this->fetchById($id);
+            $result=R::trash($register);       
             if($result){
                 return $result;
             } else {
@@ -64,31 +60,29 @@ class RateRepo {
         }  
     }
     
-    public function save($rId,$tcId,$trId,$tcAvg,$trAvg)
+    public function save($id,$UsrId,$tcId,$statusId)
     {
         try{
 
-            $rate = R::findOne('rate', 'id = ?', array($rId));
-            if($rate->id)
+            $register = R::findOne('registration', 'id = ?', array($id));
+            if($register->id)
             {
-                $rate->tc_id=$tcId;
-                $rate->tr_id=$trId;
-                $rate->tr_total_avg_rate=$trAvg;
-                $rate->tc_total_avg_rate=$tcAvg;
-                $result=R::store($rate);
+                $register->usr_id=$UsrId;
+                $register->tc_id=$tcId;
+                $register->registration_status=$statusId;      
+                $result=R::store($register);
                 if($result)
-                    return true;
+                    return $result;
                 else 
                     return false;
             }
             else 
             {
-                $rate=R::dispense('rate');
-                $rate->tc_id=$tcId;
-                $rate->tr_id=$trId;
-                $rate->tr_total_avg_rate=$trAvg;
-                $rate->tc_total_avg_rate=$tcAvg;
-                $result=R::store($rate);
+                $register=R::dispense('registration');                    
+                $register->usr_id=$UsrId;
+                $register->tc_id=$tcId;
+                $register->registration_status=$statusId;      
+                $result=R::store($register);
                 if($result)
                     return $result;
                 else 
@@ -98,6 +92,5 @@ class RateRepo {
             return $e->getTraceAsString();
         }
     }
-    }
-
+}
 ?>

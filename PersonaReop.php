@@ -7,12 +7,12 @@
  */
 
 /**
- * Description of UserRepo
+ * Description of PersonaReop
  *
  * @author ahkhuzai
  */
-class UserRepo {
-    
+class PersonaReop {
+
     private $connect;
     
     public function __construct() { 
@@ -25,7 +25,7 @@ class UserRepo {
     
     public function fetchById($id)
     {
-        $user = R::load('user', $id);         
+        $user = R::load('persona', $id);         
         if(!$user->id)
             return false;
         else
@@ -35,7 +35,7 @@ class UserRepo {
 
     public function fetchAll()
     {
-        $user = R::findAll('user');  
+        $user = R::findAll('persona');  
         if(!$user->id)
            return false;
         else
@@ -56,15 +56,24 @@ class UserRepo {
             return $e->getTraceAsString();
         }
     }        
-    public function save($id,$username,$password,$email)
+    public function save($id,$usrId,$uquId,$arName,$enName,$phone,$department,$resumeDir,$signDir,$qualification,$major,$special,$isTrainer,$isUqu)
     {
         try{        
             if($id>0)
             {
-                $user = R::findOne('user', 'id = ?', array($id));
-                $user->username=$username;
-                $user->password=$password;
-                $user->email=$email;
+                $user = R::findOne('persona', 'id = ?', array($id));
+                $user->uqu_id=$uquId;
+                $user->ar_name=$arName;
+                $user->eng_name=$enName;
+                $user->contact_phone=$phone;
+                $user->department=$department;
+                $user->resume=$resumeDir;
+                $user->qualification=$qualification;
+                $user->major=$major;
+                $user->special=$special;
+                $user->is_trainer=$isTrainer;
+                $user->is_uqu=$isUqu;
+                $user->signature=$signDir;               
                 $id=R::store($user);
                 if($id)
                     return true;
@@ -73,10 +82,20 @@ class UserRepo {
             }
             else 
             {
-                $user=R::dispense('user');
-                $user->username=$username;
-                $user->password=$password;
-                $user->email=$email;
+                $user=R::dispense('persona');
+                $user->user_id=$usrId;
+                $user->uqu_id=$uquId;
+                $user->ar_name=$arName;
+                $user->eng_name=$enName;
+                $user->contact_phone=$phone;
+                $user->department=$department;
+                $user->resume=$resumeDir;
+                $user->qualification=$qualification;
+                $user->major=$major;
+                $user->special=$special;
+                $user->is_trainer=$isTrainer;
+                $user->is_uqu=$isUqu;
+                $user->signature=$signDir;
                 $result=R::store($user);
                 if($result)
                     return true;
@@ -89,3 +108,5 @@ class UserRepo {
         }       
     }
 }
+
+?>

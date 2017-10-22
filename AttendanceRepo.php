@@ -7,13 +7,14 @@
  */
 
 /**
- * Description of RateRepo
+ * Description of AttendanceRepo
  *
  * @author ahkhuzai
  */
-class RateRepo {
-    
+class AttendanceRepo {
+   
     private $connect;
+    
     public function __construct() { 
         require_once 'DB_Connector.php';
         $this->connect = new DB_Connector();
@@ -28,31 +29,27 @@ class RateRepo {
     
     public function fetchByID($id)
     {
-        $rate = R::load('rate', $id);         
-        if(!$rate->id)
+        $timeattend = R::load('attendance', $id);         
+        if(!$timeattend->id)
             return false;
         else
-            return $rate;  
-        
+            return $timeattend;     
     } 
               
     public function fetchAll()
-    {
-        
-        $rate = R::findAll('rate');  
-        if(!$rate->id)
+    {   
+        $timeattend = R::findAll('attendance');  
+        if(!$timeattend->id)
            return false;
         else
-           return $rate; 
-         
+           return $timeattend;        
     }
     
     public function delete($id)
-    {
-        
+    {   
         try{
-            $rate= $this->fetchById($id);
-            $result=R::trash($rate);       
+            $timeattend= $this->fetchById($id);
+            $result=R::trash($timeattend);       
             if($result){
                 return $result;
             } else {
@@ -64,31 +61,29 @@ class RateRepo {
         }  
     }
     
-    public function save($rId,$tcId,$trId,$tcAvg,$trAvg)
+    public function save($id,$UsrId,$ttId,$Date)
     {
         try{
 
-            $rate = R::findOne('rate', 'id = ?', array($rId));
-            if($rate->id)
+            $timeattend = R::findOne('attendance', 'id = ?', array($id));
+            if($timeattend->id)
             {
-                $rate->tc_id=$tcId;
-                $rate->tr_id=$trId;
-                $rate->tr_total_avg_rate=$trAvg;
-                $rate->tc_total_avg_rate=$tcAvg;
-                $result=R::store($rate);
+                $timeattend->usr_id=$UsrId;
+                $timeattend->timetable_id=$ttId;
+                $timeattend->date=$Date;      
+                $result=R::store($timeattend);
                 if($result)
-                    return true;
+                    return $result;
                 else 
                     return false;
             }
             else 
             {
-                $rate=R::dispense('rate');
-                $rate->tc_id=$tcId;
-                $rate->tr_id=$trId;
-                $rate->tr_total_avg_rate=$trAvg;
-                $rate->tc_total_avg_rate=$tcAvg;
-                $result=R::store($rate);
+                $timetable=R::dispense('attendance');    
+                $timeattend->usr_id=$UsrId;
+                $timeattend->timetable_id=$ttId;
+                $timeattend->date=$Date;      
+                $result=R::store($timeattend);
                 if($result)
                     return $result;
                 else 
@@ -98,6 +93,6 @@ class RateRepo {
             return $e->getTraceAsString();
         }
     }
-    }
 
+}
 ?>
