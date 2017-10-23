@@ -7,72 +7,70 @@
  */
 
 /**
- * Description of testUserRepo
+ * Description of testTimetableRepo
  *
  * @author ahkhuzai
  */
 use PHPUnit\Framework\TestCase;
-require_once '..\UserRepo.php';
-
-class testUserRepo extends TestCase {
+require_once '..\TimetableRepo.php';
+class testTimetableRepo extends TestCase {
     
     public function testFindByID_Found()
     {
-        $user = new UserRepo();
-        $result=$user->fetchById(1);
+        $timetable = new TimetableRepo();
+        $result=$timetable->fetchById(1);
         $this->assertEquals(1,$result->id);
     }
     
     public function testFindByID_NotFound()
     {
-        $user = new UserRepo();
-        $result=$user->fetchById(1000);
+        $timetable = new TimetableRepo();
+        $result=$timetable->fetchById(1000);
         $this->assertEquals(FALSE,$result);
     }
     
     public function testFetchAll_pass()
     {
-        $user = new UserRepo();
-        $result=$user->fetchAll();
+        $timetable = new TimetableRepo();
+        $result=$timetable->fetchAll();
         $this->assertEquals(True, is_array($result));
     }
     
    
     public function testSave_AddNew_pass()
     {
-        $user = new UserRepo();
-        $result = $user->save(0,'$username'. rand(1, 190),'$password','$email'. rand(1, 150));
+        $timetable = new TimetableRepo();
+        $result = $timetable->save(0,1,1,'2017-11-11', '2017-11-11', 3, '15:15:15', 'location');
         $this->assertEquals(True,$result);
     }
     
     public function testSave_AddNew_fail()
     {
-        $user = new UserRepo();
-        $result = $user->save(0,'$username'. rand(1, 10),null,'$email'. rand(1, 10));
+        $timetable = new TimetableRepo();
+        $result = $timetable->save(0,1,1,'2017-11-11', '2017-11-11', NULL, '15:15:15', 'location');
         $this->assertEquals(FALSE,$result);
     }
     
     public function testSave_Update_pass()
     {
-        $user = new UserRepo();
-        $result = $user->save(1,'$usernam7e'. rand(1, 10),'$pa7ssword','$emai7l'. rand(1, 10));
+        $timetable = new TimetableRepo();
+        $result = $timetable->save(1,1,1,'2018-11-11', '2018-11-11', 3, '05:15:15', 'UPDATE');;
         $this->assertEquals(TRUE,$result);
     }
-   
+    
     public function testDelete_pass()
     {
-        $user = new UserRepo();
-        $result = $user->delete(1);
+        $timetable = new TimetableRepo();
+        $result = $timetable->delete(1);
         $this->assertEquals(1,$result);
     }
     
     public function testDelete_fail()
     {
-        $user = new UserRepo();
-        $result = $user->delete(200);
+        $timetable = new TimetableRepo();
+        $result = $timetable->delete(120);
         $this->assertEquals(false,$result);
     }
-    
-    
+   
 }
 ?>

@@ -5,7 +5,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  * Description of RegistrationRepo
  *
@@ -28,69 +27,87 @@ class RegistrationRepo {
     
     public function fetchByID($id)
     {
-        $register = R::load('registration', $id);         
-        if(!$register->id)
+        try {
+            $register = R::load('registration', $id);
+            if (!$register->id)
+                return false;
+            else
+                return $register;
+
+        } catch (Exception $exc) {
+            //echo $exc->getTraceAsString();
             return false;
-        else
-            return $register;     
+        }
     } 
               
     public function fetchAll()
     {   
-        $register = R::findAll('registration');  
-        if(!$register->id)
-           return false;
-        else
-           return $register;        
+        try {
+            $register = R::findAll('registration');
+            if (!$register)
+                return false;
+            else
+                return $register;
+        } catch (Exception $exc) {
+            //echo $exc->getTraceAsString();
+            return false;
+        }
     }
     
     public function delete($id)
-    {   
-        try{
-            $register= $this->fetchById($id);
-            $result=R::trash($register);       
-            if($result){
+    {        
+        try {
+            $result = R::exec('DELETE FROM registration WHERE id = :id', array('id' => $id));
+            if ($result) {
                 return $result;
             } else {
                 return false;
             }
-        }
-        catch(Exception $e){
-            return $e->getTraceAsString();
-        }  
+        } catch (Exception $exc) {
+            //echo $exc->getTraceAsString();
+            return false;
+        }         
     }
     
     public function save($id,$UsrId,$tcId,$statusId)
-    {
-        try{
+    {    
+        
+        if($id)
+        {
+            try {
+                $register = R::findOne('registration', 'id = ?', array($id));
+                $register->usr_id = $UsrId;
+                $register->tc_id = $tcId;
+                $register->registration_status = $statusId;
 
-            $register = R::findOne('registration', 'id = ?', array($id));
-            if($register->id)
-            {
-                $register->usr_id=$UsrId;
-                $register->tc_id=$tcId;
-                $register->registration_status=$statusId;      
-                $result=R::store($register);
-                if($result)
-                    return $result;
-                else 
+                $result = R::store($register);
+                if ($result)
+                    return true;
+                else
                     return false;
+            } catch (Exception $exc) {
+                //echo $exc->getTraceAsString();
+                return false;
             }
-            else 
-            {
-                $register=R::dispense('registration');                    
-                $register->usr_id=$UsrId;
-                $register->tc_id=$tcId;
-                $register->registration_status=$statusId;      
-                $result=R::store($register);
-                if($result)
-                    return $result;
-                else 
+                }
+        else 
+        {
+            try {
+                $register = R::dispense('registration');
+                $register->usr_id = $UsrId;
+                $register->tc_id = $tcId;
+                $register->registration_status = $statusId;
+                $result = R::store($register);
+                if ($result)
+                    return true;
+                else
                     return false;
+            } catch (Exception $exc) {
+                //echo $exc->getTraceAsString();
+                return false;
             }
-        }catch(Exception $e){
-            return $e->getTraceAsString();
         }
+        
     }
 }
 ?>

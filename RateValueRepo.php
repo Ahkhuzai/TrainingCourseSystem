@@ -11,8 +11,7 @@
  *
  * @author ahkhuzai
  */
-class RateValueRepo {
-    
+class RateValueRepo {  
     private $connect;
     public function __construct() { 
         require_once 'DB_Connector.php';
@@ -24,75 +23,86 @@ class RateValueRepo {
     
     public function __deconstruct() {         
         $this->connect->closeConnection();
-    }
-    
+    }  
     public function fetchByID($id)
     {
-        $rate = R::load('ratevalue', $id);         
-        if(!$rate->id)
+        try {
+            $rate = R::load('ratevalue', $id);
+
+            if (!$rate->id)
+                return false;
+            else
+                return $rate;
+        } catch (Exception $exc) {
+            //echo $exc->getTraceAsString();
             return false;
-        else
-            return $rate;  
-        
-    } 
-              
+        }        
+    }               
     public function fetchAll()
-    {
-        
-        $rate = R::findAll('ratevalue');  
-        if(!$rate->id)
-           return false;
-        else
-           return $rate; 
-         
-    }
-    
+    {  
+        try {
+            $rate = R::findAll('ratevalue');
+            if (!$rate)
+                return false;
+            else
+                return $rate;
+        } catch (Exception $exc) {
+            //echo $exc->getTraceAsString();
+            return false;
+        }        
+    }   
     public function delete($id)
-    {
-        
-        try{
-            $rate= $this->fetchById($id);
-            $result=R::trash($rate);       
-            if($result){
+    { 
+        try {
+            $result = R::exec('DELETE FROM ratevalue WHERE id = :id', array('id' => $id));
+
+            if ($result) {
                 return $result;
             } else {
                 return false;
             }
-        }
-        catch(Exception $e){
-            return $e->getTraceAsString();
-        }  
-    }
-    
+        } catch (Exception $exc) {
+           // echo $exc->getTraceAsString();
+            return false;
+        }            
+    }    
     public function save($rId,$ans,$value)
-    {
-        try{
+    {      
+        if($rId>0)
+        {
+            try {
+                $rate = R::findOne('ratevalue', 'id = ?', array($rId));
+                $rate->ans = $ans;
+                $rate->value = $value;
 
-            $rate = R::findOne('ratevalue', 'id = ?', array($rId));
-            if($rate->id)
-            {
-                $rate->ans=$ans;
-                $rate->value=$value;                
-                $result=R::store($rate);
-                if($result)
+                $result = R::store($rate);
+                if ($result)
                     return true;
-                else 
+                else
                     return false;
+            } catch (Exception $exc) {
+                //echo $exc->getTraceAsString();
+                return false;
             }
-            else 
-            {
-                $rate=R::dispense('ratevalue');
-                $rate->ans=$ans;
-                $rate->value=$value;                
-                $result=R::store($rate);
-                if($result)
+                }
+        else 
+        {
+            try {
+                $rate = R::dispense('ratevalue');
+                $rate->ans = $ans;
+                $rate->value = $value;
+
+                $result = R::store($rate);
+                if ($result)
                     return $result;
-                else 
+                else
                     return false;
+            } catch (Exception $exc) {
+                //echo $exc->getTraceAsString();
+                return false;
             }
-        }catch(Exception $e){
-            return $e->getTraceAsString();
         }
+        
     }
     
 }

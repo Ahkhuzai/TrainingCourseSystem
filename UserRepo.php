@@ -1,11 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of UserRepo
  *
@@ -24,71 +18,88 @@ class UserRepo {
     }
     
     public function fetchById($id)
-    {
-        try{
-            $user = R::load('user', $id);         
-            if(!$user->id)
+    {       
+        try {
+            $user = R::load('user', $id);
+            if (!$user->id)
                 return false;
             else
                 return $user;
-        } catch (Exception $e)
-        {return false;}
+        } catch (Exception $exc) {
+            //echo $exc->getTraceAsString();
+            return false;
+        }            
     }
     
-
     public function fetchAll()
     {
-        $user = R::findAll('user'); 
-       
-        if(!$user)
-           return false;
-        else
-           return $user;  
+        try {
+            $user = R::findAll('user');
+            if (!$user)
+                return false;
+            else
+                return $user;
+        } catch (Exception $exc) {
+            //echo $exc->getTraceAsString();
+            return false;
+        }    
     }
     
     public function delete($id)
-    {
-        try{
+    {       
+        try {
             $result = R::exec('DELETE FROM user WHERE id = :id', array('id' => $id));
-            if($result)
-                return $result;   
-            else 
+            if ($result)
+                return $result;
+            else
                 return false;
-        }
-        catch(Exception $e){
-            return FALSE;
-        }
-    }        
+        } catch (Exception $exc) {
+           // echo $exc->getTraceAsString();
+            return false;
+        }          
+    }  
+    
     public function save($id,$username,$password,$email)
-    {
-        try{        
-            if($id>0)
-            {
+    {      
+        if($id>0)
+        { 
+            try {
                 $user = R::findOne('user', 'id = ?', array($id));
-                $user->username=$username;
-                $user->password=$password;
-                $user->email=$email;
-                $id=R::store($user);
-                if($id)
+                $user->username = $username;
+                $user->password = $password;
+                $user->email = $email;
+                $id = R::store($user);
+                if ($id){
                     return true;
+                }             
                 else 
-                    return false;
-            }
-            else 
-            {
-                $user=R::dispense('user');
-                $user->username=$username;
-                $user->password=$password;
-                $user->email=$email;
-                $result=R::store($user);
-                if($result)
-                    return true;
-                else 
-                    return false;
-            }
+                {
+                return false;
+                }
+            } catch (Exception $exc) {
+                //echo $exc->getTraceAsString();
+                return false;
+            }  
         }
-        catch(Exception $e){
-        return FALSE;
-        }       
+        else 
+        {         
+            try {
+                $user = R::dispense('user');
+                $user->username = $username;
+                $user->password = $password;
+                $user->email = $email;
+                $result = R::store($user);
+                if ($result){
+                    return true;
+                }             
+                else 
+                {
+                    return false;
+                }
+            } catch (Exception $exc) {
+                //echo $exc->getTraceAsString();
+                return false;
+            }
+        }         
     }
 }

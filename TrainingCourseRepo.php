@@ -28,78 +28,95 @@ class TrainingCourseRepo {
     
     public function fetchByID($id)
     {
-        $trainingCourse = R::load('trainingcourse', $id);         
-        if(!$trainingCourse->id)
+        try {
+            $trainingCourse = R::load('trainingcourse', $id);
+
+            if (!$trainingCourse->id)
+                return false;
+            else
+                return $trainingCourse;
+        } catch (Exception $exc) {
+            //echo $exc->getTraceAsString();
             return false;
-        else
-            return $trainingCourse;       
+        }
     } 
               
     public function fetchAll()
     {   
-        $trainingCourse = R::findAll('trainingcourse');  
-        if(!$trainingCourse->id)
-           return false;
-        else
-           return $trainingCourse;        
+        try {
+            $trainingCourse = R::findAll('trainingcourse');
+
+            if (!$trainingCourse)
+                return false;
+            else
+                return $trainingCourse;
+        } catch (Exception $exc) {
+            //echo $exc->getTraceAsString();
+            return false;
+        }
     }
     
     public function delete($id)
     {
-        
-        try{
-            $trainingCourse= $this->fetchById($id);
-            $result=R::trash($trainingCourse);       
-            if($result){
+        try {
+            $result = R::exec('DELETE FROM trainingcourse WHERE id = :id', array('id' => $id));
+            if ($result) {
                 return $result;
             } else {
                 return false;
             }
+        } catch (Exception $exc) {
+            //echo $exc->getTraceAsString();
+            return false;
         }
-        catch(Exception $e){
-            return $e->getTraceAsString();
-        }  
+    
     }
     
     public function save($tcId,$name,$goal,$abstract,$capacity,$status,$available_seat,$handoutDir)
     {
-        try{
-
-            $trainingCourse = R::findOne('trainingcourse', 'id = ?', array($tcId));
-            if($trainingCourse->id)
-            {
-                $trainingCourse->name=$name;
-                $trainingCourse->goal=$goal;
-                $trainingCourse->abstract=$abstract;
-                $trainingCourse->capacity=$capacity;
-                $trainingCourse->status=$status;
-                $trainingCourse->available_seat=$available_seat;
-                $trainingCourse->handoutDir=$handoutDir;           
-                $result=R::store($trainingCourse);
-                if($result)
+        
+        if($tcId>0)
+        {
+            try {
+                $trainingCourse = R::findOne('trainingcourse', 'id = ?', array($tcId));
+                $trainingCourse->name = $name;
+                $trainingCourse->goal = $goal;
+                $trainingCourse->abstract = $abstract;
+                $trainingCourse->capacity = $capacity;
+                $trainingCourse->status = $status;
+                $trainingCourse->available_seat = $available_seat;
+                $trainingCourse->handoutDir = $handoutDir;
+                $result = R::store($trainingCourse);
+                if ($result)
                     return true;
-                else 
+                else
                     return false;
+            } catch (Exception $exc) {
+                //echo $exc->getTraceAsString();
+                return false;
             }
-            else 
-            {
-                $trainingCourse=R::dispense('trainingcourse');
-                $trainingCourse->name=$name;
-                $trainingCourse->goal=$goal;
-                $trainingCourse->abstract=$abstract;
-                $trainingCourse->capacity=$capacity;
-                $trainingCourse->status=$status;
-                $trainingCourse->available_seat=$available_seat;
-                $trainingCourse->handoutDir=$handoutDir;
-                $result=R::store($trainingCourse);
-                if($result)
+                }
+        else 
+        {
+            try {
+                $trainingCourse = R::dispense('trainingcourse');
+                $trainingCourse->name = $name;
+                $trainingCourse->goal = $goal;
+                $trainingCourse->abstract = $abstract;
+                $trainingCourse->capacity = $capacity;
+                $trainingCourse->status = $status;
+                $trainingCourse->available_seat = $available_seat;
+                $trainingCourse->handoutDir = $handoutDir;
+                $result = R::store($trainingCourse);
+                if ($result)
                     return $result;
-                else 
+                else
                     return false;
+            } catch (Exception $exc) {
+                //echo $exc->getMessage();
+                return false;
             }
-        }catch(Exception $e){
-            return $e->getTraceAsString();
-        }
+                }        
     }
 }
 ?>

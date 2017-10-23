@@ -28,66 +28,87 @@ class StatusRepo {
     
     public function fetchByID($id)
     {
-        $status = R::load('registerstatus', $id);         
-        if(!$status->id)
+        try {
+            $status = R::load('registerstatus', $id);
+
+            if (!$status->id)
+                return false;
+            else
+                return $status;
+        } catch (Exception $exc) {
+            //echo $exc->getTraceAsString();
             return false;
-        else
-            return $status;  
-        
+        }   
     } 
               
     public function fetchAll()
     {   
-        $status = R::findAll('registerstatus');  
-        if(!$status->id)
-           return false;
-        else
-           return $status;        
+        try {
+            $status = R::findAll('registerstatus');
+            if (!$status)
+                return false;
+            else
+                return $status;
+        } catch (Exception $exc) {
+            //echo $exc->getTraceAsString();
+            return false;
+        }
+    
     }
     
     public function delete($id)
     {    
-        try{
-            $status= $this->fetchById($id);
-            $result=R::trash($status);       
-            if($result){
+        try {
+            $result = R::exec('DELETE FROM registerstatus WHERE id = :id', array('id' => $id));
+
+            if ($result) {
                 return $result;
             } else {
                 return false;
             }
+        } catch (Exception $exc) {
+            //echo $exc->getTraceAsString();
+            return false;
         }
-        catch(Exception $e){
-            return $e->getTraceAsString();
-        }  
+             
     }
     
     public function save($id,$statusValue)
     {
-        try{
-
-            $status = R::findOne('registerstatus', 'id = ?', array($id));
-            if($status->id)
-            {
-                $status->status=$statusValue;
-                $result=R::store($status);
-                if($result)
+        
+        
+        if($id>0)
+        {
+            try {
+                $status = R::findOne('registerstatus', 'id = ?', array($id));
+                $status->status = $statusValue;
+                $result = R::store($status);
+                if ($result)
                     return true;
-                else 
+                else
                     return false;
+            } catch (Exception $exc) {
+                echo $exc->getMessage();
+                return false;
             }
-            else 
-            {
-                $status=R::dispense('registerstatus');
-                $status->status=$statusValue;
-                $result=R::store($status);
-                if($result)
-                    return $result;
-                else 
+                }
+        else 
+        {
+            try {
+                $status = R::dispense('registerstatus');
+                $status->status = $statusValue;
+                $result = R::store($status);
+                if ($result)
+                    return True;
+                else
+
                     return false;
+            } catch (Exception $exc) {
+                //echo $exc->getTraceAsString();
+                return false;
             }
-        }catch(Exception $e){
-            return $e->getTraceAsString();
-        }
+                }
+        
     }
 }
 ?>

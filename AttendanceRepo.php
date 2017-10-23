@@ -29,69 +29,90 @@ class AttendanceRepo {
     
     public function fetchByID($id)
     {
-        $timeattend = R::load('attendance', $id);         
-        if(!$timeattend->id)
+        try {
+            $timeattend = R::load('attendance', $id);
+            if (!$timeattend->id)
+                return false;
+            else
+                return $timeattend;
+        } catch (Exception $exc) {
+            //echo $exc->getTraceAsString();
             return false;
-        else
-            return $timeattend;     
+        }
     } 
               
     public function fetchAll()
     {   
-        $timeattend = R::findAll('attendance');  
-        if(!$timeattend->id)
-           return false;
-        else
-           return $timeattend;        
+        try {
+            $timeattend = R::findAll('attendance');
+
+            if (!$timeattend)
+                return false;
+            else
+                return $timeattend;
+
+        } catch (Exception $exc) {
+            //echo $exc->getTraceAsString();
+            return false;
+        }
+    
     }
     
     public function delete($id)
-    {   
-        try{
-            $timeattend= $this->fetchById($id);
-            $result=R::trash($timeattend);       
-            if($result){
+    {      
+        try {
+            $result = R::exec('DELETE FROM attendance WHERE id = :id', array('id' => $id));
+
+            if ($result) {
                 return $result;
             } else {
                 return false;
             }
+        } catch (Exception $exc) {
+            //echo $exc->getTraceAsString();
+            return false;
         }
-        catch(Exception $e){
-            return $e->getTraceAsString();
-        }  
+    
     }
     
     public function save($id,$UsrId,$ttId,$Date)
     {
-        try{
+        
+        if($id>0)
+        {
+            try {
+                $timeattend = R::findOne('attendance', 'id = ?', array($id));
+                $timeattend->usr_id = $UsrId;
+                $timeattend->timetable_id = $ttId;
+                $timeattend->date = $Date;
 
-            $timeattend = R::findOne('attendance', 'id = ?', array($id));
-            if($timeattend->id)
-            {
-                $timeattend->usr_id=$UsrId;
-                $timeattend->timetable_id=$ttId;
-                $timeattend->date=$Date;      
-                $result=R::store($timeattend);
-                if($result)
-                    return $result;
-                else 
+                $result = R::store($timeattend);
+                if ($result)
+                    return true;
+                else
                     return false;
+            } catch (Exception $exc) {
+                //echo $exc->getTraceAsString();
+                return false;
             }
-            else 
-            {
-                $timetable=R::dispense('attendance');    
-                $timeattend->usr_id=$UsrId;
-                $timeattend->timetable_id=$ttId;
-                $timeattend->date=$Date;      
-                $result=R::store($timeattend);
-                if($result)
-                    return $result;
-                else 
+                }
+        else 
+        {
+            try {
+                $timeattend = R::dispense('attendance');
+                $timeattend->usr_id = $UsrId;
+                $timeattend->timetable_id = $ttId;
+                $timeattend->date = $Date;
+                $result = R::store($timeattend);
+                if ($result)
+                    return true;
+                else
                     return false;
+            } catch (Exception $exc) {
+                //echo $exc->getMessage();
+                return false;
             }
-        }catch(Exception $e){
-            return $e->getTraceAsString();
-        }
+                }        
     }
 
 }

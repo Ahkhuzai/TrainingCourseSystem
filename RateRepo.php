@@ -28,75 +28,94 @@ class RateRepo {
     
     public function fetchByID($id)
     {
-        $rate = R::load('rate', $id);         
-        if(!$rate->id)
+        try {
+            $rate = R::load('rate', $id);
+
+            if (!$rate->id)
+                return false;
+            else
+                return $rate;
+        } catch (Exception $exc) {
+            //echo $exc->getTraceAsString();
             return false;
-        else
-            return $rate;  
+        }
+    
         
     } 
               
     public function fetchAll()
-    {
-        
-        $rate = R::findAll('rate');  
-        if(!$rate->id)
-           return false;
-        else
-           return $rate; 
-         
+    {     
+        try {
+            $rate = R::findAll('rate');
+
+            if (!$rate)
+                return false;
+            else
+                return $rate;
+        } catch (Exception $exc) {
+            //echo $exc->getTraceAsString();
+            return false;
+        }
+             
     }
     
     public function delete($id)
     {
-        
-        try{
-            $rate= $this->fetchById($id);
-            $result=R::trash($rate);       
-            if($result){
+        try {
+            $result = R::exec('DELETE FROM rate WHERE id = :id', array('id' => $id));
+
+            if ($result) {
                 return $result;
             } else {
                 return false;
             }
+        } catch (Exception $exc) {
+            //echo $exc->getTraceAsString();
+            return false;
         }
-        catch(Exception $e){
-            return $e->getTraceAsString();
-        }  
+             
     }
     
     public function save($rId,$tcId,$trId,$tcAvg,$trAvg)
-    {
-        try{
-
-            $rate = R::findOne('rate', 'id = ?', array($rId));
-            if($rate->id)
-            {
-                $rate->tc_id=$tcId;
-                $rate->tr_id=$trId;
-                $rate->tr_total_avg_rate=$trAvg;
-                $rate->tc_total_avg_rate=$tcAvg;
-                $result=R::store($rate);
-                if($result)
+    {      
+        
+        if($rId>0)
+        {
+            try {
+                $rate = R::findOne('rate', 'id = ?', array($rId));
+                $rate->tc_id = $tcId;
+                $rate->tr_id = $trId;
+                $rate->tr_total_avg_rate = $trAvg;
+                $rate->tc_total_avg_rate = $tcAvg;
+                $result = R::store($rate);
+                if ($result)
                     return true;
-                else 
+                else
                     return false;
+            } catch (Exception $exc) {
+                //echo $exc->getTraceAsString();
+                return false;
             }
-            else 
-            {
-                $rate=R::dispense('rate');
-                $rate->tc_id=$tcId;
-                $rate->tr_id=$trId;
-                $rate->tr_total_avg_rate=$trAvg;
-                $rate->tc_total_avg_rate=$tcAvg;
-                $result=R::store($rate);
-                if($result)
+                }
+        else 
+        {
+            try {
+                $rate = R::dispense('rate');
+                $rate->tc_id = $tcId;
+                $rate->tr_id = $trId;
+                $rate->tr_total_avg_rate = $trAvg;
+                $rate->tc_total_avg_rate = $tcAvg;
+                $result = R::store($rate);
+                if ($result)
                     return $result;
-                else 
+                else
                     return false;
+            } catch (Exception $exc) {
+                //echo $exc->getTraceAsString();
+                return false;
             }
-        }catch(Exception $e){
-            return $e->getTraceAsString();
         }
+        
     }
     }
 

@@ -5,13 +5,8 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <?php
-require_once 'UserRepo.php';
-$user = new UserRepo();
-$result=$user->fetchAll();
-ECHO $result = $user->save(0,'$use44rname','$password','$5email');
+require_once 'AttendanceRepo.php';
 
-     
-
-
-
+$attendance = new AttendanceRepo();
+       echo  $result = $attendance->save(0,1,1,'1950-01-01 05:55:55');
 ?>
