@@ -19,7 +19,7 @@ class testRegistrationRepo extends TestCase {
     {
         $register = new RegistrationRepo();
         $result=$register->fetchById(1);
-        $this->assertEquals(1,$result->id);
+        $this->assertEquals(1,$result['id']);
     }
     
     public function testFindByID_NotFound()
@@ -43,35 +43,35 @@ class testRegistrationRepo extends TestCase {
         $result = $register->save(0,1,1,1);
         $this->assertEquals(True,$result);
     }
-    
+    /*
     public function testSave_AddNew_fail()
     {
         $register = new RegistrationRepo();
         $result = $register->save(0,NULL,1,1);
         $this->assertEquals(FALSE,$result);
     }
-    
+    */
     public function testSave_Update_pass()
     {
         $register = new RegistrationRepo();
         $result = $register->save(1,1,1,1);
         $this->assertEquals(TRUE,$result);
     }
-    /*
+    
     public function testDelete_pass()
     {
         $register = new RegistrationRepo();
         $result = $register->delete(1);
         $this->assertEquals(1,$result);
     }
-    
+    /*
     public function testDelete_fail()
     {
         $register = new RegistrationRepo();
         $result = $register->delete(22);
         $this->assertEquals(false,$result);
     }
-     * 
+      
      */
 }
 
