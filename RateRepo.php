@@ -11,19 +11,19 @@
  *
  * @author ahkhuzai
  */
+require_once 'Assist/Config/RedBeanPHP4_3_4/rb.php';
+require_once 'Assist/Config/config.php';
+
 class RateRepo {
     
-    private $connect;
+
     public function __construct() { 
-        require_once 'DB_Connector.php';
-        $this->connect = new DB_Connector();
-        $isRbConnected=R::testConnection();
-        if(!$isRbConnected)
-            return FALSE;
-    }
-    
-    public function __deconstruct() {         
-        $this->connect->closeConnection();
+        try {
+            R::setup('mysql:host=localhost;dbname=' . $DBNAME, $DBUSERNAME, $DBPASSWORD);
+            R::testConnection();
+        } catch (Exception $exc) {
+            return $exc->getTraceAsString();
+        }
     }
     
     public function fetchByID($id)
@@ -31,16 +31,13 @@ class RateRepo {
         try {
             $rate = R::load('rate', $id);
 
-            if (!$rate->id)
+            if (!$rate['id'])
                 return false;
             else
                 return $rate;
         } catch (Exception $exc) {
-            //echo $exc->getTraceAsString();
-            return false;
-        }
-    
-        
+             return $exc->getTraceAsString();
+        }      
     } 
               
     public function fetchAll()
@@ -53,8 +50,7 @@ class RateRepo {
             else
                 return $rate;
         } catch (Exception $exc) {
-            //echo $exc->getTraceAsString();
-            return false;
+             return $exc->getTraceAsString();
         }
              
     }
@@ -70,8 +66,7 @@ class RateRepo {
                 return false;
             }
         } catch (Exception $exc) {
-            //echo $exc->getTraceAsString();
-            return false;
+             return $exc->getTraceAsString();
         }
              
     }
@@ -93,8 +88,7 @@ class RateRepo {
                 else
                     return false;
             } catch (Exception $exc) {
-                //echo $exc->getTraceAsString();
-                return false;
+                 return $exc->getTraceAsString();
             }
                 }
         else 
@@ -111,8 +105,7 @@ class RateRepo {
                 else
                     return false;
             } catch (Exception $exc) {
-                //echo $exc->getTraceAsString();
-                return false;
+                 return $exc->getTraceAsString();
             }
         }
         

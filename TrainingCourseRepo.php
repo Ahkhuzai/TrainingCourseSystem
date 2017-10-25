@@ -11,33 +11,32 @@
  *
  * @author ahkhuzai
  */
+require_once 'Assist/Config/RedBeanPHP4_3_4/rb.php';
+require_once 'Assist/Config/config.php';
+
 class TrainingCourseRepo {
     
-    private $connect;
+
     public function __construct() { 
-        require_once 'DB_Connector.php';
-        $this->connect = new DB_Connector();
-        $isRbConnected=R::testConnection();
-        if(!$isRbConnected)
-            return FALSE;
+        try {
+            R::setup('mysql:host=localhost;dbname=' . $DBNAME, $DBUSERNAME, $DBPASSWORD);
+            R::testConnection();
+        } catch (Exception $exc) {
+            return $exc->getTraceAsString();
+        }
     }
-    
-    public function __deconstruct() {         
-        $this->connect->closeConnection();
-    }
-    
+        
     public function fetchByID($id)
     {
         try {
             $trainingCourse = R::load('trainingcourse', $id);
 
-            if (!$trainingCourse->id)
+            if (!$trainingCourse['id'])
                 return false;
             else
                 return $trainingCourse;
         } catch (Exception $exc) {
-            //echo $exc->getTraceAsString();
-            return false;
+            return $exc->getTraceAsString();
         }
     } 
               
@@ -51,8 +50,7 @@ class TrainingCourseRepo {
             else
                 return $trainingCourse;
         } catch (Exception $exc) {
-            //echo $exc->getTraceAsString();
-            return false;
+            return $exc->getTraceAsString();
         }
     }
     
@@ -66,8 +64,7 @@ class TrainingCourseRepo {
                 return false;
             }
         } catch (Exception $exc) {
-            //echo $exc->getTraceAsString();
-            return false;
+            return $exc->getTraceAsString();
         }
     
     }
@@ -92,8 +89,7 @@ class TrainingCourseRepo {
                 else
                     return false;
             } catch (Exception $exc) {
-                //echo $exc->getTraceAsString();
-                return false;
+                return $exc->getTraceAsString();
             }
                 }
         else 
@@ -113,8 +109,7 @@ class TrainingCourseRepo {
                 else
                     return false;
             } catch (Exception $exc) {
-                //echo $exc->getMessage();
-                return false;
+                return $exc->getTraceAsString();
             }
                 }        
     }

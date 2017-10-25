@@ -11,33 +11,31 @@
  *
  * @author ahkhuzai
  */
+require_once 'Assist/Config/RedBeanPHP4_3_4/rb.php';
+require_once 'Assist/Config/config.php';
+        
 class AttendanceRepo {
-   
-    private $connect;
-    
+ 
     public function __construct() { 
-        require_once 'DB_Connector.php';
-        $this->connect = new DB_Connector();
-        $isRbConnected=R::testConnection();
-        if(!$isRbConnected)
-            return FALSE;
-    }
-    
-    public function __deconstruct() {         
-        $this->connect->closeConnection();
+       
+        try {
+            R::setup('mysql:host=localhost;dbname=' . $DBNAME, $DBUSERNAME, $DBPASSWORD);
+            R::testConnection();
+        } catch (Exception $exc) {
+            return $exc->getTraceAsString();
+        }        
     }
     
     public function fetchByID($id)
     {
         try {
             $timeattend = R::load('attendance', $id);
-            if (!$timeattend->id)
+            if (!$timeattend['id'])
                 return false;
             else
                 return $timeattend;
         } catch (Exception $exc) {
-            //echo $exc->getTraceAsString();
-            return false;
+            return $exc->getTraceAsString();
         }
     } 
               
@@ -45,39 +43,33 @@ class AttendanceRepo {
     {   
         try {
             $timeattend = R::findAll('attendance');
-
             if (!$timeattend)
                 return false;
             else
                 return $timeattend;
-
         } catch (Exception $exc) {
-            //echo $exc->getTraceAsString();
-            return false;
-        }
-    
+            return $exc->getTraceAsString();       
+        }  
     }
     
     public function delete($id)
     {      
         try {
             $result = R::exec('DELETE FROM attendance WHERE id = :id', array('id' => $id));
-
             if ($result) {
                 return $result;
             } else {
                 return false;
             }
         } catch (Exception $exc) {
-            //echo $exc->getTraceAsString();
-            return false;
+            return $exc->getTraceAsString();
+
         }
     
     }
     
     public function save($id,$UsrId,$ttId,$Date)
-    {
-        
+    {      
         if($id>0)
         {
             try {
@@ -85,15 +77,13 @@ class AttendanceRepo {
                 $timeattend->usr_id = $UsrId;
                 $timeattend->timetable_id = $ttId;
                 $timeattend->date = $Date;
-
                 $result = R::store($timeattend);
                 if ($result)
                     return true;
                 else
                     return false;
             } catch (Exception $exc) {
-                //echo $exc->getTraceAsString();
-                return false;
+                return $exc->getTraceAsString();
             }
                 }
         else 
@@ -105,15 +95,13 @@ class AttendanceRepo {
                 $timeattend->date = $Date;
                 $result = R::store($timeattend);
                 if ($result)
-                    return true;
+                    return $result;
                 else
                     return false;
             } catch (Exception $exc) {
-                //echo $exc->getMessage();
-                return false;
+                return $exc->getTraceAsString();
             }
                 }        
     }
-
 }
 ?>

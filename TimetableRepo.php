@@ -11,19 +11,19 @@
  *
  * @author ahkhuzai
  */
+require_once 'Assist/Config/RedBeanPHP4_3_4/rb.php';
+require_once 'Assist/Config/config.php';
+
 class TimetableRepo {
     
-    private $connect;
-    public function __construct() { 
-        require_once 'DB_Connector.php';
-        $this->connect = new DB_Connector();
-        $isRbConnected=R::testConnection();
-        if(!$isRbConnected)
-            return FALSE;
-    }
     
-    public function __deconstruct() {         
-        $this->connect->closeConnection();
+    public function __construct() { 
+        try {
+            R::setup('mysql:host=localhost;dbname=' . $DBNAME, $DBUSERNAME, $DBPASSWORD);
+            R::testConnection();
+        } catch (Exception $exc) {
+            return $exc->getTraceAsString();
+        }
     }
     
     public function fetchByID($id)
@@ -31,14 +31,13 @@ class TimetableRepo {
         try {
             $timetable = R::load('timetable', $id);
 
-            if (!$timetable->id)
+            if (!$timetable['id'])
                 return false;
             else
                 return $timetable;
 
         } catch (Exception $exc) {
-            //echo $exc->getTraceAsString();
-            RETURN FALSE;
+            return $exc->getTraceAsString();
         }
     
     } 
@@ -53,8 +52,7 @@ class TimetableRepo {
             else
                 return $timetable;
         } catch (Exception $exc) {
-            //echo $exc->getTraceAsString();
-            RETURN FALSE;
+            return $exc->getTraceAsString();
         }
     }
     
@@ -69,16 +67,12 @@ class TimetableRepo {
                 return false;
             }
         } catch (Exception $exc) {
-            //echo $exc->getTraceAsString();
-            RETURN FALSE;
-        }
-              
+            return $exc->getTraceAsString();
+        }             
     }
     
     public function save($id,$tcId,$trId,$startDate, $endDate, $duration, $startAt, $location)
-    {
-        
-        
+    {   
         if($id>0)
         {
             try {
@@ -97,8 +91,7 @@ class TimetableRepo {
 
                     return false;
             } catch (Exception $exc) {
-                echo $exc->getMessage();
-                RETURN FALSE;
+                return $exc->getTraceAsString();
             }
                 }
         else 
@@ -115,13 +108,11 @@ class TimetableRepo {
 
                 $result = R::store($timetable);
                 if ($result)
-                    return TRUE;
+                    return $result;
                 else
-
                     return false;
             } catch (Exception $exc) {
-                echo $exc->getMessage();
-                RETURN FALSE;
+                return $exc->getTraceAsString();
             }
                 }
         

@@ -5,29 +5,30 @@
  *
  * @author ahkhuzai
  */
+require_once 'Assist/Config/RedBeanPHP4_3_4/rb.php';
+require_once 'Assist/Config/config.php';
+
 class UserRepo {
-    
-    private $connect;
-    
+
     public function __construct() { 
-        require_once 'DB_Connector.php';
-        $this->connect = new DB_Connector();
-        $isRbConnected=R::testConnection();
-        if(!$isRbConnected)
-            return FALSE;
+        try {
+            R::setup('mysql:host=localhost;dbname=' . $DBNAME, $DBUSERNAME, $DBPASSWORD);
+            R::testConnection();
+        } catch (Exception $exc) {
+            return $exc->getTraceAsString();
+        }
     }
     
     public function fetchById($id)
     {       
         try {
             $user = R::load('user', $id);
-            if (!$user->id)
+            if (!$user['id'])
                 return false;
             else
                 return $user;
         } catch (Exception $exc) {
-            //echo $exc->getTraceAsString();
-            return false;
+            return $exc->getTraceAsString();
         }            
     }
     
@@ -40,8 +41,7 @@ class UserRepo {
             else
                 return $user;
         } catch (Exception $exc) {
-            //echo $exc->getTraceAsString();
-            return false;
+            return $exc->getTraceAsString();
         }    
     }
     
@@ -54,8 +54,7 @@ class UserRepo {
             else
                 return false;
         } catch (Exception $exc) {
-           // echo $exc->getTraceAsString();
-            return false;
+           return $exc->getTraceAsString();
         }          
     }  
     
@@ -77,8 +76,7 @@ class UserRepo {
                 return false;
                 }
             } catch (Exception $exc) {
-                //echo $exc->getTraceAsString();
-                return false;
+                return $exc->getTraceAsString();
             }  
         }
         else 
@@ -90,15 +88,14 @@ class UserRepo {
                 $user->email = $email;
                 $result = R::store($user);
                 if ($result){
-                    return true;
+                    return $result;
                 }             
                 else 
                 {
                     return false;
                 }
             } catch (Exception $exc) {
-                //echo $exc->getTraceAsString();
-                return false;
+               return $exc->getTraceAsString();
             }
         }         
     }

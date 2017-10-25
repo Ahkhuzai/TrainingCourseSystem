@@ -10,33 +10,32 @@
  *
  * @author ahkhuzai
  */
+require_once 'Assist/Config/RedBeanPHP4_3_4/rb.php';
+require_once 'Assist/Config/config.php';
+
 class RegistrationRepo {
   
-    private $connect;
+
     public function __construct() { 
-        require_once 'DB_Connector.php';
-        $this->connect = new DB_Connector();
-        $isRbConnected=R::testConnection();
-        if(!$isRbConnected)
-            return FALSE;
-    }
-    
-    public function __deconstruct() {         
-        $this->connect->closeConnection();
+        try {
+            R::setup('mysql:host=localhost;dbname=' . $DBNAME, $DBUSERNAME, $DBPASSWORD);
+            R::testConnection();
+        } catch (Exception $exc) {
+            return $exc->getTraceAsString();
+        }
     }
     
     public function fetchByID($id)
     {
         try {
             $register = R::load('registration', $id);
-            if (!$register->id)
+            if (!$register['id'])
                 return false;
             else
                 return $register;
 
         } catch (Exception $exc) {
-            //echo $exc->getTraceAsString();
-            return false;
+            return $exc->getTraceAsString();
         }
     } 
               
@@ -49,8 +48,7 @@ class RegistrationRepo {
             else
                 return $register;
         } catch (Exception $exc) {
-            //echo $exc->getTraceAsString();
-            return false;
+            return $exc->getTraceAsString();
         }
     }
     
@@ -64,8 +62,7 @@ class RegistrationRepo {
                 return false;
             }
         } catch (Exception $exc) {
-            //echo $exc->getTraceAsString();
-            return false;
+            return $exc->getTraceAsString();
         }         
     }
     
@@ -86,8 +83,7 @@ class RegistrationRepo {
                 else
                     return false;
             } catch (Exception $exc) {
-                //echo $exc->getTraceAsString();
-                return false;
+                return $exc->getTraceAsString();
             }
                 }
         else 
@@ -99,12 +95,11 @@ class RegistrationRepo {
                 $register->registration_status = $statusId;
                 $result = R::store($register);
                 if ($result)
-                    return true;
+                    return $result;
                 else
                     return false;
             } catch (Exception $exc) {
-                //echo $exc->getTraceAsString();
-                return false;
+                return $exc->getTraceAsString();
             }
         }
         
