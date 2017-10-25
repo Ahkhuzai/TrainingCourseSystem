@@ -12,13 +12,14 @@
  * @author ahkhuzai
  */
 require_once 'Assist/Config/RedBeanPHP4_3_4/rb.php';
-require_once 'Assist/Config/config.php';
+
 
 class RateDRepo {
     
    
     public function __construct() { 
         try {
+            require_once 'Assist/Config/config.php';
             R::setup('mysql:host=localhost;dbname=' . $DBNAME, $DBUSERNAME, $DBPASSWORD);
             R::testConnection();
         } catch (Exception $exc) {
@@ -78,14 +79,14 @@ class RateDRepo {
         {
             try {
                 $rate = R::findOne('ratedetails', 'id = ?', array($rdid));
-                $rate->rate_id = $rid;
-                $rate->trainee_id = $usrId;
-                $rate->comment = $comment;
-                $rate->place_rate = $placeRate;
-                $rate->presentation_rate = $presentationRate;
-                $rate->presenter_rate = $presenterRate;
-                $rate->organizing_rate = $organizingRate;
-                $rate->trainingProgram_rate = $trainingProgramRate;
+                $rate['rate_id'] = $rid;
+                $rate['trainee_id'] = $usrId;
+                $rate['comment'] = $comment;
+                $rate['place_rate'] = $placeRate;
+                $rate['presentation_rate'] = $presentationRate;
+                $rate['presenter_rate'] = $presenterRate;
+                $rate['organizing_rate'] = $organizingRate;
+                $rate['trainingProgram_rate'] = $trainingProgramRate;
                 $result = R::store($rate);
                 if ($result)
                     return true;
@@ -99,14 +100,14 @@ class RateDRepo {
         {
             try {
                 $rate = R::dispense('ratedetails');
-                $rate->rate_id = $rid;
-                $rate->trainee_id = $usrId;
-                $rate->comment = $comment;
-                $rate->place_rate = $placeRate;
-                $rate->presentation_rate = $presentationRate;
-                $rate->presenter_rate = $presenterRate;
-                $rate->organizing_rate = $organizingRate;
-                $rate->trainingProgram_rate = $trainingProgramRate;
+                $rate['rate_id'] = $rid;
+                $rate['trainee_id'] = $usrId;
+                $rate['comment'] = $comment;
+                $rate['place_rate'] = $placeRate;
+                $rate['presentation_rate'] = $presentationRate;
+                $rate['presenter_rate'] = $presenterRate;
+                $rate['organizing_rate'] = $organizingRate;
+                $rate['trainingProgram_rate'] = $trainingProgramRate;
                 $result = R::store($rate);
                 if ($result)
                     return $result;

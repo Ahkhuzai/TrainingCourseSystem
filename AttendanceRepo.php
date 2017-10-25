@@ -12,13 +12,14 @@
  * @author ahkhuzai
  */
 require_once 'Assist/Config/RedBeanPHP4_3_4/rb.php';
-require_once 'Assist/Config/config.php';
+
         
 class AttendanceRepo {
  
     public function __construct() { 
        
         try {
+            require_once 'Assist/Config/config.php';
             R::setup('mysql:host=localhost;dbname=' . $DBNAME, $DBUSERNAME, $DBPASSWORD);
             R::testConnection();
         } catch (Exception $exc) {
@@ -74,9 +75,9 @@ class AttendanceRepo {
         {
             try {
                 $timeattend = R::findOne('attendance', 'id = ?', array($id));
-                $timeattend->usr_id = $UsrId;
-                $timeattend->timetable_id = $ttId;
-                $timeattend->date = $Date;
+                $timeattend['usr_id'] = $UsrId;
+                $timeattend['timetable_id'] = $ttId;
+                $timeattend['date'] = $Date;
                 $result = R::store($timeattend);
                 if ($result)
                     return true;
@@ -90,9 +91,9 @@ class AttendanceRepo {
         {
             try {
                 $timeattend = R::dispense('attendance');
-                $timeattend->usr_id = $UsrId;
-                $timeattend->timetable_id = $ttId;
-                $timeattend->date = $Date;
+                $timeattend['usr_id'] = $UsrId;
+                $timeattend['timetable_id'] = $ttId;
+                $timeattend['date'] = $Date;
                 $result = R::store($timeattend);
                 if ($result)
                     return $result;

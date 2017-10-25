@@ -12,13 +12,14 @@
  * @author ahkhuzai
  */
 require_once 'Assist/Config/RedBeanPHP4_3_4/rb.php';
-require_once 'Assist/Config/config.php';
+
 
 class StatusRepo {
     
   
     public function __construct() { 
         try {
+            require_once 'Assist/Config/config.php';
             R::setup('mysql:host=localhost;dbname=' . $DBNAME, $DBUSERNAME, $DBPASSWORD);
             R::testConnection();
         } catch (Exception $exc) {
@@ -79,7 +80,7 @@ class StatusRepo {
         {
             try {
                 $status = R::findOne('registerstatus', 'id = ?', array($id));
-                $status->status = $statusValue;
+                $status['status'] = $statusValue;
                 $result = R::store($status);
                 if ($result)
                     return true;
@@ -93,7 +94,7 @@ class StatusRepo {
         {
             try {
                 $status = R::dispense('registerstatus');
-                $status->status = $statusValue;
+                $status['status'] = $statusValue;
                 $result = R::store($status);
                 if ($result)
                     return $result;

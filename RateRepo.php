@@ -12,13 +12,14 @@
  * @author ahkhuzai
  */
 require_once 'Assist/Config/RedBeanPHP4_3_4/rb.php';
-require_once 'Assist/Config/config.php';
+
 
 class RateRepo {
     
 
     public function __construct() { 
         try {
+            require_once 'Assist/Config/config.php';
             R::setup('mysql:host=localhost;dbname=' . $DBNAME, $DBUSERNAME, $DBPASSWORD);
             R::testConnection();
         } catch (Exception $exc) {
@@ -78,10 +79,10 @@ class RateRepo {
         {
             try {
                 $rate = R::findOne('rate', 'id = ?', array($rId));
-                $rate->tc_id = $tcId;
-                $rate->tr_id = $trId;
-                $rate->tr_total_avg_rate = $trAvg;
-                $rate->tc_total_avg_rate = $tcAvg;
+                $rate['tc_id'] = $tcId;
+                $rate['tr_id'] = $trId;
+                $rate['tr_total_avg_rate'] = $trAvg;
+                $rate['tc_total_avg_rate'] = $tcAvg;
                 $result = R::store($rate);
                 if ($result)
                     return true;
@@ -95,10 +96,10 @@ class RateRepo {
         {
             try {
                 $rate = R::dispense('rate');
-                $rate->tc_id = $tcId;
-                $rate->tr_id = $trId;
-                $rate->tr_total_avg_rate = $trAvg;
-                $rate->tc_total_avg_rate = $tcAvg;
+                $rate['tc_id'] = $tcId;
+                $rate['tr_id'] = $trId;
+                $rate['tr_total_avg_rate'] = $trAvg;
+                $rate['tc_total_avg_rate'] = $tcAvg;
                 $result = R::store($rate);
                 if ($result)
                     return $result;

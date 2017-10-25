@@ -12,13 +12,14 @@
  * @author ahkhuzai
  */
 require_once 'Assist/Config/RedBeanPHP4_3_4/rb.php';
-require_once 'Assist/Config/config.php';
+
 
 class TimetableRepo {
     
     
     public function __construct() { 
         try {
+            require_once 'Assist/Config/config.php';
             R::setup('mysql:host=localhost;dbname=' . $DBNAME, $DBUSERNAME, $DBPASSWORD);
             R::testConnection();
         } catch (Exception $exc) {
@@ -77,13 +78,13 @@ class TimetableRepo {
         {
             try {
                 $timetable = R::findOne('timetable', 'id = ?', array($id));
-                $timetable->tc_id = $tcId;
-                $timetable->tr_id = $trId;
-                $timetable->start_date = $startDate;
-                $timetable->end_date = $endDate;
-                $timetable->location = $location;
-                $timetable->duration = $duration;
-                $timetable->start_at = $startAt;
+                $timetable['tc_id'] = $tcId;
+                $timetable['tr_id'] = $trId;
+                $timetable['start_date'] = $startDate;
+                $timetable['end_date'] = $endDate;
+                $timetable['location'] = $location;
+                $timetable['duration'] = $duration;
+                $timetable['start_at'] = $startAt;
                 $result = R::store($timetable);
                 if ($result)
                     return true;
@@ -98,13 +99,14 @@ class TimetableRepo {
         {
             try {
                 $timetable = R::dispense('timetable');
-                $timetable->tc_id = $tcId;
-                 $timetable->tr_id = $trId;
-                $timetable->start_date = $startDate;
-                $timetable->end_date = $endDate;
-                $timetable->location = $location;
-                $timetable->duration = $duration;
-                $timetable->start_at = $startAt;
+                
+                $timetable['tc_id'] = $tcId;
+                $timetable['tr_id'] = $trId;
+                $timetable['start_date'] = $startDate;
+                $timetable['end_date'] = $endDate;
+                $timetable['location'] = $location;
+                $timetable['duration'] = $duration;
+                $timetable['start_at'] = $startAt;
 
                 $result = R::store($timetable);
                 if ($result)

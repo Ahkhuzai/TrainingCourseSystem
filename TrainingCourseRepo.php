@@ -12,13 +12,14 @@
  * @author ahkhuzai
  */
 require_once 'Assist/Config/RedBeanPHP4_3_4/rb.php';
-require_once 'Assist/Config/config.php';
+
 
 class TrainingCourseRepo {
     
 
     public function __construct() { 
         try {
+            require_once 'Assist/Config/config.php';
             R::setup('mysql:host=localhost;dbname=' . $DBNAME, $DBUSERNAME, $DBPASSWORD);
             R::testConnection();
         } catch (Exception $exc) {
@@ -76,13 +77,13 @@ class TrainingCourseRepo {
         {
             try {
                 $trainingCourse = R::findOne('trainingcourse', 'id = ?', array($tcId));
-                $trainingCourse->name = $name;
-                $trainingCourse->goal = $goal;
-                $trainingCourse->abstract = $abstract;
-                $trainingCourse->capacity = $capacity;
-                $trainingCourse->status = $status;
-                $trainingCourse->available_seat = $available_seat;
-                $trainingCourse->handoutDir = $handoutDir;
+                $trainingCourse['name'] = $name;
+                $trainingCourse['goal'] = $goal;
+                $trainingCourse['abstract'] = $abstract;
+                $trainingCourse['capacity'] = $capacity;
+                $trainingCourse['status'] = $status;
+                $trainingCourse['available_seat'] = $available_seat;
+                $trainingCourse['handoutDir'] = $handoutDir;
                 $result = R::store($trainingCourse);
                 if ($result)
                     return true;
@@ -96,13 +97,13 @@ class TrainingCourseRepo {
         {
             try {
                 $trainingCourse = R::dispense('trainingcourse');
-                $trainingCourse->name = $name;
-                $trainingCourse->goal = $goal;
-                $trainingCourse->abstract = $abstract;
-                $trainingCourse->capacity = $capacity;
-                $trainingCourse->status = $status;
-                $trainingCourse->available_seat = $available_seat;
-                $trainingCourse->handoutDir = $handoutDir;
+                $trainingCourse['name'] = $name;
+                $trainingCourse['goal'] = $goal;
+                $trainingCourse['abstract'] = $abstract;
+                $trainingCourse['capacity'] = $capacity;
+                $trainingCourse['status'] = $status;
+                $trainingCourse['available_seat'] = $available_seat;
+                $trainingCourse['handoutDir'] = $handoutDir;
                 $result = R::store($trainingCourse);
                 if ($result)
                     return $result;

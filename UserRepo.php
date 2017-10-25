@@ -6,12 +6,13 @@
  * @author ahkhuzai
  */
 require_once 'Assist/Config/RedBeanPHP4_3_4/rb.php';
-require_once 'Assist/Config/config.php';
+
 
 class UserRepo {
 
     public function __construct() { 
         try {
+            include 'Assist/Config/config.php';
             R::setup('mysql:host=localhost;dbname=' . $DBNAME, $DBUSERNAME, $DBPASSWORD);
             R::testConnection();
         } catch (Exception $exc) {
@@ -64,9 +65,9 @@ class UserRepo {
         { 
             try {
                 $user = R::findOne('user', 'id = ?', array($id));
-                $user->username = $username;
-                $user->password = $password;
-                $user->email = $email;
+                $user['username'] = $username;
+                $user['password'] = $password;
+                $user['email'] = $email;
                 $id = R::store($user);
                 if ($id){
                     return true;
@@ -83,9 +84,9 @@ class UserRepo {
         {         
             try {
                 $user = R::dispense('user');
-                $user->username = $username;
-                $user->password = $password;
-                $user->email = $email;
+                $user['username'] = $username;
+                $user['password'] = $password;
+                $user['email'] = $email;
                 $result = R::store($user);
                 if ($result){
                     return $result;

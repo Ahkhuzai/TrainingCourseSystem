@@ -1,4 +1,4 @@
-<php
+<?php
 
 $DBUSERNAME="root";
 $DBPASSWORD="";

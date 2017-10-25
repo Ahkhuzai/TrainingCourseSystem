@@ -11,13 +11,14 @@
  * @author ahkhuzai
  */
 require_once 'Assist/Config/RedBeanPHP4_3_4/rb.php';
-require_once 'Assist/Config/config.php';
+
 
 class RegistrationRepo {
   
 
     public function __construct() { 
         try {
+            require_once 'Assist/Config/config.php';
             R::setup('mysql:host=localhost;dbname=' . $DBNAME, $DBUSERNAME, $DBPASSWORD);
             R::testConnection();
         } catch (Exception $exc) {
@@ -73,9 +74,9 @@ class RegistrationRepo {
         {
             try {
                 $register = R::findOne('registration', 'id = ?', array($id));
-                $register->usr_id = $UsrId;
-                $register->tc_id = $tcId;
-                $register->registration_status = $statusId;
+                $register['usr_id'] = $UsrId;
+                $register['tc_id'] = $tcId;
+                $register['registration_status'] = $statusId;
 
                 $result = R::store($register);
                 if ($result)
@@ -90,9 +91,9 @@ class RegistrationRepo {
         {
             try {
                 $register = R::dispense('registration');
-                $register->usr_id = $UsrId;
-                $register->tc_id = $tcId;
-                $register->registration_status = $statusId;
+                $register['usr_id'] = $UsrId;
+                $register['tc_id'] = $tcId;
+                $register['registration_status'] = $statusId;
                 $result = R::store($register);
                 if ($result)
                     return $result;

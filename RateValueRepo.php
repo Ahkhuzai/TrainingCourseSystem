@@ -12,12 +12,13 @@
  * @author ahkhuzai
  */
 require_once 'Assist/Config/RedBeanPHP4_3_4/rb.php';
-require_once 'Assist/Config/config.php';
+
 
 class RateValueRepo {  
    
     public function __construct() { 
         try {
+            require_once 'Assist/Config/config.php';
             R::setup('mysql:host=localhost;dbname=' . $DBNAME, $DBUSERNAME, $DBPASSWORD);
             R::testConnection();
         } catch (Exception $exc) {
@@ -70,8 +71,8 @@ class RateValueRepo {
         {
             try {
                 $rate = R::findOne('ratevalue', 'id = ?', array($rId));
-                $rate->ans = $ans;
-                $rate->value = $value;
+                $rate['ans'] = $ans;
+                $rate['value'] = $value;
 
                 $result = R::store($rate);
                 if ($result)
@@ -86,8 +87,8 @@ class RateValueRepo {
         {
             try {
                 $rate = R::dispense('ratevalue');
-                $rate->ans = $ans;
-                $rate->value = $value;
+                $rate['ans'] = $ans;
+                $rate['value'] = $value;
 
                 $result = R::store($rate);
                 if ($result)
