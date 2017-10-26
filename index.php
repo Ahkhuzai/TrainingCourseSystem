@@ -5,8 +5,32 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <?php
-require_once 'UserRepo.php';
+include 'Assist/Config/smarty/libs/Smarty.class.php';
+require_once 'User.php';
 
-$attendance = new UserRepo();
-       echo  $result = $attendance->save(1,'$username','$password','$email');
+$smarty=new Smarty();
+if(isset($_POST['login']) && ($_POST['isTrainer']==='true'))
+{
+    $user = new User();
+    $usrName=$_POST['usrName'];
+    $usrPassword=$_POST['usrPass'];
+    $isUser = $user->validateUser($usrName,$usrPassword);
+    if($isUser)
+    {
+        $isTrainer=$user->isTrainer($user->getId());
+        echo $isTrainer;
+        if($isTrainer)
+            header ('Location:main.php?mode=Trainer');
+        else 
+            $smarty->assign ('msg','انت غير مسجل لدينا كمتدرب ');
+    }
+    else 
+        $smarty->assign ('msg','الرجاء التأكد من بيانات الدخول ');
+        
+}
+elseif (isset($_POST['newUser']) && ($_POST['isTrainer']==='true'))
+    header ('Location:newUser.php');
+else if (isset($_POST['login']))
+    header ('Location:main.php?mode=Trainee');
+$smarty->display("index.tpl");
 ?>

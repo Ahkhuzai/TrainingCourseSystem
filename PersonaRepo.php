@@ -17,7 +17,7 @@ class PersonaRepo {
    
     public function __construct() { 
         try {
-            require_once 'Assist/Config/config.php';
+            include 'Assist/Config/config.php';
             R::setup('mysql:host=localhost;dbname=' . $DBNAME, $DBUSERNAME, $DBPASSWORD);
             R::testConnection();
         } catch (Exception $exc) {
