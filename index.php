@@ -24,7 +24,7 @@ if(isset($_POST['login']) && ($_POST['isTrainer']==='true'))
         $isUser = $user->validateUser($usrName,$usrPassword);
         if($isUser)
         {
-            $isTrainer=$user->isTrainer($user->getId());            
+            echo $isTrainer=$user->isTrainer($user->getId());            
             if($isTrainer)
             {
                 session_start();    
@@ -32,7 +32,7 @@ if(isset($_POST['login']) && ($_POST['isTrainer']==='true'))
                 $_SESSION['usrpassword']= $usrPassword ;
                 $_SESSION['mode']='Trainer';
 
-                header ('Location:main.php?mode=tr');
+                header ('Location:main.php');
             }
             else 
                 $smarty->assign ('msg','انت غير مسجل لدينا كمتدرب ');
@@ -44,17 +44,18 @@ if(isset($_POST['login']) && ($_POST['isTrainer']==='true'))
         $smarty->assign ('msg','الرجاء عدم ترك الحقول فارغة'); 
 }
 
-if (isset($_POST['newUser']) && ($_POST['isTrainer'] === 'true')) {
+else if (isset($_POST['newUser']) && ($_POST['isTrainer'] === 'true')) {
     $usrName=$_POST['usrName'];
     $usrPassword=md5($_POST['usrPass']);
     session_start();    
     $_SESSION['usrname']=$usrName;
     $_SESSION['usrpassword']= $usrPassword ;
     $_SESSION['mode']='Trainer';
+    
     header('Location:newUsr.php');
 }
 
-if (isset($_POST['login']))
+else if (isset($_POST['login'])&& ($_POST['isTrainer'] === 'false'))
 {
     if(!empty(trim($_POST['usrName'])) && !empty(trim($_POST['usrPass'])))
     {
@@ -67,7 +68,6 @@ if (isset($_POST['login']))
             $_SESSION['usrname']=$usrName;
             $_SESSION['usrpassword']= $usrPassword ;
             $_SESSION['mode']='Trainee';
-
             header ('Location:main.php');
         }
         else 
@@ -75,7 +75,8 @@ if (isset($_POST['login']))
     }
     else 
         $smarty->assign ('msg','الرجاء عدم ترك الحقول فارغة'); 
-}   
+}  
+else
 $smarty->display("index.tpl");
 ?>
 
