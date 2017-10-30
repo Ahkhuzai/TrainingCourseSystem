@@ -77,9 +77,10 @@ class User {
     public function isTrainer($id)
     {   
        $user = new PersonaRepo();
+       $Id=-1;
        $result=$user->fetchAll();
        for ($i = 1; $i <= count($result); $i++) {
-        if ($result[$i]['user_id'] === $id)
+        if ($result[$i]['user_id'] == $id)
             $Id=$i;   
        }      
         if($result[$Id]['is_trainer']==1)
