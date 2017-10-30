@@ -16,7 +16,6 @@ require_once 'UserRepo.php';
 require_once 'PersonaRepo.php';
 class User {    
     
-    
     private $id;
     private $username;
     private $email;

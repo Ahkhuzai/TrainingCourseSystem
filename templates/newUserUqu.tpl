@@ -13,27 +13,44 @@ and open the template in the editor.
         <!-- add one or more widgets -->
         <script type="text/javascript" src="Assist/js/jqwidgets-ver5.3.2/jqwidgets/jqxbuttons.js"></script>
         <script type="text/javascript" src="Assist/js/jqwidgets-ver5.3.2/jqwidgets/jqxinput.js"></script>
-        <script type="text/javascript" src="Assist/js/jqwidgets-ver5.3.2/jqwidgets/jqxcheckbox.js"></script>
-        <script type="text/javascript" src="Assist/js/jqwidgets-ver5.3.2/jqwidgets/jqxpasswordinput.js"></script>
-        <script type="text/javascript" src="Assist/js/jqwidgets-ver5.3.2/jqwidgets/jqxcheckbox.js"></script>
-        <script type="text/javascript" src="Assist/js/main.js"></script>
+        <script type="text/javascript" src="Assist/js/jqwidgets-ver5.3.2/jqwidgets/jqxfileupload.js"></script>
+        <script type="text/javascript" src="Assist/js/jqwidgets-ver5.3.2/jqwidgets/jqxscrollbar.js"></script>
+        <script type="text/javascript" src="Assist/js/jqwidgets-ver5.3.2/jqwidgets/jqxlistbox.js"></script>
+        <script type="text/javascript" src="Assist/js/jqwidgets-ver5.3.2/jqwidgets/jqxdropdownlist.js"></script>
+        <script type="text/javascript" src="Assist/js/newUsrUqu.js"></script>
         <!-- add the jQWidgets base styles and one of the theme stylesheets -->
         <link rel="stylesheet" href="Assist/js/jqwidgets-ver5.3.2/jqwidgets/styles/jqx.base.css" type="text/css" />
         <link rel="stylesheet" href="Assist/js/jqwidgets-ver5.3.2/jqwidgets/styles/jqx.energyblue.css" type="text/css" />
         <link rel="stylesheet" href="Assist/cs/style.css" type="text/css" />
-        
-        
+             
         <title>بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى</title>
     </head>
     <body>
         <header>
             <img class='banner' src="images/banner1.png"  >
             <center><h1>بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى</h1></center>
-            <center><h1> تسجيل المدربين من أعضاء هيئة التدريس بجامعة ام القرى</h1></center>
+            <center><h3> تسجيل المدربين من أعضاء هيئة التدريس بجامعة ام القرى</h3></center>
         </header>
-    <center>
-       
-    <img src="images/logo.png" width="10%"/>
+    <center>      
+        <form action='newUsrUqu.php' method='POST' enctype="multipart/form-data">
+            <p>السيرة الذاتية</p>
+            <div id="resume" name='resume'> 
+            </div>
+            </br>
+            <div id='qualification'>
+            </div>
+            </br>
+            <input type='text' id='major' name='major'  >
+            </br>
+            </br>
+            <input type='text' id='special' name='special'  >
+            </br>
+            </br>
+            <input type='submit' id='submit' name='submit'  >
+            </br>
+            </br>
+            
+        </form>
     <p> {$msg}</p>
     </center>
         <footer>

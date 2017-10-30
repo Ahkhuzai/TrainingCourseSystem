@@ -48,7 +48,7 @@ and open the template in the editor.
         <input type="submit" value="مستخدم جديد" name="newUser" id='newUser'/>
     </form>
     
-    <p> {$msg}</p>
+    <p><font color="red">{$msg}</font></p>
     </center>
         <footer>
             <img  class='banner' src="images/footer1.png" >
