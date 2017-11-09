@@ -73,6 +73,7 @@ and open the template in the editor.
             <li style="width:15%"><a href="trainer.php">المدربين</a>
                 <ul>
                     <li><a href="addTraining.php">طلب تقديم دورة</a></li>
+                    <li><a href="approveCertificate.php"> طلب تقديم الحقيبة التدريبية</a></li>
                     <li><a href="viewRequest.php">استعراض الطلبات</a></li>
                     <li><a href="oldTraining.php">الدورات السابقة</a></li>
                     <li><a href="approveCertificate.php"> اعتماد الشهادات</a></li>

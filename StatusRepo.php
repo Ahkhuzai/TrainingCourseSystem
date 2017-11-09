@@ -7,16 +7,16 @@
  */
 
 /**
- * Description of TimetableRepo
+ * Description of StatusRepo
  *
  * @author ahkhuzai
  */
 require_once 'libs/RedBeanPHP4_3_4/rb.php';
 
 
-class TimetableRepo {
+class StatusRepo {
     
-    
+  
     public function __construct() { 
         try {
             include 'config/config.php';
@@ -26,42 +26,41 @@ class TimetableRepo {
             return $exc->getTraceAsString();
         }
     }
+
     
     public function fetchByID($id)
     {
         try {
-            $timetable = R::load('timetable', $id);
+            $status = R::load('registerstatus', $id);
 
-            if (!$timetable['id'])
+            if (!$status['id'])
                 return false;
             else
-                return $timetable;
-
+                return $status;
         } catch (Exception $exc) {
             return $exc->getTraceAsString();
-        }
-    
+        }   
     } 
               
     public function fetchAll()
     {   
         try {
-            $timetable = R::findAll('timetable');
-            
-            if (!$timetable)
+            $status = R::findAll('registerstatus');
+            if (!$status)
                 return false;
             else
-                return $timetable;
+                return $status;
         } catch (Exception $exc) {
             return $exc->getTraceAsString();
         }
+    
     }
     
     public function delete($id)
-    {   
-        
+    {    
         try {
-            $result = R::exec('DELETE FROM timetable WHERE id = :id', array('id' => $id));
+            $result = R::exec('DELETE FROM registerstatus WHERE id = :id', array('id' => $id));
+
             if ($result) {
                 return $result;
             } else {
@@ -69,28 +68,23 @@ class TimetableRepo {
             }
         } catch (Exception $exc) {
             return $exc->getTraceAsString();
-        }             
+        }
+             
     }
     
-    public function save($id,$tcId,$trId,$startDate, $endDate, $duration, $startAt, $location,$addDate)
-    {   
+    public function save($id,$statusValue)
+    {
+        
+        
         if($id>0)
         {
             try {
-                $timetable = R::findOne('timetable', 'id = ?', array($id));
-                $timetable['tc_id'] = $tcId;
-                $timetable['tr_id'] = $trId;
-                $timetable['start_date'] = $startDate;
-                $timetable['end_date'] = $endDate;
-                $timetable['location'] = $location;
-                $timetable['duration'] = $duration;
-                $timetable['start_at'] = $startAt;
-                $timetable['add_date'] = $addDate;
-                $result = R::store($timetable);
+                $status = R::findOne('registerstatus', 'id = ?', array($id));
+                $status['status'] = $statusValue;
+                $result = R::store($status);
                 if ($result)
                     return true;
                 else
-
                     return false;
             } catch (Exception $exc) {
                 return $exc->getTraceAsString();
@@ -99,18 +93,9 @@ class TimetableRepo {
         else 
         {
             try {
-                $timetable = R::dispense('timetable');
-             
-                $timetable['tc_id'] = $tcId;
-                $timetable['tr_id'] = $trId;
-                $timetable['start_date'] = $startDate;
-                $timetable['end_date'] = $endDate;
-                $timetable['location'] = $location;
-                $timetable['duration'] = $duration;
-                $timetable['start_at'] = $startAt;
-                $timetable['add_date'] = $addDate;
-                
-                $result = R::store($timetable);
+                $status = R::dispense('registerstatus');
+                $status['status'] = $statusValue;
+                $result = R::store($status);
                 if ($result)
                     return $result;
                 else

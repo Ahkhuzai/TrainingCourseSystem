@@ -9,6 +9,7 @@
         <p>لتتمكن من طلب تقديم دورة  يجب اتمام النموذج التالي  لمرة واحدة</p>       
         <div id='qualification'>
         </div>
+        <input type='hidden' id='quali' name='quali' />
         </br>
         <input type='text' id='major' name='major'  >
         </br>
@@ -19,11 +20,12 @@
         <div id="resume" name='resume'> 
             السيرة الذاتية
         </div>
+        <input type='hidden' id='cv_url' name='cv_url' />
         </br>
         <div id="signture" name='signture' /> 
             التوقيع
         </div>
-        <input type='hidden' id='quali' name='quali' />
+        <input type='hidden' id='signature_url' name='signature_url' />
         </br>
         <input type='submit' id='becomeTrainer' name='becomeTrainer'  value="متابعة"  >
         </br>

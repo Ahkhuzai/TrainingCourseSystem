@@ -23,8 +23,8 @@ if (isset($_POST['becomeTrainer'])) {
     $major=$_POST['major'];
     $specail=$_POST['special'];
     $qualification=$_POST['quali'];
-    $resumeDir="uploads/resume/resume1.pdf";
-    $signtureDir="uploads/signture/resume1.jpg"; 
+    $resumeDir="";
+    $signtureDir=""; 
     $result = $persona->addTrainer($usrID,$major,$specail,$qualification,$resumeDir,$signtureDir);
     if($result)
         $smarty->display("contract.tpl");
@@ -34,6 +34,4 @@ if (isset($_POST['becomeTrainer'])) {
         }
     } 
 }
-
-    
 ?>

@@ -17,6 +17,10 @@
             <textarea id='Goals' name='Goals' ></textarea>       
             </br>
             </br>
+            <div id="handout" name='handout'> 
+                الحقيبة التدريبية
+            </div>
+            <input type='hidden' id='handout_url' name='handout_url' />
             <input type="text" id="Hours" name="Hours"/>       
             </br>
             </br>

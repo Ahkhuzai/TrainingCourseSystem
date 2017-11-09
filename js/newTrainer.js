@@ -1,7 +1,9 @@
 $(document).ready(function () {              
     $("#major").jqxInput({placeHolder: "التخصص العام ", height: 25, width: '70%', minLength: 1,  theme: 'office',rtl:true });
     $("#special").jqxInput({ placeHolder: "التخصص الدقيق ", height: 25,width: '70%', minLength: 1, theme: 'office' ,rtl:true});
-     $("#quali").jqxInput({height: 25,width: '70%', minLength: 1, theme: 'office' ,rtl:true});
+    $("#quali").jqxInput({height: 25,width: '70%', minLength: 1, theme: 'office' ,rtl:true});
+    $("#cv_url").jqxInput({height: 25,width: '70%', minLength: 1, theme: 'office' ,rtl:true});
+    $("#signature_url").jqxInput({height: 25,width: '70%', minLength: 1, theme: 'office' ,rtl:true});
 });
 
 $(document).ready(function () {
@@ -9,10 +11,19 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    $('#resume').jqxFileUpload({  width: '70%', uploadUrl: 'addTraining.php', fileInputName:'TrCV',theme: 'office'  });
+    $('#resume').jqxFileUpload({  width: '70%', uploadUrl: 'cv_upload.php', fileInputName:'TrCV',theme: 'office',accept: 'application/pdf , application/vnd.wordperfect , application/msword'});
+    $('#resume').on('uploadEnd', function (event) {
+    var args = event.args;
+    var serverResponce = args.response;
+    alert(serverResponce);
 });
-$(document).ready(function () {
-    $('#signture').jqxFileUpload({ width: '70%', uploadUrl: 'addTraining.php', fileInputName:'TrSign',theme: 'office' });
+
+    $('#signture').jqxFileUpload({ width: '70%', uploadUrl: 'signature_upload.php', fileInputName:'TrSign',theme: 'office',accept: 'image/*' });
+    $('#signture').on('uploadEnd', function (event) {
+    var args = event.args;
+    var serverResponce = args.response;
+    alert(serverResponce);
+});
 });
 
 $(document).ready(function () {                

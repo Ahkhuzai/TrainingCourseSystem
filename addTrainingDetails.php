@@ -6,8 +6,9 @@ $smarty=new Smarty();
 $trCourse = new TrainingCourse();
 $usrId=1;
 //error_reporting(0);
+
 if(isset($_POST['saveTraining']))
-{
+{   
     if(!empty(trim($_POST['Tname'])))
     {
         $Tname=$_POST['Tname'];
@@ -20,13 +21,11 @@ if(isset($_POST['saveTraining']))
         $Tstatus=6;
         $Tavailable_seat=0;
         $handoutDir="";
-        $addDate=date("Y-m-d");
+        $addDate="2017-5-25";
         $startAt="00:00:00";
         $location="-";
         
-        $result=$trCourse->addTraining($usrId,$Tname,$Tabstract,$Tgoals,$Thours,$Tstart,$Tend,$Tcapacity,$Tstatus,$Tavailable_seat,$handoutDir,$addDate,$startAt,$location);
-        
-        
+        $result=$trCourse->addTraining($usrId,$Tname,$Tabstract,$Tgoals,$Thours,$Tstart,$Tend,$Tcapacity,$Tstatus,$Tavailable_seat,$handoutDir,$addDate,$startAt,$location);    
     }
     else 
         $smarty->assign ('msg','يجب أدخال اسم الدورة ليتم حفظ الطلب');
