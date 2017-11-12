@@ -72,14 +72,14 @@ class RateRepo {
              
     }
     
-    public function save($rId,$tcId,$trId,$tcAvg,$trAvg)
+    public function save($rId,$ttId,$trId,$tcAvg,$trAvg)
     {      
         
         if($rId>0)
         {
             try {
                 $rate = R::findOne('rate', 'id = ?', array($rId));
-                $rate['tc_id'] = $tcId;
+                $rate['tt_id'] = $ttId;
                 $rate['tr_id'] = $trId;
                 $rate['tr_total_avg_rate'] = $trAvg;
                 $rate['tc_total_avg_rate'] = $tcAvg;
@@ -96,7 +96,7 @@ class RateRepo {
         {
             try {
                 $rate = R::dispense('rate');
-                $rate['tc_id'] = $tcId;
+                $rate['tt_id'] = $ttId;
                 $rate['tr_id'] = $trId;
                 $rate['tr_total_avg_rate'] = $trAvg;
                 $rate['tc_total_avg_rate'] = $tcAvg;

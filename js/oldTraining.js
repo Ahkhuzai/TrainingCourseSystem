@@ -5,7 +5,7 @@ $(document).ready(function () {
         datafields: [{ name: 'id',type: 'number' },
             { name: 'name',type: 'string' },
             { name: 'start_date'}],
-        url: 'getPrevTc.php'
+        url: "getPrevTc.php"
     };
     $("#oldTC").jqxGrid({
         source: source,

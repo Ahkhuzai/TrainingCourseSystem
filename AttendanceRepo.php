@@ -7,35 +7,34 @@
  */
 
 /**
- * Description of TrainingCourseRepo
+ * Description of AttendanceRepo
  *
  * @author ahkhuzai
  */
 require_once 'libs/RedBeanPHP4_3_4/rb.php';
 
-
-class TrainingCourseRepo {
-    
-
+        
+class AttendanceRepo {
+ 
     public function __construct() { 
+       
         try {
-            require_once 'config/config.php';
+            include 'config/config.php';
             R::setup('mysql:host=localhost;dbname=' . $DBNAME, $DBUSERNAME, $DBPASSWORD);
             R::testConnection();
         } catch (Exception $exc) {
             return $exc->getTraceAsString();
-        }
+        }        
     }
-        
+    
     public function fetchByID($id)
     {
         try {
-            $trainingCourse = R::load('trainingcourse', $id);
-
-            if (!$trainingCourse['id'])
+            $timeattend = R::load('attendance', $id);
+            if (!$timeattend['id'])
                 return false;
             else
-                return $trainingCourse;
+                return $timeattend;
         } catch (Exception $exc) {
             return $exc->getTraceAsString();
         }
@@ -44,21 +43,20 @@ class TrainingCourseRepo {
     public function fetchAll()
     {   
         try {
-            $trainingCourse = R::findAll('trainingcourse');
-
-            if (!$trainingCourse)
+            $timeattend = R::findAll('attendance');
+            if (!$timeattend)
                 return false;
             else
-                return $trainingCourse;
+                return $timeattend;
         } catch (Exception $exc) {
-            return $exc->getTraceAsString();
-        }
+            return $exc->getTraceAsString();       
+        }  
     }
     
     public function delete($id)
-    {
+    {      
         try {
-            $result = R::exec('DELETE FROM trainingcourse WHERE id = :id', array('id' => $id));
+            $result = R::exec('DELETE FROM attendance WHERE id = :id', array('id' => $id));
             if ($result) {
                 return $result;
             } else {
@@ -66,22 +64,23 @@ class TrainingCourseRepo {
             }
         } catch (Exception $exc) {
             return $exc->getTraceAsString();
+
         }
     
     }
     
-    public function save($tcId,$name,$goal,$abstract,$pid)
-    {
-        
-        if($tcId>0)
+    public function save($id,$UsrId,$ttId,$Date,$certificate_approved)
+    {      
+        if($id>0)
         {
             try {
-                $trainingCourse = R::findOne('trainingcourse', 'id = ?', array($tcId));
-                $trainingCourse['name'] = $name;
-                $trainingCourse['goals'] = $goal;
-                $trainingCourse['abstract'] = $abstract;
-                $trainingCourse['pid'] = $pid;
-                $result = R::store($trainingCourse);
+                $timeattend = R::findOne('attendance', 'id = ?', array($id));
+                $timeattend['usr_id'] = $UsrId;
+                $timeattend['timetable_id'] = $ttId;
+                $timeattend['date'] = $Date;
+                $timeattend['certificate_approved'] = $certificate_approved;
+                
+                $result = R::store($timeattend);
                 if ($result)
                     return true;
                 else
@@ -93,12 +92,12 @@ class TrainingCourseRepo {
         else 
         {
             try {
-                $trainingCourse = R::dispense('trainingcourse');
-                $trainingCourse['name'] = $name;
-                $trainingCourse['goals'] = $goal;
-                $trainingCourse['abstract'] = $abstract;
-                $trainingCourse['pid'] = $pid;
-                $result = R::store($trainingCourse);
+                $timeattend = R::dispense('attendance');
+                $timeattend['usr_id'] = $UsrId;
+                $timeattend['timetable_id'] = $ttId;
+                $timeattend['date'] = $Date;
+                $timeattend['certificate_approved'] = $certificate_approved;
+                $result = R::store($timeattend);
                 if ($result)
                     return $result;
                 else

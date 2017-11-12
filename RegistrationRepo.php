@@ -5,37 +5,36 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
- * Description of TrainingCourseRepo
+ * Description of RegistrationRepo
  *
  * @author ahkhuzai
  */
 require_once 'libs/RedBeanPHP4_3_4/rb.php';
 
 
-class TrainingCourseRepo {
-    
+class RegistrationRepo {
+  
 
     public function __construct() { 
         try {
-            require_once 'config/config.php';
+            include 'config/config.php';
             R::setup('mysql:host=localhost;dbname=' . $DBNAME, $DBUSERNAME, $DBPASSWORD);
             R::testConnection();
         } catch (Exception $exc) {
             return $exc->getTraceAsString();
         }
     }
-        
+    
     public function fetchByID($id)
     {
         try {
-            $trainingCourse = R::load('trainingcourse', $id);
-
-            if (!$trainingCourse['id'])
+            $register = R::load('registration', $id);
+            if (!$register['id'])
                 return false;
             else
-                return $trainingCourse;
+                return $register;
+
         } catch (Exception $exc) {
             return $exc->getTraceAsString();
         }
@@ -44,21 +43,20 @@ class TrainingCourseRepo {
     public function fetchAll()
     {   
         try {
-            $trainingCourse = R::findAll('trainingcourse');
-
-            if (!$trainingCourse)
+            $register = R::findAll('registration');
+            if (!$register)
                 return false;
             else
-                return $trainingCourse;
+                return $register;
         } catch (Exception $exc) {
             return $exc->getTraceAsString();
         }
     }
     
     public function delete($id)
-    {
+    {        
         try {
-            $result = R::exec('DELETE FROM trainingcourse WHERE id = :id', array('id' => $id));
+            $result = R::exec('DELETE FROM registration WHERE id = :id', array('id' => $id));
             if ($result) {
                 return $result;
             } else {
@@ -66,22 +64,21 @@ class TrainingCourseRepo {
             }
         } catch (Exception $exc) {
             return $exc->getTraceAsString();
-        }
-    
+        }         
     }
     
-    public function save($tcId,$name,$goal,$abstract,$pid)
-    {
+    public function save($id,$UsrId,$ttId,$statusId)
+    {    
         
-        if($tcId>0)
+        if($id)
         {
             try {
-                $trainingCourse = R::findOne('trainingcourse', 'id = ?', array($tcId));
-                $trainingCourse['name'] = $name;
-                $trainingCourse['goals'] = $goal;
-                $trainingCourse['abstract'] = $abstract;
-                $trainingCourse['pid'] = $pid;
-                $result = R::store($trainingCourse);
+                $register = R::findOne('registration', 'id = ?', array($id));
+                $register['usr_id'] = $UsrId;
+                $register['tt_id'] = $ttId;
+                $register['registration_status'] = $statusId;
+
+                $result = R::store($register);
                 if ($result)
                     return true;
                 else
@@ -93,12 +90,11 @@ class TrainingCourseRepo {
         else 
         {
             try {
-                $trainingCourse = R::dispense('trainingcourse');
-                $trainingCourse['name'] = $name;
-                $trainingCourse['goals'] = $goal;
-                $trainingCourse['abstract'] = $abstract;
-                $trainingCourse['pid'] = $pid;
-                $result = R::store($trainingCourse);
+                $register = R::dispense('registration');
+                $register['usr_id'] = $UsrId;
+                $register['tt_id'] = $ttId;
+                $register['registration_status'] = $statusId;
+                $result = R::store($register);
                 if ($result)
                     return $result;
                 else
@@ -106,7 +102,8 @@ class TrainingCourseRepo {
             } catch (Exception $exc) {
                 return $exc->getTraceAsString();
             }
-                }        
+        }
+        
     }
 }
 ?>

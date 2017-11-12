@@ -15,6 +15,7 @@ require_once 'TrainingCourseRepo.php';
 require_once 'TimetableRepo.php';
 require_once 'StatusRepo.php';
 require_once 'RateRepo.php';
+require_once 'RateDRepo.php';
 class TrainingCourse {
     
     public function addTraining($usrID,$Tname,$Tabstract,$Tgoals,$Thours,$Tstart,$Tend,$Tcapacity,$Tstatus,$Tavailable_seat,$handoutDir,$addDate,$startAt,$location)
@@ -22,8 +23,8 @@ class TrainingCourse {
         $trMan=new TrainingCourseRepo();
         $ttMan=new TimetableRepo();
         
-        $tcId=$trMan->save(0, $Tname, $Tgoals, $Tabstract, $Tcapacity, $Tstatus, $Tavailable_seat, $handoutDir);
-        $ttMan->save(0, $tcId, $usrID, $Tstart, $Tend, $Thours, $startAt, $location,$addDate);
+        $tcId=$trMan->save(0, $Tname, $Tgoals, $Tabstract);
+        $ttMan->save(0, $tcId, $usrID, $Tstart, $Tend, $Thours, $startAt, $location,$addDate,$Tcapacity, $Tstatus, $Tavailable_seat, $handoutDir);
     }
     public function getOldTrainingByUserID($usrId)
     {
@@ -33,6 +34,7 @@ class TrainingCourse {
         $today=date("Y-m-d");
         $all_tt= $ttMan->fetchAll();
         $all_tt= array_values($all_tt);
+      
         //find tc for this user 
         $j=0;
         
@@ -55,15 +57,16 @@ class TrainingCourse {
         {
             
           $tc[] = array(
-                'id'=>$all_userTt[$i]['tc_id'],
+                'id'=>$all_userTt[$i]['id'],
                 'name'=>$all_userTc[$i]['name'],
-                'start_date' => $all_userTt[$i]['start_date']
+                'start_date' => $all_userTt[$i]['start_date']        
 	);        
         }      
         return $tc;     
     }
 
-    public function getTrainingRequestByUserID($usrId){
+    public function getTrainingRequestByUserID($usrId)
+    {
         
         $trMan=new TrainingCourseRepo();
         $ttMan=new TimetableRepo();
@@ -91,7 +94,7 @@ class TrainingCourse {
         //get status value; 
         for($i=0;$i<count($all_userTt);$i++)
         {
-            $all_userSt[$i]=$sMan->fetchByID($all_userTc[$i]['status']);
+            $all_userSt[$i]=$sMan->fetchByID($all_userTt[$i]['status']);
         }
         
         //create the array for all required information;
@@ -107,9 +110,9 @@ class TrainingCourse {
             }
 
             $tc[] = array(
-                    'id'=>$all_userTt[$i]['tc_id'],
+                    'id'=>$all_userTt[$i]['id'],
                     'name'=>$all_userTc[$i]['name'],
-                    'sid' =>$all_userTc[$i]['status'] ,
+                    'sid' =>$all_userTt[$i]['status'] ,
                     'status' => $status,
                     'add_date' => $all_userTt[$i]['add_date']
 	);        
@@ -118,39 +121,102 @@ class TrainingCourse {
         return $tc;
     }
     
-    public function getSingleTrainingCourseInfo($tcid)
+    public function getSingleTrainingCourseInfo($tt_id)
     {
-        $trMan=new TrainingCourseRepo();
+        $tcMan=new TrainingCourseRepo();
         $ttMan=new TimetableRepo();
         $rMan=new RateRepo();
+        $tt=$ttMan->fetchByID($tt_id);
         
-        $tc=$trMan->fetchByID($tcid);
-        $tt=$ttMan->fetchByID($tcid);
+        $tc=$tcMan->fetchByID($tt['tc_id']);
+        
         
         $result=$rMan->fetchAll();
         $result= array_values($result);
+        
         $j=0;
         for($i=0;$i<count($result);$i++)
         {
-            if($result[$i]['tc_id']==$tcid)
+            if($result[$i]['tt_id']==$tt_id)
             {
                 $rate[$j]=$result[$i];
                 break;
             }
                 
-        }
-        
+        }       
         $result=array(
             'name'=>$tc['name'],
             'start_date'=>$tt['start_date'],
             'duration'=>$tt['duration'],
             'tr_total_avg_rate'=>$rate[0]['tr_total_avg_rate'],
             'tc_total_avg_rate'=>$rate[0]['tc_total_avg_rate']
-            
-            
+      
+        );        
+        return $result;
+    }
+    
+    public function getSingleTrainingCourseRate($tt_id)
+    {
+        $rMan=new RateRepo();
+        $rdMan=new RateDRepo();
+        
+        $Allrid=$rMan->fetchAll();
+        $Allrid= array_values($Allrid);
+        for($i=0;$i<count($Allrid);$i++)
+        {
+            if($Allrid[$i]['tt_id']==$tt_id)
+                $rid=$Allrid[$i]['id'];
+        }
+        
+   
+        $rateD=$rdMan->fetchAll();
+        $rateD = array_values($rateD);
+        
+        //get rateD for rid
+        
+        $j=0;
+        for($i=0;$i<count($rateD);$i++)
+        {
+            if ($rateD[$i]['rate_id'] == $rid) {
+                $tcRate[$j] = $rateD[$i];
+                $j++;
+            }
+        }
+        
+        //Create array for chart 
+        $total_voter= count($tcRate);
+        $total_place=0;
+        $total_presentation=0;
+        $total_orgnization=0;
+        $total_trainer=0;
+        $total_program=0;
+               
+        
+        //calculate avg for all voters value
+        for($i=0;$i<$total_voter;$i++)
+        {
+            $total_place+=$tcRate[$i]['place_rate'];
+            $total_presentation+=$tcRate[$i]['presentation_rate'];
+            $total_orgnization+=$tcRate[$i]['organizing_rate'];
+            $total_trainer+=$tcRate[$i]['presenter_rate'];
+            $total_program+=$tcRate[$i]['training_program_rate']; 
+        }
+        
+        $rate=array(
+            array('score'=>$total_place/$total_voter,
+                  'criteria'=>'مكان الدورة'),
+            array('score'=>$total_presentation/$total_voter,
+                  'criteria'=>'وسائل العرض'),
+            array('score'=>$total_orgnization/$total_voter,
+                  'criteria'=>'تنظيم الدورة'),
+            array('score'=>$total_trainer/$total_voter,
+                  'criteria'=>'مقدم الدورة التدريبية'),
+            array('score'=>$total_program/$total_voter,
+                  'criteria'=>'البرنامج التدريبي')
         );
         
-        return $result;
+        return $rate;
+        
         
     }
 }

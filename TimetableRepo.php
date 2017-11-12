@@ -72,7 +72,7 @@ class TimetableRepo {
         }             
     }
     
-    public function save($id,$tcId,$trId,$startDate, $endDate, $duration, $startAt, $location,$addDate)
+    public function save($id,$tcId,$trId,$startDate, $endDate, $duration, $startAt, $location,$addDate,$capacity,$status,$available_seat,$handoutDir)
     {   
         if($id>0)
         {
@@ -86,6 +86,10 @@ class TimetableRepo {
                 $timetable['duration'] = $duration;
                 $timetable['start_at'] = $startAt;
                 $timetable['add_date'] = $addDate;
+                $timetable['capacity'] = $capacity;
+                $timetable['status'] = $status;
+                $timetable['available_seat'] = $available_seat;
+                $timetable['handout_dir'] = $handoutDir;
                 $result = R::store($timetable);
                 if ($result)
                     return true;
@@ -109,6 +113,10 @@ class TimetableRepo {
                 $timetable['duration'] = $duration;
                 $timetable['start_at'] = $startAt;
                 $timetable['add_date'] = $addDate;
+                $timetable['capacity'] = $capacity;
+                $timetable['status'] = $status;
+                $timetable['available_seat'] = $available_seat;
+                $timetable['handout_dir'] = $handoutDir;
                 
                 $result = R::store($timetable);
                 if ($result)

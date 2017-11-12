@@ -7,7 +7,7 @@ $(document).ready(function () {
             { name: 'name',type: 'string' },
             { name: 'status' ,type: 'string'},
             { name: 'add_date'}],
-        url: 'tc_get.php'
+        url:"tc_get.php"
     };
     $("#grid").jqxGrid({
         source: source,

@@ -7,58 +7,61 @@
  */
 
 /**
- * Description of TrainingCourseRepo
+ * Description of RateRepo
  *
  * @author ahkhuzai
  */
 require_once 'libs/RedBeanPHP4_3_4/rb.php';
 
 
-class TrainingCourseRepo {
+class RateDRepo {
     
-
+   
     public function __construct() { 
         try {
-            require_once 'config/config.php';
+            include 'config/config.php';
             R::setup('mysql:host=localhost;dbname=' . $DBNAME, $DBUSERNAME, $DBPASSWORD);
             R::testConnection();
         } catch (Exception $exc) {
             return $exc->getTraceAsString();
         }
     }
-        
+    
     public function fetchByID($id)
     {
         try {
-            $trainingCourse = R::load('trainingcourse', $id);
+            $rate = R::load('ratedetails', $id);
 
-            if (!$trainingCourse['id'])
+            if (!$rate['id'])
                 return false;
             else
-                return $trainingCourse;
+                return $rate;
         } catch (Exception $exc) {
             return $exc->getTraceAsString();
-        }
+        }  
     } 
               
     public function fetchAll()
-    {   
+    {
+        
         try {
-            $trainingCourse = R::findAll('trainingcourse');
+            $rate = R::findAll('ratedetails');
 
-            if (!$trainingCourse)
+            if (!$rate)
                 return false;
             else
-                return $trainingCourse;
+                return $rate;
+
         } catch (Exception $exc) {
             return $exc->getTraceAsString();
-        }
+        }    
     }
     
     public function delete($id)
     {
         try {
-            $result = R::exec('DELETE FROM trainingcourse WHERE id = :id', array('id' => $id));
+            $result = R::exec('DELETE FROM ratedetails WHERE id = :id', array('id' => $id));
+
             if ($result) {
                 return $result;
             } else {
@@ -67,21 +70,24 @@ class TrainingCourseRepo {
         } catch (Exception $exc) {
             return $exc->getTraceAsString();
         }
-    
     }
     
-    public function save($tcId,$name,$goal,$abstract,$pid)
+    public function save($rdid,$rid,$usrId,$comment,$placeRate,$presenterRate,$presentationRate,$organizingRate,$trainingProgramRate)
     {
         
-        if($tcId>0)
+        if($rdid>0)
         {
             try {
-                $trainingCourse = R::findOne('trainingcourse', 'id = ?', array($tcId));
-                $trainingCourse['name'] = $name;
-                $trainingCourse['goals'] = $goal;
-                $trainingCourse['abstract'] = $abstract;
-                $trainingCourse['pid'] = $pid;
-                $result = R::store($trainingCourse);
+                $rate = R::findOne('ratedetails', 'id = ?', array($rdid));
+                $rate['rate_id'] = $rid;
+                $rate['trainee_id'] = $usrId;
+                $rate['comments'] = $comment;
+                $rate['place_rate'] = $placeRate;
+                $rate['presentation_rate'] = $presentationRate;
+                $rate['presenter_rate'] = $presenterRate;
+                $rate['organizing_rate'] = $organizingRate;
+                $rate['training_program_rate'] = $trainingProgramRate;
+                $result = R::store($rate);
                 if ($result)
                     return true;
                 else
@@ -93,12 +99,16 @@ class TrainingCourseRepo {
         else 
         {
             try {
-                $trainingCourse = R::dispense('trainingcourse');
-                $trainingCourse['name'] = $name;
-                $trainingCourse['goals'] = $goal;
-                $trainingCourse['abstract'] = $abstract;
-                $trainingCourse['pid'] = $pid;
-                $result = R::store($trainingCourse);
+                $rate = R::dispense('ratedetails');
+                $rate['rate_id'] = $rid;
+                $rate['trainee_id'] = $usrId;
+                $rate['comments'] = $comment;
+                $rate['place_rate'] = $placeRate;
+                $rate['presentation_rate'] = $presentationRate;
+                $rate['presenter_rate'] = $presenterRate;
+                $rate['organizing_rate'] = $organizingRate;
+                $rate['training_program_rate'] = $trainingProgramRate;
+                $result = R::store($rate);
                 if ($result)
                     return $result;
                 else
@@ -106,7 +116,9 @@ class TrainingCourseRepo {
             } catch (Exception $exc) {
                 return $exc->getTraceAsString();
             }
-                }        
+        }
+            
     }
 }
+
 ?>

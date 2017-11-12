@@ -27,6 +27,7 @@ class Persona {
     private $qualification;
     private $major;
     private $special;
+    private $signture;
     
     function getId() {
         return $this->id;

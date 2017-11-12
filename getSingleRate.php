@@ -1,7 +1,9 @@
 <?php
 require_once 'TrainingCourse.php';
-$usrID=2;
+
 $tr = new TrainingCourse();
-$result=$tr->getTrainingRequestByUserID($usrID);
+$tt_id=$_GET['id'];
+$result=$tr->getSingleTrainingCourseRate($tt_id);
 echo json_encode($result);
+
 ?>
