@@ -69,7 +69,7 @@ class AttendanceRepo {
     
     }
     
-    public function save($id,$UsrId,$ttId,$Date,$certificate_approved)
+    public function save($id,$UsrId,$ttId,$Date)
     {      
         if($id>0)
         {
@@ -78,7 +78,7 @@ class AttendanceRepo {
                 $timeattend['usr_id'] = $UsrId;
                 $timeattend['timetable_id'] = $ttId;
                 $timeattend['date'] = $Date;
-                $timeattend['certificate_approved'] = $certificate_approved;
+               
                 
                 $result = R::store($timeattend);
                 if ($result)
@@ -96,7 +96,7 @@ class AttendanceRepo {
                 $timeattend['usr_id'] = $UsrId;
                 $timeattend['timetable_id'] = $ttId;
                 $timeattend['date'] = $Date;
-                $timeattend['certificate_approved'] = $certificate_approved;
+             
                 $result = R::store($timeattend);
                 if ($result)
                     return $result;

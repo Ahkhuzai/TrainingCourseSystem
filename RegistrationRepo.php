@@ -67,7 +67,7 @@ class RegistrationRepo {
         }         
     }
     
-    public function save($id,$UsrId,$ttId,$statusId)
+    public function save($id,$UsrId,$ttId,$statusId,$certificate_approved)
     {    
         
         if($id)
@@ -76,6 +76,7 @@ class RegistrationRepo {
                 $register = R::findOne('registration', 'id = ?', array($id));
                 $register['usr_id'] = $UsrId;
                 $register['tt_id'] = $ttId;
+                $register['certificate_approved'] = $certificate_approved;
                 $register['registration_status'] = $statusId;
 
                 $result = R::store($register);
@@ -93,6 +94,7 @@ class RegistrationRepo {
                 $register = R::dispense('registration');
                 $register['usr_id'] = $UsrId;
                 $register['tt_id'] = $ttId;
+                $register['certificate_approved'] = $certificate_approved;
                 $register['registration_status'] = $statusId;
                 $result = R::store($register);
                 if ($result)

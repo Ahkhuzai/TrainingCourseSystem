@@ -30,6 +30,7 @@ and open the template in the editor.
     <script type="text/javascript" src="libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxtooltip.js"></script>
     <script type="text/javascript" src="libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/globalization/globalize.js"></script>
     <script type="text/javascript" src="libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxgrid.edit.js"></script>
     <script type="text/javascript" src="libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxgrid.pager.js"></script>
     <script type="text/javascript" src="libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxgrid.selection.js"></script>
     <script type="text/javascript" src="libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxgrid.sort.js"></script>

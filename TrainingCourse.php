@@ -16,6 +16,8 @@ require_once 'TimetableRepo.php';
 require_once 'StatusRepo.php';
 require_once 'RateRepo.php';
 require_once 'RateDRepo.php';
+require_once 'RegistrationRepo.php';
+require_once 'PersonaRepo.php';
 class TrainingCourse {
     
     public function addTraining($usrID,$Tname,$Tabstract,$Tgoals,$Thours,$Tstart,$Tend,$Tcapacity,$Tstatus,$Tavailable_seat,$handoutDir,$addDate,$startAt,$location)
@@ -40,7 +42,7 @@ class TrainingCourse {
         
         for($i=0;$i<count($all_tt);$i++)
         {
-            if($all_tt[$i]['tr_id']==$usrId && $all_tt[$i]['end_date']<=$today )
+            if($all_tt[$i]['tr_id']==$usrId && $all_tt[$i]['end_date']<=$today && $all_tt[$i]['status']==2)
             {
                 $all_userTt[$j]=$all_tt[$i];
                 $j++;
@@ -219,4 +221,93 @@ class TrainingCourse {
         
         
     }
+    
+    public function getTrainingWaitingForCertificate($usrId)
+    {
+        $trMan=new TrainingCourseRepo();
+        $ttMan=new TimetableRepo();
+        $j=0;
+        $weekFromToday=date("Y-m-d", strtotime("+1 week"));
+        
+        $all_tt= $ttMan->fetchAll();
+        $all_tt= array_values($all_tt);
+      
+        //find tc for this user 
+        $j=0;
+        
+        for($i=0;$i<count($all_tt);$i++)
+        {
+            if($all_tt[$i]['tr_id']==$usrId && $all_tt[$i]['end_date']<=$weekFromToday && $all_tt[$i]['status']==2)
+            {
+                $all_userTt[$j]=$all_tt[$i];
+                $j++;
+            }
+        }
+       
+        //get tc details
+      
+        for($i=0;$i<count($all_userTt);$i++)
+        {
+            $all_userTc[$i]=$trMan->fetchByID($all_userTt[$i]['tc_id']);
+        }
+        for($i=0;$i<count($all_userTt);$i++)
+        {
+            
+          $tc[] = array(
+                'id'=>$all_userTt[$i]['id'],
+                'name'=>$all_userTc[$i]['name'],
+                'start_date' => $all_userTt[$i]['start_date']        
+	);        
+        }      
+        return $tc;
+    }
+    
+    public function getRegisterTrainee($tt_id)
+    {
+        $personaMan=new PersonaRepo();
+        $registerMan=new RegistrationRepo();
+        
+        $allPersona=$personaMan->fetchAll();
+        $allRegister=$registerMan->fetchAll();
+        
+        $allRegister= array_values($allRegister);
+        $allPersona= array_values($allPersona);
+        //get users id's
+        $j=0;
+        for($i=0;$i<count($allRegister);$i++)
+        {
+            if($allRegister[$i]['tt_id']==$tt_id && $allRegister[$i]['registration_status']==2)
+            {
+                $tcRegister[$j]=$allRegister[$i];
+                $j++;
+            }
+        }
+        //get trainee information
+        $x=0;
+        for($i=0;$i<count($tcRegister);$i++)
+        {
+            for($j=0;$j<count($allPersona);$j++)
+            {
+                if($tcRegister[$i]['usr_id']==$allPersona[$j]['user_id'])
+                {
+                    $trainee[$x]=$allPersona[$j];
+                    $x++;
+                }
+            }
+        }
+        $trainee= array_values($trainee);
+        for($i=0;$i<count($trainee);$i++)
+        {
+       
+        $tr[$i] = array(
+            'id'=>$tcRegister[$i]['id'],
+            'name'=>$trainee[$i]['ar_name'],
+            'certificateApprove' => $tcRegister[$i]['certificate_approved']       
+	); 
+        }
+        
+        return $tr;
+        
+    }
+    
 }

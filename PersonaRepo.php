@@ -68,7 +68,7 @@ class PersonaRepo {
         }
             
     }        
-    public function save($id,$usrId,$uquId,$arName,$enName,$phone,$department,$resumeDir,$signDir,$qualification,$major,$special,$isTrainer)
+    public function save($id,$usrId,$uquId,$arName,$enName,$phone,$department,$resumeDir,$signDir,$qualification,$major,$special,$isTrainer,$rank)
     {             
         if($id>0)
         {
@@ -78,6 +78,7 @@ class PersonaRepo {
                 $user['user_id'] = $usrId;
                 $user['ar_name'] = $arName;
                 $user['eng_name'] = $enName;
+                $user['rank'] = $rank;
                 $user['contact_phone'] = $phone;
                 $user['department'] = $department;
                 $user['resume'] = $resumeDir;
@@ -103,6 +104,7 @@ class PersonaRepo {
             $user['user_id'] = $usrId;
             $user['ar_name'] = $arName;
             $user['eng_name'] = $enName;
+            $user['rank'] = $rank;
             $user['contact_phone'] = $phone;
             $user['department'] = $department;
             $user['resume'] = $resumeDir;
