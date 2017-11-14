@@ -1,23 +1,41 @@
 
 $(document).ready(function () {
-
+            var data={};
             var source =
             {
+                
                 datatype: 'json',
                 url:'getRegister.php',
                 datafields: [
                     {name: 'name', type: 'string'},
-                    {name: 'trainee_id'},
-                    {name: 'major'},
-                    {name: 'rank'},
-                    {name: 'department'},
-                    {name: 'attended', type: 'string'},
+                    {name: 'usr_id'},
+                    {name: 'id'},
+                    {name: 'registration_status'},
+                    {name: 'tt_id'},
                     {name: 'certificateApprove'}
-                ]
+                ],
+                id: 'id',
+                url:'getRegister.php',
+                updaterow: function (rowid, rowdata, commit) {
+                    // synchronize with the server - send update command
+                    
+                    var data = "update=true&certificate_approved=" + rowdata.certificateApprove+ "&id=" + rowdata.id;
+                    
+                    $.ajax({
+                    
+                        dataType: 'json',
+                        url: 'getRegister.php',
+                        data: data,
+                        success: function (data, status, xhr) {
+                            commit(true);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                                alert(errorThrown);
+                            commit(false);
+                        }
+                    });
+                }
             };
-
-
-   
             $('#traineelist').jqxGrid(
                 {
                     width: '90%',
@@ -25,12 +43,12 @@ $(document).ready(function () {
                     source: source,
                     rtl:true,
                     editable: true,
-                    editmode: 'click',
-                    selectionmode: 'singlecell',
+                   
+                     selectionmode: 'singlecell',
                     theme:'office',
                     columns: [
                         { text: 'اعتماد الشهادة', datafield: 'certificateApprove', columntype: 'checkbox', width:'20%' ,renderer: columnsrenderer, cellsrenderer: cellsrenderer},
-                        { text: "اسم المتدرب", datafield: "name"  ,width:'80%',renderer: columnsrenderer, cellsrenderer: cellsrenderer}                   
+                        { text: "اسم المتدرب", datafield: "name"  ,editable:false,width:'80%',renderer: columnsrenderer, cellsrenderer: cellsrenderer}                   
                     ]
                 }
             );

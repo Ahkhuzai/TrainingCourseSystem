@@ -3,7 +3,15 @@ require_once 'TrainingCourse.php';
 
 if (isset($_GET['update']))
     {
-    // UPDATE COMMAND
+    $reg_id=$_GET['id'];
+    $cerApprove=$_GET['certificate_approved'];
+    if($cerApprove==true)
+        $cerApprove=1;
+    else
+        $cerApprove=0;
+    $tr = new TrainingCourse();
+    $result=$tr->approveCertificate($reg_id,$cerApprove);
+
     }
 else
     {

@@ -72,7 +72,7 @@ class TimetableRepo {
         }             
     }
     
-    public function save($id,$tcId,$trId,$startDate, $endDate, $duration, $startAt, $location,$addDate,$capacity,$status,$available_seat,$handoutDir)
+    public function save($id,$tcId,$trId,$startDate, $endDate, $duration, $startAt, $location,$addDate,$capacity,$status,$available_seat,$trAvg,$tcAvg)
     {   
         if($id>0)
         {
@@ -89,7 +89,8 @@ class TimetableRepo {
                 $timetable['capacity'] = $capacity;
                 $timetable['status'] = $status;
                 $timetable['available_seat'] = $available_seat;
-                $timetable['handout_dir'] = $handoutDir;
+                $timetable['tr_total_avg_rate'] = $trAvg;
+                $timetable['tc_total_avg_rate'] = $tcAvg;
                 $result = R::store($timetable);
                 if ($result)
                     return true;
@@ -116,7 +117,8 @@ class TimetableRepo {
                 $timetable['capacity'] = $capacity;
                 $timetable['status'] = $status;
                 $timetable['available_seat'] = $available_seat;
-                $timetable['handout_dir'] = $handoutDir;
+                $timetable['tr_total_avg_rate'] = $trAvg;
+                $timetable['tc_total_avg_rate'] = $tcAvg;
                 
                 $result = R::store($timetable);
                 if ($result)

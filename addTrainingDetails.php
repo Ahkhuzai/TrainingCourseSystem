@@ -24,8 +24,10 @@ if(isset($_POST['saveTraining']))
         $addDate="2017-5-25";
         $startAt="00:00:00";
         $location="-";
+        $tr_avg=0;
+        $tc_avg=0;
         
-        $result=$trCourse->addTraining($usrId,$Tname,$Tabstract,$Tgoals,$Thours,$Tstart,$Tend,$Tcapacity,$Tstatus,$Tavailable_seat,$handoutDir,$addDate,$startAt,$location);    
+        $result=$trCourse->addTraining($usrId,$Tname,$Tabstract,$Tgoals,$Thours,$Tstart,$Tend,$Tcapacity,$Tstatus,$Tavailable_seat,$handoutDir,$addDate,$startAt,$location,$tr_avg,$tc_avg);    
     }
     else 
         $smarty->assign ('msg','يجب أدخال اسم الدورة ليتم حفظ الطلب');

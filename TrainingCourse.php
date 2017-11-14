@@ -13,21 +13,24 @@
  */
 require_once 'TrainingCourseRepo.php';
 require_once 'TimetableRepo.php';
+require_once 'HandoutTcRepo.php';
 require_once 'StatusRepo.php';
-require_once 'RateRepo.php';
 require_once 'RateDRepo.php';
 require_once 'RegistrationRepo.php';
 require_once 'PersonaRepo.php';
+
 class TrainingCourse {
-    
-    public function addTraining($usrID,$Tname,$Tabstract,$Tgoals,$Thours,$Tstart,$Tend,$Tcapacity,$Tstatus,$Tavailable_seat,$handoutDir,$addDate,$startAt,$location)
+    public function addTraining($usrID,$Tname,$Tabstract,$Tgoals,$Thours,$Tstart,$Tend,$Tcapacity,$Tstatus,$Tavailable_seat,$handoutDir,$addDate,$startAt,$location,$tc_avg,$tr_avg)
     {
         $trMan=new TrainingCourseRepo();
         $ttMan=new TimetableRepo();
-        
+        $hoMan=new HandoutTcRepo();
         $tcId=$trMan->save(0, $Tname, $Tgoals, $Tabstract);
-        $ttMan->save(0, $tcId, $usrID, $Tstart, $Tend, $Thours, $startAt, $location,$addDate,$Tcapacity, $Tstatus, $Tavailable_seat, $handoutDir);
+        $result= $ttMan->save(0, $tcId, $usrID, $Tstart, $Tend, $Thours, $startAt, $location,$addDate,$Tcapacity, $Tstatus, $Tavailable_seat,$tr_avg,$tc_avg);
+        $hoMan->save(0, null, null, $handoutDir, null, $result);
+        
     }
+    
     public function getOldTrainingByUserID($usrId)
     {
         $trMan=new TrainingCourseRepo();
@@ -35,11 +38,9 @@ class TrainingCourse {
         $j=0;
         $today=date("Y-m-d");
         $all_tt= $ttMan->fetchAll();
-        $all_tt= array_values($all_tt);
-      
+        $all_tt= array_values($all_tt);   
         //find tc for this user 
         $j=0;
-        
         for($i=0;$i<count($all_tt);$i++)
         {
             if($all_tt[$i]['tr_id']==$usrId && $all_tt[$i]['end_date']<=$today && $all_tt[$i]['status']==2)
@@ -127,59 +128,31 @@ class TrainingCourse {
     {
         $tcMan=new TrainingCourseRepo();
         $ttMan=new TimetableRepo();
-        $rMan=new RateRepo();
-        $tt=$ttMan->fetchByID($tt_id);
-        
-        $tc=$tcMan->fetchByID($tt['tc_id']);
-        
-        
-        $result=$rMan->fetchAll();
-        $result= array_values($result);
-        
-        $j=0;
-        for($i=0;$i<count($result);$i++)
-        {
-            if($result[$i]['tt_id']==$tt_id)
-            {
-                $rate[$j]=$result[$i];
-                break;
-            }
-                
-        }       
+        $rMan=new RateDRepo();
+        $tt=$ttMan->fetchByID($tt_id);       
+        $tc=$tcMan->fetchByID($tt['tc_id']);  
         $result=array(
             'name'=>$tc['name'],
             'start_date'=>$tt['start_date'],
             'duration'=>$tt['duration'],
-            'tr_total_avg_rate'=>$rate[0]['tr_total_avg_rate'],
-            'tc_total_avg_rate'=>$rate[0]['tc_total_avg_rate']
-      
+            'tr_total_avg_rate'=>$tt['tr_total_avg_rate'],
+            'tc_total_avg_rate'=>$tt['tc_total_avg_rate']
         );        
         return $result;
     }
     
     public function getSingleTrainingCourseRate($tt_id)
     {
-        $rMan=new RateRepo();
         $rdMan=new RateDRepo();
-        
-        $Allrid=$rMan->fetchAll();
-        $Allrid= array_values($Allrid);
-        for($i=0;$i<count($Allrid);$i++)
-        {
-            if($Allrid[$i]['tt_id']==$tt_id)
-                $rid=$Allrid[$i]['id'];
-        }
-        
-   
         $rateD=$rdMan->fetchAll();
         $rateD = array_values($rateD);
         
-        //get rateD for rid
+        //get rateD for ttid
         
         $j=0;
         for($i=0;$i<count($rateD);$i++)
         {
-            if ($rateD[$i]['rate_id'] == $rid) {
+            if ($rateD[$i]['tt_id'] == $tt_id) {
                 $tcRate[$j] = $rateD[$i];
                 $j++;
             }
@@ -218,8 +191,6 @@ class TrainingCourse {
         );
         
         return $rate;
-        
-        
     }
     
     public function getTrainingWaitingForCertificate($usrId)
@@ -298,16 +269,25 @@ class TrainingCourse {
         $trainee= array_values($trainee);
         for($i=0;$i<count($trainee);$i++)
         {
-       
         $tr[$i] = array(
             'id'=>$tcRegister[$i]['id'],
+            'tt_id'=>$tcRegister[$i]['tt_id'],
+            'usr_id'=>$tcRegister[$i]['usr_id'],
+            'registration_status'=>$tcRegister[$i]['registration_status'],
             'name'=>$trainee[$i]['ar_name'],
             'certificateApprove' => $tcRegister[$i]['certificate_approved']       
 	); 
-        }
-        
-        return $tr;
-        
+        }    
+        return $tr; 
     }
+    
+    public function approveCertificate($reg_id,$cerApprove)
+    {
+        $registerMan=new RegistrationRepo();
+        $record=$registerMan->fetchByID($reg_id);    
+        $registerMan->save($reg_id, $record['usr_id'], $record['tt_id'], $record['registration_status'], $cerApprove);
+         
+    }
+    
     
 }

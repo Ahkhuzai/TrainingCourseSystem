@@ -72,14 +72,14 @@ class RateDRepo {
         }
     }
     
-    public function save($rdid,$rid,$usrId,$comment,$placeRate,$presenterRate,$presentationRate,$organizingRate,$trainingProgramRate)
+    public function save($rdid,$tid,$usrId,$comment,$placeRate,$presenterRate,$presentationRate,$organizingRate,$trainingProgramRate)
     {
         
         if($rdid>0)
         {
             try {
                 $rate = R::findOne('ratedetails', 'id = ?', array($rdid));
-                $rate['rate_id'] = $rid;
+                $rate['tt_id'] = $tid;
                 $rate['trainee_id'] = $usrId;
                 $rate['comments'] = $comment;
                 $rate['place_rate'] = $placeRate;
@@ -100,7 +100,7 @@ class RateDRepo {
         {
             try {
                 $rate = R::dispense('ratedetails');
-                $rate['rate_id'] = $rid;
+                $rate['tt_id'] = $tid;
                 $rate['trainee_id'] = $usrId;
                 $rate['comments'] = $comment;
                 $rate['place_rate'] = $placeRate;

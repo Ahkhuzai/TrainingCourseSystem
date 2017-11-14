@@ -90,7 +90,7 @@ and open the template in the editor.
                     <li><a href="viewCertificate.php">الشهادات</a></li>
                 </ul>
             </li>
-            <li style="width:15%"><a href="index.php">المبادرة </a>
+            <li style="width:15%"><a href="info.php">المبادرة </a>
             </li>
             <li style="width:15%"><a href="index.php">الرئيسية </a>
             </li>
