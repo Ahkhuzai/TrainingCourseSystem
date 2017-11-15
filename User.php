@@ -54,7 +54,12 @@ class User {
     function setPassword($password) {
         $this->password = $password;
     }
-
+    public function getUserInfo($id)
+    {
+        $user = new UserRepo();
+        $result=$user->fetchById($id);
+        return $result;  
+    }
     public function validateUser($usrName,$usrPass)
     {
         

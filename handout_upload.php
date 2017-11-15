@@ -1,16 +1,14 @@
 <?php
-$target_dir = "uploads/signature/";
+$target_dir = "uploads/handouts/";
 $target_file = $target_dir . basename($_FILES["TcHO"]["name"]);
 $uploadOk = 1;
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 // Check if image file is a actual image or fake image
 if(isset($_POST["submit"])) {
-    $check = getimagesize($_FILES["TcHO"]["tmp_name"]);
-    if($check !== false) {
-        
+    if($check !== false) {    
         $uploadOk = 1;
     } else {
-        echo "صيغة التوقيع غير صحيحة, الصيغ المقبولة هي png.gif,jpg, jpeg";
+        echo "الصيغة غير صحيحة";
         $uploadOk = 0;
     }
 }
@@ -26,8 +24,8 @@ if ($_FILES["TcHO"]["size"] > 500000) {
 }
 // Allow certain file formats
 if($imageFileType != "pdf" && $imageFileType != "doc" && $imageFileType != "docx"
-&& $imageFileType != "ppt" ) {
-    echo "صيغة التوقيع غير صحيحة, الصيغ المقبولة هي png.gif,jpg, jpeg";
+&& $imageFileType != "txt" ) {
+    echo "الصيغة غير صحيحة";
     $uploadOk = 0;
 }
 // Check if $uploadOk is set to 0 by an error
@@ -35,8 +33,8 @@ if ($uploadOk == 0) {
     echo "عذرا لم يتم تحميل الملف";
 // if everything is ok, try to upload file
 } else {
-    if (move_uploaded_file($_FILES["TrSign"]["tmp_name"], $target_file)) {
-        echo "تم تحميل الملف بنجاح";
+    if (move_uploaded_file($_FILES["TcHO"]["tmp_name"], $target_file)) {
+        echo $target_file;
     } else {
         echo "عذرا لم يتم تحميل الملف";
     }

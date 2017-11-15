@@ -20,14 +20,18 @@ require_once 'RegistrationRepo.php';
 require_once 'PersonaRepo.php';
 
 class TrainingCourse {
-    public function addTraining($usrID,$Tname,$Tabstract,$Tgoals,$Thours,$Tstart,$Tend,$Tcapacity,$Tstatus,$Tavailable_seat,$handoutDir,$addDate,$startAt,$location,$tc_avg,$tr_avg)
+    public function addTraining($usrID,$pid,$Tname,$Tabstract,$Tgoals,$Thours,$Tstart,$Tend,$Tcapacity,$Tstatus,$Tavailable_seat,$handoutDir,$addDate,$startAt,$location,$tc_avg,$tr_avg)
     {
         $trMan=new TrainingCourseRepo();
         $ttMan=new TimetableRepo();
         $hoMan=new HandoutTcRepo();
-        $tcId=$trMan->save(0, $Tname, $Tgoals, $Tabstract);
+        $tcId=$trMan->save(0, $Tname, $Tgoals, $Tabstract,$pid);
         $result= $ttMan->save(0, $tcId, $usrID, $Tstart, $Tend, $Thours, $startAt, $location,$addDate,$Tcapacity, $Tstatus, $Tavailable_seat,$tr_avg,$tc_avg);
-        $hoMan->save(0, null, null, $handoutDir, null, $result);
+        $re=$hoMan->save(0, null, null, $handoutDir, null, $result);
+        if($re)     
+            return true;
+        else 
+            return false;
         
     }
     

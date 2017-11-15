@@ -1,6 +1,6 @@
 {include file='header.tpl' title='بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'}
 
-<script type="text/javascript" src="js/addTraining.js"></script>
+<script type="text/javascript" src="js/addHandoutOnly.js"></script>
 
     
         <fieldset style="margin:0 auto; width:75%" dir='rtl'>
@@ -10,8 +10,21 @@
     <center>
           <p><font color="green">{$added}</font></p>
           <br>
-        <div id="handout" name='handout'> 
-    الحقيبة التدريبية       
+          
+        <div id="handout_tr" name='handout_tr'> 
+    الحقيبة التدريبية للمدرب      
+        </div>
+            </br>
+           <div id="handout_te" name='handout_te'> 
+    الحقيبة التدريبيةللمتدرب       
+        </div>
+            </br>
+           <div id="handout_pr" name='handout_pr'> 
+    العرض التقديمي     
+        </div>
+            </br>
+           <div id="handout_sci" name='handout_sci'> 
+    المادة العلمية      
         </div>
         </br>
      
@@ -19,25 +32,14 @@
             <input type="text" id="Tname" name="Tname"/>
             </br>
             </br>          
-            <textarea id='abstract' name='abstract' ></textarea>       
-            </br>
-            </br>
-            <textarea id='Goals' name='Goals' ></textarea>       
-            </br>
-            </br>
-             <input type="text" id="Hours" name="Hours"/>       
-            </br>
-            </br>
-            <div id='time'>
-            </div>   
-            <div style='margin-top: 10px; font-size: 13px; font-family: Verdana;' id='selection'></div>  
-            </br>
-            </br>
-            <input type='hidden' id='handout_url' name='handout_url' />
-            <input type="submit" value="حفظ"  name = "saveTraining" id='saveTraining' class='btn'/>
+            
+            <input type='hidden' id='handout_trainer' name='handout_trainer' />
+            <input type='hidden' id='handout_trainee' name='handout_trainee' />
+            <input type='hidden' id='handout_presentation' name='handout_presentation' />
+            <input type='hidden' id='handout_scichapter' name='handout_scichapter' />
+            
+           
             <input type="submit" value="إضافة"  name = "addTraining" id='addTraining' class='btn'/> 
-            <input type="hidden" id="stime" name="stime"/>
-            <input type="hidden" id="etime" name="etime"/>
             </form>
        
             <br>
@@ -52,4 +54,5 @@
     <br>
   
     {include file='footer.tpl'}
+
 

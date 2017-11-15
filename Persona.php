@@ -24,6 +24,7 @@ class Persona {
     private $contact_phone;
     private $department;
     private $resume;
+    private $rank;
     private $qualification;
     private $major;
     private $special;
@@ -77,6 +78,13 @@ class Persona {
         return $this->special;
     }
 
+    function getRank() {
+        return $this->rank;
+    }
+    
+    function getSignture() {
+        return $this->signture;
+    }
     function setId($id) {
         $this->id = $id;
     }
@@ -127,6 +135,9 @@ class Persona {
     function setSignture($signture) {
         $this->signture = $signture;
     }
+    function setRank($rank) {
+        $this->rank = $rank;
+    }
 
     function addTrainer($userId,$major,$special,$qualification,$resumeDir,$signtureDir)
     {
@@ -142,15 +153,15 @@ class Persona {
             $this->setEng_name($result[$i]['eng_name']);
             $this->setContact_phone($result[$i]['contact_phone']);
             $this->setDepartment($result[$i]['department']);
-            $this->setDepartment($result[$i]['rank']);
+            $this->setRank($result[$i]['rank']);
             $this->setResume($resumeDir);
             $this->setQualification($qualification);
             $this->setMajor($major);
             $this->setSpecial($special);
             $this->setIs_trainer(1);
             $this->setSignture($signtureDir);
-            $result=$persona->save($this->id,$this->user_id,$this->uqu_id,$this->ar_name,$this->eng_name,$this->rank,$this->contact_phone,$this->department,$this->resume,$this->signture
-                    ,$this->qualification,$this->major,$this->special,$this->is_trainer);  
+             $result=$persona->save($this->id,$this->user_id,$this->uqu_id,$this->ar_name,$this->eng_name,$this->contact_phone,$this->department,$this->resume,$this->signture
+                    ,$this->qualification,$this->major,$this->special,$this->is_trainer,$this->rank);  
             if($result)
                 return $result;   
             else

@@ -13,16 +13,28 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('#resume').jqxFileUpload({  width: '70%', uploadUrl: 'cv_upload.php', fileInputName:'TrCV',theme: 'office',accept: 'application/pdf , application/vnd.wordperfect , application/msword'});
     $('#resume').on('uploadEnd', function (event) {
-    var args = event.args;
-    var serverResponce = args.response;
-    alert(serverResponce);
+        var args = event.args;
+        var serverResponce = args.response; 
+        if (args != undefined) {
+            var item = event.args.file;
+            if (item != null) {
+                alert("تم تحميل الملف بنجاح");
+                $("#cv_url").val(serverResponce);
+            }
+        }
 });
 
     $('#signture').jqxFileUpload({ width: '70%', uploadUrl: 'signature_upload.php', fileInputName:'TrSign',theme: 'office',accept: 'image/*' });
     $('#signture').on('uploadEnd', function (event) {
-    var args = event.args;
-    var serverResponce = args.response;
-    alert(serverResponce);
+     var args = event.args;
+        var serverResponce = args.response; 
+        if (args != undefined) {
+            var item = event.args.file;
+            if (item != null) {
+                 alert("تم تحميل الملف بنجاح");
+                $("#signature_url").val(serverResponce);
+            }
+        }
 });
 });
 

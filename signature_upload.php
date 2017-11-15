@@ -1,5 +1,5 @@
 <?php
-$target_dir = "uploads/signature/";
+$target_dir = "uploads/signeture/";
 $target_file = $target_dir . basename($_FILES["TrSign"]["name"]);
 $uploadOk = 1;
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
@@ -36,7 +36,7 @@ if ($uploadOk == 0) {
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["TrSign"]["tmp_name"], $target_file)) {
-        echo "تم تحميل الملف بنجاح";
+        echo $target_file;
     } else {
         echo "عذرا لم يتم تحميل الملف";
     }

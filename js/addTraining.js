@@ -10,25 +10,31 @@
     $(document).ready(function () {
     $("#addTraining").jqxButton({ width: '120px', height: '35px', theme: 'office'});
     $("#saveTraining").jqxButton({ width: '120px', height: '35px', theme: 'office'});
-     
         });
 
 $(document).ready(function () {              
     $("#Tname").jqxInput({placeHolder: "اسم الدورة", height: 25, width: '70%', minLength: 1, theme: 'office',rtl : true }); 
-    $("#Hours").jqxInput({placeHolder: "عدد ساعات الدورة", height: 25, width: '70%', minLength: 1, theme: 'office',rtl : true }); 
+    $("#Hours").jqxInput({placeHolder: "عدد ساعات الدورة في اليوم الواحد", height: 25, width: '70%', minLength: 1, theme: 'office',rtl : true }); 
     $("#abstract").jqxInput({width: '70%', height: 80, placeHolder: 'ملخص الدورة',theme: 'office' ,rtl : true }); 
     $("#Goals").jqxInput({width: '70%', height: 200, placeHolder: 'أهداف الدورة',theme: 'office' ,rtl : true });  
     $("#stime").jqxInput({placeHolder: "اسم الدورة", height: 25, width: '70%', minLength: 1, theme: 'office',rtl : true }); 
     $("#etime").jqxInput({placeHolder: "اسم الدورة", height: 25, width: '70%', minLength: 1, theme: 'office',rtl : true }); 
     $("#handout_url").jqxInput({placeHolder: "اسم الدورة", height: 25, width: '70%', minLength: 1, theme: 'office',rtl : true }); 
+   
 });
-
+  
 $(document).ready(function () {
     $('#handout').jqxFileUpload({  width: '70%', uploadUrl: 'handout_upload.php', fileInputName:'TcHO',theme: 'office',accept: 'application/pdf , application/vnd.wordperfect , application/msword'  });
     $('#handout').on('uploadEnd', function (event) {
     var args = event.args;
-    var serverResponce = args.response;
-    alert(serverResponce);
+        var serverResponce = args.response; 
+        if (args != undefined) {
+            var item = event.args.file;
+            if (item != null) {
+                 alert("تم تحميل الملف بنجاح");
+                $("#handout_url").val(serverResponce);
+            }
+        }
 });
 });
 
@@ -61,8 +67,6 @@ $(document).ready(function () {
 function getDateFormat( date)
 {
     var s=date.split('/');
-    
-   
     var end=s[2];
     var start= s[0];
     s[0]=end;   
