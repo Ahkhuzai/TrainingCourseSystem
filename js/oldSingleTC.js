@@ -6,7 +6,7 @@ $(document).ready(function () {
                     { name: 'criteria'},
                     { name: 'score'}
                     ],
-		url: $('#url').text()
+		url: "getSingleRate.php"
 		};
 	   var dataAdapter = new $.jqx.dataAdapter(source,
 		{

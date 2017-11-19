@@ -5,7 +5,7 @@ $(document).ready(function () {
         datafields: [{ name: 'id',type: 'number' },
             { name: 'name',type: 'string' },
             { name: 'start_date'}],
-        url: 'getPrevTc.php'
+        url: 'getTcforCertificate.php'
     };
     $("#oldTC").jqxGrid({
         source: source,
@@ -19,13 +19,26 @@ $(document).ready(function () {
             { text: 'اسم الدورة', datafield: 'name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },       
         ]
     });
+
         $("#oldTC").on('rowselect', function (event) {
-        var TCID = event.args.row.id;
-        var url="certificate.php?id=".concat(TCID);    
-        window.location=url;               
-});
-});
-   
+        var TCID = event.args.row.id;   
+        $.ajax({
+        type : 'GET',
+        url : 'setPrevVariable.php',
+        data: {
+            ttid :TCID
+              },
+        success : function(data){
+           ;
+        },
+        error : function(XMLHttpRequest, textStatus, errorThrown) 
+        {alert ("Error Occured");}
+            });       
+        var url="certificate.php";
+        window.location=url;     
+        }); 
+
+});   
 var cellsrenderer = function (row, column, value) {
     return '<div style="text-align: center; margin:5px;">' + value + '</div>';
 }

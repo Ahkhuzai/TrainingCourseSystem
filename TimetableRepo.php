@@ -92,6 +92,7 @@ class TimetableRepo {
                 $timetable['tr_total_avg_rate'] = $trAvg;
                 $timetable['tc_total_avg_rate'] = $tcAvg;
                 $result = R::store($timetable);
+                
                 if ($result)
                     return true;
                 else

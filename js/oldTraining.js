@@ -20,11 +20,24 @@ $(document).ready(function () {
         ]
     });
         $("#oldTC").on('rowselect', function (event) {
-        var TCID = event.args.row.id;
-        var url="oldSingleTC.php?id=".concat(TCID);    
-        window.location=url;               
+        var TCID = event.args.row.id;   
+        $.ajax({
+        type : 'GET',
+        url : 'setPrevVariable.php',
+        data: {
+            ttid :TCID
+              },
+        success : function(data){
+           ;
+        },
+        error : function(XMLHttpRequest, textStatus, errorThrown) 
+        {alert ("Error Occured");}
+            });       
+        var url="oldsingleTC.php";
+        window.location=url;     
+        });              
 });
-});
+
    
 var cellsrenderer = function (row, column, value) {
     return '<div style="text-align: center; margin:5px;">' + value + '</div>';

@@ -1,6 +1,8 @@
 <?php
 require_once 'TrainingCourse.php';
-$usrID=2;
+
+session_start();
+$usrID=$_SESSION['user_id'];
 $tr = new TrainingCourse();
 $result=$tr->getTrainingRequestByUserID($usrID);
 echo json_encode($result);

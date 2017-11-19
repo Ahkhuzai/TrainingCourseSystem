@@ -25,9 +25,23 @@ $(document).ready(function () {
         $("#grid").on('rowselect', function (event) {
         var TCID = event.args.row.id;
         var StatusID=event.args.row.sid;
-        var url="singleTC.php?id=".concat(TCID).concat("&status=").concat(StatusID);    
-        window.location=url;               
-});
+      
+        $.ajax({
+        type : 'GET',
+        url : 'setSession.php',
+        data: {
+            ttid :TCID,
+            sid:StatusID
+              },
+        success : function(data){
+           ;
+        },
+        error : function(XMLHttpRequest, textStatus, errorThrown) 
+        {alert ("Error Occured");}
+            });       
+        var url="singleTC.php";
+        window.location=url;     
+        });
 
 });
     

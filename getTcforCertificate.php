@@ -1,6 +1,7 @@
 <?php
 require_once 'TrainingCourse.php';
-$usrID=2;
+session_start();
+$usrID=$_SESSION['user_id'];
 $tr = new TrainingCourse();
 $result=$tr->getTrainingWaitingForCertificate($usrID);
 echo json_encode($result);

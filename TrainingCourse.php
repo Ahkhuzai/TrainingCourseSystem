@@ -20,14 +20,33 @@ require_once 'RegistrationRepo.php';
 require_once 'PersonaRepo.php';
 
 class TrainingCourse {
-    public function addTraining($usrID,$pid,$Tname,$Tabstract,$Tgoals,$Thours,$Tstart,$Tend,$Tcapacity,$Tstatus,$Tavailable_seat,$handoutDir,$addDate,$startAt,$location,$tc_avg,$tr_avg)
+    
+    public function addTraining($tt_id,$usrID,$pid,$Tname,$Tabstract,$Tgoals,$Thours,$Tstart,$Tend,$Tcapacity,$Tstatus,$Tavailable_seat,$handoutDir,$addDate,$startAt,$location,$tc_avg,$tr_avg)
     {
         $trMan=new TrainingCourseRepo();
         $ttMan=new TimetableRepo();
         $hoMan=new HandoutTcRepo();
-        $tcId=$trMan->save(0, $Tname, $Tgoals, $Tabstract,$pid);
-        $result= $ttMan->save(0, $tcId, $usrID, $Tstart, $Tend, $Thours, $startAt, $location,$addDate,$Tcapacity, $Tstatus, $Tavailable_seat,$tr_avg,$tc_avg);
-        $re=$hoMan->save(0, null, null, $handoutDir, null, $result);
+        if ($tt_id > 0) {
+            $result = $ttMan->fetchByID($tt_id);
+            $trMan->save($result['tc_id'], $Tname, $Tgoals, $Tabstract,$pid);
+            $result= $ttMan->save($tt_id, $result['tc_id'], $usrID, $Tstart, $Tend, $Thours, $startAt, $location,$addDate,$Tcapacity, $Tstatus, $Tavailable_seat,$tr_avg,$tc_avg);
+            $allhout=$hoMan->fetchAll();
+            $allhout= array_values($allhout);   
+            //try to get handout ids
+            for($i=0;$i<count($allhout);$i++)
+            {
+                if($allhout[$i]['tt_id']==$tt_id)
+                    $ho_id=$allhout[$i]['id'];
+            }
+            
+            $re=$hoMan->save($ho_id, null, null, $handoutDir, null, $tt_id);
+        }
+        else 
+        {
+            $tcId=$trMan->save(0, $Tname, $Tgoals, $Tabstract,$pid);
+            $result= $ttMan->save(0, $tcId, $usrID, $Tstart, $Tend, $Thours, $startAt, $location,$addDate,$Tcapacity, $Tstatus, $Tavailable_seat,$tr_avg,$tc_avg);
+            $re=$hoMan->save(0, null, null, $handoutDir, null, $result);
+        }
         if($re)     
             return true;
         else 
@@ -132,12 +151,16 @@ class TrainingCourse {
     {
         $tcMan=new TrainingCourseRepo();
         $ttMan=new TimetableRepo();
-        $rMan=new RateDRepo();
+        
         $tt=$ttMan->fetchByID($tt_id);       
         $tc=$tcMan->fetchByID($tt['tc_id']);  
+        
         $result=array(
             'name'=>$tc['name'],
+            'abstract'=>$tc['abstract'],
+            'goals'=>$tc['goals'],
             'start_date'=>$tt['start_date'],
+            'end_date'=>$tt['end_date'],
             'duration'=>$tt['duration'],
             'tr_total_avg_rate'=>$tt['tr_total_avg_rate'],
             'tc_total_avg_rate'=>$tt['tc_total_avg_rate']
@@ -193,7 +216,7 @@ class TrainingCourse {
             array('score'=>$total_program/$total_voter,
                   'criteria'=>'البرنامج التدريبي')
         );
-        
+       
         return $rate;
     }
     
@@ -257,6 +280,7 @@ class TrainingCourse {
                 $j++;
             }
         }
+       
         //get trainee information
         $x=0;
         for($i=0;$i<count($tcRegister);$i++)
@@ -279,7 +303,10 @@ class TrainingCourse {
             'usr_id'=>$tcRegister[$i]['usr_id'],
             'registration_status'=>$tcRegister[$i]['registration_status'],
             'name'=>$trainee[$i]['ar_name'],
-            'certificateApprove' => $tcRegister[$i]['certificate_approved']       
+            'certificateApprove' => $tcRegister[$i]['certificate_approved'],
+            'rank'=>$trainee[$i]['rank'],
+            'major'=>$trainee[$i]['major'],
+            'department'=>$trainee[$i]['department'],
 	); 
         }    
         return $tr; 
@@ -293,5 +320,14 @@ class TrainingCourse {
          
     }
     
+    public function deleteCourse($tt_id)
+    {
+        $tcMan=new TrainingCourseRepo();
+        $ttMan=new TimetableRepo();
+        $tt=$ttMan->fetchByID($tt_id);       
+        $tc=$tcMan->fetchByID($tt['tc_id']);  
+        $result=$tcMan->delete($tc['id']);
+        return $result;
+    }
     
 }

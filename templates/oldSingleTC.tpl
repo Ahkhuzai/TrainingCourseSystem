@@ -1,7 +1,7 @@
 {include file='header.tpl' title='بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'}
 
 <script type="text/javascript" src="js/oldSingleTC.js"></script>
-<p id="url" hidden="true">{$url}</p>
+
     <center>
     <fieldset style="width:70%; margin:0 auto;">      
    <legend align="right">بيانات الدورة</legend>

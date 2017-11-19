@@ -9,8 +9,7 @@
 
     <br>
 
-        
-    <input type="submit" value="اعتماد"  name = "approve" id='approve' class='btn'/>
+
            
     <input type="submit" value="عودة"  name = "back" id='back' class='btn'/>
     </form>

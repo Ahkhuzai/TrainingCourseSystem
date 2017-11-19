@@ -42,6 +42,9 @@ and open the template in the editor.
     <script type="text/javascript" src="libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxchart.js"></script>
     <script type="text/javascript" src="libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxdraw.js"></script>
     <script type="text/javascript" src="libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxchart.core.js"></script>
+    <script type="text/javascript" src="libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxdata.export.js"></script> 
+    <script type="text/javascript" src="libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxgrid.export.js"></script> 
+   
     <script type="text/javascript" src="js/slider.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     

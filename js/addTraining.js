@@ -49,7 +49,7 @@ $(document).ready(function () {
            
             var sdate = getDateFormat(selection.from.toLocaleDateString());
             
-            var edate=getDateFormat(selection.from.toLocaleDateString());
+            var edate=getDateFormat(selection.to.toLocaleDateString());
           
             $("#stime").val(sdate);
             $("#etime").val(edate);
@@ -57,11 +57,7 @@ $(document).ready(function () {
         }
     });
 
-    var date1 = new Date();
-    date1.setFullYear(2017, 7, 7);
-    var date2 = new Date();
-    date2.setFullYear(2017, 7, 15);
-    $("#time").jqxDateTimeInput('setRange', date1, date2);
+   
 });
    
 function getDateFormat( date)

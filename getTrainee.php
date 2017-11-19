@@ -1,5 +1,10 @@
 <?php
 require_once 'TrainingCourse.php';
+session_start(); 
+$tt_id=$_SESSION['tt_id'];
+$tcMan= new TrainingCourse();
+$result=$tcMan->getRegisterTrainee($tt_id);
+echo json_encode($result);
 
 if (isset($_GET['update']))
     {
@@ -11,14 +16,5 @@ if (isset($_GET['update']))
         $cerApprove=0;
     $tr = new TrainingCourse();
     $result=$tr->approveCertificate($reg_id,$cerApprove);
-
     }
-else
-    {
-    $tt_id=1;
-    $tr = new TrainingCourse();
-    $result=$tr->getRegisterTrainee($tt_id);
-    echo json_encode($result);
-    }
-
 ?>

@@ -5,7 +5,7 @@ $(document).ready(function () {
             {
                 
                 datatype: 'json',
-                url:'getRegister.php',
+               
                 datafields: [
                     {name: 'name', type: 'string'},
                     {name: 'usr_id'},
@@ -15,27 +15,27 @@ $(document).ready(function () {
                     {name: 'certificateApprove'}
                 ],
                 id: 'id',
-                url:'getRegister.php',
+                url:'getTrainee.php',
                 updaterow: function (rowid, rowdata, commit) {
-                    // synchronize with the server - send update command
-                    
-                    var data = "update=true&certificate_approved=" + rowdata.certificateApprove+ "&id=" + rowdata.id;
-                    
+                    // synchronize with the server - send update command                   
                     $.ajax({
-                    
-                        dataType: 'json',
-                        url: 'getRegister.php',
-                        data: data,
-                        success: function (data, status, xhr) {
-                            commit(true);
+                        type : 'GET',
+                        url : 'getTrainee.php',
+                        data: {
+                            update:true,
+                            certificate_approved: + rowdata.certificateApprove,
+                            id:rowdata.id
+                              },
+                        success : function(data){
+                         commit(true);
                         },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                                alert(errorThrown);
-                            commit(false);
-                        }
-                    });
-                }
+                        error : function(XMLHttpRequest, textStatus, errorThrown) 
+                        {alert (errorThrown);}
+                            }); 
+                   
+                    }
             };
+            
             $('#traineelist').jqxGrid(
                 {
                     width: '90%',
@@ -62,6 +62,5 @@ var columnsrenderer = function (value) {
 }
 
 $(document).ready(function () {
-    $("#approve").jqxButton({ width: '120px', height: '35px', theme: 'office'});
-     $("#back").jqxButton({ width: '120px', height: '35px', theme: 'office'});
+    $("#back").jqxButton({ width: '120px', height: '35px', theme: 'office'});
 });
