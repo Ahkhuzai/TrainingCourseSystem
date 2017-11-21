@@ -1,7 +1,7 @@
 <?php
 include 'libs/smarty/libs/Smarty.class.php';
 require_once 'TrainingCourse.php';
-//error_reporting(0);
+error_reporting(0);
 $smarty=new Smarty();
 session_start(); 
 if (!isset($_SESSION['user_id'])) {

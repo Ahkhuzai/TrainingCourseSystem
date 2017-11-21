@@ -4,20 +4,20 @@ include 'TrainingCourse.php';
 
 $smarty=new Smarty();
 $trCourse = new TrainingCourse();
+error_reporting(0);
 session_start();
 if(isset($_SESSION['user_id']))
 {
     $usrId=$_SESSION['user_id'];
-   // error_reporting(0);
+
     if(isset($_POST['saveTraining']) )
     {       
         if(!empty(trim($_POST['Tname'])))
         {
-            if(isset($_SESSION['tt_id']))
-                $tt_id=$_SESSION['tt_id'];
-            else {
-                $tt_id=0;
-            }
+            
+            
+            $tt_id=0;
+            
             $Tname=$_POST['Tname'];
             $Tabstract=$_POST['abstract'];
             $Tgoals=$_POST['Goals'];
@@ -45,11 +45,9 @@ if(isset($_SESSION['user_id']))
         if(!empty(trim($_POST['Tname']))&& !empty(trim($_POST['abstract'])) && !empty(trim($_POST['Goals'])) && !empty(trim($_POST['Hours']))
                 && !empty(trim($_POST['stime'])) && !empty(trim($_POST['etime'])) )
         {
-            if(isset($_SESSION['tt_id']))
-                $tt_id=$_SESSION['tt_id'];
-            else {
-                $tt_id=0;
-            }
+           
+            $tt_id=0;
+            
             $Tname=$_POST['Tname'];
             $Tabstract=$_POST['abstract'];
             $Tgoals=$_POST['Goals'];

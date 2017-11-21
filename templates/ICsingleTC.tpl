@@ -15,7 +15,7 @@
         </div>
         </br>
      
-        <form action='addTrainingDetails.php' method='POST'>
+        <form action='ICsingleTC.php' method='POST'>
             <input type="text" id="Tname" name="Tname" value="{$name}"/>
             </br>
             </br>          
@@ -25,7 +25,7 @@
             <textarea id='Goals' name='Goals' >{$goals}</textarea>       
             </br>
             </br>
-             <input type="text" id="Hours" name="Hours" value="{$hours}"/>       
+             <input type="text" id="Hours" name="Hours" value="{$hours}" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>       
             </br>
             </br>
             <div id='time'>

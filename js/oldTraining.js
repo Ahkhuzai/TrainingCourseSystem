@@ -11,6 +11,8 @@ $(document).ready(function () {
         source: source,
         theme: 'office',
         rtl:true,
+        autorowheight: true,
+        autoheight: true,
         showfilterrow: true,
         filterable: true,
         width:'70%',                                                         
@@ -33,7 +35,7 @@ $(document).ready(function () {
         error : function(XMLHttpRequest, textStatus, errorThrown) 
         {alert ("Error Occured");}
             });       
-        var url="oldsingleTC.php";
+        var url="oldSingleTC.php";
         window.location=url;     
         });              
 });

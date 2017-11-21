@@ -19,6 +19,8 @@ $(document).ready(function () {
                     rtl:true,
                     showfilterrow: true,
                     filterable: true,
+                    autorowheight: true,
+                    autoheight: true,
                     theme:'office',
                     columns: [
                         { text: 'اسم المتدرب', datafield: 'name', columntype: 'text' ,renderer: columnsrenderer, cellsrenderer: cellsrenderer},

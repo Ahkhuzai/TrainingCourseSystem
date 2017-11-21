@@ -6,7 +6,7 @@ include 'Persona.php';
 $smarty=new Smarty();
 $persona=new Persona();
 $user=new User();
-//error_reporting(0);
+error_reporting(0);
 session_start();
 if(isset($_SESSION['user_id']))
 {

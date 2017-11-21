@@ -1,5 +1,5 @@
-<?php
-include 'libs/smarty/libs/Smarty.class.php';
+﻿<?php
+include 'libs/smarty/libs/Smarty.class.php'; error_reporting(0);
 $smarty=new Smarty();
 session_start();
 if (isset($_SESSION['user_id'])) {

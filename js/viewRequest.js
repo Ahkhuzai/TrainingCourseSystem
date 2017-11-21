@@ -13,6 +13,8 @@ $(document).ready(function () {
         source: source,
         theme: 'office',
         rtl:true,
+        autorowheight: true,
+        autoheight: true,
         showfilterrow: true,
         filterable: true,
         width:'70%',

@@ -19,7 +19,7 @@ class TrainingCourseRepo {
 
     public function __construct() { 
         try {
-            require_once 'config/config.php';
+            include'config/config.php';
             R::setup('mysql:host=localhost;dbname=' . $DBNAME, $DBUSERNAME, $DBPASSWORD);
             R::testConnection();
         } catch (Exception $exc) {

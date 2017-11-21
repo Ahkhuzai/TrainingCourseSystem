@@ -25,7 +25,7 @@
             <textarea id='Goals' name='Goals' ></textarea>       
             </br>
             </br>
-             <input type="text" id="Hours" name="Hours"/>       
+             <input type="text" id="Hours" name="Hours" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>       
             </br>
             </br>
             <div id='time'>
