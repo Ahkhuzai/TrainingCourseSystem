@@ -1,8 +1,9 @@
 <?php
-$target_dir = "uploads/handouts/";
-$target_file = $target_dir . basename($_FILES["TcHO"]["name"]);
+$target_dir = "uploads/handouts/req/";
+
 $uploadOk = 1;
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+$target_file = $target_dir . basename($_FILES["TcHO"]["name"]).date("Y-m-d hh:mm:ss").'.'.$FileType;
 // Check if image file is a actual image or fake image
 if(isset($_POST["submit"])) {
     if($check !== false) {    

@@ -20,8 +20,9 @@ if (!isset($_SESSION['user_id'])) {
             $Tabstract=$_POST['abstract'];
             $Tgoals=$_POST['Goals'];
             $Thours=$_POST['Hours'];
+            
             $Tstart=$_POST['stime'];
-            $Tend=$_POST['etime'];
+            $Tend = $_POST['etime'];  
             $Tcapacity=0;
             $Tstatus=6;
             $Tavailable_seat=0;
@@ -52,7 +53,7 @@ if (!isset($_SESSION['user_id'])) {
             $Tgoals=$_POST['Goals'];
             $Thours=$_POST['Hours'];
             $Tstart=$_POST['stime'];
-            $Tend=$_POST['etime'];
+            $Tend = $_POST['etime'];  
             $Tcapacity=0;
             $Tstatus=1;
             $Tavailable_seat=0;

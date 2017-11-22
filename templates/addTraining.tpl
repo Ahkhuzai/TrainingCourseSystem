@@ -9,13 +9,8 @@
     
     <center>
           <p><font color="green">{$added}</font></p>
-          <br>
-        <div id="handout" name='handout'> 
-    الحقيبة التدريبية       
-        </div>
-        </br>
-     
-        <form action='addTrainingDetails.php' method='POST'>
+ 
+        <form action='addTrainingDetails.php' method='POST' enctype="multipart/form-data">
             <input type="text" id="Tname" name="Tname"/>
             </br>
             </br>          
@@ -28,12 +23,21 @@
              <input type="text" id="Hours" name="Hours" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>       
             </br>
             </br>
-            <div id='time'>
-            </div>   
-            <div style='margin-top: 10px; font-size: 13px; font-family: Verdana;' id='selection'></div>  
+            <label>تاريخ البداية</label>
+        <div id='dates'>
+        </div> 
+            <br>
+           <label>تاريخ النهاية</label>
+        <div id='datee'>
+        </div>
             </br>
             </br>
-            <input type='hidden' id='handout_url' name='handout_url' />
+            <div> 
+                الحقيبة التدريبية        <br>
+           <input type="file" name="hout" id="hout"  accept='application/pdf , application/vnd.wordperfect , application/msword' >     <br> <br>
+        </div>
+            <br>
+            <br>
             <input type="submit" value="حفظ"  name = "saveTraining" id='saveTraining' class='btn'/>
             <input type="submit" value="إضافة"  name = "addTraining" id='addTraining' class='btn'/> 
             <input type="hidden" id="stime" name="stime"/>

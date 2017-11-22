@@ -28,9 +28,13 @@
              <input type="text" id="Hours" name="Hours" value="{$hours}" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>       
             </br>
             </br>
-            <div id='time'>
-            </div>   
-            <div style='margin-top: 10px; font-size: 13px; font-family: Verdana;' id='selection'></div>  
+            <label>تاريخ البداية</label>
+        <div id='dates'>
+        </div> 
+            <br>
+           <label>تاريخ النهاية</label>
+        <div id='datee'>
+        </div>
             </br>
             </br>
             <input type='hidden' id='handout_url' name='handout_url' />

@@ -8,8 +8,7 @@ if (isset($_POST['upload'])) {
         $uploaddir = 'uploads/cv/';
         $userid=1;
         $FileType = pathinfo($_FILES["fileToUpload"]["name"],PATHINFO_EXTENSION);
-        $uploadfile = $uploaddir .$userid.' - '.'cv - '.date("Y-m-d").'.'.$FileType;
-        
+        $uploadfile = $uploaddir .$userid.' - '.'cv - '.date("Y-m-d").'.'.$FileType;  
         if (file_exists($uploadfile))
             echo "الملف محمل مسبقاً";
         else
@@ -19,8 +18,6 @@ if (isset($_POST['upload'])) {
                     //check file size 
                     if($_FILES['fileToUpload']['size']<=500000)
                     {
-
-                        echo $uploadfile;
                         if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $uploadfile)) {
                             echo "File is valid, and was successfully uploaded.\n";
                         } else {

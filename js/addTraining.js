@@ -19,55 +19,22 @@ $(document).ready(function () {
     $("#Goals").jqxInput({width: '70%', height: 200, placeHolder: 'أهداف الدورة',theme: 'office' ,rtl : true });  
     $("#stime").jqxInput({placeHolder: "اسم الدورة", height: 25, width: '70%', minLength: 1, theme: 'office',rtl : true }); 
     $("#etime").jqxInput({placeHolder: "اسم الدورة", height: 25, width: '70%', minLength: 1, theme: 'office',rtl : true }); 
-    $("#handout_url").jqxInput({placeHolder: "اسم الدورة", height: 25, width: '70%', minLength: 1, theme: 'office',rtl : true }); 
-   
+    
 });
-  
-$(document).ready(function () {
-    $('#handout').jqxFileUpload({  width: '70%', uploadUrl: 'handout_upload.php', fileInputName:'TcHO',theme: 'office',accept: 'application/pdf , application/vnd.wordperfect , application/msword'  });
-    $('#handout').on('uploadEnd', function (event) {
-    var args = event.args;
-        var serverResponce = args.response; 
-        if (args != undefined) {
-            var item = event.args.file;
-            if (item != null) {
-                 alert("تم تحميل الملف بنجاح");
-                $("#handout_url").val(serverResponce);
-            }
-        }
-});
-});
-
 
 $(document).ready(function () {                
     // create jqxcalendar.
-    $("#time").jqxDateTimeInput({ width: '70%', height: 25,  selectionMode: 'range', theme: 'office' });
-    $("#time").on('change', function (event) {
-        var selection = $("#time").jqxDateTimeInput('getRange');
-        if (selection.from != null) {
-            $("#selection").html("<div>من: " + selection.from.toLocaleDateString() + " <br/>الى: " + selection.to.toLocaleDateString() + "</div>");
-           
-            var sdate = getDateFormat(selection.from.toLocaleDateString());
-            
-            var edate=getDateFormat(selection.to.toLocaleDateString());
-          
-            $("#stime").val(sdate);
-            $("#etime").val(edate);
-            
-        }
-    });
-
+    $("#dates").jqxDateTimeInput({ width: '300px', height: '25px' ,formatString:'yyyy-M-dd'});
+    $("#datee").jqxDateTimeInput({ width: '300px', height: '25px',formatString:'yyyy-M-dd' });
+    $('#dates').on('change', function (event) 
+    {    
+        $("#stime").val($('#dates').val());
+    }); 
+       $('#datee').on('change', function (event) 
+    {     
+        $("#etime").val($('#datee').val());  
+    }); 
+   
+   
    
 });
-   
-function getDateFormat( date)
-{
-    var s=date.split('/');
-    var end=s[2];
-    var start= s[0];
-    s[0]=end;   
-    s[2]=s[1];
-    s[1]=start;
-    s=s.join('-');
-    return s;
-}
