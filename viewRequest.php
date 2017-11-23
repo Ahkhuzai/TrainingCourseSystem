@@ -1,7 +1,5 @@
 <?php
 include 'libs/smarty/libs/Smarty.class.php';
-
-
 $smarty=new Smarty();
 session_start(); 
 error_reporting(0);

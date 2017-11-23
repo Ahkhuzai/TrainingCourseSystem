@@ -18,6 +18,7 @@ require_once 'StatusRepo.php';
 require_once 'RateDRepo.php';
 require_once 'RegistrationRepo.php';
 require_once 'PersonaRepo.php';
+require_once 'HandoutReqRepo.php';
 
 class TrainingCourse {
     
@@ -47,6 +48,7 @@ class TrainingCourse {
             $result= $ttMan->save(0, $tcId, $usrID, $Tstart, $Tend, $Thours, $startAt, $location,$addDate,$Tcapacity, $Tstatus, $Tavailable_seat,$tr_avg,$tc_avg);
             $re=$hoMan->save(0, null, null, $handoutDir, null, $result);
         }
+        
         if($re)     
             return true;
         else 
@@ -55,96 +57,103 @@ class TrainingCourse {
     }
     
     public function getOldTrainingByUserID($usrId)
-    {
-        $trMan=new TrainingCourseRepo();
-        $ttMan=new TimetableRepo();
-        $j=0;
-        $today=date("Y-m-d");
-        $all_tt= $ttMan->fetchAll();
-        $all_tt= array_values($all_tt);   
-        //find tc for this user 
-        $j=0;
-        for($i=0;$i<count($all_tt);$i++)
-        {
-            if($all_tt[$i]['tr_id']==$usrId && $all_tt[$i]['end_date']<=$today && $all_tt[$i]['status']==2)
+    {   
+        try{
+            $trMan=new TrainingCourseRepo();
+            $ttMan=new TimetableRepo();
+            $j=0;
+            $today=date("Y-m-d");
+            $all_tt= $ttMan->fetchAll();
+            $all_tt= array_values($all_tt);   
+            //find tc for this user 
+            $j=0;
+            for($i=0;$i<count($all_tt);$i++)
             {
-                $all_userTt[$j]=$all_tt[$i];
-                $j++;
+                if($all_tt[$i]['tr_id']==$usrId && $all_tt[$i]['end_date']<=$today && $all_tt[$i]['status']==2)
+                {
+                    $all_userTt[$j]=$all_tt[$i];
+                    $j++;
+                }
             }
+
+            //get tc details
+
+            for($i=0;$i<count($all_userTt);$i++)
+            {
+                $all_userTc[$i]=$trMan->fetchByID($all_userTt[$i]['tc_id']);
+            }
+            for($i=0;$i<count($all_userTt);$i++)
+            {
+
+              $tc[] = array(
+                    'id'=>$all_userTt[$i]['id'],
+                    'name'=>$all_userTc[$i]['name'],
+                    'start_date' => $all_userTt[$i]['start_date']        
+            );        
+            }      
+            return $tc;
+        }catch(Exception $e){
+        return $e->getTraceAsString();
         }
-       
-        //get tc details
-      
-        for($i=0;$i<count($all_userTt);$i++)
-        {
-            $all_userTc[$i]=$trMan->fetchByID($all_userTt[$i]['tc_id']);
-        }
-        for($i=0;$i<count($all_userTt);$i++)
-        {
-            
-          $tc[] = array(
-                'id'=>$all_userTt[$i]['id'],
-                'name'=>$all_userTc[$i]['name'],
-                'start_date' => $all_userTt[$i]['start_date']        
-	);        
-        }      
-        return $tc;     
     }
 
     public function getTrainingRequestByUserID($usrId)
     {
-        
-        $trMan=new TrainingCourseRepo();
-        $ttMan=new TimetableRepo();
-        $sMan=new StatusRepo();
-        
-        $all_tt= $ttMan->fetchAll();
-        $all_tt= array_values($all_tt);
-        //find tc for this user 
-        $j=0;
+        try{
+            $trMan=new TrainingCourseRepo();
+            $ttMan=new TimetableRepo();
+            $sMan=new StatusRepo();
 
-        for($i=0;$i<count($all_tt);$i++)
-        {
-            if($all_tt[$i]['tr_id']==$usrId)
+            $all_tt= $ttMan->fetchAll();
+            $all_tt= array_values($all_tt);
+            //find tc for this user 
+            $j=0;
+
+            for($i=0;$i<count($all_tt);$i++)
             {
-                $all_userTt[$j]=$all_tt[$i];
-                $j++;
+                if($all_tt[$i]['tr_id']==$usrId)
+                {
+                    $all_userTt[$j]=$all_tt[$i];
+                    $j++;
+                }
             }
-        }
-        //get tc details
-      
-        for($i=0;$i<count($all_userTt);$i++)
-        {
-            $all_userTc[$i]=$trMan->fetchByID($all_userTt[$i]['tc_id']);
-        }
-        //get status value; 
-        for($i=0;$i<count($all_userTt);$i++)
-        {
-            $all_userSt[$i]=$sMan->fetchByID($all_userTt[$i]['status']);
-        }
-        
-        //create the array for all required information;
-        
-        for($i=0;$i<count($all_userTt);$i++)
-        {
-            switch($all_userSt[$i]['status'])
+            //get tc details
+            for($i=0;$i<count($all_userTt);$i++)
             {
-                case 'Processing':{$status="تحت الدراسة" ;break;}
-                case 'Accepted':{$status="مقبول" ;break;    } 
-                case 'Rejected':{$status="مرفوض" ;break;}
-                case 'Incomplete':{$status="غير مكتمل" ;break; }
+                $all_userTc[$i]=$trMan->fetchByID($all_userTt[$i]['tc_id']);
+            }
+            //get status value; 
+            for($i=0;$i<count($all_userTt);$i++)
+            {
+                $all_userSt[$i]=$sMan->fetchByID($all_userTt[$i]['status']);
             }
 
-            $tc[] = array(
-                    'id'=>$all_userTt[$i]['id'],
-                    'name'=>$all_userTc[$i]['name'],
-                    'sid' =>$all_userTt[$i]['status'] ,
-                    'status' => $status,
-                    'add_date' => $all_userTt[$i]['add_date']
-	);        
-        }      
-    
-        return $tc;
+            //create the array for all required information;
+
+            for($i=0;$i<count($all_userTt);$i++)
+            {
+                switch($all_userSt[$i]['status'])
+                {
+                    case 'Processing':{$status="تحت الدراسة" ;break;}
+                    case 'Accepted':{$status="مقبول" ;break;    } 
+                    case 'Rejected':{$status="مرفوض" ;break;}
+                    case 'Incomplete':{$status="غير مكتمل" ;break; }
+                }
+
+                $tc[] = array(
+                        'id'=>$all_userTt[$i]['id'],
+                        'name'=>$all_userTc[$i]['name'],
+                        'sid' =>$all_userTt[$i]['status'] ,
+                        'status' => $status,
+                        'add_date' => $all_userTt[$i]['add_date']
+            );        
+            }      
+
+            return $tc;
+        }catch(Exception $e)
+        {
+            return $e->getTraceAsString();
+        }
     }
     
     public function getSingleTrainingCourseInfo($tt_id)
@@ -316,8 +325,8 @@ class TrainingCourse {
     {
         $registerMan=new RegistrationRepo();
         $record=$registerMan->fetchByID($reg_id);    
-        $registerMan->save($reg_id, $record['usr_id'], $record['tt_id'], $record['registration_status'], $cerApprove);
-         
+        $result=$registerMan->save($reg_id, $record['usr_id'], $record['tt_id'], $record['registration_status'], $cerApprove);  
+        return $result;
     }
     
     public function deleteCourse($tt_id)
@@ -328,6 +337,65 @@ class TrainingCourse {
         $tc=$tcMan->fetchByID($tt['tc_id']);  
         $result=$tcMan->delete($tc['id']);
         return $result;
+    }
+    
+    public function addHandoutOnly($tname,$tr_ho,$te_ho,$pres,$sci_ch,$add_date,$sid,$tr_id)
+    {
+        $ho_req = new HandoutReqRepo();        
+        $ho_result=$ho_req->save(0,$tname ,$tr_ho, $te_ho, $pres, $sci_ch,$add_date,$sid,$tr_id);
+        if($ho_result)
+            return $ho_result;
+        else 
+            return false;
+    }
+    
+      public function getHORequestByUserID($usrId)
+    {
+        
+        $hoMan=new HandoutReqRepo();
+        $sMan=new StatusRepo();
+        
+        $all_ho= $hoMan->fetchAll();
+        $all_ho= array_values($all_ho);
+        //find tc for this user 
+        $j=0;
+        for($i=0;$i<count($all_ho);$i++)
+        {
+            if($all_ho[$i]['tr_id']==$usrId)
+            {
+                $all_userho[$j]=$all_ho[$i];
+                $j++;
+            }
+        }
+       
+        //get status value; 
+        for($i=0;$i<count($all_userho);$i++)
+        {
+            $all_userSt[$i]=$sMan->fetchByID($all_userho[$i]['sid']);
+        }
+        
+        //create the array for all required information;
+        
+        for($i=0;$i<count($all_userho);$i++)
+        {
+            switch($all_userSt[$i]['status'])
+            {
+                case 'Processing':{$status="تحت الدراسة" ;break;}
+                case 'Accepted':{$status="مقبول" ;break; } 
+                case 'Rejected':{$status="مرفوض" ;break;}
+                
+            }
+
+            $tc[] = array(
+                    'id'=>$all_userho[$i]['id'],
+                    'name'=>$all_userho[$i]['name'],
+                    'sid' =>$all_userho[$i]['sid'] ,
+                    'status' => $status,
+                    'add_date' => $all_userho[$i]['add_date']
+	);        
+        }      
+    
+        return $tc;
     }
     
 }

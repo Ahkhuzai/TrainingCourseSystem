@@ -8,27 +8,27 @@
     <p><font color="green">{$added}</font></p>
     <br>
     <form action='addHandoutOnly.php' method='POST' enctype="multipart/form-data">
-        <input type="text" id="Tname" name="Tname"/>
+        <input type="text" id="Tname" name="Tname" />
         </br>
         </br>
         <div id="handout_tr" name='handout_tr'> 
     الحقيبة التدريبية للمدرب      
-        <input type='file' id='handout[]' name='handout_trainer' />
+        <input type='file' id='handout[]' name='handout[]'  accept='application/pdf , application/vnd.wordperfect , application/msword'/>
         </div>
         </br>
         <div id="handout_te" name='handout_te'> 
     الحقيبة التدريبية للمتدرب       
-        <input type='file' id='handout[]' name='handout_trainee' />
+        <input type='file' id='handout[]' name='handout[]'  accept='application/pdf , application/vnd.wordperfect , application/msword'/>
         </div>
         </br>
         <div id="handout_pr" name='handout_pr'> 
     العرض التقديمي     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        <input type='file' id='handout[]' name='handout_presentation' />
+        <input type='file' id='handout[]' name='handout[]'  accept="application/vnd.openxmlformats-officedocument.presentationml.presentation, application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain, application/pdf, image/*"/>
         </div>
         </br>
         <div id="handout_sci" name='handout_sci'> 
     المادة العلمية      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        <input type='file' id='handout[]' name='handout_scichapter' />
+        <input type='file' id='handout[]' name='handout[]'  accept='application/pdf , application/vnd.wordperfect , application/msword'/>
         </div>
         </br>             
         </br>

@@ -46,7 +46,34 @@ $(document).ready(function () {
         });
 
 });
-    
+  
+$(document).ready(function () {
+    // prepare the data
+    var source1 ={
+        datatype: "json",
+        datafields: [{ name: 'id',type: 'number' },
+            { name: 'sid',type: 'number' },
+            { name: 'name',type: 'string' },
+            { name: 'status' ,type: 'string'},
+            { name: 'add_date'}],
+        url:"ho_get.php"
+    };
+    $("#HOgrid").jqxGrid({
+        source: source1,
+        theme: 'office',
+        rtl:true,
+        autorowheight: true,
+        autoheight: true,
+        showfilterrow: true,
+        filterable: true,
+        width:'70%',
+        columns: [
+            { text: 'اسم الدورة', datafield: 'name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'تاريخ الاضافة', datafield: 'add_date',cellsformat: 'dd.MM.yyyy',filtertype: 'range',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'الحالة', datafield: 'status',filtertype: 'checkedlist',renderer: columnsrenderer, cellsrenderer: cellsrenderer}
+        ]
+    });
+});
 var cellsrenderer = function (row, column, value) {
     return '<div style="text-align: center; margin:5px;">' + value + '</div>';
 }

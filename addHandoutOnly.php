@@ -6,18 +6,56 @@ $smarty=new Smarty();
 $tcMan = new TrainingCourse ();
 session_start();
 if (isset($_SESSION['user_id'])) {
-    
+    $userId=$_SESSION['user_id'];
     if(isset($_POST['addHandout']))
     {
-        if(isset(trim($_POST['Tname'])))
+        if(isset($_POST['Tname']) && !empty(trim($_POST['Tname'])))
         {
             $tname=$_POST['Tname'];
-            
+            $addDate=date('y-m-d');
+            if (isset($_FILES['handout'])) { 
+                $uploaddir = 'uploads/handouts/req/';
+                for ($i = 0; $i < 4; $i++)
+                {
+                    $FileType = pathinfo($_FILES["handout"]["name"][$i],PATHINFO_EXTENSION);
+                    $uploadfile = $uploaddir .$userId.$i.' - '.'handout - '.date("Y-m-d").'.'.$FileType;  
+                    if (file_exists($uploadfile))
+                        $smarty->assign('msg', 'الملف محمل مسبقا'); 
+                    else
+                    {
+                        //check file extention 
+                        if($FileType=='pdf'||$FileType=='pptx'||$FileType=='docx'||$FileType=='doc'||$FileType=='jpg'||$FileType=='png'||$FileType=='gif'||
+                                $FileType=='txt'||$FileType=='rtf'||$FileType=='xlsx'||$FileType=='ppt'||$FileType=='jpeg')
+                                //check file size 
+                                if($_FILES['handout']['size'][$i]<=500000)
+                                {
+                                    if (move_uploaded_file($_FILES['handout']['tmp_name'][$i], $uploadfile)) {
+                                        $url[$i]=$uploadfile;
+                                    } else {
+                                        echo "Possible file upload attack!\n";
+                                    }
+                                }
+                                else 
+                                { echo 'file size';
+                                echo $_FILES['handout']['size'][$i];
+                                }
+                        else
+                            echo 'not supported';
+                    }
+                }
+                $tr_ho=$url[0];
+                $te_ho=$url[1];
+                $pres=$url[2];
+                $sci_ch=$url[3];
+            }
             if($tr_ho && $te_ho && $pres && $sci_ch )
-                $tcMan->addHandoutOnly($tname,$tr_ho,$te_ho,$pres,$sci_ch);
+            {    $sid=1;
+                $result=$tcMan->addHandoutOnly($tname,$tr_ho,$te_ho,$pres,$sci_ch,  $addDate,$sid,$userId);
+                if($result)
+                    $smarty->assign('added', 'تمت الاضافة بنجاح'); 
+            }          
             else 
-                $smarty->assign('msg', 'يجب تعبئة كافة الحقول');
-                
+                $smarty->assign('msg', 'يجب تعبئة كافة الحقول');      
         }
     }
     $smarty->display('addHandoutOnly.tpl');

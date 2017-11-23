@@ -10,17 +10,24 @@ if (!isset($_SESSION['user_id'])) {
     $smarty->assign('msg','غير مصرح لك بالدخول للنظام');
     $smarty->display("unAuthorized.tpl");
 } else {
-    
+    $tt_id=$_SESSION['tt_id'];
+    if(isset($_POST['deleteTraining']))
+    {
+        $result=$tcMan->deleteCourse($tt_id);
+        if ($result) {
+            echo '<script>alert("تم حذف الطلب بنجاح"); window.location = "viewRequest.php";</script>';
+        } else
+            echo '<script>alert("لم يتم حذف طلبك, الرجاء المحاولة في وقت لاحق")</script>';
+    }
     if(isset($_POST['saveTraining']) )
     {       
         if(!empty(trim($_POST['Tname'])))
-        {   $tt_id=$_SESSION['tt_id'];
+        {   
             $usrId=$_SESSION['user_id'];
             $Tname=$_POST['Tname'];
             $Tabstract=$_POST['abstract'];
             $Tgoals=$_POST['Goals'];
             $Thours=$_POST['Hours'];
-            
             $Tstart=$_POST['stime'];
             $Tend = $_POST['etime'];  
             $Tcapacity=0;
@@ -46,7 +53,6 @@ if (!isset($_SESSION['user_id'])) {
         if(!empty(trim($_POST['Tname']))&& !empty(trim($_POST['abstract'])) && !empty(trim($_POST['Goals'])) && !empty(trim($_POST['Hours']))
                 && !empty(trim($_POST['stime'])) && !empty(trim($_POST['etime'])) )
         {
-            $tt_id=$_SESSION['tt_id'];
             $usrId=$_SESSION['user_id'];
             $Tname=$_POST['Tname'];
             $Tabstract=$_POST['abstract'];

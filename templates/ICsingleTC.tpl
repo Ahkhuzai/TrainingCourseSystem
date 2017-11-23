@@ -1,6 +1,6 @@
 {include file='header.tpl' title='بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'}
 
-<script type="text/javascript" src="js/addTraining.js"></script>
+<script type="text/javascript" src="js/ICsingleTC.js"></script>
 
     
         <fieldset style="margin:0 auto; width:75%" dir='rtl'>
@@ -39,7 +39,9 @@
             </br>
             <input type='hidden' id='handout_url' name='handout_url' />
             <input type="submit" value="حفظ"  name = "saveTraining" id='saveTraining' class='btn'/>
+  
             <input type="submit" value="إضافة"  name = "addTraining" id='addTraining' class='btn'/> 
+                      <input type="submit" value="حذف"  name = "deleteTraining" id='deleteTraining' onclick="return confirm('هل انت متأكدمن رغبتك بحذف الطلب')"  class='btn'/>
             <input type="hidden" id="stime" name="stime"/>
             <input type="hidden" id="etime" name="etime"/>
             </form>

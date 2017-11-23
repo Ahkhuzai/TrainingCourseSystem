@@ -69,17 +69,20 @@ class HandoutReqRepo {
         }
             
     }        
-    public function save($id,$trainer,$trainee,$presentation,$scientific_chapter,$tr_id)
+    public function save($id,$tname,$trainer,$trainee,$presentation,$scientific_chapter,$add_date,$sid,$tr_id)
     {             
         if($id>0)
         {
             try {
                 $ho = R::findOne('reqhandout', 'id = ?', array($id));
+                $ho['name'] = $tname;
                 $ho['ho_trainer_dir'] = $trainer;
                 $ho['ho_trainee_dir'] = $trainee;
                 $ho['presentation_dir'] = $presentation;
                 $ho['scientific_chapter'] = $scientific_chapter;
-                $ho['tr_id'] = $tr_id;               
+                $ho['tr_id'] = $tr_id;  
+                $ho['add_date']=$add_date;
+                $ho['sid']=$sid;
                 $id = R::store($ho);
                 if($id)
                     return true;
@@ -93,11 +96,14 @@ class HandoutReqRepo {
         {
         try {
             $ho = R::dispense('reqhandout');
+            $ho['name'] = $tname;
             $ho['ho_trainer_dir'] = $trainer;
             $ho['ho_trainee_dir'] = $trainee;
             $ho['presentation_dir'] = $presentation;
             $ho['scientific_chapter'] = $scientific_chapter;
-            $ho['tr_id'] = $tr_id;               
+            $ho['tr_id'] = $tr_id;  
+            $ho['add_date']=$add_date;
+            $ho['sid']=$sid;
             $result = R::store($ho);
             if ($result)
                 return $result;
