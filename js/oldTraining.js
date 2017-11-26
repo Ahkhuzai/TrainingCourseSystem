@@ -15,7 +15,7 @@ $(document).ready(function () {
         autoheight: true,
         showfilterrow: true,
         filterable: true,
-        width:'70%',                                                         
+        width:'75%',                                                         
         columns: [
             { text: 'اسم الدورة', datafield: 'name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'تاريخ انعقاد الدورة', datafield: 'start_date',cellsformat: 'dd.MM.yyyy',filtertype: 'range',renderer: columnsrenderer, cellsrenderer: cellsrenderer },        

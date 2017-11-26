@@ -18,6 +18,7 @@ require_once 'StatusRepo.php';
 require_once 'RateDRepo.php';
 require_once 'RegistrationRepo.php';
 require_once 'PersonaRepo.php';
+require_once 'ProgramRepo.php';
 require_once 'HandoutReqRepo.php';
 
 class TrainingCourse {
@@ -396,6 +397,98 @@ class TrainingCourse {
         }      
     
         return $tc;
+    }
+    
+    
+    public function getAvailableProgram()
+    {
+        $program = new ProgramRepo();
+        
+        $result= $program->fetchAll();
+        $result= array_values($result);
+        for($i=0;$i<count($result);$i++)
+        {
+        $programArray[] = array(
+                    'id'=>$result[$i]['id'],
+                    'name'=>$result[$i]['name'],
+                    'hours' =>$result[$i]['hours'] ,
+	);  
+        }
+        
+        return $programArray;
+    }
+    
+    
+    public function getSingleProgram($pid)
+    {
+        $program = new ProgramRepo();
+        $result= $program->fetchById($pid);
+        return $result;
+    }
+    
+    Public function getProgramTrainingCourse($pid)
+    {
+        $tcMan = new TrainingCourseRepo();
+        $personaMan = new PersonaRepo();
+        $allTc = $tcMan->fetchAll();
+        $allTc= array_values($allTc);
+        for($i=0;$i<count($allTc);$i++)
+        {
+            if($allTc[$i]['pid'] == $pid)
+                $program_tc[$i]= $allTc[$i];      
+        }
+        
+        $ttMan=new TimetableRepo();
+        $all_tt=$ttMan->fetchAll();
+        $all_tt= array_values($all_tt);
+      
+        for($i=0;$i<count($program_tc);$i++)
+            if($program_tc[$i]['id'] == $all_tt[$i]['tc_id'])
+                $time_Table[$i]=$all_tt[$i];
+        $time_Table= array_values($time_Table);
+        
+        for ($i = 0; $i < count($time_Table); $i++) {
+            if ($time_Table[$i]['start_date'] >= date('y-m-d'))
+                $currentTt[$i] = $time_Table[$i];
+        }
+
+        
+        $currentTt= array_values($currentTt);
+        
+        $allPersona = $personaMan->fetchAll();
+        $allPersona= array_values($allPersona);
+        
+        $x=0;
+        for($i=0;$i<count($currentTt);$i++)
+        {
+            for($j=0;$j<count($allPersona);$j++)
+            {
+                if($currentTt[$i]['tr_id']==$allPersona[$j]['user_id'])
+                {
+                    $trainer[$x]=$allPersona[$j];
+                    $x++;
+                }
+            }
+        }
+        $trainer= array_values($trainer);
+        
+        for($i=0;$i<count($currentTt);$i++)
+        {  
+            
+            
+            $programTrainingCourse [$i] = array(
+                'id'=>$currentTt[$i]['id'],
+                'name'=>$program_tc[$i]['name'],
+                'start_date' => $currentTt[$i]['start_date'],
+                'presenter'=> $trainer[$i]['rank'].'/'.$trainer[$i]['ar_name'],
+                'time'=> $currentTt[$i]['start_at'],
+                'duration'=> $currentTt[$i]['duration'],
+                'location'=>$currentTt[$i]['location'],
+                'capacity'=>$currentTt[$i]['capacity'],
+            );
+        }       
+        return $programTrainingCourse;
+   
     }
     
 }
