@@ -1,8 +1,4 @@
 <?php
-
-
-?>
-<?php
 include 'libs/smarty/libs/Smarty.class.php';
 require_once 'TrainingCourse.php';
 
@@ -16,9 +12,9 @@ if (!isset($_SESSION['user_id'])) {
 else 
 {
     $tcMan = new TrainingCourse();
-    $pid=$_SESSION['program_id'];
-    $result=$tcMan->getSingleProgram($pid);
-    $smarty->assign('name',$result['name']);
+    $tt_id=$_SESSION['tt_id'];
+    $result=$tcMan->getSingleTrainingCourseInfo($tt_id);
+    $smarty->assign('name',$result['name']); 
     $smarty->assign('hour',$result['hours']);
     $smarty->assign('abstract',$result['abstract']);
     $smarty->assign('goals',$result['goals']);
@@ -28,7 +24,7 @@ else
     if (isset($_POST['register'])) {
         $teMan = new TrainingCourse();
         $userId=$_SESSION['user_id'];
-        $result=$teMan->registerForProgram($userId,$pid);
+        $result=$teMan->registerForTC($userId,$tt_id);
         if($result=='true')
         {
             $smarty->assign('added','تم التسجيل بنجاح');
@@ -38,7 +34,7 @@ else
         else
             $smarty->assign('msg','حدث خطأ اثناء معالجة طلبك, الرجاء المحاولة لاحقا');   
     }
-    $smarty->display("SingleProgram.tpl");
+    $smarty->display("SingleTrainingCourse.tpl");
 }
 
 ?>

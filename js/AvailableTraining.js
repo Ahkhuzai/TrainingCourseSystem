@@ -34,7 +34,7 @@
             page: 'SingleProgram'
               },
         success : function(data){
-           alert(PID);
+          ;
         },
         error : function(XMLHttpRequest, textStatus, errorThrown) 
         {alert ("Error Occured");}
@@ -44,53 +44,60 @@
         });              
 });
 
+//////////////////////////////
 
-    $(document).ready(function () {
-      var source ={
+       $(document).ready(function () {
+    var source1 ={
         datatype: "json",
         datafields: [{ name: 'id',type: 'number' },
             { name: 'name',type: 'string' },
-            { name: 'start_date'}],
-        url: "getPrevTc.php"
+            { name: 'presenter',type: 'string' },
+            { name: 'time'},
+            { name: 'duration'},
+            { name: 'start_date'},
+            { name: 'location',type: 'string' },
+            { name: 'capacity',type: 'string' }
+        ],
+        url: "getAvailableTC.php"
     };
     $("#AvailableTC").jqxGrid({
-        source: source,
+        source: source1,
         theme: 'office',
         rtl:true,
         autorowheight: true,
         autoheight: true,
-        showfilterrow: true,
-        filterable: true,
         width:'75%',                                                         
         columns: [
-            { text: 'اسم الدورة', datafield: 'name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'مقدم الدورة', datafield: '',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'تاريخ الدورة ', datafield: 'start_date',cellsformat: 'dd.MM.yyyy',filtertype: 'range',renderer: columnsrenderer, cellsrenderer: cellsrenderer }, 
-            { text: 'الزمان ', datafield: 'id',cellsformat: 'textbox',filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer }, 
-            { text: 'المكان ', datafield: 'id',cellsformat: 'textbox',filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'العدد ', datafield: 'id',cellsformat: 'textbox',filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer }, 
-             
+            { text: 'اسم الدورة', datafield: 'name',columntype: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer },  
+            { text: 'مقدم الدورة', datafield: 'presenter',columntype: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'تاريخ الدورة ', datafield: 'start_date',cellsformat: 'dd.MM.yyyy',renderer: columnsrenderer, cellsrenderer: cellsrenderer }, 
+            { text: 'الزمان ', datafield: 'time',cellsformat: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'المدة ', datafield: 'duration',cellsformat: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'المكان ', datafield: 'location',cellsformat: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'العدد ', datafield: 'capacity',cellsformat: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer },       
         ]
-    });
-        $("#AvailableTC").on('rowselect', function (event) {
-        var TCID = event.args.row.id;   
+    }); 
+    
+    $("#AvailableTC").on('rowselect', function (event) {
+        var tt_ID = event.args.row.id;   
         $.ajax({
         type : 'GET',
-        url : 'setPrevVariable.php',
+        url : 'setSession.php',
         data: {
-            ttid :TCID
+            tt_id :tt_ID,
+            page: 'SingleTC'
               },
         success : function(data){
-           ;
+          ;
         },
         error : function(XMLHttpRequest, textStatus, errorThrown) 
         {alert ("Error Occured");}
             });       
-        var url="oldSingleTC.php";
+        var url="SingleTrainingCourse.php";
         window.location=url;     
-        }); 
+        });
 });
-   
+
 var cellsrenderer = function (row, column, value) {
     return '<div style="text-align: center; margin:5px;">' + value + '</div>';
 }

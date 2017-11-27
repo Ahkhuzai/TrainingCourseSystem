@@ -161,16 +161,28 @@ class TrainingCourse {
     {
         $tcMan=new TrainingCourseRepo();
         $ttMan=new TimetableRepo();
-        
+        $sMan=new StatusRepo();
         $tt=$ttMan->fetchByID($tt_id);       
         $tc=$tcMan->fetchByID($tt['tc_id']);  
-        
+        $status=$sMan->fetchByID($tt['status']);
+         switch($status['status'])
+        {
+            case 'Processing':{$status['status']="تحت الدراسة" ;break;}
+            case 'Accepted':{$status['status']="مقبول" ;break;    } 
+            case 'Rejected':{$status['status']="مرفوض" ;break;}
+            case 'Missed':{$status['status']="غائب" ;break;}
+            case 'Excused':{$status['status']="معتذر" ;break;}
+            case 'Incomplete':{$status['status']="غير مكتمل" ;break; }
+        }
         $result=array(
             'name'=>$tc['name'],
             'abstract'=>$tc['abstract'],
+            'sid'=>$tt['status'],
             'goals'=>$tc['goals'],
             'start_date'=>$tt['start_date'],
             'end_date'=>$tt['end_date'],
+            'add_date'=>$tt['add_date'],
+            'status'=>$status['status'],
             'duration'=>$tt['duration'],
             'tr_total_avg_rate'=>$tt['tr_total_avg_rate'],
             'tc_total_avg_rate'=>$tt['tc_total_avg_rate']
@@ -474,8 +486,6 @@ class TrainingCourse {
         
         for($i=0;$i<count($currentTt);$i++)
         {  
-            
-            
             $programTrainingCourse [$i] = array(
                 'id'=>$currentTt[$i]['id'],
                 'name'=>$program_tc[$i]['name'],
@@ -491,4 +501,155 @@ class TrainingCourse {
    
     }
     
+    public function registerForProgram($userId,$pid)
+    {
+        $result=$this->getProgramTrainingCourse($pid);
+        $regMan = new RegistrationRepo();
+        $allRegestration=$regMan->fetchAll();
+        
+        //check if already register
+        for($i=0;$i<count($result);$i++)
+            if($result[$i]['id']==$allRegestration[$i]['tt_id'] && $allRegestration[$i]['usr_id']==$userId)
+                return "-1";
+        for($i=0;$i<count($result);$i++)
+            $done[$i]=$regMan->save(0, $userId, $result[$i]['id'], 1, 0);
+        if($done)
+            return 'true';
+        else
+            return 'false';
+    }
+    
+    public function getTrainingCourse()
+    {
+        $tcMan=new TrainingCourseRepo();
+        $ttMan=new TimetableRepo();  
+        $personaMan = new PersonaRepo();
+        $result=$ttMan->fetchAll();
+        $result= array_values($result);
+        for($i=0;$i<count($result);$i++)
+        {   
+            if($result[$i]['start_date'] >= date('Y-mm-d'))
+                $available_tt[$i]=$result[$i];
+        }   
+        
+        $available_tt= array_values($available_tt);
+        
+        //get tc information 
+        for($i=0;$i<count($available_tt);$i++)
+        {
+            $available_tc[$i]= $tcMan->fetchByID($available_tt[$i]['tc_id']);
+        }
+        $available_tc= array_values($available_tc);
+
+        //get trainer info 
+        $allPersona = $personaMan->fetchAll();
+        $allPersona= array_values($allPersona);
+        
+        $x=0;
+        for($i=0;$i<count($available_tt);$i++)
+        {
+            for($j=0;$j<count($allPersona);$j++)
+            {
+                if($available_tt[$i]['tr_id']==$allPersona[$j]['user_id'])
+                {
+                    $trainer[$x]=$allPersona[$j];
+                    $x++;
+                }
+            }
+        }
+        $trainer= array_values($trainer);
+        //create the array
+        for($i=0;$i<count($available_tt);$i++)
+        {
+            $TrainingCourse [$i] = array(
+                'id'=>$available_tt[$i]['id'],
+                'name'=>$available_tc[$i]['name'],
+                'start_date' => $available_tt[$i]['start_date'],
+                'presenter'=> $trainer[$i]['rank'].'/'.$trainer[$i]['ar_name'],
+                'time'=> $available_tt[$i]['start_at'],
+                'duration'=> $available_tt[$i]['duration'],
+                'location'=>$available_tt[$i]['location'],
+                'capacity'=>$available_tt[$i]['capacity'],
+            );
+        }
+        return $TrainingCourse;
+    } 
+    
+    public function registerForTC($userId,$tt_id)
+    {
+        $regMan = new RegistrationRepo();
+        $allRegestration=$regMan->fetchAll();
+        $allRegestration= array_values($allRegestration);
+        //check if already register
+        for ($i = 0; $i < count($allRegestration); $i++) {
+            if ($tt_id == $allRegestration[$i]['tt_id'] && $allRegestration[$i]['usr_id'] == $userId)
+                return "-1";
+        }
+        $done=$regMan->save(0, $userId, $tt_id, 1, 0);
+        if($done)
+            return 'true';
+        else
+            return 'false';
+    }
+    
+    public function getTrainingRegisteredByUserID($usrID)
+    {
+        $regMan = new RegistrationRepo();
+        $sMan=new StatusRepo();
+        $allRegestration=$regMan->fetchAll();
+        $allRegestration= array_values($allRegestration);
+        //check if already register
+        for ($i = 0; $i < count($allRegestration); $i++) {
+            if ($allRegestration[$i]['usr_id'] == $usrID) {
+                $reg_user[$i] = $allRegestration[$i];           
+            }
+        }
+        
+        //get course information bu tt_id
+        for($i=0;$i<count($reg_user);$i++)
+        {
+            $req_tc[$i]=$this->getSingleTrainingCourseInfo($reg_user[$i]['tt_id']);
+            $status=$sMan->fetchByID($reg_user[$i]['registration_status']);
+            switch($status['status'])
+            {
+                case 'Processing':{$status['status']="تحت الدراسة" ;break;}
+                case 'Accepted':{$status['status']="مقبول" ;break;    } 
+                case 'Rejected':{$status['status']="مرفوض" ;break;}
+                case 'Missed':{$status['status']="غائب" ;break;}
+                case 'Excused':{$status['status']="معتذر" ;break;}
+                case 'Incomplete':{$status['status']="غير مكتمل" ;break; }
+            }
+            $req_tc[$i]['registration_status']=$status['status'];
+            $req_tc[$i]['sid']=$reg_user[$i]['registration_status'];
+            $req_tc[$i]['id']=$reg_user[$i]['tt_id'];
+        }
+    
+        return $req_tc;
+    }
+    
+    public function getHandOutForTc($tt_id)
+    {
+        $hoMan=new HandoutTcRepo();
+        $all_ho=$hoMan->fetchAll();
+        $all_ho= array_values($all_ho);
+        
+        for($i=0;$i<count($all_ho);$i++)
+            if($all_ho[$i]['tt_id']==$tt_id)
+                return "http://localhost:81/rtp_Design/".$all_ho[$i]['presentation_dir'];
+        
+    }
+    
+    public function apologizeForTc($usrId,$tt_id)
+    {
+        $regMan = new RegistrationRepo();
+        $allRegestration=$regMan->fetchAll();
+        $allRegestration= array_values($allRegestration);
+        //check if already register
+        for ($i = 0; $i < count($allRegestration); $i++) {
+            if ($tt_id == $allRegestration[$i]['tt_id'] && $allRegestration[$i]['usr_id'] == $usrId)
+                $r_id=$allRegestration[$i]['id'];
+        } 
+        $result=$regMan->save($r_id, $usrId, $tt_id, 5, 0);
+        return $result;
+    }
 }
