@@ -575,17 +575,17 @@ class TrainingCourse {
         return $TrainingCourse;
     } 
     
-    public function registerForTC($userId,$tt_id)
+    public function registerForTC($userId,$tt_id,$rid)
     {
         $regMan = new RegistrationRepo();
         $allRegestration=$regMan->fetchAll();
         $allRegestration= array_values($allRegestration);
         //check if already register
         for ($i = 0; $i < count($allRegestration); $i++) {
-            if ($tt_id == $allRegestration[$i]['tt_id'] && $allRegestration[$i]['usr_id'] == $userId)
+            if ($tt_id == $allRegestration[$i]['tt_id'] && $allRegestration[$i]['usr_id'] == $userId && $allRegestration[$i]['registration_status'] != 5)
                 return "-1";
         }
-        $done=$regMan->save(0, $userId, $tt_id, 1, 0);
+        $done=$regMan->save($rid, $userId, $tt_id, 1, 0);
         if($done)
             return 'true';
         else
@@ -622,6 +622,8 @@ class TrainingCourse {
             $req_tc[$i]['registration_status']=$status['status'];
             $req_tc[$i]['sid']=$reg_user[$i]['registration_status'];
             $req_tc[$i]['id']=$reg_user[$i]['tt_id'];
+            $req_tc[$i]['rid']=$reg_user[$i]['id'];
+            $req_tc[$i]['cer_app']=$reg_user[$i]['certificate_approved'];
         }
     
         return $req_tc;
@@ -651,5 +653,25 @@ class TrainingCourse {
         } 
         $result=$regMan->save($r_id, $usrId, $tt_id, 5, 0);
         return $result;
+    }
+    
+    public function deleteReg($rid)
+    {
+        $regMan = new RegistrationRepo();
+        $result= $regMan->delete($rid);
+        return $result;
+    }
+    
+    public function getOldReqTrainingByUserID($usrID)
+    {
+        $result = $this->getTrainingRegisteredByUserID($usrID);
+        $x=0;
+        for ($i = 0; $i < count($result); $i++) 
+            if ($result[$i]['sid'] == 2 && $result[$i]['end_date'] <= date('Y-mm-d')){  
+                $oldTc[$x] = $result[$i];
+                $oldTc[$x]['cer_app']=$result[$i]['cer_app'];    
+                $x++;
+        }
+        return $oldTc;
     }
 }

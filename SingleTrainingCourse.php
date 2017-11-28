@@ -20,11 +20,11 @@ else
     $smarty->assign('goals',$result['goals']);
 
     if(isset($_POST['back']))
-        header('Location:AvailableTraining.php');
+        header('Location:availableTraining.php');
     if (isset($_POST['register'])) {
         $teMan = new TrainingCourse();
         $userId=$_SESSION['user_id'];
-        $result=$teMan->registerForTC($userId,$tt_id);
+        $result=$teMan->registerForTC($userId,$tt_id,0);
         if($result=='true')
         {
             $smarty->assign('added','تم التسجيل بنجاح');

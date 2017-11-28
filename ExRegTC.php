@@ -10,6 +10,8 @@ if (!isset($_SESSION['user_id'])) {
     $smarty->display("unAuthorized.tpl");
 } else {
     $tt_id=$_SESSION['tt_id'];
+    $userId=$_SESSION['user_id'];
+    $rid=$_SESSION['rid'];
     $tcMan=new TrainingCourse();
     $result=$tcMan->getSingleTrainingCourseInfo($tt_id);
     $smarty->assign('name',$result['name']);
@@ -18,21 +20,23 @@ if (!isset($_SESSION['user_id'])) {
     $smarty->assign('hours',$result['duration']);
     $smarty->assign('abstract',$result['abstract']);
     $smarty->assign('goals',$result['goals']);
-    $link= $tcMan->getHandOutForTc($tt_id);
-    $smarty->assign('url',$link);
     
-    if(isset($_POST['apologize']))
+    
+    if(isset($_POST['re_register']))
     {
-        $result= $tcMan->apologizeForTc($_SESSION['user_id'],$tt_id);
-        if($result)
-            echo '<script>alert("تم الاعتذار عن الطلب بنجاح"); window.location = "registration.php";</script>';
-         else
-            echo '<script>alert("لم يتم حذف طلبك, الرجاء المحاولة في وقت لاحق")</script>';
-       
+        $result=$tcMan->registerForTC($userId,$tt_id,$rid);
+        if($result=='true')
+        {
+            $smarty->assign('added','تم التسجيل بنجاح');
+        }
+        else if($result=='-1')
+            $smarty->assign('msg','تم تسجيل طلبكم مسبقا, الرجاء الذهاب لصفحة استعراض الطلبات لمتابعة حالة الطلب');
+        else
+            $smarty->assign('msg','حدث خطأ اثناء معالجة طلبك, الرجاء المحاولة لاحقا'); 
     }
     if(isset($_POST['back']))
         header('Location:registration.php');
     
-    $smarty->display("AccRegTC.tpl");
+    $smarty->display("ExRegTC.tpl");
 }
 ?>

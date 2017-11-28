@@ -18,21 +18,9 @@ if (!isset($_SESSION['user_id'])) {
     $smarty->assign('hours',$result['duration']);
     $smarty->assign('abstract',$result['abstract']);
     $smarty->assign('goals',$result['goals']);
-    $link= $tcMan->getHandOutForTc($tt_id);
-    $smarty->assign('url',$link);
-    
-    if(isset($_POST['apologize']))
-    {
-        $result= $tcMan->apologizeForTc($_SESSION['user_id'],$tt_id);
-        if($result)
-            echo '<script>alert("تم الاعتذار عن الطلب بنجاح"); window.location = "registration.php";</script>';
-         else
-            echo '<script>alert("لم يتم حذف طلبك, الرجاء المحاولة في وقت لاحق")</script>';
-       
-    }
     if(isset($_POST['back']))
         header('Location:registration.php');
     
-    $smarty->display("AccRegTC.tpl");
+    $smarty->display("UPRegTC.tpl");
 }
 ?>

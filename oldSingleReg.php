@@ -10,6 +10,7 @@ if (!isset($_SESSION['user_id'])) {
     $smarty->display("unAuthorized.tpl");
 } else {
     $tt_id=$_SESSION['tt_id'];
+    $cer_app=$_SESSION['cer_app'];
     $tcMan=new TrainingCourse();
     $result=$tcMan->getSingleTrainingCourseInfo($tt_id);
     $smarty->assign('name',$result['name']);
@@ -18,21 +19,15 @@ if (!isset($_SESSION['user_id'])) {
     $smarty->assign('hours',$result['duration']);
     $smarty->assign('abstract',$result['abstract']);
     $smarty->assign('goals',$result['goals']);
-    $link= $tcMan->getHandOutForTc($tt_id);
-    $smarty->assign('url',$link);
+  
+    if($cer_app==0)
+        $smarty->assign('certificate','الشهادة غير جاهزة بعد');
+    else 
+        $smarty->assign('certificate','<a href="uploads/handouts/tc/task_table.pdf"> لتحميل الشهادة - اضغط هنا</a>');
     
-    if(isset($_POST['apologize']))
-    {
-        $result= $tcMan->apologizeForTc($_SESSION['user_id'],$tt_id);
-        if($result)
-            echo '<script>alert("تم الاعتذار عن الطلب بنجاح"); window.location = "registration.php";</script>';
-         else
-            echo '<script>alert("لم يتم حذف طلبك, الرجاء المحاولة في وقت لاحق")</script>';
-       
-    }
     if(isset($_POST['back']))
-        header('Location:registration.php');
+        header('Location:oldRegister.php');
     
-    $smarty->display("AccRegTC.tpl");
+    $smarty->display("oldSingleReg.tpl");
 }
 ?>

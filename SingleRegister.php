@@ -14,11 +14,11 @@ if (!isset($_SESSION['user_id'])) {
         case 1: {header("Location: UPRegTC.php"); break;}
         case 2: {header("Location: AccRegTC.php"); break;}
         case 3: {header("Location: RJRegTC.php"); break;}
-        case 4: {header("Location: MisRegTC.php"); break;}
+        case 4: {header("Location: UPRegTC.php"); break;}
         case 5: {header("Location: ExRegTC.php"); break;}
         }
     }
     else
-    $smarty->display("viewRequest.tpl");
+    $smarty->display("registration.tpl");
 }
 ?>

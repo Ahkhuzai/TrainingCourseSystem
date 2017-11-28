@@ -3,14 +3,12 @@ $(document).ready(function () {
     var source ={
         datatype: "json",
         datafields: [{ name: 'id',type: 'number' },
-            { name: 'sid',type: 'number' },
-            { name: 'rid',type: 'number' },
             { name: 'name',type: 'string' },
-            { name: 'registration_status' ,type: 'string'},
-            { name: 'add_date'}],
-        url:"getRegisteredTC.php"
+            { name: 'cer_app',type: 'number' },
+            { name: 'start_date'}],
+        url: "getPrevReg.php"
     };
-    $("#grid").jqxGrid({
+    $("#oldReg").jqxGrid({
         source: source,
         theme: 'office',
         rtl:true,
@@ -18,38 +16,35 @@ $(document).ready(function () {
         autoheight: true,
         showfilterrow: true,
         filterable: true,
-        width:'70%',
+        width:'75%',                                                         
         columns: [
             { text: 'اسم الدورة', datafield: 'name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'تاريخ اضافة الطلب', datafield: 'add_date',cellsformat: 'dd.MM.yyyy',filtertype: 'range',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'الحالة', datafield: 'registration_status',filtertype: 'checkedlist',renderer: columnsrenderer, cellsrenderer: cellsrenderer}
+            { text: 'تاريخ انعقاد الدورة', datafield: 'start_date',cellsformat: 'dd.MM.yyyy',filtertype: 'range',renderer: columnsrenderer, cellsrenderer: cellsrenderer },        
         ]
     });
-        $("#grid").on('rowselect', function (event) {
-        var TtID = event.args.row.id;
-        var StatusID=event.args.row.sid; 
-        var regID=event.args.row.rid; 
+        $("#oldReg").on('rowselect', function (event) {
+        var TCID = event.args.row.id;   
+        var Cer_app = event.args.row.cer_app;
         $.ajax({
         type : 'GET',
         url : 'setSession.php',
         data: {
-            ttid :TtID,
-            sid:StatusID,
-            rid:regID,
-            page: 'SingleRegister',
+            tt_id :TCID,
+            page: 'oldRegister',
+            cer_app:Cer_app
               },
         success : function(data){
-           ;
+            ;
         },
         error : function(XMLHttpRequest, textStatus, errorThrown) 
-        {alert ("Error Occured");}
+        {
+            alert ("Error Occured");
+        }
             });       
-        var url="SingleRegister.php";
+        var url="oldSingleReg.php";
         window.location=url;     
-        });
-
-});
- 
+        });              
+});   
 var cellsrenderer = function (row, column, value) {
     return '<div style="text-align: center; margin:5px;">' + value + '</div>';
 }

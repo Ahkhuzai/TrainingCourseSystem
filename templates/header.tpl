@@ -91,10 +91,8 @@ and open the template in the editor.
                 <ul >
                     <li><a href="availableTraining.php"> الدورات المتاحة</a></li>
                     <li><a href="registration.php"> استعراض طلبات التسجيل</a></li>
-                    <li><a href="oldRegister.php"> الدورات السابقة</a></li>
-                    <li><a href="apology.php"> الاعتذار عن الحضور</a></li>
+                    <li><a href="oldRegister.php"> الدورات السابقة</a></li>         
                     <li><a href="rateTraining">التقييم</a></li>
-                    <li><a href="viewCertificate.php">الشهادات</a></li>
                 </ul>
             </li>
             <li style="width:15%"><a href="info.php">المبادرة </a>

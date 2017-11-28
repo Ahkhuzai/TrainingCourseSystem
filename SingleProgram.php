@@ -24,7 +24,7 @@ else
     $smarty->assign('goals',$result['goals']);
 
     if(isset($_POST['back']))
-        header('Location:AvailableTraining.php');
+        header('Location:availableTraining.php');
     if (isset($_POST['register'])) {
         $teMan = new TrainingCourse();
         $userId=$_SESSION['user_id'];
