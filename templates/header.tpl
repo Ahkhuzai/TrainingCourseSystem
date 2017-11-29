@@ -10,6 +10,7 @@ and open the template in the editor.
     <meta name="msapplication-tap-highlight" content="no" />
     <link rel="stylesheet" href="libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/styles/jqx.base.css" type="text/css" />
     <link rel="stylesheet" href="libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/styles/jqx.office.css" type="text/css" />
+    <link rel="stylesheet" href="libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/styles/jqx.arctic.css" type="text/css" />
     <link rel="stylesheet" href="css/slider.css">
     <link rel="stylesheet" href="css/style.css">
     
@@ -44,10 +45,13 @@ and open the template in the editor.
     <script type="text/javascript" src="libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxchart.core.js"></script>
     <script type="text/javascript" src="libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxdata.export.js"></script> 
     <script type="text/javascript" src="libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxgrid.export.js"></script> 
+    <script type="text/javascript" src="libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxtextarea.js"></script>
     
     <script type="text/javascript" src="libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxtabs.js"></script>
     <script type="text/javascript" src="libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxlistbox.js"></script>
     <script type="text/javascript" src="libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxcombobox.js"></script>
+     <script type="text/javascript" src="libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxrating.js"></script>
+    <script type="text/javascript" src="libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxexpander.js"></script>
    
     <script type="text/javascript" src="js/slider.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
@@ -92,7 +96,7 @@ and open the template in the editor.
                     <li><a href="availableTraining.php"> الدورات المتاحة</a></li>
                     <li><a href="registration.php"> استعراض طلبات التسجيل</a></li>
                     <li><a href="oldRegister.php"> الدورات السابقة</a></li>         
-                    <li><a href="rateTraining">التقييم</a></li>
+                    <li><a href="tcForRate.php">التقييم</a></li>
                 </ul>
             </li>
             <li style="width:15%"><a href="info.php">المبادرة </a>

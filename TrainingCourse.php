@@ -512,7 +512,7 @@ class TrainingCourse {
             if($result[$i]['id']==$allRegestration[$i]['tt_id'] && $allRegestration[$i]['usr_id']==$userId)
                 return "-1";
         for($i=0;$i<count($result);$i++)
-            $done[$i]=$regMan->save(0, $userId, $result[$i]['id'], 1, 0);
+            $done[$i]=$regMan->save(0, $userId, $result[$i]['id'], 1, 0,0);
         if($done)
             return 'true';
         else
@@ -585,7 +585,7 @@ class TrainingCourse {
             if ($tt_id == $allRegestration[$i]['tt_id'] && $allRegestration[$i]['usr_id'] == $userId && $allRegestration[$i]['registration_status'] != 5)
                 return "-1";
         }
-        $done=$regMan->save($rid, $userId, $tt_id, 1, 0);
+        $done=$regMan->save($rid, $userId, $tt_id, 1, 0,0);
         if($done)
             return 'true';
         else
@@ -624,6 +624,7 @@ class TrainingCourse {
             $req_tc[$i]['id']=$reg_user[$i]['tt_id'];
             $req_tc[$i]['rid']=$reg_user[$i]['id'];
             $req_tc[$i]['cer_app']=$reg_user[$i]['certificate_approved'];
+            $req_tc[$i]['rate_flag']=$reg_user[$i]['rate_flag'];
         }
     
         return $req_tc;
@@ -674,4 +675,18 @@ class TrainingCourse {
         }
         return $oldTc;
     }
+
+    public function getTrainingForRate($usrID)
+    {
+        $result=$this->getOldReqTrainingByUserID($usrID);
+        $x=0;
+        for ($i = 0; $i < count($result); $i++) {
+            if ($result[$i]['rate_flag'] == 0) {
+                $tc[$x] = $result[$i];
+                $x++;
+            }
+        }
+        return $tc;
+    }
+    
 }

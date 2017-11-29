@@ -67,7 +67,7 @@ class RegistrationRepo {
         }         
     }
     
-    public function save($id,$UsrId,$ttId,$statusId,$certificate_approved)
+    public function save($id,$UsrId,$ttId,$statusId,$certificate_approved,$rate_flag)
     {    
         
         if($id)
@@ -78,7 +78,7 @@ class RegistrationRepo {
                 $register['tt_id'] = $ttId;
                 $register['certificate_approved'] = $certificate_approved;
                 $register['registration_status'] = $statusId;
-
+                $register['rate_flag'] = $rate_flag;
                 $result = R::store($register);
                 if ($result)
                     return true;
@@ -96,6 +96,7 @@ class RegistrationRepo {
                 $register['tt_id'] = $ttId;
                 $register['certificate_approved'] = $certificate_approved;
                 $register['registration_status'] = $statusId;
+                $register['rate_flag'] = $rate_flag;
                 $result = R::store($register);
                 if ($result)
                     return $result;
