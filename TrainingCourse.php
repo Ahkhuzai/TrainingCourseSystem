@@ -23,7 +23,7 @@ require_once 'HandoutReqRepo.php';
 
 class TrainingCourse {
     
-    public function addTraining($tt_id,$usrID,$pid,$Tname,$Tabstract,$Tgoals,$Thours,$Tstart,$Tend,$Tcapacity,$Tstatus,$Tavailable_seat,$handoutDir,$addDate,$startAt,$location,$tc_avg,$tr_avg)
+    public function addTraining($tt_id,$usrID,$pid,$Tname,$Tabstract,$Tgoals,$Thours,$Tstart,$Tend,$Tcapacity,$Tstatus,$Tavailable_seat,$handoutDir,$addDate,$startAt,$location,$tc_avg)
     {
         $trMan=new TrainingCourseRepo();
         $ttMan=new TimetableRepo();
@@ -31,7 +31,7 @@ class TrainingCourse {
         if ($tt_id > 0) {
             $result = $ttMan->fetchByID($tt_id);
             $trMan->save($result['tc_id'], $Tname, $Tgoals, $Tabstract,$pid);
-            $result= $ttMan->save($tt_id, $result['tc_id'], $usrID, $Tstart, $Tend, $Thours, $startAt, $location,$addDate,$Tcapacity, $Tstatus, $Tavailable_seat,$tr_avg,$tc_avg);
+            $result= $ttMan->save($tt_id, $result['tc_id'], $usrID, $Tstart, $Tend, $Thours, $startAt, $location,$addDate,$Tcapacity, $Tstatus, $Tavailable_seat,$tc_avg);
             $allhout=$hoMan->fetchAll();
             $allhout= array_values($allhout);   
             //try to get handout ids
@@ -46,7 +46,7 @@ class TrainingCourse {
         else 
         {
             $tcId=$trMan->save(0, $Tname, $Tgoals, $Tabstract,$pid);
-            $result= $ttMan->save(0, $tcId, $usrID, $Tstart, $Tend, $Thours, $startAt, $location,$addDate,$Tcapacity, $Tstatus, $Tavailable_seat,$tr_avg,$tc_avg);
+            $result= $ttMan->save(0, $tcId, $usrID, $Tstart, $Tend, $Thours, $startAt, $location,$addDate,$Tcapacity, $Tstatus, $Tavailable_seat);
             $re=$hoMan->save(0, null, null, $handoutDir, null, $result);
         }
         
@@ -184,7 +184,6 @@ class TrainingCourse {
             'add_date'=>$tt['add_date'],
             'status'=>$status['status'],
             'duration'=>$tt['duration'],
-            'tr_total_avg_rate'=>$tt['tr_total_avg_rate'],
             'tc_total_avg_rate'=>$tt['tc_total_avg_rate']
         );        
         return $result;
@@ -687,6 +686,53 @@ class TrainingCourse {
             }
         }
         return $tc;
+    }
+    
+    public function insertRate($tt_id,$usrId,$place,$program,$orgnization,$presentation,$presenter,$comment,$rid)
+    {
+        $regMan = new RegistrationRepo();
+        $rateMan = new RateDRepo();
+        
+        $rateMan->save(0, $tt_id, $usrId, $comment, $place, $presenter, $presentation, $orgnization, $program);
+        $reg=$regMan->fetchByID($rid);
+        $result=$regMan->save($rid, $usrId, $tt_id, $reg['registration_status'], $reg['certificate_approved'], 1);
+        
+        //CALCULATE AVG AFTER ADDING NEW RATE; 
+        $this->updateAvgForOneTC($tt_id);
+        
+        if($result)
+            return true;
+        else 
+            return false;
+        
+    }
+    
+    
+    public function updateAvgForOneTC($tt_id)
+    {
+        $rateMan = new RateDRepo();
+        $tbMan = new TimetableRepo();
+        $All_Rate = $rateMan->fetchAll();
+        $All_Rate= array_values($All_Rate);
+        
+        $x=0;
+        for($i=0;$i<count($All_Rate);$i++)
+            if($All_Rate[$i]['tt_id'] == $tt_id)
+                $rat_tc[$x] = $All_Rate[$i];
+            
+        $total=0;
+        for($i=0;$i<count($rat_tc);$i++) 
+        {
+            $total+=$rat_tc[$i]['place_rate']+$rat_tc[$i]['presentation_rate']+$rat_tc[$i]['organizing_rate']+$rat_tc[$i]['presenter_rate']+$rat_tc[$i]['training_program_rate'];
+        }
+        $total=$total/5;
+        $timetable=$tbMan->fetchByID($tt_id);
+        $result=$tbMan->save($tt_id, $timetable['tc_id'],  $timetable['tr_id'],  $timetable['start_date'],  $timetable['end_date'],  $timetable['duration'],  $timetable['start_at'],  $timetable['location'],  $timetable['add_date'],  $timetable['capacity'],  $timetable['status'],  $timetable['available_seat'],$total);
+        if($result)
+            return true;
+        else 
+            return false;
+        
     }
     
 }

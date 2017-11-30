@@ -4,7 +4,7 @@ $(document).ready(function () {
         datatype: "json",
         datafields: [{ name: 'id',type: 'number' },
             { name: 'name',type: 'string' },
-            { name: 'cer_app',type: 'number' },
+            { name: 'rid',type: 'number' },
             { name: 'start_date'}],
         url: "getTcForRate.php"
     };
@@ -23,16 +23,18 @@ $(document).ready(function () {
         ]
     });
         $("#oldReg").on('rowselect', function (event) {
-        var TCID = event.args.row.id;   
+        var TCID = event.args.row.id; 
+        var RID = event.args.row.rid; 
         $.ajax({
         type : 'GET',
         url : 'setSession.php',
         data: {
             tt_id :TCID,
+            rid:RID,
             page: 'tcForRate'
               },
         success : function(data){
-            ;
+          ;
         },
         error : function(XMLHttpRequest, textStatus, errorThrown) 
         {

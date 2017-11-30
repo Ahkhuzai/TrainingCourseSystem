@@ -157,7 +157,7 @@
    
     <form action="singalRate.php" method="POST">
         <center>
-            <textarea  type="text" id="comments"></textarea>
+            <textarea  type="text" id="comments" name="comments"></textarea>
         </center>
     </br>
     </br> 

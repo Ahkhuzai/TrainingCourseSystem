@@ -67,7 +67,7 @@ class ProgramRepo {
         }
             
     }        
-    public function save($id,$name,$goals,$abstract)
+    public function save($id,$name,$goals,$abstract,$hour,$status)
     {             
         if($id>0)
         {
@@ -76,6 +76,8 @@ class ProgramRepo {
                 $program['name'] = $name;
                 $program['goals'] = $goals;
                 $program['abstract'] = $abstract;
+                $program['hour'] = $hour;
+                $program['status'] = $status;
                 
                 $id = R::store($program);
                 if($id)
@@ -93,6 +95,8 @@ class ProgramRepo {
             $program['name'] = $name;
             $program['goals'] = $goals;
             $program['abstract'] = $abstract;
+            $program['hour'] = $hour;
+            $program['status'] = $status;
             $result = R::store($user);
             if ($result)
                 return $result;

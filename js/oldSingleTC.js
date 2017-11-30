@@ -43,7 +43,7 @@ $(document).ready(function () {
                             {
                                 unitInterval: 5,
                                 minValue: 0,
-                                maxValue:25,
+                                maxValue:100,
                                 displayValueAxis: true,
                                 description: 'متوسط الدرجة المستحقة',
                                 axisSize: 'auto',
@@ -52,7 +52,7 @@ $(document).ready(function () {
                             series: [
                                     { dataField: 'score', displayText: 'الدرجة',labels:
                                     {
-                                        visible: true,
+                                        visible: true
                                     }}
                                 ]
                         }

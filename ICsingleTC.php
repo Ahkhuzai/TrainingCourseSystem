@@ -37,9 +37,9 @@ if (!isset($_SESSION['user_id'])) {
             $addDate=date("Y-m-d");
             $startAt="00:00:00";
             $location="-";
-            $tr_avg=0;
+           
             $tc_avg=0; 
-            $result=$tcMan->addTraining($tt_id,$usrId,null,$Tname,$Tabstract,$Tgoals,$Thours,$Tstart,$Tend,$Tcapacity,$Tstatus,$Tavailable_seat,$handoutDir,$addDate,$startAt,$location,$tr_avg,$tc_avg);    
+            $result=$tcMan->addTraining($tt_id,$usrId,null,$Tname,$Tabstract,$Tgoals,$Thours,$Tstart,$Tend,$Tcapacity,$Tstatus,$Tavailable_seat,$handoutDir,$addDate,$startAt,$location,$tc_avg);    
             if($result)
                 $smarty->assign ('added','تم حفظ الطلب بنجاح , لإستكمال الطلب الرجاء الذهاب الى صفحة استعراض الطلبات');
         }
@@ -67,9 +67,9 @@ if (!isset($_SESSION['user_id'])) {
             $addDate=date("Y-m-d");
             $startAt="00:00:00";
             $location="-";
-            $tr_avg=0;
+           
             $tc_avg=0;                   
-            $result=$tcMan->addTraining($tt_id,$usrId,null,$Tname,$Tabstract,$Tgoals,$Thours,$Tstart,$Tend,$Tcapacity,$Tstatus,$Tavailable_seat,$handoutDir,$addDate,$startAt,$location,$tr_avg,$tc_avg);    
+            $result=$tcMan->addTraining($tt_id,$usrId,null,$Tname,$Tabstract,$Tgoals,$Thours,$Tstart,$Tend,$Tcapacity,$Tstatus,$Tavailable_seat,$handoutDir,$addDate,$startAt,$location,$tc_avg);    
             if($result)
                 $smarty->assign ('added','تم اضافة الطلب بنجاح');
             

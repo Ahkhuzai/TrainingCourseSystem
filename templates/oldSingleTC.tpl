@@ -9,8 +9,6 @@
     <p id="nameOfTC">{$name}</p>
     <h3> تاريخ الانعقاد</h3>
     <p>{$start_date}</p>
-    <h3> التقييم العام للمدرب</h3>
-    <p>{$trAllRate}</p>
     <h3> التقييم العام للدورة</h3>
     <p>{$tcAllRate}</p>   
     </br>
