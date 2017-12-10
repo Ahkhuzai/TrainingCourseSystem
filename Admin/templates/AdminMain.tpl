@@ -71,26 +71,26 @@ and open the template in the editor.
     </br>
     <div id='menu' style='text-align: center; position: relative; border: none;'>
         <ul>
-            <li style="width:15%"><a href="http://www.uqu.edu.sa">تسجيل الخروج  </a>
+            <li style="width:10%"><a href="http://www.uqu.edu.sa">تسجيل الخروج  </a>
             </li>
             
-            <li style="width:15%">الاحصائيات
+            <li style="width:10%">الاحصائيات
                 
             </li>
-            <li style="width:15%"> الشهادات 
+            <li style="width:10%"> الشهادات 
                 
             </li>
-            <li style="width:15%">الحضور 
+            <li style="width:10%">الحضور 
             </li>
-            <li style="width:15%">التسجيل 
+            <li style="width:10%">التسجيل 
                 <ul>
                    <li><a href="AdminViewRequest.php"> استعراض الطلبات</a></li>
-                   <li><a href="AdminViewRequest.php"> الدورات والبرامج التدريبية </a></li>
+                   <li><a href="AdminProgramAndTrainingCourse.php"> الدورات والبرامج التدريبية </a></li>
                    <li><a href="AdminViewRequest.php"> المدربين </a></li>
                    <li><a href="AdminViewRequest.php"> المتدربين </a></li>
                 </ul>
             </li>
-            <li style="width:15%"><a href="AdminMain.php">الرئيسية </a>
+            <li style="width:10%"><a href="AdminMain.php">الرئيسية </a>
             </li>
         </ul>
     </div>

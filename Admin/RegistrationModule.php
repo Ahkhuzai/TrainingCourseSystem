@@ -80,7 +80,7 @@ class RegistrationModule {
     {
         $timetable = new TimetableRepo();
         $registration = new RegistrationRepo();
-        $query="select timetable.id,trainingcourse.name,timetable.start_date  from timetable join trainingcourse  where timetable.start_date>=CURDATE() and timetable.tc_id = trainingcourse.id";
+        $query="select timetable.id,trainingcourse.name,timetable.start_date  from timetable join trainingcourse  where timetable.start_date>=CURDATE() and timetable.status=$sid and timetable.tc_id = trainingcourse.id";
         $timeTableResult = $timetable->fetchByQuery($query);
         
         for ($i=0;$i<count($timeTableResult);$i++)

@@ -49,7 +49,7 @@ class HandoutTcRepo {
             else
                 return $ho;
         } catch (Exception $exc) {
-            return $exc->getTraceAsString();
+            return $exc->getMessage();
         }            
     }
 

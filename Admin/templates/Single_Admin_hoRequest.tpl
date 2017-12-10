@@ -28,8 +28,7 @@
     <form action="Single_Admin_hoRequest.php" method="POST">
         <input type="submit" value="عودة"  name = "back" id='back' class='btn'/> 
         <input type="submit" value="رفض الطلب"  name = "reject" id='reject' class='btn' onclick="return confirm('هل انت متأكدمن رغبتك برفض الطلب')"/>
-        <input type="button" value="قبول الطلب"  name = "accept" id='accept' class='btn'/>
-     
+        <input type="submit" value="قبول الطلب"  name = "accept" id='accept' class='btn' onclick="return confirm('هل انت متأكدمن رغبتك بقبول الطلب')"/>
     </form>
     </br>
     </fieldset>

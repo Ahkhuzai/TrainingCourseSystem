@@ -20,19 +20,27 @@ if (!isset($_SESSION['user_id'])) {
     $smarty->assign('goals',$result['goals']);
     $smarty->assign('url',$result['url']);
     $smarty->assign('trname',$result['tr_ar_name']);
-   
+    
     if(isset($_POST['reject']))
     {
-        //$result= $tcMan->apologizeForTc($_SESSION['user_id'],$tt_id);
+        $result= $tcMan->HandleTCRequest($tt_id,1);
         if($result)
-            echo '<script>alert("تم رفض عن الطلب بنجاح"); window.location = "AdminViewRequest.php";</script>';
+            echo '<script>alert("تم رفض الطلب بنجاح"); window.location = "AdminViewRequest.php";</script>';
          else
             echo '<script>alert("لم يتم رفض الطلب, الرجاء المحاولة في وقت لاحق")</script>';
-       
+    }
+    
+    if(isset($_POST['accept']))
+    {
+        $result= $tcMan->HandleTCRequest($tt_id,2);
+        if($result)
+            echo '<script>alert(" تم قبول عن الطلب بنجاح وسيتم ابلاغ مقدم الطلب بذلك"); window.location = "AdminViewRequest.php";</script>';
+         else
+            echo '<script>alert("لم يتم قبول الطلب, الرجاء المحاولة في وقت لاحق")</script>';
     }
     if(isset($_POST['back']))
         header('Location:AdminViewRequest.php');
-    
+
     $smarty->display("Single_Admin_tcRequest.tpl");
 }
 ?>

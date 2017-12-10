@@ -20,13 +20,22 @@ if (!isset($_SESSION['user_id'])) {
    
     if(isset($_POST['reject']))
     {
-        
+        $result= $tcMan->HandleHORequest($ho_id,1);
         if($result)
-            echo '<script>alert("تم رفض عن الطلب بنجاح"); window.location = "AdminViewRequest.php";</script>';
+            echo '<script>alert("تم رفض عن الطلب بنجاح"); window.location = "AdminViewRequest.php";</script>';       
          else
             echo '<script>alert("لم يتم رفض الطلب, الرجاء المحاولة في وقت لاحق")</script>';
-       
     }
+    
+    if(isset($_POST['accept']))
+    {
+        $result= $tcMan->HandleHORequest($ho_id,2);
+        if($result)
+            echo '<script>alert(" تم قبول عن الطلب بنجاح وسيتم ابلاغ مقدم الطلب بذلك"); window.location = "AdminViewRequest.php";</script>';
+         else
+            echo '<script>alert("لم يتم قبول الطلب, الرجاء المحاولة في وقت لاحق")</script>';
+    }
+    
     if(isset($_POST['back']))
         header('Location:AdminViewRequest.php');
     

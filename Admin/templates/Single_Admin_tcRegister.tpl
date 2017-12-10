@@ -37,8 +37,8 @@
     <br>
     
     <form action="Single_Admin_tcRegister.php" method="POST">
-        <input type="submit" value="عودة"  name = "back" id='back' class='btn'/> 
-        <input type="submit" value="اغلاق التسجيل في الدورة "  name = "close" id='close' class='btn' onclick="return confirm('هل انت متأكدمن رغبتك برفض الطلب')"/>
+        <input type="submit" value="عودة"  name = "back" id='back' class='btn' /> 
+        <input type="submit" value="اغلاق التسجيل في الدورة "  name = "close" id='close' class='btn' onclick="return confirm('هل انت متأكدمن رغبتك بإغلاق التسجيل')"/>
     </form>
     </br>
     </fieldset>

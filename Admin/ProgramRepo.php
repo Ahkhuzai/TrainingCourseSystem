@@ -89,8 +89,8 @@ class ProgramRepo {
                 $program['eng_name'] = $eng_name;
                 $program['goals'] = $goals;
                 $program['abstract'] = $abstract;
-                $program['hour'] = $hour;
-                $program['status'] = $status;
+                $program['hours'] = $hour;
+                $program['sid'] = $status;
                 
                 $id = R::store($program);
                 if($id)
@@ -109,9 +109,9 @@ class ProgramRepo {
             $program['eng_name'] = $eng_name;
             $program['goals'] = $goals;
             $program['abstract'] = $abstract;
-            $program['hour'] = $hour;
-            $program['status'] = $status;
-            $result = R::store($user);
+            $program['hours'] = $hour;
+            $program['sid'] = $status;
+            $result = R::store($program);
             if ($result)
                 return $result;
             else

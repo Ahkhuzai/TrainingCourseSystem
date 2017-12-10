@@ -17,13 +17,37 @@ $(document).ready(function () {
             { name: 'rank',type: 'string' },
             { name: 'sid',type: 'number' },
             { name: 'status',type: 'string' },
-            { name: 'boolstatus',type: 'bool' },
+            { name: 'boolstatus' },
+            { name: 'rid',type: 'number' },
             { name: 'missed',type: 'number' },
             { name: 'excused',type: 'number' }],
-        url: "getTCRegisterTrainee.php"
-    };
+        id: 'id',
+        url: "getTCRegisterTrainee.php",
+ 
+    updaterow: function (rowid, rowdata, commit) {               
+                    $.ajax({
+                        type : 'GET',
+                        url : 'getTCRegisterTrainee.php',
+                        data: {
+                            update:true,
+                            boolstatus:rowdata.boolstatus,
+                            rid:rowdata.rid
+                              },
+                        success : function(data){
+                            commit(true);
+                            $("tcRegisterTrainee").jqxGrid('updatebounddata');
+                        },
+                        error : function(XMLHttpRequest, textStatus, errorThrown) 
+                        {alert (errorThrown);}
+                            }); 
+                   
+                    }
+                       };
+                       
+    var dataAdapter = new $.jqx.dataAdapter(source);
     $("#tcRegisterTrainee").jqxGrid({
-        source: source,
+        source: dataAdapter,
+    
         theme: 'office',
         rtl:true,
         autorowheight: true,
@@ -32,16 +56,20 @@ $(document).ready(function () {
         selectionmode: 'singlecell',
         width:'75%',                                                         
         columns: [
-            { text: 'اسم المتدرب', datafield: 'ar_name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'الرتبة العلمية',datafield: 'rank',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'التخصص العام',datafield: 'major',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'الكلية التابع لها', datafield: 'department',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'عدد مرات الغياب', datafield: 'missed',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'عدد مرات الاعتذار', datafield: 'excused',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'حالة الطلب', datafield: 'status',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'قبول الطلب',datafield: 'boolstatus',columntype: 'checkbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer }
+            { text: 'اسم المتدرب',editable:false, datafield: 'ar_name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'الرتبة العلمية',editable:false,datafield: 'rank',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'التخصص العام',editable:false,datafield: 'major',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'الكلية التابع لها',editable:false, datafield: 'department',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'عدد مرات الغياب',editable:false, datafield: 'missed',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'عدد مرات الاعتذار', editable:false,datafield: 'excused',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'حالة الطلب', editable:false,datafield: 'status',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'قبول الطلب',datafield: 'boolstatus',columntype:'checkbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer }
         ]
-    });           
+    });
+    $("#tcRegisterTrainee").on('cellendedit', function (event) 
+    {
+        $("#tcRegisterTrainee").jqxGrid('updatebounddata');
+    });
 });
 
 var cellsrenderer = function (row, column, value) {

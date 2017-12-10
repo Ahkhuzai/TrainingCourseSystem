@@ -21,13 +21,13 @@ if (!isset($_SESSION['user_id'])) {
     $smarty->assign('goals',$result['goals']);
     $smarty->assign('url',$result['url']);
     $smarty->assign('trname',$result['tr_ar_name']);
-    if(isset($_POST['reject']))
+    if(isset($_POST['close']))
     {
+        $result=$tcMan->closeRegister($tt_id);
         if($result)
-            echo '<script>alert("تم رفض عن الطلب بنجاح"); window.location = "AdminViewRequest.php";</script>';
+             echo '<script>alert("تم اغلاق التسجيل بنجاح"); window.location = "AdminViewRequest.php";</script>';       
          else
-            echo '<script>alert("لم يتم رفض الطلب, الرجاء المحاولة في وقت لاحق")</script>';
-       
+            echo '<script>alert("لم يتم اغلاق التسجيل, الرجاء المحاولة في وقت لاحق")</script>';
     }
     if(isset($_POST['back']))
         header('Location:AdminViewRequest.php');

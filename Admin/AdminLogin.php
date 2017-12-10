@@ -1,12 +1,9 @@
 <?php
 include 'libs/smarty/libs/Smarty.class.php';
 require_once 'RegistrationModule.php';
-//error_reporting(0);
+error_reporting(0);
 $smarty=new Smarty();
 $user = new RegistrationModule();
-
-
-
 if(isset($_POST['login']))
 { 
     if(!empty(trim($_POST['usrName'])) && !empty(trim($_POST['usrPass'])))
@@ -31,4 +28,5 @@ if(isset($_POST['login']))
 }
 $smarty->assign ('msg','use Admin for username and admin for password'); 
 $smarty->display("AdminLogin.tpl");
+
 ?>

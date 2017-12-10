@@ -101,7 +101,7 @@ class TrainingCourseRepo {
                 else
                     return false;
             } catch (Exception $exc) {
-                return $exc->getTraceAsString();
+                return $exc->getMessage();
             }
                 }
         else 
