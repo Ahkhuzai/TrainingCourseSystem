@@ -1,15 +1,15 @@
 <?php
-include 'libs/smarty/libs/Smarty.class.php';
-require_once 'TrainingCourse.php';
+include '../libs/smarty/libs/Smarty.class.php';
+require_once '../TrainingCourseModule.php';
 $smarty=new Smarty();
-//error_reporting(0);
+error_reporting(0);
 session_start();
-$tcMan = new TrainingCourse();
+$tcMan = new TrainingCourseModule();
 
 if(isset($_SESSION['user_id']))
 {
     if(isset($_POST['back']))
-        header('Location:AdminProgramAndTrainingCourse.php');
+        header('Location:AdminMain.php');
     
     if(isset($_POST['addProgram']))
     {
@@ -20,9 +20,7 @@ if(isset($_SESSION['user_id']))
             $abstract=$_POST['abstract'];
             $goals=$_POST['Goals'];
             $hours=$_POST['Hours'];
-            $tcId=$_POST['tc_id'];
-            $sid=2;
-            $result=$tcMan->AddProgram($name,$eng_name,$abstract,$goals,$hours,$tcId,$sid);
+            $result=$tcMan->AddProgram($name,$eng_name,$abstract,$goals,$hours);
             if($result)
                 $smarty->assign('added','تمت اضافة البرنامج بنجاح');
             else

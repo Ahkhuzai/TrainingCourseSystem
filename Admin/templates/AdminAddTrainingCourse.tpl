@@ -1,11 +1,12 @@
-{include file='AdminMain.tpl' title='بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'}
+{include file='headerq.tpl' title='بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'}
 
 <script type="text/javascript" src="js/AdminAddTrainingCourse.js"></script>
-
-    
-        <fieldset style="margin:0 auto; width:75%" dir='rtl'>
-            <br>
-    <legend>لطلب تقديم دورة تدريبية, الرجاء إكمال النموذج التالي:</legend>
+<!-- Introduction -->
+    <section id="intro" class="main">
+        <div class="spotlight">
+            <div class="content align-right">
+                <section class="main">
+    <h2>لطلب تقديم دورة تدريبية, الرجاء إكمال النموذج التالي:</h2>
     
     <center>
         <p><font color="green">{$added}</font></p>
@@ -58,6 +59,18 @@
            الحقيبة التدريبية  <br>
            <input type="file" name="hout" id="hout"  accept='application/pdf , application/vnd.wordperfect , application/msword' >     <br> <br>
             </div>
+
+
+             هل الدورة تتبع برنامج تدريبي؟ 
+            <div id='isinProgram'>
+                <span>نعم</span></div>
+    
+            <div id='program'>
+            </div>
+            <input type="hidden" id="p_id" name="p_id"/> 
+            <br>
+            <br>
+
              <input type="submit" value="إضافة"  name = "addTraining" id='addTraining' class='btn'/> 
             <input type="submit" value="عودة"  name = "back" id='back' class='btn'/>
            
@@ -65,17 +78,12 @@
             <input type="hidden" id="etime" name="etime"/>
             <input type="hidden" id="start_at" name="start_at"/>
             </form>
-       
+        
             <br>
                <p><font color="red">{$msg}</font></p>
-              
-    </center>
-    </fieldset>
-   
-    <br>
-    <br>
-</div>
-    <br>
-{include file='footer.tpl'}
+               </section>          
+            </section>              
+  {include file='footer.tpl'}
+
 
 

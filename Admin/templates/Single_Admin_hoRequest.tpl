@@ -1,15 +1,18 @@
-{include file='AdminMain.tpl' title='بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'}
-
+{include file='headerq.tpl' title='بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'}
 <script type="text/javascript" src="js/Single_Admin_hoRequest.js"></script>
-    <center>
-    <fieldset style="width:70%; margin:0 auto;">      
-   <legend align="right">بيانات الدورة</legend>
+
+<!-- Introduction -->
+    <section id="intro" class="main">
+        <div class="spotlight">
+            <div class="content align-right">
+                <section class="main">
+  
+   <h2>بيانات الدورة</h2>
    <center>
-            <h3><font color="green">{$added}</font></h3>
-            <p><font color="red">{$msg}</font></p>
-            </center>
-            <br>
-            <br>
+        <h3><font color="green">{$added}</font></h3>
+        <p><font color="red">{$msg}</font></p>
+    </center>
+    <br>
     <h3>مقدم الطلب </h3> 
     <p>{$trname}</p> 
     <h3>الحقيبة التدريبية للمتدرب</h3>
@@ -25,18 +28,16 @@
     <p><a href="{$scurl}" >  من هنا</a> </p>
     </br>
     </br> 
+    <center>
     <form action="Single_Admin_hoRequest.php" method="POST">
         <input type="submit" value="عودة"  name = "back" id='back' class='btn'/> 
         <input type="submit" value="رفض الطلب"  name = "reject" id='reject' class='btn' onclick="return confirm('هل انت متأكدمن رغبتك برفض الطلب')"/>
         <input type="submit" value="قبول الطلب"  name = "accept" id='accept' class='btn' onclick="return confirm('هل انت متأكدمن رغبتك بقبول الطلب')"/>
     </form>
-    </br>
-    </fieldset>
-    </br>
-    </br>
-</div>
-    <br>
-{include file='footer.tpl'}
-
+    </center>
+     </section>          
+ </section>   
+<script type="text/javascript" src="js/Single_Admin_tcRegister.js"></script>           
+  {include file='footer.tpl'}
 
 

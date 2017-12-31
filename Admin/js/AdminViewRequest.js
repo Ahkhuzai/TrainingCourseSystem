@@ -1,5 +1,5 @@
     $(document).ready(function () {
-            $('#tabs').jqxTabs({ width:'75%', height: 200, position: 'top', theme:'office', rtl:'true'});     
+            $('#tabs').jqxTabs({ width:'100%',height:600, position: 'top', rtl:'true'});     
         });
 
 /////////////////////////
@@ -8,15 +8,14 @@ $(document).ready(function () {
     var source ={
         datatype: "json",
         datafields: [{ name: 'id',type: 'number' },
-            { name: 'tcid',type: 'number' },
-            { name: 'name',type: 'string' },
+            { name: 'tc_id',type: 'number' },
+            { name: 'tc_ar_name',type: 'string' },
             { name: 'start_date' },
             { name: 'counts',type: 'number' }],
         url: "getTCRegister.php"
     };
     $("#tcRegister").jqxGrid({
         source: source,
-        theme: 'office',
         rtl:true,
         autorowheight: true,
         autoheight: true,
@@ -24,7 +23,7 @@ $(document).ready(function () {
         filterable: true,
         width:'75%',                                                         
         columns: [
-            { text: 'اسم الدورة', datafield: 'name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'اسم الدورة', datafield: 'tc_ar_name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'تاريخ بدء الدورة',datafield: 'start_date',filtertype: 'range',cellsformat: 'dd.MM.yyyy',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: ' عدد طلبات الالتحاق', datafield: 'counts',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },   
         ]
@@ -55,15 +54,14 @@ $(document).ready(function () {
     var source ={
         datatype: "json",
         datafields: [{ name: 'id',type: 'number' },
-            { name: 'tcid',type: 'number' },
-            { name: 'tc_name',type: 'string' },
+            { name: 'tc_id',type: 'number' },
+            { name: 'tc_ar_name',type: 'string' },
             { name: 'add_date' },
-            { name: 'tr_name',type: 'string' }],
+            { name: 'tr_ar_name',type: 'string' }],
         url: "getTCRequest.php"
     };
     $("#tcRequest").jqxGrid({
         source: source,
-        theme: 'office',
         rtl:true,
         autorowheight: true,
         autoheight: true,
@@ -71,8 +69,8 @@ $(document).ready(function () {
         filterable: true,
         width:'75%',                                                         
         columns: [
-            { text: 'اسم الدورة', datafield: 'tc_name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'مقدم الطلب', datafield: 'tr_name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'اسم الدورة', datafield: 'tc_ar_name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'مقدم الطلب', datafield: 'tr_ar_name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'تاريخ تقديم الطلب',datafield: 'add_date',filtertype: 'range',cellsformat: 'dd.MM.yyyy',renderer: columnsrenderer, cellsrenderer: cellsrenderer }
               
         ]
@@ -105,12 +103,11 @@ $(document).ready(function () {
         datafields: [{ name: 'id',type: 'number' },
             { name: 'name',type: 'string' },
             { name: 'add_date' },
-            { name: 'tr_name',type: 'string' }],
+            { name: 'ar_name',type: 'string' }],
         url: "getHORequest.php"
     };
     $("#hoRequest").jqxGrid({
         source: source,
-        theme: 'office',
         rtl:true,
         autorowheight: true,
         autoheight: true,
@@ -119,7 +116,7 @@ $(document).ready(function () {
         width:'75%',                                                         
         columns: [
             { text: 'اسم الدورة', datafield: 'name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'مقدم الطلب', datafield: 'tr_name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'مقدم الطلب', datafield: 'ar_name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'تاريخ تقديم الطلب',datafield: 'add_date',filtertype: 'range',cellsformat: 'dd.MM.yyyy',renderer: columnsrenderer, cellsrenderer: cellsrenderer }
               
         ]

@@ -28,7 +28,8 @@ $(document).ready(function () {
             ];
             var dataAdapter = new $.jqx.dataAdapter(source);
     // Create a jqxDropDownList
-    $("#TypeTc").jqxDropDownList({ autoDropDownHeight: true,source: dataAdapter, selectedIndex: 0,width: '70%', height: '25' ,theme: 'office' ,rtl:true });
+    $("#TypeTc").jqxDropDownList({ autoDropDownHeight: true,source: dataAdapter,width: '70%', height: '25' ,theme: 'office' ,rtl:true });
+    $("#TypeTc").jqxDropDownList({placeHolder: "مقر الحضور"});
     $('#TypeTc').on('select', function (event) {
         var args = event.args;
         if (args != undefined) {
@@ -39,6 +40,7 @@ $(document).ready(function () {
         }
     });
 });
+
 
 $(document).ready(function () {                
     var source =
@@ -54,8 +56,9 @@ $(document).ready(function () {
                 var dataAdapter = new $.jqx.dataAdapter(source);
                 // Create a jqxDropDownList
                 $("#trainer").jqxDropDownList({
-                    theme:'office',selectedIndex: 0, source: dataAdapter, displayMember: "ar_name", valueMember: "id", width: '70%',autoDropDownHeight: true
+                    theme:'office', source: dataAdapter, displayMember: "ar_name", valueMember: "id", width: '70%',autoDropDownHeight: true,rtl:true
                 });
+                    $("#trainer").jqxDropDownList({placeHolder: "مقدم الدورة"});
                 // subscribe to the select event.
                 $("#trainer").on('select', function (event) {
                     if (event.args) {
@@ -66,6 +69,46 @@ $(document).ready(function () {
                     }
                 });
 });
+
+$(document).ready(function () {                
+    var source =
+                {
+                    datatype: "json",
+                    datafields: [
+                        { name: 'id' },
+                        { name: 'name'}
+                    ],
+                    url:"getProgram.php",
+                    async: true
+                };
+                var dataAdapter = new $.jqx.dataAdapter(source);
+                // Create a jqxDropDownList
+                $("#program").jqxDropDownList({
+                    disabled: true, source: dataAdapter, displayMember: "name", valueMember: "id", width: '70%',autoDropDownHeight: true,rtl:true
+                });
+                    $("#program").jqxDropDownList({placeHolder: "مقدم الدورة"});
+                // subscribe to the select event.
+                $("#program").on('select', function (event) {
+                    if (event.args) {
+                        var item = event.args.item;
+                        if (item) {
+                            $("#p_id").val(item.value);
+                        }
+                    }
+                });
+             $("#isinProgram").jqxCheckBox({ width: 120, height: 25, checked: false,rtl:true});
+            $("#isinProgram").on('change', function (event) {
+                var checked = event.args.checked;
+                if (checked) {
+                    $("#program").jqxDropDownList({ disabled: false }); 
+                }
+                else {
+                    $("#program").jqxDropDownList({ disabled: true }); 
+                     $("#p_id").val("");
+                }
+            });
+});
+
 
 $(document).ready(function () {                
     $("#startAt").jqxDateTimeInput({ width: '70%', height: '25px', formatString: 'HH:mm:ss', showTimeButton: true, showCalendarButton: false});
