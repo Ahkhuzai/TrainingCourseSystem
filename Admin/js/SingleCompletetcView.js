@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    $("#print").jqxButton({ width: '10%', height: '35px', theme: 'office'});
-    $("#back").jqxButton({ width: '10%', height: '35px', theme: 'office'});
-    $("#comments").jqxExpander({ width: '75%',  rtl: true, theme:'office',expanded: false});
+    $("#print").jqxButton({ width: '10%', height: '35px'});
+    $("#back").jqxButton({ width: '10%', height: '35px'});
+    $("#comments").jqxExpander({ width: '75%',  rtl: true,expanded: false});
     });
     $(document).ready(function () {
     var source ={
@@ -24,8 +24,6 @@ $(document).ready(function () {
     var dataAdapter = new $.jqx.dataAdapter(source);
     $("#tcRegisterTrainee").jqxGrid({
         source: dataAdapter,
-    
-        theme: 'office',
         rtl:true,
         autorowheight: true,
         autoheight: true,

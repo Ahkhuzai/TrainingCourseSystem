@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $("#back").jqxButton({ width: '10%', height: '35px', theme: 'office'});
+    $("#back").jqxButton({ width: '10%', height: '35px'});
     });
     $(document).ready(function () {
     var source ={
@@ -42,7 +42,6 @@ $(document).ready(function () {
     var dataAdapter = new $.jqx.dataAdapter(source);
     $("#tcRegisterTrainee").jqxGrid({
         source: dataAdapter,
-        theme: 'office',
         rtl:true,
         autorowheight: true,
         autoheight: true,

@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $("#back").jqxButton({ width: '15%', height: '35px', theme: 'office'});
+    $("#back").jqxButton({ width: '15%', height: '35px'});
     var source ={
         datatype: "json",
         datafields: [{ name: 'id',type: 'number' },
@@ -14,7 +14,7 @@ $(document).ready(function () {
     };
     $("#tcCompleteList").jqxGrid({
         source: source,
-        theme: 'office',
+      
         rtl:true,
         autorowheight: true,
         autoheight: true,

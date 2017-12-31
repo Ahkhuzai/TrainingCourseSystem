@@ -1,8 +1,8 @@
 $(document).ready(function () {
-    $("#trainee").jqxInput({placeHolder: "رقم المنسوب", height: 25, width: 230, minLength: 1,  theme: 'office',rtl:true });
+    $("#trainee").jqxInput({placeHolder: "رقم المنسوب", height: 25, width: 230, minLength: 1,rtl:true });
 
-    $("#back").jqxButton({ width: '10%', height: '35px', theme: 'office'});
-    $("#search").jqxButton({ width: '10%', height: '35px', theme: 'office'});
+    $("#back").jqxButton({ width: '10%', height: '35px'});
+    $("#search").jqxButton({ width: '10%', height: '35px'});
 });
 
 $(document).ready(function () {
@@ -38,7 +38,7 @@ $(document).ready(function () {
                        };
     $("#TraineeTC").jqxGrid({
         source: source,
-        theme: 'office',
+   
         rtl:true,
         autorowheight: true,
         autoheight: true,

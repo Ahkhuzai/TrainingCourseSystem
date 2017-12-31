@@ -6,9 +6,9 @@
         });
 
 $(document).ready(function () {     
-    $("#Tname").jqxInput({placeHolder: "اسم البرنامج باللغة العربية", height: 25, width: '70%', minLength: 1, theme: 'office',rtl : true });  
-    $("#engname").jqxInput({placeHolder: "اسم البرنامج باللغة الانجليزية", height: 25, width: '70%', minLength: 1, theme: 'office',rtl : true }); 
-    $("#Hours").jqxInput({placeHolder: "عدد ساعات البرنامج الكلية", height: 25, width: '70%', minLength: 1, theme: 'office',rtl : true }); 
+    $("#Tname").jqxInput({placeHolder: "اسم البرنامج باللغة العربية", height: 25, width: '70%', minLength: 1, rtl : true });  
+    $("#engname").jqxInput({placeHolder: "اسم البرنامج باللغة الانجليزية", height: 25, width: '70%', minLength: 1, rtl : true }); 
+    $("#Hours").jqxInput({placeHolder: "عدد ساعات البرنامج الكلية", height: 25, width: '70%', minLength: 1, rtl : true }); 
     $("#abstract").jqxInput({width: '70%', height: 80, placeHolder: 'ملخص البرنامج',theme: 'office' ,rtl : true }); 
     $("#Goals").jqxInput({width: '70%', height: 200, placeHolder: 'أهداف البرنامج',theme: 'office' ,rtl : true });   
     });

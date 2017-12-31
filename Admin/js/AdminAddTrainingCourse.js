@@ -6,18 +6,18 @@
         });
 
 $(document).ready(function () {     
-    $("#Tname").jqxInput({placeHolder: "اسم الدورة", height: 25, width: '70%', minLength: 1, theme: 'office',rtl : true }); 
-    $("#engname").jqxInput({placeHolder: "اسم الدورة باللغة الانجليزية", height: 25, width: '70%', minLength: 1, theme: 'office',rtl : true }); 
+    $("#Tname").jqxInput({placeHolder: "اسم الدورة", height: 25, width: '70%', minLength: 1, rtl : true }); 
+    $("#engname").jqxInput({placeHolder: "اسم الدورة باللغة الانجليزية", height: 25, width: '70%', minLength: 1, rtl : true }); 
     $("#Location").jqxInput({placeHolder: "مكان الدورة", height: 25, width: '70%', minLength: 1, theme: 'office',rtl : true }); 
-    $("#Hours").jqxInput({placeHolder: "عدد ساعات الدورة في اليوم الواحد", height: 25, width: '70%', minLength: 1, theme: 'office',rtl : true }); 
-    $("#abstract").jqxInput({width: '70%', height: 80, placeHolder: 'ملخص الدورة',theme: 'office' ,rtl : true }); 
-    $("#Goals").jqxInput({width: '70%', height: 200, placeHolder: 'أهداف الدورة',theme: 'office' ,rtl : true });  
-    $("#stime").jqxInput({placeHolder: "تاريخ البداية", height: 25, width: '70%', minLength: 1, theme: 'office',rtl : true }); 
-    $("#etime").jqxInput({placeHolder: "تاريخ النهاية", height: 25, width: '70%', minLength: 1, theme: 'office',rtl : true }); 
-    $("#type").jqxInput({placeHolder: "مكان الدورة", height: 25, width: '70%', minLength: 1, theme: 'office',rtl : true }); 
-    $("#tr_id").jqxInput({placeHolder: "مكان الدورة", height: 25, width: '70%', minLength: 1, theme: 'office',rtl : true }); 
-    $("#start_at").jqxInput({placeHolder: "مكان الدورة", height: 25, width: '70%', minLength: 1, theme: 'office',rtl : true }); 
-    $("#capacity").jqxInput({placeHolder: "عدد المقاعد المتاحة", height: 25, width: '70%', minLength: 1, theme: 'office',rtl : true }); 
+    $("#Hours").jqxInput({placeHolder: "عدد ساعات الدورة في اليوم الواحد", height: 25, width: '70%', minLength: 1, rtl : true }); 
+    $("#abstract").jqxInput({width: '70%', height: 80, placeHolder: 'ملخص الدورة',rtl : true }); 
+    $("#Goals").jqxInput({width: '70%', height: 200, placeHolder: 'أهداف الدورة' ,rtl : true });  
+    $("#stime").jqxInput({placeHolder: "تاريخ البداية", height: 25, width: '70%', minLength: 1, rtl : true }); 
+    $("#etime").jqxInput({placeHolder: "تاريخ النهاية", height: 25, width: '70%', minLength: 1,rtl : true }); 
+    $("#type").jqxInput({placeHolder: "مكان الدورة", height: 25, width: '70%', minLength: 1, rtl : true }); 
+    $("#tr_id").jqxInput({placeHolder: "مكان الدورة", height: 25, width: '70%', minLength: 1, rtl : true }); 
+    $("#start_at").jqxInput({placeHolder: "مكان الدورة", height: 25, width: '70%', minLength: 1,rtl : true }); 
+    $("#capacity").jqxInput({placeHolder: "عدد المقاعد المتاحة", height: 25, width: '70%', minLength: 1, rtl : true }); 
 });
 
 $(document).ready(function () {                
@@ -28,7 +28,7 @@ $(document).ready(function () {
             ];
             var dataAdapter = new $.jqx.dataAdapter(source);
     // Create a jqxDropDownList
-    $("#TypeTc").jqxDropDownList({ autoDropDownHeight: true,source: dataAdapter,width: '70%', height: '25' ,theme: 'office' ,rtl:true });
+    $("#TypeTc").jqxDropDownList({ autoDropDownHeight: true,source: dataAdapter,width: '70%', height: '25' ,rtl:true });
     $("#TypeTc").jqxDropDownList({placeHolder: "مقر الحضور"});
     $('#TypeTc').on('select', function (event) {
         var args = event.args;

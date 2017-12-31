@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    $("#close").jqxButton({ width: '120px', height: '35px', theme: 'office'});
+    $("#close").jqxButton({ width: '120px', height: '35px'});
     
-    $("#back").jqxButton({ width: '120px', height: '35px', theme: 'office'});
+    $("#back").jqxButton({ width: '120px', height: '35px'});
     });
     
 
@@ -47,8 +47,6 @@ $(document).ready(function () {
     var dataAdapter = new $.jqx.dataAdapter(source);
     $("#tcRegisterTrainee").jqxGrid({
         source: dataAdapter,
-    
-        theme: 'office',
         rtl:true,
         autorowheight: true,
         autoheight: true,
