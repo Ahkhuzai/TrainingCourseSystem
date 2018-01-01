@@ -1,11 +1,11 @@
 <?php
 include '../libs/smarty/libs/Smarty.class.php';
-require_once '../TrainingCourse.php';
+require_once '../TrainingCourseModule.php';
 require_once '../DAL/RegistrationRepo.php';
 $smarty=new Smarty();
 error_reporting(0);
 session_start();
-$tcMan = new TrainingCourse();
+$tcMan = new TrainingCourseModule();
 $reg = new RegistrationRepo();
 if(isset($_SESSION['user_id']))
 {

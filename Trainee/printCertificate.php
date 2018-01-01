@@ -1,14 +1,19 @@
 <?php
 session_start();
 require_once '../DAL/RegistrationRepo.php';
-require_once '../TrainingCourse.php';
+require_once '../TrainingCourseModule.php';
+require_once '../RegistrationModule.php';
 error_reporting(0);
 $reg=new RegistrationRepo();
-$tcMan=new TrainingCourse();
+
+$tcMan=new TrainingCourseModule();
+$trMan=new RegistrationModule();
+
 $regResult=$reg->fetchByID($_SESSION['r_id']);
-$result_persona=$tcMan->getTraineeInfo($regResult['usr_id']);
+$result_persona=$trMan->getUserInfo($regResult['usr_id']);
 $result_tc=$tcMan->getSingleTrainingCourseInfo($regResult['tt_id']);
-$result_tr=$tcMan->getTrainerInfo($result_tc['tr_id']);
+$result_tr=$trMan->getUserInfo($result_tc['tr_id']);
+
 $name_ar=$result_persona['ar_name'];
 $rank =$result_persona['rank'];
 $name_ar='ال'.$rank.'/ة '.$name_ar;
@@ -31,7 +36,8 @@ $date_eng=$eng_date_string.' the '.$result_tc['start_date'];
 $hours=$result_tc['duration'];
 $tr_name_ar=$result_tr['ar_name'];
 $tr_name_eng=$result_tr['eng_name'];
-$tr_sig='../'.$result_tr['signature'];
+//$tr_sig='../'.$result_tr['signature'];
+$tr_sig='../images/template/sig.png;';
 
 
 if($regResult['certificate_approved']==1)
@@ -144,4 +150,4 @@ if($regResult['certificate_approved']==1)
 
 }
 else 
-    header('Location:SinglePrevTrainingCourseView.php');
+    echo 'error';

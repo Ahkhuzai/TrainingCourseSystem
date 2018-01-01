@@ -1,8 +1,8 @@
 <?php
 include '../libs/smarty/libs/Smarty.class.php';
-require_once '../TrainingCourse.php';
+require_once '../TrainingCourseModule.php';
 $smarty=new Smarty();
-$tcMan= new TrainingCourse();
+$tcMan= new TrainingCourseModule();
 error_reporting(0);
 session_start(); 
 if (!isset($_SESSION['user_id'])) {

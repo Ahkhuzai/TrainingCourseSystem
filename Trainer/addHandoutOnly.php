@@ -1,10 +1,11 @@
-﻿<?php
+<?php
 include '../libs/smarty/libs/Smarty.class.php'; 
-require_once '../TrainingCourse.php';
+require_once '../RegistrationModule.php';
+session_start();
 error_reporting(0);
 $smarty=new Smarty();
-$tcMan = new TrainingCourse ();
-session_start();
+$trMan = new RegistrationModule ();
+
 if (isset($_SESSION['user_id'])) {
     $userId=$_SESSION['user_id'];
     if(isset($_POST['addHandout']))
@@ -32,7 +33,6 @@ if (isset($_SESSION['user_id'])) {
                             {
                                 if (move_uploaded_file($_FILES['handout']['tmp_name'][$i], $uploadfile)) {
                                     $url[$i]=$uploadfile;
-
                                 } else {
                                     $smarty->assign('msg','حدث خطأ اثناء تحميل الملف');
                                 }
@@ -54,13 +54,13 @@ if (isset($_SESSION['user_id'])) {
             if($tr_ho && $te_ho && $pres && $sci_ch )
             {   
                 $sid=1;
-                $result=$tcMan->addHandoutOnly($tname,$tr_ho,$te_ho,$pres,$sci_ch, $addDate,$sid,$userId);
+                $result=$trMan->addHandoutOnly($tname,$tr_ho,$te_ho,$pres,$sci_ch, $addDate,$sid,$userId);
                 if($result)
                     $smarty->assign('added', 'تمت الاضافة بنجاح'); 
-            }          
-            else 
-                $smarty->assign('msg', 'يجب تعبئة كافة الحقول');      
+            }               
         }
+        else 
+            $smarty->assign('msg', 'يجب تعبئة كافة الحقول'); 
     }
     $smarty->display('addHandoutOnly.tpl');
 } else {

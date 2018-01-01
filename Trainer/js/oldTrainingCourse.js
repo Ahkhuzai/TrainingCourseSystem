@@ -12,7 +12,6 @@ $(document).ready(function () {
     };
     $("#tcList").jqxGrid({
         source: source,
-        theme: 'office',
         rtl:true,
         autorowheight: true,
         autoheight: true,

@@ -1,10 +1,10 @@
 <?php
 include '../libs/smarty/libs/Smarty.class.php';
-require_once '../TrainingCourse.php';
+require_once '../TrainingCourseModule.php';
 $smarty=new Smarty();
 error_reporting(0);
 session_start();
-$tcMan = new TrainingCourse();
+$tcMan = new TrainingCourseModule();
 
 if(isset($_SESSION['user_id']))
 {
@@ -34,10 +34,10 @@ if(isset($_SESSION['user_id']))
             $smarty->display("SingleTCRequest_UP.tpl"); 
             break;
         }
-        case 11: {
+        case 10: {
             $smarty->display("SingleTCRequest_Av_Un.tpl"); break;
         }
-        case 13: { 
+        case 11: { 
             $smarty->display("SingleTCRequest_Av_Un.tpl"); 
             break;
         }

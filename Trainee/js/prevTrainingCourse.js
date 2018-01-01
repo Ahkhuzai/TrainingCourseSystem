@@ -1,7 +1,8 @@
-    $(document).ready(function () {
+
+  /*   
+   *     $(document).ready(function () {
             $('#tabs').jqxTabs({ width:'75%', height: 200, position: 'top', theme:'office', rtl:'true'});     
-        });
-        
+        });   
     $(document).ready(function () {
     var source ={
         datatype: "json",
@@ -43,7 +44,7 @@
         window.location=url;     
         });              
 });
-
+*/
 //////////////////////////////
 
     $(document).ready(function () {
@@ -59,7 +60,7 @@
             { name: 'pname'},
             { name: 'start_date'},
             { name: 'location',type: 'string' },
-            { name: 'reg_status',type: 'string' },
+ 
             { name: 'r_id',type: 'number' },
             
         ],
@@ -67,7 +68,7 @@
     };
     $("#CompleteTC").jqxGrid({
         source: source1,
-        theme: 'office',
+  
         rtl:true,
         autorowheight: true,
         autoheight: true,
@@ -81,7 +82,6 @@
             { text: 'المدة ', datafield: 'duration',cellsformat: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'المكان ', datafield: 'location',cellsformat: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'النوع ', datafield: 'type',cellsformat: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'حالة التسجيل ', datafield: 'reg_status',cellsformat: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer }, 
             
         ]
     }); 

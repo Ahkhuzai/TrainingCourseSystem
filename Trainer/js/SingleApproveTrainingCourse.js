@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $("#back").jqxButton({ width: '10%', height: '35px', theme: 'office'});
+    $("#back").jqxButton({ width: '10%', height: '35px'});
     });
     $(document).ready(function () {
     var source ={
@@ -12,7 +12,7 @@ $(document).ready(function () {
             { name: 'department',type: 'string' },
             { name: 'rank',type: 'string' },
             { name: 'sid',type: 'number' },
-            { name: 'status',type: 'string' },
+            { name: 'attendance_status',type: 'string' },
             { name: 'certificate' },
             { name: 'certificate_status',type:'string' },
             { name: 'rid',type: 'number' }
@@ -42,7 +42,6 @@ $(document).ready(function () {
     var dataAdapter = new $.jqx.dataAdapter(source);
     $("#tcRegisterTrainee").jqxGrid({
         source: dataAdapter,
-        theme: 'office',
         rtl:true,
         autorowheight: true,
         autoheight: true,
@@ -55,7 +54,7 @@ $(document).ready(function () {
             { text: 'الرتبة العلمية',editable:false,datafield: 'rank',columntype: 'textbox', filtertype: 'checkedlist',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'التخصص العام',editable:false,datafield: 'major',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'الكلية التابع لها',editable:false, datafield: 'department',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'حالة الطلب', editable:false,datafield: 'status',columntype: 'textbox', filtertype: 'checkedlist',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'حالة الحضور', editable:false,datafield: 'attendance_status',columntype: 'textbox', filtertype: 'checkedlist',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'حالة الشهادة', editable:false,datafield: 'certificate_status',columntype: 'textbox', filtertype: 'checkedlist',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'اعتماد الشهادة', editable:true,datafield: 'certificate',columntype: 'checkbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             ]

@@ -15,7 +15,7 @@
     };
     $("#prog_tc").jqxGrid({
         source: source,
-        theme: 'office',
+  
         rtl:true,
         autorowheight: true,
         autoheight: true,
@@ -40,6 +40,6 @@ var columnsrenderer = function (value) {
 }
 
   $(document).ready(function () {
-    $("#register").jqxButton({ width: '120px', height: '35px', theme: 'office'});
-    $("#back").jqxButton({ width: '120px', height: '35px', theme: 'office'});
+    $("#register").jqxButton({ width: '120px', height: '35px'});
+    $("#back").jqxButton({ width: '120px', height: '35px'});
         });

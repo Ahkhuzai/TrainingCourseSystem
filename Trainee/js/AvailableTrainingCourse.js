@@ -1,5 +1,5 @@
     $(document).ready(function () {
-            $('#tabs').jqxTabs({ width:'75%', height: 200, position: 'top', theme:'office', rtl:'true'});     
+            $('#tabs').jqxTabs({ width:'75%', height: 200, position: 'top', rtl:'true'});     
         });
         
     $(document).ready(function () {
@@ -12,7 +12,6 @@
     };
     $("#AvailableProgram").jqxGrid({
         source: source,
-        theme: 'office',
         rtl:true,
         autorowheight: true,
         autoheight: true,
@@ -66,7 +65,6 @@
     };
     $("#AvailableTC").jqxGrid({
         source: source1,
-        theme: 'office',
         rtl:true,
         autorowheight: true,
         autoheight: true,

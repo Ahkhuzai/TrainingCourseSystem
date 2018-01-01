@@ -1,10 +1,12 @@
 <?php
 include '../libs/smarty/libs/Smarty.class.php';
-require_once '../TrainingCourse.php';
+require_once '../TrainingCourseModule.php';
+require_once '../RegistrationModule.php';
 $smarty=new Smarty();
-//error_reporting(0);
+error_reporting(0);
 session_start();
-$tcMan = new TrainingCourse();
+$tcMan = new TrainingCourseModule();
+$trMan = new RegistrationModule();
 
 if(isset($_SESSION['user_id']))
 {   
@@ -12,10 +14,10 @@ if(isset($_SESSION['user_id']))
         header('Location:AvailableTrainingCourse.php'); 
     if (isset($_POST['add'])) {
     
-        $isRegister=$tcMan->IsTraineeRegistered($_SESSION['user_id'], $_SESSION['tt_id']);
+        $isRegister=$trMan->IsTraineeRegistered($_SESSION['user_id'], $_SESSION['tt_id']);
         if(!$isRegister)
         {
-        $result_tc = $tcMan->RegisterTraineeInTC($_SESSION['user_id'], $_SESSION['tt_id'], 1);
+        $result_tc = $trMan->RegisterTraineeInTC($_SESSION['user_id'], $_SESSION['tt_id'], 1);
         if($result_tc)
                 $smarty->assign ('added','تم التسجيل في الدورة بنجاح,لمتابعة الطلب يرجى الذهاب الى صفحة استعراض الطلبات');
             else
@@ -24,8 +26,8 @@ if(isset($_SESSION['user_id']))
         else {
             $smarty->assign ('msg','لقد تم تسجيلك مسبقا في هذه الدورة, لمتابعة الطلب الخاص بك الرجاء التوجه لصفحة استعراض الطلبات');
         }
-     
     }
+    
     $tt_id=$_SESSION['tt_id'];
     $result=$tcMan->getSingleTrainingCourseInfo($tt_id);
     $smarty->assign('name',$result['tc_ar_name']);

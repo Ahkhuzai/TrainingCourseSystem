@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    $("#print").jqxButton({ width: '10%', height: '35px', theme: 'office'});
-    $("#back").jqxButton({ width: '10%', height: '35px', theme: 'office'});
-    $("#comments").jqxExpander({ width: '75%',  rtl: true, theme:'office',expanded: false});
+    $("#print").jqxButton({ width: '10%', height: '35px'});
+    $("#back").jqxButton({ width: '10%', height: '35px'});
+    $("#comments").jqxExpander({ width: '75%',  rtl: true, expanded: false});
     });
     $(document).ready(function () {
     var source ={
@@ -13,11 +13,10 @@ $(document).ready(function () {
             { name: 'department',type: 'string' },
             { name: 'rank',type: 'string' },
             { name: 'sid',type: 'number' },
-            { name: 'status',type: 'string' },
+            { name: 'attendance_status',type: 'string' },
             { name: 'boolstatus' },
             { name: 'rid',type: 'number' },
-            { name: 'missed',type: 'number' },
-            { name: 'excused',type: 'number' }],
+        ],
         id: 'id',
         url: "getTCRegisterTrainee.php",
 
@@ -26,8 +25,7 @@ $(document).ready(function () {
     var dataAdapter = new $.jqx.dataAdapter(source);
     $("#tcRegisterTrainee").jqxGrid({
         source: dataAdapter,
-    
-        theme: 'office',
+
         rtl:true,
         autorowheight: true,
         autoheight: true,
@@ -39,9 +37,7 @@ $(document).ready(function () {
             { text: 'الرتبة العلمية',editable:false,datafield: 'rank',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'التخصص العام',editable:false,datafield: 'major',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'الكلية التابع لها',editable:false, datafield: 'department',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'عدد مرات الغياب',editable:false, datafield: 'missed',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'عدد مرات الاعتذار', editable:false,datafield: 'excused',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'حالة الطلب', editable:false,datafield: 'status',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'حالة الحضور', editable:false,datafield: 'attendance_status',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             ]
     });
 });

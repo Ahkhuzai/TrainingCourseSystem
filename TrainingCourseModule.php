@@ -86,7 +86,8 @@ class TrainingCourseModule {
             
             }
         }   
-    }  
+    } 
+    
     //done 
     public function rePresentTrainingCourse($tt_id,$usrId,$tc_id,$Thours,$Tstart,$Tend,$Tcapacity,$Tstatus,$Tavailable_seat,$handoutDir,$addDate,$startAt,$location,$tc_avg,$type)
     {
@@ -280,7 +281,7 @@ class TrainingCourseModule {
         if($resultClosed)
         $result= array_merge($result,$resultClosed);
         
-        $TraineeTC=$this->getTraineeRegister($traineeID,2);
+        $TraineeTC=$this->getTraineeRegister($traineeID,0);
         
         for($i=0;$i<count($TraineeTC);$i++)
            $Trainee_TC_ID[$i]=$TraineeTC[$i]['tt_id'];
@@ -298,46 +299,82 @@ class TrainingCourseModule {
     //done but need more look
     public function getTraineeRegister($te_id,$sid)
     {
+        if($sid>0)
+            $qr='SELECT * FROM `registration` WHERE `usr_id`='.$te_id.' AND `registration_status`='.$sid;
+        else {
+            $qr='SELECT * FROM `registration` WHERE `usr_id`='.$te_id;
+        }
         $tReg=new RegistrationRepo();
-        $result=$tReg->fetchByQuery('SELECT * FROM `registration` WHERE `usr_id`='.$te_id.' AND `registration_status`='.$sid);
+        $result=$tReg->fetchByQuery($qr);
+        return $result;
+    }
+    //done
+    public function getTraineeAttended($te_id,$sid)
+    {
+        $tReg=new RegistrationRepo();
+        $result=$tReg->fetchByQuery('SELECT * FROM `registration` WHERE `usr_id`='.$te_id.' AND `attendance_status`='.$sid);
         return $result;
     }
     
     
+    
+    //done
+    public function getTrainingCourseForRateByUserID($usrID)
+    {
+        $result=$this->getTraineeAttended($usrID,12);
+        $x=0;
+        for ($i = 0; $i < count($result); $i++) {
+            if ($result[$i]['rate_flag'] == 0) {
+                $tc[$x] = $this->getSingleTrainingCourseInfo($result[$i]['tt_id']);
+                $tc[$x]['rid']=$result[$i]['id'];
+                $x++;
+            }
+        }
+        return $tc;
+    }
+    
+    //done
+    public function insertRate($tt_id,$usrId,$place,$program,$orgnization,$presentation,$presenter,$comment,$rid)
+    {
+        $regMan = new RegistrationRepo();
+        $rateMan = new RateDRepo();
+        $rateMan->save(0, $tt_id, $usrId, $comment, $place, $presenter, $presentation, $orgnization, $program);
+        $reg=$regMan->fetchByID($rid);
+        $result=$regMan->save($rid, $usrId, $tt_id, $reg['registration_status'],$reg['attendance_status'], $reg['certificate_approved'], 1);
+        //CALCULATE AVG AFTER ADDING NEW RATE; 
+        $this->updateAvgForOneTC($tt_id);
+        
+        if($result)
+            return true;
+        else 
+            return false;
+        
+    }
+    
+    //done
+    public function updateAvgForOneTC($tt_id)
+    {
+        $rateMan = new RateDRepo();
+        $tbMan = new TimetableRepo();
+        $rat_tc = $rateMan->fetchByTt_id($tt_id);
+        
+        $total=0;
+        for($i=0;$i<count($rat_tc);$i++) 
+        {
+            $total+=$rat_tc[$i]['place_rate']+$rat_tc[$i]['presentation_rate']+$rat_tc[$i]['organizing_rate']+$rat_tc[$i]['presenter_rate']+$rat_tc[$i]['training_program_rate'];
+        }
+        $totalRate=$total/5;
+        $timetable=$tbMan->fetchByID($tt_id);
+        $result=$tbMan->save($tt_id, $timetable['tc_id'],  $timetable['tr_id'],  $timetable['start_date'],  $timetable['end_date'],  $timetable['duration'],  $timetable['start_at'],  $timetable['location'],  $timetable['add_date'],  $timetable['capacity'],  $timetable['status'],  $timetable['available_seat'],$totalRate,$timetable['type']);
+        if($result)
+            return true;
+        else 
+            return false;
+        
+    }
+    
+    
     //////////////////////////////////////////
-    
-    
-        public function addTcToProgram($pid,$tc_id)
-    {
-        $tcMan=new TrainingCourseRepo();
-        $result=$tcMan->fetchByID($tc_id);
-        $saveResult=$tcMan->save($result['id'], $result['name'], $result['eng_name'], $result['goals'], $result['abstract'], $pid);
-        return $saveResult;
-    }
-
-    
-    public function getTrainingCourse()
-    {
-        $result=$this->getTcBySid(9);
-        for($i=0;$i<count($result);$i++)
-        {
-            $tc_id[$i]=$result[$i]['tc_id'];
-        }
-        $tc_id = array_unique($tc_id);
-        $new_id = array_values($tc_id);
-
-        $tcMan = new TrainingCourseRepo();
-        $tc_id=array();
-        for($i=0;$i<count($new_id);$i++)
-        {
-            $tc_id[$i]=$tcMan->fetchById($new_id[$i]);
-
-        }
-
-        $tc_id= array_values($tc_id);
-        return $tc_id;
-
-    }
     public function getAvailableProgram($te_id)
     {
         //the program available if one training course of it is available 
@@ -417,105 +454,6 @@ class TrainingCourseModule {
     
 
     
-    public function getTrainingCourseForRateByUserID($usrID)
-    {
-        $result=$this->getTraineeRegister($usrID,14);
-        $x=0;
-        for ($i = 0; $i < count($result); $i++) {
-            if ($result[$i]['rate_flag'] == 0) {
-                $tc[$x] = $this->getSingleTrainingCourseInfo($result[$i]['tt_id']);
-                $tc[$x]['rid']=$result[$i]['id'];
-                $x++;
-            }
-        }
-        return $tc;
-    }
-    
-    public function insertRate($tt_id,$usrId,$place,$program,$orgnization,$presentation,$presenter,$comment,$rid)
-    {
-        $regMan = new RegistrationRepo();
-        $rateMan = new RateDRepo();
-        $rateMan->save(0, $tt_id, $usrId, $comment, $place, $presenter, $presentation, $orgnization, $program);
-        $reg=$regMan->fetchByID($rid);
-        $result=$regMan->save($rid, $usrId, $tt_id, $reg['registration_status'], $reg['certificate_approved'], 1);
-        //CALCULATE AVG AFTER ADDING NEW RATE; 
-        $this->updateAvgForOneTC($tt_id);
-        
-        if($result)
-            return true;
-        else 
-            return false;
-        
-    }
-    
-    
-    public function updateAvgForOneTC($tt_id)
-    {
-        $rateMan = new RateDRepo();
-        $tbMan = new TimetableRepo();
-        $All_Rate = $rateMan->fetchAll();
-        $All_Rate= array_values($All_Rate);
-        
-        $x=0;
-        for($i=0;$i<count($All_Rate);$i++)
-            if($All_Rate[$i]['tt_id'] == $tt_id)
-                $rat_tc[$x] = $All_Rate[$i];    
-        $total=0;
-        for($i=0;$i<count($rat_tc);$i++) 
-        {
-            $total+=$rat_tc[$i]['place_rate']+$rat_tc[$i]['presentation_rate']+$rat_tc[$i]['organizing_rate']+$rat_tc[$i]['presenter_rate']+$rat_tc[$i]['training_program_rate'];
-        }
-        $total=$total/5;
-        $timetable=$tbMan->fetchByID($tt_id);
-        $result=$tbMan->save($tt_id, $timetable['tc_id'],  $timetable['tr_id'],  $timetable['start_date'],  $timetable['end_date'],  $timetable['duration'],  $timetable['start_at'],  $timetable['location'],  $timetable['add_date'],  $timetable['capacity'],  $timetable['status'],  $timetable['available_seat'],$total,$timetable['type']);
-        if($result)
-            return true;
-        else 
-            return false;
-        
-    }
-    
-    public function addHandoutOnly($tname,$tr_ho,$te_ho,$pres,$sci_ch,  $addDate,$sid,$userId)
-    {
-        $ho_req = new HandoutReqRepo();        
-        $ho_result=$ho_req->save(0,$tname ,$tr_ho, $te_ho, $pres, $sci_ch,$addDate,$sid,$userId);
-        if($ho_result)
-            return $ho_result;
-        else 
-            return false;
-    }
-    
-    public function getTCRequestsOfTrainer($user_id)
-    {
-        $ttMan= new TimetableRepo();
-        $result=$ttMan->fetchByQuery("select id from timetable where tr_id=".$user_id);
-        $x=0;
-        for($i=0;$i<count($result);$i++)
-        {
-            $tcResult[$i]=$this->getSingleTrainingCourseInfo($result[$i]['id']); 
-            if($tcResult[$i]['status']==10)
-                ;
-            else
-            {
-                $tc[$x]=$tcResult[$i];
-                $tc[$x]['sid']=$tcResult[$i]['status'];
-                $tc[$x]['status']=$this->getStatus($tcResult[$i]['sid']);
-                $x++;
-            }
-        }
-        return $tc;
-    }
-    
-    public function getHandoutRequestsOfTrainer($user_id)
-    {
-        $hoMan= new HandoutReqRepo();
-        $result=$hoMan->fetchByTr_id($user_id);
-        for($i=0;$i<count($result);$i++)
-        {
-            $result[$i]['status'] = $this->getStatus($result[$i]['sid']);
-        }
-        return $result;
-    }
     
 }
             

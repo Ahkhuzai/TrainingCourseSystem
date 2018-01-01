@@ -1,8 +1,8 @@
 <?php
 include '../libs/smarty/libs/Smarty.class.php';
-require_once '../TrainingCourse.php';
+require_once '../TrainingCourseModule.php';
 $smarty=new Smarty();
-error_reporting(0);
+//error_reporting(0);
 session_start(); 
 if (!isset($_SESSION['user_id'])) {
     
@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
     $smarty->display("unAuthorized.tpl");
 } else {
     $tt_id=$_SESSION['tt_id'];
-    $tcMan=new TrainingCourse();
+    $tcMan=new TrainingCourseModule();
     $result=$tcMan->getSingleTrainingCourseInfo($tt_id);
     $smarty->assign('name',$result['tc_ar_name']);
     $smarty->assign('tr_name',$result['tr_ar_name']);

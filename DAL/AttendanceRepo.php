@@ -108,7 +108,7 @@ class AttendanceRepo {
     
     }
     
-    public function save($id,$UsrId,$ttId,$attend_time,$leave_time)
+    public function save($id,$UsrId,$ttId,$attend_time)
     {      
         if($id>0)
         {
@@ -117,7 +117,6 @@ class AttendanceRepo {
                 $timeattend['usr_id'] = $UsrId;
                 $timeattend['timetable_id'] = $ttId;
                 $timeattend['attend_time'] = $attend_time;
-               $timeattend['leave_time'] = $leave_time;
                 
                 $result = R::store($timeattend);
                 if ($result)
@@ -135,8 +134,7 @@ class AttendanceRepo {
                 $timeattend['usr_id'] = $UsrId;
                 $timeattend['timetable_id'] = $ttId;
                 $timeattend['attend_time'] = $attend_time;
-                $timeattend['leave_time'] = $leave_time;
-             
+                
                 $result = R::store($timeattend);
                 if ($result)
                     return $result;

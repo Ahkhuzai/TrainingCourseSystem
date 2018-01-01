@@ -16,7 +16,6 @@ $(document).ready(function () {
     };
     $("#tcRequest").jqxGrid({
         source: source,
-        theme: 'office',
         rtl:true,
         autorowheight: true,
         autoheight: true,
@@ -68,7 +67,6 @@ $(document).ready(function () {
     };
     $("#hoRequest").jqxGrid({
         source: source,
-        theme: 'office',
         rtl:true,
         autorowheight: true,
         autoheight: true,

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-12-31 07:30:39
+/* Smarty version 3.1.30, created on 2018-01-01 10:14:32
   from "C:\xampp\htdocs\rtp\Trainee\templates\header.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a48840f79c545_55082535',
+  'unifunc' => 'content_5a49fbf8509b44_98769787',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '6b39bb04d8cc3c862c212488a40341bbec9f2a38' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rtp\\Trainee\\templates\\header.tpl',
-      1 => 1514617558,
+      1 => 1514797713,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a48840f79c545_55082535 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a49fbf8509b44_98769787 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE HTML>
 <!--
@@ -186,6 +186,8 @@ function content_5a48840f79c545_55082535 (Smarty_Internal_Template $_smarty_tpl)
                             <li ><a href="AvailableTrainingCourse.php">الدورات المتاحة </a>
                             </li>
                             <li ><a href="index.php">الرئيسية </a>
+                            </li>
+                            <li ><a href="../main/index.php">البوابة الرئيسية </a>
                             </li>
                         </ul>
                     </nav>

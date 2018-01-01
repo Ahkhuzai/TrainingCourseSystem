@@ -8,28 +8,9 @@
                                     <div class="content align-right">
                                     <section class="main">
     <center>
-        <div id='tabs'>
-            <ul>
-                
-                <li>الدورات التدريبية</li>
-                <li>البرامج التدريبية</li>
-            </ul>
-            <div>
-                </br>
-                <center>   
-                     <div  id='CompleteTC'>      
-                    </div>  
-                                      
-                </center>
-            </div>
-            <div>   
-                </br>
-                <center> 
-                    <div  id='CompleteProgram'>      
-                    </div>    
-                </center>
-            </div>   
-        </div>  
+        <div  id='CompleteTC'>      
+                    </div> 
+
     </center>
                     </section>          
                             </section>  

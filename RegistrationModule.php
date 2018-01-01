@@ -22,6 +22,7 @@ require_once '../DAL/TimetableRepo.php';
 require_once '../DAL/TrainingCourseRepo.php';
 require_once '../DAL/RegistrationRepo.php';
 require_once '../DAL/BlockedUserRepo.php';
+require_once '../TrainingCourseModule.php';
 class RegistrationModule {    
 
     //done
@@ -499,7 +500,7 @@ class RegistrationModule {
         $user = new UserRoleRepo();
         $role = new SysRoleRepo();
         $result = $user->fetchByUser_id($user_id);
-        print_r($result);
+     
         for($i=0;$i<count($result);$i++)
         {
             $roleResult= $role->fetchById($result[$i]['role_id']);
@@ -515,7 +516,7 @@ class RegistrationModule {
         $user = new UserRoleRepo();
         $role = new SysRoleRepo();
         $result = $user->fetchByUser_id($user_id);
-        print_r($result);
+      
         for($i=0;$i<count($result);$i++)
         {
             $roleResult= $role->fetchById($result[$i]['role_id']);
@@ -523,6 +524,57 @@ class RegistrationModule {
                 return true;
         }
         return false;
+    }
+    
+    //done
+    public function addHandoutOnly($tname,$tr_ho,$te_ho,$pres,$sci_ch,$addDate,$sid,$userId)
+    {
+        $ho_req = new HandoutReqRepo();        
+        $ho_result=$ho_req->save(0,$tname ,$tr_ho, $te_ho, $pres, $sci_ch,$addDate,$sid,$userId);
+        if($ho_result)
+            return $ho_result;
+        else 
+            return false;
+    }
+    
+    //done 
+    public function getTCRequestsOfTrainer($user_id)
+    {
+        $ttMan= new TimetableRepo();
+        $tcMan = new TrainingCourseModule();
+        $result=$ttMan->fetchByQuery("select id from timetable where tr_id=".$user_id);
+   
+        $x=0;
+        if($result)
+            for($i=0;$i<count($result);$i++)
+            {
+                $tcResult[$i]=$tcMan->getSingleTrainingCourseInfo($result[$i]['id']); 
+                if($tcResult[$i]['status']==9)
+                    ;
+                else
+                {
+                    $tc[$x]=$tcResult[$i];
+                    $tc[$x]['sid']=$tcResult[$i]['status'];
+                    $status = $this->getStatus($tcResult[$i]['sid']);
+                    $tc[$x]['status']= $status['status_arabic'];
+                    $x++;
+                }
+            }
+        return $tc;
+    }
+    
+    //DONE
+    public function getHandoutRequestsOfTrainer($user_id)
+    {
+        $hoMan= new HandoutReqRepo();
+        $result=$hoMan->fetchByTr_id($user_id);
+        if($result)
+        for($i=0;$i<count($result);$i++)
+        {
+            $status = $this->getStatus($result[$i]['sid']);
+            $result[$i]['status']= $status['status_arabic'];
+        }
+        return $result;
     }
 }
 ?>

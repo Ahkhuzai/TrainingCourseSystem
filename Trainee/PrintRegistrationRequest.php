@@ -1,9 +1,12 @@
 <?php
 session_start();
 require_once '../DAL/RegistrationRepo.php';
-require_once '../TrainingCourse.php';
+require_once '../TrainingCourseModule.php';
 error_reporting(0);
-$tcMan=new TrainingCourse();
+$tcMan=new TrainingCourseModule();
+require_once '../RegistrationModule.php';
+error_reporting(0);
+$trMan=new RegistrationModule();
 if($_SESSION['user_id'])
 {
     require_once '../libs/tcpdf/tcpdf.php';
@@ -90,11 +93,12 @@ if($_SESSION['user_id'])
     $date_ar=$tcResult['start_date'];
     $location=$tcResult['location'];
     $user_id=$_SESSION['user_id'];
-    $usrInfo=$tcMan->getTraineeInfo($user_id);
+    $usrInfo=$trMan->getTraineeInfo($user_id);
     $tename=$usrInfo['ar_name'];
     $teuqu=$usrInfo['uqu_id'];
     $department=$usrInfo['department'];
-    $barcode=$tt_id.'-'.$user_id;
+    //$barcode=$tt_id.'-'.$user_id;
+    $barcode = "http://dsr.uqu.edu.sa/rtp/Admin/takingAttendance.php?usr_id=$user_id&tt_id=$tt_id";
     // set font
     $pdf->SetFont('Sakkal_Majalla', '', 14, '', false);
     $pdf->Image('../images/logo_dsr.png', 130, 15, 40, 20, 'PNG', '', '', true, 150, '', false, false, 1, false, false, false);

@@ -84,6 +84,8 @@
                             </li>
                             <li ><a href="index.php">الرئيسية </a>
                             </li>
+                            <li ><a href="../main/index.php">البوابة الرئيسية </a>
+                            </li>
                         </ul>
                     </nav>
                 <!-- Main -->
