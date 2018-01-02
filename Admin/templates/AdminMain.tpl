@@ -5,7 +5,9 @@
             <div class="content align-right">
                 <section class="main">
                     <p> Welcome {$username} </p>
-                </section>          
+                </section>   
+            </div>
+        </div>
             </section>              
   {include file='footer.tpl'}
 

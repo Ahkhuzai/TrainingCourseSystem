@@ -1,10 +1,14 @@
 {include file='header.tpl' title='بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'}
 
 <script type="text/javascript" src="js/SingleOldTrainingCourse.js"></script>
-    <center>
-    <fieldset style="width:70%; margin:0 auto;">      
-   <legend align="right">بيانات الدورة</legend>
+   <!-- Introduction -->
+<section id="intro" class="main">
+        <div class="spotlight">
+                <div class="content align-right">
+                <section class="main">     
+
    <center>
+          <h3>بيانات الدورة</h3>
     <h3><font color="green">{$added}</font></h3>
     <p><font color="red">{$msg}</font></p>
     </center>
@@ -30,7 +34,8 @@
     <h3>الحقيبة التدريبية</h3>
     <p><a href="{$url}" >  من هنا</a> </p>
     </br>
-    </br>    
+    </br> 
+    <center>
     <h3>قائمة المسجلين</h3>
     <div  id='tcRegisterTrainee'>      
     </div>
@@ -67,18 +72,12 @@
         <input type="submit" value="عودة"  name = "back" id='back' class='btn' /> 
         <input type="submit" value='طباعة'  name = "print" id='print' class='btn'/>
     </form>
-    
-    </br>
-    <br>
-    <br>
-    </fieldset>
-    </br>
-    </br>
-</div>
-    <br>
-{include file='footer.tpl'}
-
-
+    </center>
+                </section>
+                </div>
+        </div>
+</section>				
+  {include file='footer.tpl'}
 
 
 

@@ -14,13 +14,14 @@ for($i=0;$i<count($Allresult);$i++)
         $result[$x] = $Allresult[$i];
         $x++;
     }
-
+if($result)
+{
 for($i=0;$i<count($result);$i++)
 {
     if ($result[$i]['pid'] == NULL) {
         $result[$i]['pname'] = 'لا تتبع برنامج محدد';
-        $rate=$tcMan->getSingleTCRate($result[$i]['id']);
-        $result[$i]['rate'] = $rate['totalRate'];
+        $rate=$result[$i]['tc_total_avg_rate'];
+        $result[$i]['rate'] = $rate;
         $result[$i]['sid'] = $result[$i]['status'];
         $result[$i]['status'] = $status['status_arabic'];
         $trainee=$trMan->getTraineeRegisteredInTC($result[$i]['id']);
@@ -32,8 +33,8 @@ for($i=0;$i<count($result);$i++)
     } else {
         $Presult = $tcMan->getProgramInfo($result[$i]['pid']);
         $result[$i]['pname'] = $Presult['name'];
-        $rate=$tcMan->getSingleTCRate($result[$i]['id']);
-        $result[$i]['rate'] = $rate['totalRate'];
+        $rate=$result[$i]['tc_total_avg_rate'];
+        $result[$i]['rate'] = $rate;
         $result[$i]['sid'] = $result[$i]['status'];
         $result[$i]['status'] = $status['status_arabic'];
         $trainee=$trMan->getTraineeRegisteredInTC($result[$i]['id']);
@@ -43,7 +44,7 @@ for($i=0;$i<count($result);$i++)
             $result[$i]['counts']=0;
     }   
 }
-
+}
 echo json_encode($result);
 
 ?>

@@ -1,11 +1,16 @@
 {include file='header.tpl' title='بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'}
 
 <script type="text/javascript" src="js/SingleRate.js"></script>
+<!-- Introduction -->
+<section id="intro" class="main">
+        <div class="spotlight">
+                <div class="content align-right">
+                <section class="main">     
 
-    <center>
-    <fieldset style="width:70%; margin:0 auto;" id="printend" name="printend">      
-   <legend align="right">بيانات الدورة</legend>
-   <center>
+  
+            <center>
+                    <h2>بيانات الدورة</h2>
+  
             <h3><font color="green">{$added}</font></h3>
             <p><font color="red">{$msg}</font></p>
             </center>
@@ -150,11 +155,11 @@
         <br>
         <br>
     </center>    
-   
+       <center>
     <form action="SingleRate.php" method="POST">
-        <center>
+    
             <textarea  type="text" id="comments" name="comments"></textarea>
-        </center>
+  
     </br>
     </br> 
     <input type="hidden"   name = "place_rate" id='place_rate' class='btn'/>
@@ -165,16 +170,11 @@
     <input type="submit" value="إرسال"  name = "send" id='send' class='btn'/>
     <input type="submit" value="عودة"  name = "back" id='back' class='btn'/> 
     </form>
-    </br>
-    </fieldset>
-    </br>
-    </br>
-</div>
-    <br>
-{include file='footer.tpl'}
-
-
-
-
+    </center>
+                </section>
+                </div>
+        </div>
+</section>				
+  {include file='footer.tpl'}
 
 

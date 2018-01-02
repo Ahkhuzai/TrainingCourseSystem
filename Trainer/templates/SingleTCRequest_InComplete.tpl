@@ -1,14 +1,19 @@
 {include file='header.tpl' title='بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'}
 
 <script type="text/javascript" src="js/SingleTCRequest_InComplete.js"></script>
+<!-- Introduction -->
+<section id="intro" class="main">
+        <div class="spotlight">
+                <div class="content align-right">
+                <section class="main">
 
     
-        <fieldset style="margin:0 auto; width:75%" dir='rtl'>
-            <br>
-    <legend>لطلب تقديم دورة تدريبية, الرجاء إكمال النموذج التالي:</legend>
-    
     <center>
+            <h3>لطلب تقديم دورة تدريبية, الرجاء إكمال النموذج التالي</h3>
+            <br>
         <p><font color="green">{$added}</font></p>
+        <p><font color="red">{$msg}</font></p>
+        <br>
         <form action='SingleTCRequest_InComplete.php' method='POST' enctype="multipart/form-data">
              
             <input type="text" id="Tname" name="Tname" value='{$name}'/>
@@ -60,17 +65,13 @@
             <input type="hidden" id="etime" name="etime" value="{$end_date}"/>
             </form>
             <br>
-               <p><font color="red">{$msg}</font></p>
+               
               
     </center>
-    </fieldset>
-   
-    <br>
-    <br>
-</div>
-    <br>
-{include file='footer.tpl'}
-
-
+                </section>
+                </div>
+        </div>
+</section>				
+  {include file='footer.tpl'}
 
 

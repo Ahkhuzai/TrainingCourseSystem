@@ -71,7 +71,8 @@
         <input type="submit" value='طباعة'  name = "print" id='print' class='btn'/>
     </form>
 </center>
-</section>          
+</section>    
+            </div></div>
 </section>              
   {include file='footer.tpl'}
 

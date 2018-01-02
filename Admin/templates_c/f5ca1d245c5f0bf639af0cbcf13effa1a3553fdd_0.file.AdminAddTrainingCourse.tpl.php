@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-12-31 07:34:26
+/* Smarty version 3.1.30, created on 2018-01-02 09:02:23
   from "C:\xampp\htdocs\rtp\Admin\templates\AdminAddTrainingCourse.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a4884f250f471_02407087',
+  'unifunc' => 'content_5a4b3c8fb3c1e4_64471311',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'f5ca1d245c5f0bf639af0cbcf13effa1a3553fdd' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rtp\\Admin\\templates\\AdminAddTrainingCourse.tpl',
-      1 => 1514617556,
+      1 => 1514880139,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a4884f250f471_02407087 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a4b3c8fb3c1e4_64471311 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('title'=>'بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'), 0, false);
 ?>
 
@@ -100,9 +100,9 @@ $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_s
             <input type="hidden" id="p_id" name="p_id"/> 
             <br>
             <br>
-
-             <input type="submit" value="إضافة"  name = "addTraining" id='addTraining' class='btn'/> 
             <input type="submit" value="عودة"  name = "back" id='back' class='btn'/>
+            <input type="submit" value="إضافة"  name = "addTraining" id='addTraining' class='btn'/> 
+           
            
             <input type="hidden" id="stime" name="stime"/>
             <input type="hidden" id="etime" name="etime"/>
@@ -112,10 +112,18 @@ $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_s
             <br>
                <p><font color="red"><?php echo $_smarty_tpl->tpl_vars['msg']->value;?>
 </font></p>
-               </section>          
+    </center>
+    
+                </section>   
+            </div>
+        </div>
             </section>              
   <?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
+
+
+
+
 
 
 

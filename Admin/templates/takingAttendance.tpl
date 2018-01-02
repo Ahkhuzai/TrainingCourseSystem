@@ -6,7 +6,7 @@
         <div class="spotlight">
             <div class="content align-right">
                 <section class="main">
-                    
+                     <h3><font color="red">{$msg}</font></h3>
     <h2> اسم الدورة: </h2>  
     <p>{$tname}</p>
     <h2> مقدم الدورة: </h2>  
@@ -18,11 +18,15 @@
         <p><font color="green"></font></p>
         
         <form action='takingAttendance.php' method='POST' >
-            <input type="submit" value="تسجيل"  name = "in" id='in' class='btn'/> 
+            <input type="password" id="pass" name="pass" />
+            <input type="submit" value="تسجيل"  name = "in" id='in' class='btn' /> 
         </form>
             <br>            
     </center>
-                   </section>          
+         
+                   </section> 
+       </div>
+        </div>
             </section>              
   {include file='footer.tpl'}
 

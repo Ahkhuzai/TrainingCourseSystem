@@ -7,9 +7,10 @@
         <div class="spotlight">
             <div class="content align-right">
                 <section class="main">
-                        <h2>اعتماد الدورة التدريبية</h2>
+                       
     
     <center>
+         <h2>اعتماد الدورة التدريبية</h2>
         <p><font color="green">{$added}</font></p>
         <form action='Single_Admin_tcApprove.php' method='POST' enctype="multipart/form-data">
              <label> مقدم الدورة : {$trname}</label>
@@ -82,8 +83,10 @@
                <p><font color="red">{$msg}</font></p>
               
     </center>
-</center>
-                </section>          
+        
+                </section>  
+                   </div>
+        </div>
             </section>              
   {include file='footer.tpl'}
 

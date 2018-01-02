@@ -1,7 +1,13 @@
 {include file='headerq.tpl' title='بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'}
 
 <script type="text/javascript" src="js/Single_Admin_Trainee.js"></script>
-    <center>
+ <!-- Introduction -->
+    <section id="intro" class="main">
+        <div class="spotlight">
+            <div class="content align-right">
+                <section class="main">
+  
+ 
         <h3>اسم المتدرب</h3>
         <p>{$name}</p>
         <h3>الكلية </h3>
@@ -16,6 +22,7 @@
         <p>{$email}</p>    
         <h3>حالة التسجيل</h3>
         <p>{$reg_status}</p>
+        <center>
     <h2>قائمة الدورات</h2>
     <div  id='tcList'>      
     </div>
@@ -24,10 +31,16 @@
         <input type="submit" value="عودة"  name = "back" id='back' class='btn' /> 
     </form>
     </center>
-    </br>
-</div>
-    <br>
-{include file='footer.tpl'}
+                </section>      
+            </div>
+        </div>
+            </section>              
+  {include file='footer.tpl'}
+
+
+
+
+
 
 
 

@@ -6,7 +6,7 @@ $smarty=new Smarty();
 $tcMan=new TrainingCourseModule();
 $trMan=new RegistrationModule();
 session_start(); 
-//error_reporting(0);
+error_reporting(0);
 if (!isset($_SESSION['user_id'])) {
     $smarty->assign('msg','غير مصرح لك بالدخول للنظام');
     $smarty->display("unAuthorized.tpl");

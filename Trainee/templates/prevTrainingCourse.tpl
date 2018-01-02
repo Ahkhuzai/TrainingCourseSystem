@@ -12,7 +12,9 @@
                     </div> 
 
     </center>
-                    </section>          
+                    </section> 
+                                    </div>
+                                </div>
                             </section>  
     <br>
     <br>

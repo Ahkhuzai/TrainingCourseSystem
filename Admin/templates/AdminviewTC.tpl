@@ -20,7 +20,10 @@
         <input type="submit" value="عودة"  name = "back" id='back' class='btn' /> 
     </form>
 </center>
-                </section>          
+           
+                </section>      
+ </div>
+        </div>
             </section>              
   {include file='footer.tpl'}
 

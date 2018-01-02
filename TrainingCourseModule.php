@@ -204,25 +204,30 @@ class TrainingCourseModule {
         $totalPlace=0;
         $totalorgnization=0;
         $totalPresentation=0;
-        for($j=0;$j<count($result);$j++)
+        if($result)
         {
-            $totalPresenter+=$result[$j]['presenter_rate'];
-            $totalProgram+=$result[$j]['training_program_rate'];
-            $totalPlace+=$result[$j]['place_rate'];
-            $totalPresentation+=$result[$j]['presentation_rate'];
-            $totalorgnization+=$result[$j]['organizing_rate'];
-            $comments[$j]=$result[$j]['comments'];
+            for($j=0;$j<count($result);$j++)
+            {
+                $totalPresenter+=$result[$j]['presenter_rate'];
+                $totalProgram+=$result[$j]['training_program_rate'];
+                $totalPlace+=$result[$j]['place_rate'];
+                $totalPresentation+=$result[$j]['presentation_rate'];
+                $totalorgnization+=$result[$j]['organizing_rate'];
+                $comments[$j]=$result[$j]['comments'];
+            }
+            $singleAvg['comments']=$comments;
+            $singleAvg['presenter_rate']=$totalPresenter/count($result);
+            $singleAvg['presenter_total_rate']=$totalPresenter;
+            $singleAvg['voter_count']=count($result);
+            $singleAvg['training_program_rate']=$totalProgram/count($result);
+            $singleAvg['place_rate']=$totalPlace/count($result);
+            $singleAvg['presentation_rate']=$totalPresentation/count($result);
+            $singleAvg['organizing_rate']=$totalorgnization/count($result);
+            $singleAvg['totalRate']=( $singleAvg['organizing_rate']+$singleAvg['presentation_rate']+$singleAvg['place_rate']+$singleAvg['training_program_rate']+$singleAvg['presenter_rate'])/5; 
+            return $singleAvg;
         }
-        $singleAvg['comments']=$comments;
-        $singleAvg['presenter_rate']=$totalPresenter/count($result);
-        $singleAvg['presenter_total_rate']=$totalPresenter;
-        $singleAvg['voter_count']=count($result);
-        $singleAvg['training_program_rate']=$totalProgram/count($result);
-        $singleAvg['place_rate']=$totalPlace/count($result);
-        $singleAvg['presentation_rate']=$totalPresentation/count($result);
-        $singleAvg['organizing_rate']=$totalorgnization/count($result);
-        $singleAvg['totalRate']=( $singleAvg['organizing_rate']+$singleAvg['presentation_rate']+$singleAvg['place_rate']+$singleAvg['training_program_rate']+$singleAvg['presenter_rate'])/5; 
-        return $singleAvg;
+        else
+            return 0;
     }
 
 
@@ -316,7 +321,13 @@ class TrainingCourseModule {
         return $result;
     }
     
-    
+    //done
+    public function getTraineeAccepted($te_id,$sid)
+    {
+        $tReg=new RegistrationRepo();
+        $result=$tReg->fetchByQuery('SELECT * FROM `registration` WHERE `usr_id`='.$te_id.' AND `registration_status`='.$sid);
+        return $result;
+    }
     
     //done
     public function getTrainingCourseForRateByUserID($usrID)
@@ -373,6 +384,28 @@ class TrainingCourseModule {
         
     }
     
+    //done
+    public function getTrainingCourse()
+    {
+        $tcMan = new TrainingCourseRepo();
+        $result = $tcMan->fetchAll();
+        $result=array_values($result);
+        if($result)
+            return $result;
+        else 
+            return false;
+    }
+    
+    //done
+    public function getTotalTCPresent($tc_id)
+    {
+        $ttMan = new TimetableRepo();
+        $result = $ttMan->fetchByQuery("SELECT * FROM Timetable where tc_id = $tc_id and status = 9");
+        if($result)
+            return count($result);
+        else 
+            return 0; 
+    }
     
     //////////////////////////////////////////
     public function getAvailableProgram($te_id)

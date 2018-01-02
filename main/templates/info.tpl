@@ -8,6 +8,6 @@
 										<img  src="../images/info.jpg" style="width:90%">
 									</section>			
 							</section>				
-  {include file='footer.tpl'}
+  {include file='footerq.tpl'}
 
 

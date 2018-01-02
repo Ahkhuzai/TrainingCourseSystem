@@ -2,31 +2,25 @@
 {include file='header.tpl' title='بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'}
 
 <script type="text/javascript" src='js/AvailableTrainingCourse.js'></script>
-	
-    <center>
-        <div id='tabs'>
-            <ul>
-                <li>البرامج التدريبية</li>
-                <li>الدورات التدريبية</li>
-            </ul>
-            <div>
-                </br>
-                <center>                   
-                    <div  id='AvailableProgram'>      
-                    </div>                       
-                </center>
-            </div>
-            <div>   
-                </br>
+<!-- Introduction -->
+<section id="intro" class="main">
+        <div class="spotlight">
+                <div class="content align-right">
+                <section class="main">	
+    <center>    
+        <h2>الدورات التدريبية</h2>
+            
                 <center> 
                     <div  id='AvailableTC'>      
                     </div>  
                 </center>
-            </div>   
-        </div>  
+         
+      
     </center>
-    <br>
-    <br>
-    {include file='footer.tpl'}
+                </section>
+                </div>
+        </div>
+</section>				
+  {include file='footer.tpl'}
 
 

@@ -100,6 +100,7 @@ $(document).ready(function () {
             { name: 'pid',type: 'string' },
             { name: 'abstract',type: 'string' },
             { name: 'goals',type: 'string' },
+             { name: 'p_counts',type: 'number' },
 
             ],
         url: "getTrainingCourse.php"
@@ -115,6 +116,7 @@ $(document).ready(function () {
         columns: [
             { text: 'اسم الدورة', datafield: 'name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'اسم البرنامج', datafield: 'pname',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'عدد مرات اقامة الدورة ', datafield: 'p_counts',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             ]
     });
 $("#tcList").on('rowselect', function (event) {
@@ -124,6 +126,7 @@ $("#tcList").on('rowselect', function (event) {
         $("#abstract").val(event.args.row.abstract);
         $("#Goals").val(event.args.row.goals);
         $("#pid").val(event.args.row.pid);
+ 
 
 
         });           

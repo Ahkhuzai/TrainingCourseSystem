@@ -1,4 +1,5 @@
  $(document).ready(function () {
-    $("#in").jqxButton({ width: '10%', height: '35px'});
+    $("#in").jqxButton({height: '35px',width:'100%'});
+      $("#pass").jqxPasswordInput({ placeHolder: "كلمة المرور", minLength: 1, rtl:true});
    
         });

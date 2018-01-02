@@ -2,12 +2,15 @@
 
 <script type="text/javascript" src="js/addTrainingCourse.js"></script>
 
-    
-        <fieldset style="margin:0 auto; width:75%" dir='rtl'>
-            <br>
+ <!-- Introduction -->
+<section id="intro" class="main">
+        <div class="spotlight">
+                <div class="content align-right">
+                <section class="main">
     <legend>لطلب تقديم دورة تدريبية, الرجاء إكمال النموذج التالي:</legend>
     
     <center>
+        <p><font color="red">{$msg}</font></p>
         <p><font color="green">{$added}</font></p>
         <form action='addTrainingCourse.php' method='POST' enctype="multipart/form-data">
              
@@ -52,16 +55,11 @@
             <input type="hidden" id="etime" name="etime"/>
             </form>
             <br>
-               <p><font color="red">{$msg}</font></p>
+               
               
     </center>
-    </fieldset>
-   
-    <br>
-    <br>
-</div>
-    <br>
-{include file='footer.tpl'}
-
-
-
+  </section>
+                </div>
+        </div>
+</section>				
+  {include file='footer.tpl'}

@@ -1,10 +1,16 @@
 {include file='header.tpl' title='بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'}
 
 <script type="text/javascript" src="js/SingleRegisterAccepted.js"></script>
-    <center>
-    <fieldset style="width:70%; margin:0 auto;">      
-   <legend align="right">بيانات الدورة</legend>
-   <center>
+<!-- Introduction -->
+<section id="intro" class="main">
+        <div class="spotlight">
+                <div class="content align-right">
+                <section class="main">     
+
+  
+            <center>
+                    <h2>بيانات الدورة</h2>
+ 
     <h3><font color="green">{$added}</font></h3>
     <p><font color="red">{$msg}</font></p>
     </center>
@@ -31,19 +37,20 @@
     <p><a href="{$url}" >  من هنا</a> </p>
     </br>
     </br>    
+    <center>
     <form action="SingleRegister.php" method="POST">
         <input type="submit" value="عودة"  name = "back" id='back' class='btn' /> 
         <input type="submit" value='طباعة طلب التسجيل'  name = "printRegister" id='printRegister' class='btn'/>
     </form>
-    </br>
-    <br>
-    <br>
-    </fieldset>
-    </br>
-    </br>
-</div>
-    <br>
-{include file='footer.tpl'}
+    </center>
+                 </section>
+                </div>
+        </div>
+</section>				
+  {include file='footer.tpl'}
+
+
+
 
 
 

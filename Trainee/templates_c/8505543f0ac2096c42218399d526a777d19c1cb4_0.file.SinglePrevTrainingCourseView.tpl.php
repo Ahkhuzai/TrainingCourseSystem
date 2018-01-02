@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-01-01 07:45:01
+/* Smarty version 3.1.30, created on 2018-01-02 10:03:06
   from "C:\xampp\htdocs\rtp\Trainee\templates\SinglePrevTrainingCourseView.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a49d8edc8dfb5_89773648',
+  'unifunc' => 'content_5a4b4acacbb318_25894232',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '8505543f0ac2096c42218399d526a777d19c1cb4' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rtp\\Trainee\\templates\\SinglePrevTrainingCourseView.tpl',
-      1 => 1514617558,
+      1 => 1514882655,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a49d8edc8dfb5_89773648 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a4b4acacbb318_25894232 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('title'=>'بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'), 0, false);
 ?>
 
@@ -30,10 +30,14 @@ $_smarty_tpl->_subTemplateRender("file:header.tpl", $_smarty_tpl->cache_id, $_sm
 <?php echo '<script'; ?>
  type="text/javascript" src="js/SinglePrevTrainingCourseView.js"><?php echo '</script'; ?>
 >
-    <center>
-    <fieldset style="width:70%; margin:0 auto;">      
-   <legend align="right">بيانات الدورة</legend>
+<!-- Introduction -->
+<section id="intro" class="main">
+        <div class="spotlight">
+                <div class="content align-right">
+                <section class="main">     
+
    <center>
+          <h2>بيانات الدورة</h2>
     <h3><font color="green"><?php echo $_smarty_tpl->tpl_vars['added']->value;?>
 </font></h3>
     <p><font color="red"><?php echo $_smarty_tpl->tpl_vars['msg']->value;?>
@@ -78,20 +82,20 @@ $_smarty_tpl->_subTemplateRender("file:header.tpl", $_smarty_tpl->cache_id, $_sm
     </br> 
     <br>
     <br>
+    <center>
     <form action="SinglePrevTrainingCourseView.php" method="POST">
         <input type="submit" value="عودة"  name = "back" id='back' class='btn' />
         <input type="submit" value='طباعة الشهادة'  name = "print" id='print' class='btn'   />        
     </form>
-    </br>
-    <br>
-    <br>
-    </fieldset>
-    </br>
-    </br>
-</div>
-    <br>
-<?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+    </center>
+                </section>
+                </div>
+        </div>
+</section>				
+  <?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
+
+
 
 
 

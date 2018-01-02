@@ -70,9 +70,9 @@
             <input type="hidden" id="p_id" name="p_id"/> 
             <br>
             <br>
-
-             <input type="submit" value="إضافة"  name = "addTraining" id='addTraining' class='btn'/> 
             <input type="submit" value="عودة"  name = "back" id='back' class='btn'/>
+            <input type="submit" value="إضافة"  name = "addTraining" id='addTraining' class='btn'/> 
+           
            
             <input type="hidden" id="stime" name="stime"/>
             <input type="hidden" id="etime" name="etime"/>
@@ -81,9 +81,17 @@
         
             <br>
                <p><font color="red">{$msg}</font></p>
-               </section>          
+    </center>
+    
+                </section>   
+            </div>
+        </div>
             </section>              
   {include file='footer.tpl'}
+
+
+
+
 
 
 

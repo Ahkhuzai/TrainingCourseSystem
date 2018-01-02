@@ -7,8 +7,9 @@
             <div class="content align-right">
                 <section class="main">
   
-   <h2>بيانات الدورة</h2>
+  
    <center>
+        <h2>بيانات الدورة</h2>
         <h3><font color="green">{$added}</font></h3>
         <p><font color="red">{$msg}</font></p>
     </center>
@@ -35,9 +36,12 @@
         <input type="submit" value="قبول الطلب"  name = "accept" id='accept' class='btn' onclick="return confirm('هل انت متأكدمن رغبتك بقبول الطلب')"/>
     </form>
     </center>
-     </section>          
+         
+     </section>
+       </div>
+        </div>
  </section>   
-<script type="text/javascript" src="js/Single_Admin_tcRegister.js"></script>           
+         
   {include file='footer.tpl'}
 
 

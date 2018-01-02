@@ -24,8 +24,8 @@ $(document).ready(function () {
             { text: 'اسم المدرب', datafield: 'ar_name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'الكلية التابع لها', datafield: 'department',columntype: 'textbox',filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'التخصص', datafield: 'major',columntype: 'textbox',filtertype: 'checkedlist',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'التقييم العام للمدرب', datafield: 'totalRate',columntype: 'textbox', filtertype: 'checkedlist',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'عدد الدورات المقدمة',datafield: 'tcCounts',filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer }
+            { text: 'التقييم العام للمدرب', datafield: 'total_rate',columntype: 'textbox', filtertype: 'checkedlist',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'عدد الدورات المقدمة',datafield: 'tc_counts',filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer }
             ]
     });
         $("#trList").on('rowselect', function (event) {

@@ -36,9 +36,13 @@
             </form>
             <br>            
     </center>
-                   </section>          
+                </section>   
+            </div>
+        </div>
             </section>              
   {include file='footer.tpl'}
+
+
 
 
 

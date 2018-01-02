@@ -2,9 +2,12 @@
 
 <script type="text/javascript" src="js/becomeTrainer.js"></script>
 
-  
-    <fieldset style="margin:0 auto; width:75%" dir='rtl'>
-    <legend>الرجاء تعبئة البيانات التالية:</legend>
+<!-- Introduction -->
+<section id="intro" class="main">
+        <div class="spotlight">
+                <div class="content align-right">
+                <section class="main">
+    <h3>الرجاء تعبئة البيانات التالية</h3>
     
     <center> 
         <p><font color="green">{$added}</font></p>  
@@ -30,13 +33,11 @@
         </br>
           </form>
     </center>
-  
-    </fieldset>
-  
-    <br>
-    <br>
-</div>
-    <br>
-    {include file='footer.tpl'}
+                  </section>
+                </div>
+        </div>
+</section>				
+  {include file='footer.tpl'}
+
 
 

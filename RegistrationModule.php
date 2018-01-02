@@ -23,6 +23,7 @@ require_once '../DAL/TrainingCourseRepo.php';
 require_once '../DAL/RegistrationRepo.php';
 require_once '../DAL/BlockedUserRepo.php';
 require_once '../TrainingCourseModule.php';
+require_once '../DAL/TimetableRepo.php';
 class RegistrationModule {    
 
     //done
@@ -575,6 +576,46 @@ class RegistrationModule {
             $result[$i]['status']= $status['status_arabic'];
         }
         return $result;
+    }
+    
+    //DONE 
+    public function isTCAttendanceOpen($tt_id)
+    {
+        $ttMan= new TimetableRepo($tt_id);
+        $result = $ttMan->fetchByQuery("SELECT * FROM timetable WHERE `start_date`=CURRENT_DATE AND id=$tt_id and (`status`=10 or `status` = 11)");
+        if($result)
+        {
+            $start_at = $result[0]['start_at'];
+            $duration = $result[0]['duration'];
+            
+            $today = time();
+            $now = date('h:i:s A', strtotime($today));
+            
+            $endAt = date('h:i:s A', strtotime($start_at . " +$duration hours")); 
+            
+      
+            if ($now > $start_at && $now <$endAt)
+                return 0; 
+            else if ($now > $endAt)
+                return 1; 
+            else if ($now <$start_at) 
+                return -1; 
+        }
+        else 
+            return false;
+    }
+    
+    //done 
+    public function takeAttendance()
+    {
+        require_once '../DAL/AttendanceRepo.php';
+        $attMan = new AttendanceRepo();
+        //check if already attended 
+        $result = $attMan->fetchByQuery("SELECT * FROM attendance where user_id = $user_id and tt_id= $tt_id");
+        if($result)
+            return $result;
+        else 
+            return $result = $attMan->save (0, $UsrId, $ttId, $attend_time);
     }
 }
 ?>

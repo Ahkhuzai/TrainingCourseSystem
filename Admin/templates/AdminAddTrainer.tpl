@@ -1,10 +1,12 @@
 {include file='headerq.tpl' title='بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'}
 
 <script type="text/javascript" src="js/AdminAddTrainer.js"></script>
-
-  
-    <fieldset style="margin:0 auto; width:75%" dir='rtl'>
-    <legend>الرجاء تعبئة البيانات التالية:</legend>
+<!-- Introduction -->
+    <section id="intro" class="main">
+        <div class="spotlight">
+            <div class="content align-right">
+                <section class="main">
+    <h2>الرجاء تعبئة البيانات التالية:</h2>
     
     <center> 
         <p><font color="green">{$added}</font></p>  
@@ -31,20 +33,20 @@
          
         </div>
            <p><font color="red">{$msg}</font></p> 
+           <input type='submit' id='back' name='back'  value="عودة"  >
         <input type='submit' id='AddTrainer' name='AddTrainer'  value="اضافة مدرب"  >
-        <input type='submit' id='back' name='back'  value="عودة"  >
+        
         </br>
         </br>
           </form>
     
    
     </center>
-  
-    </fieldset>
-  
-    <br>
-    <br>
-</div>
-    <br>
-    {include file='footer.tpl'}
+                </section>   
+            </div>
+        </div>
+            </section>              
+  {include file='footer.tpl'}
+
+
 

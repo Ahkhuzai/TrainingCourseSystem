@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-01-01 06:25:34
+/* Smarty version 3.1.30, created on 2018-01-02 10:01:55
   from "C:\xampp\htdocs\rtp\Trainer\templates\addHandoutOnly.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a49c64e1f6bd2_31123816',
+  'unifunc' => 'content_5a4b4a83e40da1_78942469',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '940152357160e647ef17170b140e89575d5153de' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rtp\\Trainer\\templates\\addHandoutOnly.tpl',
-      1 => 1514617584,
+      1 => 1514883490,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a49c64e1f6bd2_31123816 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a4b4a83e40da1_78942469 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('title'=>'بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'), 0, false);
 ?>
 
@@ -30,12 +30,18 @@ $_smarty_tpl->_subTemplateRender("file:header.tpl", $_smarty_tpl->cache_id, $_sm
 <?php echo '<script'; ?>
  type="text/javascript" src="js/addHandoutOnly.js"><?php echo '</script'; ?>
 >  
-<fieldset style="margin:0 auto; width:75%" dir='rtl'>
-    <br>
-    <legend>لطلب تقديم دورة تدريبية, الرجاء إكمال النموذج التالي:</legend>
+<!-- Introduction -->
+<section id="intro" class="main">
+        <div class="spotlight">
+                <div class="content align-right">
+                <section class="main">  
+
+    <h3>لطلب تقديم دورة تدريبية, الرجاء إكمال النموذج التالي:</h3>
     <center>
     <p><font color="green"><?php echo $_smarty_tpl->tpl_vars['added']->value;?>
 </font></p>
+       <p><font color="red"><?php echo $_smarty_tpl->tpl_vars['msg']->value;?>
+</font></p>   
     <br>
     <form action='addHandoutOnly.php' method='POST' enctype="multipart/form-data">
         <input type="text" id="Tname" name="Tname" />
@@ -65,16 +71,17 @@ $_smarty_tpl->_subTemplateRender("file:header.tpl", $_smarty_tpl->cache_id, $_sm
         <input type="submit" value="إضافة"  name = "addHandout" id='addHandout' class='btn'/> 
     </form>
     <br>
-    <p><font color="red"><?php echo $_smarty_tpl->tpl_vars['msg']->value;?>
-</font></p>     
+   
     </center>
-    </fieldset>
-    <br>
-    <br>
-</div>
-    <br>
-    <?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+           </section>
+                </div>
+        </div>
+</section>				
+  <?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
+
+
+
 
 
 <?php }

@@ -18,6 +18,10 @@
 			</form>   
 			</div>
 			    </br>
-	</section>			
-</section>				
+                </section>   
+            </div>
+        </div>
+            </section>              
   {include file='footer.tpl'}
+
+

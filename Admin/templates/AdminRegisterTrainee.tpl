@@ -1,16 +1,22 @@
 {include file='headerq.tpl' title='بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'}
 
 <script type="text/javascript" src="js/AdminRegisterTrainee.js"></script>
-    <fieldset style="margin:0 auto; width:75%" dir='rtl'>
-    <legend>الرجاء تعبئة البيانات التالية:</legend>
+   <!-- Introduction -->
+    <section id="intro" class="main">
+        <div class="spotlight">
+            <div class="content align-right">
+                <section class="main">
+    
     
     <center> 
+        <h2>الرجاء تعبئة البيانات التالية:</h2>
         <p><font color="green">{$added}</font></p>  
+
         </br>
         <form action="AdminRegisterTrainee.php" method="POST">
         <input type='text' id='trainee' name='trainee' />
         <input type='submit' id='search' name='search'  value='بحث'/>
-        <center>
+   
         <div id="info" name="info" style="display:{$display}" >
             <br>
         <h3>اسم المتدرب</h3>
@@ -32,21 +38,18 @@
         <div id="TraineeTC" > </div>
         </div>
     <br>
-    </center>
+    
    <p><font color="red">{$msg}</font></p>    
 
     <br>
     <br>
     <input type="submit" value="عودة"  name = "back" id='back' class='btn' /> 
     </form>
-       </fieldset>
-    </center>
-    </br>
-</div>
-    <br>
-{include file='footer.tpl'}
+   </center>
+                </section>   
+            </div>
+        </div>
+            </section>              
+  {include file='footer.tpl'}
 
-
-
- 
 

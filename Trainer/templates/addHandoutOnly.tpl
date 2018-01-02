@@ -1,11 +1,16 @@
 {include file='header.tpl' title='بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'}
 
 <script type="text/javascript" src="js/addHandoutOnly.js"></script>  
-<fieldset style="margin:0 auto; width:75%" dir='rtl'>
-    <br>
-    <legend>لطلب تقديم دورة تدريبية, الرجاء إكمال النموذج التالي:</legend>
+<!-- Introduction -->
+<section id="intro" class="main">
+        <div class="spotlight">
+                <div class="content align-right">
+                <section class="main">  
+
+    <h3>لطلب تقديم دورة تدريبية, الرجاء إكمال النموذج التالي:</h3>
     <center>
     <p><font color="green">{$added}</font></p>
+       <p><font color="red">{$msg}</font></p>   
     <br>
     <form action='addHandoutOnly.php' method='POST' enctype="multipart/form-data">
         <input type="text" id="Tname" name="Tname" />
@@ -35,12 +40,14 @@
         <input type="submit" value="إضافة"  name = "addHandout" id='addHandout' class='btn'/> 
     </form>
     <br>
-    <p><font color="red">{$msg}</font></p>     
+   
     </center>
-    </fieldset>
-    <br>
-    <br>
-</div>
-    <br>
-    {include file='footer.tpl'}
+           </section>
+                </div>
+        </div>
+</section>				
+  {include file='footer.tpl'}
+
+
+
 

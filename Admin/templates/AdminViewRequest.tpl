@@ -5,9 +5,11 @@
         <div class="spotlight">
             <div class="content align-right">
                 <section class="main">
+                    <center>
                     <h2>
                     استعراض الطلبات
                     </h2>
+                    </center>
                 <center>
                     <div id='tabs'>
                         <ul>
@@ -38,7 +40,9 @@
                         </div>  
                     </div>  
                 </center>
-    </section>          
+    </section>   
+            </div>
+        </div>
 </section>              
   {include file='footer.tpl'}
 

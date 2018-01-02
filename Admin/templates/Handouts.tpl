@@ -9,7 +9,9 @@
                         <div  id='hoRequest'>      
                         </div>  
                     </center>
-                </section>          
+                </section>      
+            </div>
+        </div>
             </section>              
   {include file='footer.tpl'}
 

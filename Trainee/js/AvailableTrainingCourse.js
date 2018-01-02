@@ -1,47 +1,45 @@
-    $(document).ready(function () {
-            $('#tabs').jqxTabs({ width:'75%', height: 200, position: 'top', rtl:'true'});     
-        });
+
         
-    $(document).ready(function () {
-    var source ={
-        datatype: "json",
-        datafields: [{ name: 'id',type: 'number' },
-            { name: 'name',type: 'string' },
-            { name: 'hours',type: 'number' }],
-        url: "getAvailableProgram.php"
-    };
-    $("#AvailableProgram").jqxGrid({
-        source: source,
-        rtl:true,
-        autorowheight: true,
-        autoheight: true,
-        showfilterrow: true,
-        filterable: true,
-        width:'75%',                                                         
-        columns: [
-            { text: 'اسم البرنامج', datafield: 'name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: ' عدد الساعات الكلية للبرنامج', datafield: 'hours',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },        
-        ]
-    });
-        $("#AvailableProgram").on('rowselect', function (event) {
-        var PID = event.args.row.id;   
-        $.ajax({
-        type : 'GET',
-        url : 'setSession.php',
-        data: {
-            program_id :PID,
-            page: 'SingleProgram'
-              },
-        success : function(data){
-          ;
-        },
-        error : function(XMLHttpRequest, textStatus, errorThrown) 
-        {alert ("Error Occured");}
-            });       
-        var url="SingleProgram.php";
-        window.location=url;     
-        });              
-});
+//    $(document).ready(function () {
+//    var source ={
+//        datatype: "json",
+//        datafields: [{ name: 'id',type: 'number' },
+//            { name: 'name',type: 'string' },
+//            { name: 'hours',type: 'number' }],
+//        url: "getAvailableProgram.php"
+//    };
+//    $("#AvailableProgram").jqxGrid({
+//        source: source,
+//        rtl:true,
+//        autorowheight: true,
+//        autoheight: true,
+//        showfilterrow: true,
+//        filterable: true,
+//        width:'75%',                                                         
+//        columns: [
+//            { text: 'اسم البرنامج', datafield: 'name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+//            { text: ' عدد الساعات الكلية للبرنامج', datafield: 'hours',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },        
+//        ]
+//    });
+//        $("#AvailableProgram").on('rowselect', function (event) {
+//        var PID = event.args.row.id;   
+//        $.ajax({
+//        type : 'GET',
+//        url : 'setSession.php',
+//        data: {
+//            program_id :PID,
+//            page: 'SingleProgram'
+//              },
+//        success : function(data){
+//          ;
+//        },
+//        error : function(XMLHttpRequest, textStatus, errorThrown) 
+//        {alert ("Error Occured");}
+//            });       
+//        var url="SingleProgram.php";
+//        window.location=url;     
+//        });              
+//});
 
 //////////////////////////////
 

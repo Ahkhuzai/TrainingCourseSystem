@@ -35,7 +35,10 @@
         <input type="submit" value="قبول الطلب"  name = "accept" id='accept' class='btn' onclick="return confirm('هل انت متأكدمن رغبتك بقبول الطلب')"/>
     </form>
 </center>
-                </section>          
+          
+                </section> 
+      </div>
+        </div>
             </section>   
 <script type="text/javascript" src="js/Single_Admin_tcRegister.js"></script>           
   {include file='footer.tpl'}

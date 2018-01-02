@@ -1,5 +1,5 @@
 <?php
-//error_reporting(0);
+error_reporting(0);
 session_start();
 require_once '../RegistrationModule.php';
 require_once '../TrainingCourseModule.php';
@@ -15,12 +15,12 @@ if($result)
         $totalTc=$tcMan->getTotalTrainerTC($result[$i]['user_id']);
         
         if ($totalTc) {
-            $result[$i]['tcCounts'] = count($totalTc);
+            $result[$i]['tc_counts'] = count($totalTc);
             $totalrate= $tcMan->getTotalTrainerRate($totalTc);
-            $result[$i]['totalRate'] =$totalrate;
+            $result[$i]['total_rate'] =$totalrate;
         } else {
-            $result[$i]['tcCounts'] = 0;
-            $result[$i]['totalRate']=0;
+            $result[$i]['tc_counts'] = 0;
+            $result[$i]['total_rate']=0;
         }
     }
 }

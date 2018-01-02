@@ -6,8 +6,9 @@
         <div class="spotlight">
             <div class="content align-right">
                 <section class="main">    
-   <h2>بيانات الدورة</h2>
+
    <center>
+          <h2>بيانات الدورة</h2>
     <h3><font color="green">{$added}</font></h3>
     <p><font color="red">{$msg}</font></p>
     </center>
@@ -46,9 +47,11 @@
         <input type="submit" value="عودة"  name = "back" id='back' class='btn' /> 
         <input type="submit" value='طباعة'  name = "print" id='print' class='btn'/>
     </form>
-</center>
-</section>          
-</section>              
+                    </center>
+                </section>      
+            </div>
+        </div>
+            </section>              
   {include file='footer.tpl'}
 
 

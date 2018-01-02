@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-01-01 06:28:54
+/* Smarty version 3.1.30, created on 2018-01-02 10:01:46
   from "C:\xampp\htdocs\rtp\Trainer\templates\addTrainingCourse.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a49c71681aaa9_25015426',
+  'unifunc' => 'content_5a4b4a7a771a18_63827327',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '8ead68fcde514a77f8f00ec7e62ddf108994ea0a' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rtp\\Trainer\\templates\\addTrainingCourse.tpl',
-      1 => 1514617584,
+      1 => 1514883557,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a49c71681aaa9_25015426 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a4b4a7a771a18_63827327 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('title'=>'بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'), 0, false);
 ?>
 
@@ -31,12 +31,16 @@ $_smarty_tpl->_subTemplateRender("file:header.tpl", $_smarty_tpl->cache_id, $_sm
  type="text/javascript" src="js/addTrainingCourse.js"><?php echo '</script'; ?>
 >
 
-    
-        <fieldset style="margin:0 auto; width:75%" dir='rtl'>
-            <br>
+ <!-- Introduction -->
+<section id="intro" class="main">
+        <div class="spotlight">
+                <div class="content align-right">
+                <section class="main">
     <legend>لطلب تقديم دورة تدريبية, الرجاء إكمال النموذج التالي:</legend>
     
     <center>
+        <p><font color="red"><?php echo $_smarty_tpl->tpl_vars['msg']->value;?>
+</font></p>
         <p><font color="green"><?php echo $_smarty_tpl->tpl_vars['added']->value;?>
 </font></p>
         <form action='addTrainingCourse.php' method='POST' enctype="multipart/form-data">
@@ -82,21 +86,15 @@ $_smarty_tpl->_subTemplateRender("file:header.tpl", $_smarty_tpl->cache_id, $_sm
             <input type="hidden" id="etime" name="etime"/>
             </form>
             <br>
-               <p><font color="red"><?php echo $_smarty_tpl->tpl_vars['msg']->value;?>
-</font></p>
+               
               
     </center>
-    </fieldset>
-   
-    <br>
-    <br>
-</div>
-    <br>
-<?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+  </section>
+                </div>
+        </div>
+</section>				
+  <?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
-
-
-
 
 <?php }
 }

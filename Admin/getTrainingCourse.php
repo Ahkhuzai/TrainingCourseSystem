@@ -7,9 +7,9 @@ $tcMan = new TrainingCourseModule();
 $result=$tcMan->getTrainingCourse();
 
 for($i=0;$i<count($result);$i++)
-{
+{   $tc_id=$result[$i]['id'];
+    $result[$i]['p_counts']=$tcMan->getTotalTCPresent($tc_id);
     if ($result[$i]['pid'] == NULL) {
-
         $result[$i]['pname'] = 'لا تتبع برنامج محدد';
     } else {
 

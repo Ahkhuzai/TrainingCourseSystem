@@ -5,13 +5,15 @@
         <div class="spotlight">
             <div class="content align-right">
                 <section class="main">
-                    <h2> اعادة تقديم دورة سابقة </h2>
+                    
                     <center>
+                        <h2> اعادة تقديم دورة سابقة </h2>
                          <p><font color="red">{$msg}</font></p>
                     <div id='tcList' ></div>
+                    </center>
                     <form action="rePresentTC.php" method="POST" enctype="multipart/form-data">
                     <div id='info' style="display:none" >           
-                        
+                    <center>
                         <label>ملخص الدورة</label>
 
                         <input type='text' id='abstract' name='abstract' />
@@ -64,11 +66,15 @@
             <input type="hidden" id="stime" name="stime"/>
             <input type="hidden" id="etime" name="etime"/>
             <input type="hidden" id="start_at" name="start_at"/>
+                    </center>
             </form>
 
                     </div>
-                </center>
-                </section>          
+                         </section> 
+                        </div>
+        </div>
+               
+                        
             </section>              
   {include file='footer.tpl'}
 
