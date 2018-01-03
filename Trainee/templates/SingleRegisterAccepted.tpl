@@ -40,6 +40,7 @@
     <center>
     <form action="SingleRegister.php" method="POST">
         <input type="submit" value="عودة"  name = "back" id='back' class='btn' /> 
+        <input type="submit" value='الاعتذار عن الحضور'  name = "execude" id='execude' class='btn'/>
         <input type="submit" value='طباعة طلب التسجيل'  name = "printRegister" id='printRegister' class='btn'/>
     </form>
     </center>

@@ -14,6 +14,7 @@ for($i=0;$i<count($result);$i++)
         $result[$i]['certificate_status']="اعتمدت";
     else
         $result[$i]['certificate_status']="لم تعتمد";
+    
 echo json_encode($result);
 
 if (isset($_GET['update']))

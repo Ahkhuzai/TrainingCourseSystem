@@ -19,7 +19,7 @@ for ($i = 0; $i < count($result); $i++) {
         $status = $trMan->getStatus($result[$i]['registration_status']);
         $tcResult[$i]['registration_status'] = $status['status_arabic'];
         //
-    if($result[$i]['attendance_status']==12 || $result[$i]['attendance_status'] ==4)
+   if($result[$i]['attendance_status']==12 || $result[$i]['attendance_status'] ==4|| $result[$i]['attendance_status'] ==5)
     {   
         $status = $trMan->getStatus($result[$i]['attendance_status']);
         $tcResult[$i]['attendance_status'] = $status['status_arabic'];
@@ -30,10 +30,10 @@ for ($i = 0; $i < count($result); $i++) {
     } else {
         $Presult = $tcMan->getProgramInfo($tcResult[$i]['pid']);
         $tcResult[$i]['pname'] = $Presult['name'];
-        $status = $trMan->getStatus($result[$i]['registration_status']);
-        $tcResult[$i]['status'] = $status['status_arabic'];
+            $status = $trMan->getStatus($result[$i]['registration_status']);
+        $tcResult[$i]['registration_status'] = $status['status_arabic'];
         //
-        if($result[$i]['attendance_status']==12 || $result[$i]['attendance_status'] ==4)
+       if($result[$i]['attendance_status']==12 || $result[$i]['attendance_status'] ==4|| $result[$i]['attendance_status'] ==5)
         {   
             $status = $trMan->getStatus($result[$i]['attendance_status']);
             $tcResult[$i]['attendance_status'] = $status['status_arabic'];

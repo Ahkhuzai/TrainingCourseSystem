@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-01-03 11:27:21
-  from "C:\xampp\htdocs\rtp\Admin\templates\AdminviewTC.tpl" */
+/* Smarty version 3.1.30, created on 2018-01-03 09:11:43
+  from "C:\xampp\htdocs\rtp\Admin\templates\Single_Admin_Attendance.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a4cb0095c95c6_12644320',
+  'unifunc' => 'content_5a4c903f8f1149_87372195',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '19812b2b7fa777a99c721bebab4afd56dbb8aa67' => 
+    'f7b6b84530892144c5d6759bc2d647a210dc4cf3' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\rtp\\Admin\\templates\\AdminviewTC.tpl',
-      1 => 1514880298,
+      0 => 'C:\\xampp\\htdocs\\rtp\\Admin\\templates\\Single_Admin_Attendance.tpl',
+      1 => 1514967100,
       2 => 'file',
     ),
   ),
@@ -22,42 +22,66 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a4cb0095c95c6_12644320 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a4c903f8f1149_87372195 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('title'=>'بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'), 0, false);
 ?>
 
-<?php echo '<script'; ?>
- type="text/javascript" src="js/AdminviewTC.js"><?php echo '</script'; ?>
->
 
+<?php echo '<script'; ?>
+ type="text/javascript" src="js/Single_Admin_Attendance.js"><?php echo '</script'; ?>
+>
 <!-- Introduction -->
     <section id="intro" class="main">
         <div class="spotlight">
             <div class="content align-right">
-                <section class="main">
-<center>
+                <section class="main">      
+ 
+   <center>
+         <h2>بيانات الدورة</h2>
     <h3><font color="green"><?php echo $_smarty_tpl->tpl_vars['added']->value;?>
 </font></h3>
     <p><font color="red"><?php echo $_smarty_tpl->tpl_vars['msg']->value;?>
 </font></p>
-</center>
-    <center>
-    <h2>قائمة الدورات</h2>
+    </center>
+    <br>
+    <br>
+    <h3>مقدم الدورة </h3> 
+    <p><?php echo $_smarty_tpl->tpl_vars['trname']->value;?>
+</p>   
+    <h3 >اسم الدورة</h3> 
+    <p id="nameOfTC"><?php echo $_smarty_tpl->tpl_vars['name']->value;?>
+</p>
+    <h3> تاريخها </h3>
+    <p><?php echo $_smarty_tpl->tpl_vars['start_date']->value;?>
+ من  <br>
+    <?php echo $_smarty_tpl->tpl_vars['end_date']->value;?>
+ الى </p>
 
-    <div  id='tcList'>      
+    </br> 
+    <center>
+    <h3>قائمة المسجلين</h3>
+    <div  id='tcRegisterTrainee'>      
     </div>
     <br>
-    <form action="AdminviewTC.php" method="POST">
+    <br>
+    <form action="Single_Admin_Attendance.php" method="POST">
         <input type="submit" value="عودة"  name = "back" id='back' class='btn' /> 
     </form>
-</center>
-           
-                </section>      
- </div>
+    </center>
+       
+            </section>  
+         </div>
         </div>
             </section>              
   <?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
+
+
+
+
+
+
+
 
 
 

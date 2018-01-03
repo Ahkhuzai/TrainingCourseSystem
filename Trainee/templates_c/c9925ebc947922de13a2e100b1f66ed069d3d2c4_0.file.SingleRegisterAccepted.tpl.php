@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-01-01 07:25:39
+/* Smarty version 3.1.30, created on 2018-01-03 09:55:03
   from "C:\xampp\htdocs\rtp\Trainee\templates\SingleRegisterAccepted.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a49d46324e356_68152766',
+  'unifunc' => 'content_5a4c9a67999ce9_87591116',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c9925ebc947922de13a2e100b1f66ed069d3d2c4' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rtp\\Trainee\\templates\\SingleRegisterAccepted.tpl',
-      1 => 1514617558,
+      1 => 1514967907,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a49d46324e356_68152766 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a4c9a67999ce9_87591116 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('title'=>'بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'), 0, false);
 ?>
 
@@ -30,10 +30,16 @@ $_smarty_tpl->_subTemplateRender("file:header.tpl", $_smarty_tpl->cache_id, $_sm
 <?php echo '<script'; ?>
  type="text/javascript" src="js/SingleRegisterAccepted.js"><?php echo '</script'; ?>
 >
-    <center>
-    <fieldset style="width:70%; margin:0 auto;">      
-   <legend align="right">بيانات الدورة</legend>
-   <center>
+<!-- Introduction -->
+<section id="intro" class="main">
+        <div class="spotlight">
+                <div class="content align-right">
+                <section class="main">     
+
+  
+            <center>
+                    <h2>بيانات الدورة</h2>
+ 
     <h3><font color="green"><?php echo $_smarty_tpl->tpl_vars['added']->value;?>
 </font></h3>
     <p><font color="red"><?php echo $_smarty_tpl->tpl_vars['msg']->value;?>
@@ -72,20 +78,22 @@ $_smarty_tpl->_subTemplateRender("file:header.tpl", $_smarty_tpl->cache_id, $_sm
 " >  من هنا</a> </p>
     </br>
     </br>    
+    <center>
     <form action="SingleRegister.php" method="POST">
         <input type="submit" value="عودة"  name = "back" id='back' class='btn' /> 
+        <input type="submit" value='الاعتذار عن الحضور'  name = "execude" id='execude' class='btn'/>
         <input type="submit" value='طباعة طلب التسجيل'  name = "printRegister" id='printRegister' class='btn'/>
     </form>
-    </br>
-    <br>
-    <br>
-    </fieldset>
-    </br>
-    </br>
-</div>
-    <br>
-<?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+    </center>
+                 </section>
+                </div>
+        </div>
+</section>				
+  <?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
+
+
+
 
 
 

@@ -13,6 +13,7 @@ $userId=$_SESSION['user_id'];
 $result=$tRegMan->fetchByQuery('SELECT * FROM `registration` WHERE `usr_id`='.$userId);
 
 for ($i = 0; $i < count($result); $i++) {
+    $tcResult[$i]['rid']=$result[$i]['id'];
     $tcResult[$i] = $tcMan->getSingleTrainingCourseInfo($result[$i]['tt_id']);
     if ($tcResult[$i]['pid'] == NULL) {
         $tcResult[$i]['pname'] = 'لا تتبع برنامج محدد';
@@ -23,7 +24,7 @@ for ($i = 0; $i < count($result); $i++) {
         $status = $trMan->getStatus($tcResult[$i]['status']);
         $tcResult[$i]['tc_status'] = $status['status_arabic'];
         
-    if($result[$i]['attendance_status']==12 || $result[$i]['attendance_status'] ==4)
+    if($result[$i]['attendance_status']==12 || $result[$i]['attendance_status'] ==4|| $result[$i]['attendance_status'] ==5)
     {   
         $status = $trMan->getStatus($result[$i]['attendance_status']);
         $tcResult[$i]['attendance_status'] = $status['status_arabic'];
@@ -32,15 +33,17 @@ for ($i = 0; $i < count($result); $i++) {
          $tcResult[$i]['attendance_status'] = "لا يوجد حالة بعد";
 
     } else {
+        $tcResult[$i]['rid']=$result[$i]['id'];
         $Presult = $tcMan->getProgramInfo($tcResult[$i]['pid']);
         $tcResult[$i]['pname'] = $Presult['name'];
+        $tcResult[$i]['sid'] = $result[$i]['registration_status'];
         $status = $trMan->getStatus($result[$i]['registration_status']);
-        $tcResult[$i]['status'] = $status['status_arabic'];
+        $tcResult[$i]['registration_status'] = $status['status_arabic'];
         
         $status = $trMan->getStatus($tcResult[$i]['status']);
         $tcResult[$i]['tc_status'] = $status['status_arabic'];
         
-        if($result[$i]['attendance_status']==12 || $result[$i]['attendance_status'] ==4)
+        if($result[$i]['attendance_status']==12 || $result[$i]['attendance_status'] ==4|| $result[$i]['attendance_status'] ==5)
         {   
             $status = $trMan->getStatus($result[$i]['attendance_status']);
             $tcResult[$i]['attendance_status'] = $status['status_arabic'];

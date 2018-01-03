@@ -37,6 +37,7 @@ class RegistrationModule {
         {
             $personaResult['username']=$result['username'];
             $personaResult['email']=$result['email'];
+            $personaResult['usr_id']=$result['id'];
             return $personaResult;
         }
         else 
@@ -148,9 +149,10 @@ class RegistrationModule {
         $registration = new RegistrationRepo();
         
         $resultReg=$registration->fetchByTt_id($tt_id);
+
         if($resultReg)
         {
-            for($i=0;$i<count($registration);$i++)
+            for($i=0;$i<count($resultReg);$i++)
             {
                 $Trainee[$i] = $this->getUserInfo($resultReg[$i]['usr_id']);
                 $Trainee[$i]['missed']=$this->gettotalMissed($resultReg[$i]['usr_id']);
@@ -223,7 +225,7 @@ class RegistrationModule {
         $totalMiss=0;
         for($i=0;$i<count($allRegister);$i++)
         {
-            if($allRegister[$i]['registration_status']==4)
+            if($allRegister[$i]['attendance_status']==4)
                 $totalMiss+=1;
         }
         return $totalMiss;
@@ -283,7 +285,7 @@ class RegistrationModule {
         $totalAppo=0;
         for($i=0;$i<count($allRegister);$i++)
         {
-            if($allRegister[$i]['registration_status']==5)
+            if($allRegister[$i]['attendance_status']==5)
                 $totalAppo+=1;
         }
         return $totalAppo;
@@ -358,7 +360,36 @@ class RegistrationModule {
             return false;
     }  
 
-
+     //done
+    public function closeTC($tt_id)
+    {
+        $ttMan = new TimetableRepo();
+        $result = $ttMan->fetchByID($tt_id);        
+        $resultSave = $ttMan->save($tt_id, $result['tc_id'], $result['tr_id'], $result['start_date'], $result['end_date'], $result['duration'], $result['start_at'], $result['location'], $result['add_date'], $result['capacity'], 9 , $result['available_seat'], $result['tc_total_avg_rate'],$result['type']);
+        if($resultSave)
+            return true;
+        else
+            return false;
+    }
+    
+    //done
+    public function calcMissed($tt_id)
+    {
+        $attMan = new AttendanceRepo();
+        $result=$this->getTraineeRegisteredInTC($tt_id);
+        $attResult=$attMan->fetchByTt_id($tt_id);
+        
+        for($i=0;$i<count($result);$i++)
+        {
+           $user_id=$result[$i]['usr_id'];
+           $resultAtt = $attMan->fetchByQuery("SELECT * FROM attendance WHERE usr_id=$user_id and timetable_id=$tt_id"); 
+           if($resultAtt)
+           {
+               
+           }
+        }
+    }
+    
     //done 
     public function getTrainer()
     {
@@ -582,40 +613,54 @@ class RegistrationModule {
     public function isTCAttendanceOpen($tt_id)
     {
         $ttMan= new TimetableRepo($tt_id);
-        $result = $ttMan->fetchByQuery("SELECT * FROM timetable WHERE `start_date`=CURRENT_DATE AND id=$tt_id and (`status`=10 or `status` = 11)");
-        if($result)
-        {
-            $start_at = $result[0]['start_at'];
-            $duration = $result[0]['duration'];
-            
-            $today = time();
-            $now = date('h:i:s A', strtotime($today));
-            
-            $endAt = date('h:i:s A', strtotime($start_at . " +$duration hours")); 
-            
+        $result = $ttMan->fetchByQuery("SELECT * FROM timetable WHERE id=$tt_id and (`status`=10 or `status` = 11)");
       
-            if ($now > $start_at && $now <$endAt)
-                return 0; 
-            else if ($now > $endAt)
-                return 1; 
-            else if ($now <$start_at) 
-                return -1; 
+        if($result)
+        {     
+            if( $result[0]['start_date']==date("Y-m-d"))
+            {   
+                $start_at = $result[0]['start_at'];
+                $duration = $result[0]['duration'];
+
+                $start_at = date('H:i:s', strtotime($start_at));
+                $endAt = date('H:i:s', strtotime($start_at . " +$duration hours")); 
+                
+                $today=date('Y-m-d H:i:s');
+                $now =date('H:i:s', strtotime($today. " +3 hours"));
+                
+                if ($now > $start_at && $now <$endAt)
+                    return "open"; 
+                else if ($now > $endAt)
+                    return "done"; 
+                else if ($now <$start_at) 
+                    return "notYet"; 
+            }
+            else 
+                return "التحضير لهذه الدورة غير متاح";
         }
         else 
-            return false;
+            return "التحضير لهذه الدورة غير متاح";
     }
     
     //done 
-    public function takeAttendance()
+    public function takeAttendance($UsrId, $ttId, $attend_time,$rid)
     {
         require_once '../DAL/AttendanceRepo.php';
         $attMan = new AttendanceRepo();
+        $trMan= new RegistrationRepo();
         //check if already attended 
-        $result = $attMan->fetchByQuery("SELECT * FROM attendance where user_id = $user_id and tt_id= $tt_id");
-        if($result)
-            return $result;
-        else 
-            return $result = $attMan->save (0, $UsrId, $ttId, $attend_time);
+        $result = $attMan->fetchByQuery("SELECT * FROM attendance where usr_id = $UsrId and timetable_id= $ttId");
+        if (is_array($result)) {
+            return 1;
+        } else {
+            $result = $attMan->save(0, $UsrId, $ttId, $attend_time);
+            $resultReg = $trMan->fetchByID($rid);
+            $result=$trMan->save($rid, $UsrId, $ttId, $resultReg['registration_status'], 12, $resultReg['certificate_approved'], $resultReg['rate_flag']);
+            if($result)
+                return 0;
+            else 
+                return -1;
+        }
     }
 }
 ?>

@@ -5,7 +5,7 @@ require_once '../RegistrationModule.php';
 
 
 $smarty=new Smarty();
-error_reporting(0);
+//error_reporting(0);
 session_start();
 $tcMan = new TrainingCourseModule();
 $trMan = new RegistrationModule();
@@ -14,23 +14,26 @@ if(isset($_GET['usr_id']))
 {
     $_SESSION['USR']=$_GET['usr_id'];
     $_SESSION['TT']=$_GET['tt_id'];
-    $_SESSION['TIME']=date('y-m-d');
+    $today=date('Y-m-d H:i:s');
+    $now =date('y-m-d H:i:s', strtotime($today. " +3 hours"));
+    $_SESSION['TIME']=$now;
 }
 if(isset($_POST['in'])&& !empty($_POST['pass']))
 {   if($_POST['pass']==3124)
     {   
         $isOpen = $trMan->isTCAttendanceOpen($_SESSION['TT']);
-        if($isOpen ==0)
+      
+        if($isOpen =="open")
         {
             //check if registered and accepted 
             $isRegistred = $tcMan->getTraineeAccepted($_SESSION['TT'],2);
             if($isRegistred)
             {   
-                $attendance = $trMan->takeAttendance($_SESSION['USR'], $_SESSION['TT'], $_SESSION['TIME']);
-                unset($_SESSION);
-                //change training course status 
+                
+                $attendance = $trMan->takeAttendance($_SESSION['USR'], $_SESSION['TT'], $_SESSION['TIME'],$isRegistred[0]['id']);
                 if ($attendance==0) {
-                    $smarty->assign('added', " تم التحضير بنجاح");
+                    $smarty->assign('added', " تم التحضير ");
+                    unset($_SESSION);
                 } 
                 else if ($attendance==1)
                     $smarty->assign('msg', " تم تسجيل التحضير مسبقا");
@@ -40,11 +43,13 @@ if(isset($_POST['in'])&& !empty($_POST['pass']))
             else 
                 $smarty->assign('msg'," المتدرب غير مسجل في الدورة او لم يتم قبول طلبة بعد ");
         }
-        else if ($isOpen==-1)
-            $smarty->assign('msg'," لم تبدأ الدورة بعد ");
-        else if ($isOpen==1)
-            $smarty->assign('msg'," انتهى وقت الدورة");
-            
+        else if ($isOpen == "notYet") {
+            $smarty->assign('msg', "لم تبدأ الدورة بعد ");
+        } else if ($isOpen == "done")
+            $smarty->assign('msg', " انتهى وقت الدورة");
+        else
+            $smarty->assign('msg', $isOpen);
+
         $smarty->display("DoneAttendance.tpl");
     }
     else

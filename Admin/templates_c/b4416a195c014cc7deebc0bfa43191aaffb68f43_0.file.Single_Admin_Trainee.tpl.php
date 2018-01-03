@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-12-31 09:15:38
+/* Smarty version 3.1.30, created on 2018-01-03 10:23:17
   from "C:\xampp\htdocs\rtp\Admin\templates\Single_Admin_Trainee.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a489caa6e8f22_39076307',
+  'unifunc' => 'content_5a4ca1051e4031_94512809',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'b4416a195c014cc7deebc0bfa43191aaffb68f43' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rtp\\Admin\\templates\\Single_Admin_Trainee.tpl',
-      1 => 1514617556,
+      1 => 1514879268,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a489caa6e8f22_39076307 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a4ca1051e4031_94512809 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('title'=>'بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'), 0, false);
 ?>
 
@@ -30,7 +30,13 @@ $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_s
 <?php echo '<script'; ?>
  type="text/javascript" src="js/Single_Admin_Trainee.js"><?php echo '</script'; ?>
 >
-    <center>
+ <!-- Introduction -->
+    <section id="intro" class="main">
+        <div class="spotlight">
+            <div class="content align-right">
+                <section class="main">
+  
+ 
         <h3>اسم المتدرب</h3>
         <p><?php echo $_smarty_tpl->tpl_vars['name']->value;?>
 </p>
@@ -52,6 +58,7 @@ $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_s
         <h3>حالة التسجيل</h3>
         <p><?php echo $_smarty_tpl->tpl_vars['reg_status']->value;?>
 </p>
+        <center>
     <h2>قائمة الدورات</h2>
     <div  id='tcList'>      
     </div>
@@ -60,11 +67,17 @@ $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_s
         <input type="submit" value="عودة"  name = "back" id='back' class='btn' /> 
     </form>
     </center>
-    </br>
-</div>
-    <br>
-<?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+                </section>      
+            </div>
+        </div>
+            </section>              
+  <?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
+
+
+
+
+
 
 
 

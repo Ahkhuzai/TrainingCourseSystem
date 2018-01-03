@@ -328,7 +328,17 @@ class TrainingCourseModule {
         $result=$tReg->fetchByQuery('SELECT * FROM `registration` WHERE `usr_id`='.$te_id.' AND `registration_status`='.$sid);
         return $result;
     }
-    
+    public function appolgizeFromAttending($rid)
+    {
+        $trMan= new RegistrationRepo();
+        $result = $trMan->fetchByID($rid);
+        if ($result) {
+            $saveResult = $trMan->save($rid, $result['usr_id'], $result['tt_id'], $result['registration_status'], 5, $result['certificate_approved'], $result['rate_flag']);
+            return $saveResult;
+        }
+        else
+            return false;
+    }
     //done
     public function getTrainingCourseForRateByUserID($usrID)
     {
@@ -343,6 +353,8 @@ class TrainingCourseModule {
         }
         return $tc;
     }
+    
+   
     
     //done
     public function insertRate($tt_id,$usrId,$place,$program,$orgnization,$presentation,$presenter,$comment,$rid)

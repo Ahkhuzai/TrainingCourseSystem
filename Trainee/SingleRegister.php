@@ -12,10 +12,18 @@ if(isset($_SESSION['user_id']))
         header('Location:registrationRequest.php'); 
     if (isset($_POST['printRegister'])) {
         header('Location:PrintRegistrationRequest.php');
-    }      
+    }
+    if (isset($_POST['execude'])) {
+        $result = $tcMan->appolgizeFromAttending($_SESSION['rid']);
+        if($result)
+        {
+            echo "<script>alert('تم الاعتذار عن حضور الدورة بنجاح');</script>";
+            echo"<script> window.location= 'registrationRequest.php'</script>";
+        }
+    }
+
     $tt_id=$_SESSION['tt_id'];
     $sid=$_SESSION['sid'];
-
     $result=$tcMan->getSingleTrainingCourseInfo($tt_id);
     $smarty->assign('name',$result['tc_ar_name']);
     $smarty->assign('start_date',$result['start_date']);

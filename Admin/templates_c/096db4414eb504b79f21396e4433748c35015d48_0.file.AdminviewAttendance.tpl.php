@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-01-03 11:27:21
-  from "C:\xampp\htdocs\rtp\Admin\templates\AdminviewTC.tpl" */
+/* Smarty version 3.1.30, created on 2018-01-03 09:07:04
+  from "C:\xampp\htdocs\rtp\Admin\templates\AdminviewAttendance.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a4cb0095c95c6_12644320',
+  'unifunc' => 'content_5a4c8f28ec95d5_86091870',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '19812b2b7fa777a99c721bebab4afd56dbb8aa67' => 
+    '096db4414eb504b79f21396e4433748c35015d48' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\rtp\\Admin\\templates\\AdminviewTC.tpl',
-      1 => 1514880298,
+      0 => 'C:\\xampp\\htdocs\\rtp\\Admin\\templates\\AdminviewAttendance.tpl',
+      1 => 1514966783,
       2 => 'file',
     ),
   ),
@@ -22,42 +22,48 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a4cb0095c95c6_12644320 (Smarty_Internal_Template $_smarty_tpl) {
-$_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('title'=>'بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'), 0, false);
+function content_5a4c8f28ec95d5_86091870 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
-<?php echo '<script'; ?>
- type="text/javascript" src="js/AdminviewTC.js"><?php echo '</script'; ?>
->
+<?php $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('title'=>'بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'), 0, false);
+?>
 
+
+<?php echo '<script'; ?>
+ type="text/javascript" src="js/AdminviewAttendance.js"><?php echo '</script'; ?>
+>
 <!-- Introduction -->
     <section id="intro" class="main">
         <div class="spotlight">
             <div class="content align-right">
                 <section class="main">
-<center>
+    <center>
+   <center>
     <h3><font color="green"><?php echo $_smarty_tpl->tpl_vars['added']->value;?>
 </font></h3>
     <p><font color="red"><?php echo $_smarty_tpl->tpl_vars['msg']->value;?>
 </font></p>
-</center>
-    <center>
-    <h2>قائمة الدورات</h2>
-
-    <div  id='tcList'>      
+    </center>
+    <h3>قائمة الدورات  المكتملة</h3>
+    <div  id='tcCompleteList'>      
     </div>
     <br>
-    <form action="AdminviewTC.php" method="POST">
+    <form action="AdminviewAttendance.php" method="POST">
         <input type="submit" value="عودة"  name = "back" id='back' class='btn' /> 
     </form>
-</center>
-           
-                </section>      
- </div>
+    </center>
+                </section>   
+            </div>
         </div>
             </section>              
   <?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
+
+
+
+
+
+
 
 
 

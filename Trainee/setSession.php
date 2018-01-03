@@ -50,6 +50,7 @@ else if ($page=='SingleRegistration')
 {
     $_SESSION['tt_id']=$_GET['tt_id'];
     $_SESSION['sid']=$_GET['sid'];
+    $_SESSION['rid']=$_GET['r_id'];
 }
 else if ($page=='SingleOldTC')
 {
