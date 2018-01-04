@@ -1,6 +1,12 @@
 {include file='headerq.tpl' title='بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'}
 
 <script type="text/javascript" src="js/AdminCertificatePrint.js"></script>
+<nav id="nav">
+	<ul>
+		<li><a href="AdminCertificateApprove.php">اعتماد الشهادات</a></li>
+		<li><a href="AdminCertificatePrint.php">طباعة الشهادات</a></li>                       
+    </ul>
+</nav>
 <!-- Introduction -->
     <section id="intro" class="main">
         <div class="spotlight">

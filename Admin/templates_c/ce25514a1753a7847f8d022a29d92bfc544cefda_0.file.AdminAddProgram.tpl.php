@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-01-02 08:57:35
+/* Smarty version 3.1.30, created on 2018-01-04 06:52:08
   from "C:\xampp\htdocs\rtp\Admin\templates\AdminAddProgram.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a4b3b6f6e1548_07969854',
+  'unifunc' => 'content_5a4dc108942ea0_66350951',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ce25514a1753a7847f8d022a29d92bfc544cefda' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rtp\\Admin\\templates\\AdminAddProgram.tpl',
-      1 => 1514879829,
+      1 => 1515045123,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a4b3b6f6e1548_07969854 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a4dc108942ea0_66350951 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('title'=>'بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'), 0, false);
 ?>
 
@@ -30,6 +30,16 @@ $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_s
 <?php echo '<script'; ?>
  type="text/javascript" src="js/AdminAddProgram.js"><?php echo '</script'; ?>
 >
+<nav id="nav">
+	<ul>
+		<li><a href="AdminCertificate.php">الشهادات</a></li>
+		<li><a href="rePresentTC.php">اعادة تقديم دورة سابقة</a></li>
+ 	    <li><a href="AdminAddTrainingCourse.php"> اضافة دورة تدريبية</a></li>
+        <li><a href="AdminAddProgram.php"> اضافة برنامج تدريبي</a></li>
+        <li><a href="ApproveTrainingCourse.php">اعتماد الدورات والبرامج التدريبية</a></li>
+        <li><a href="AdminviewTC.php"> استعراض الدورات</a></li>                          
+    </ul>
+</nav>
 <!-- Introduction -->
     <section id="intro" class="main">
         <div class="spotlight">

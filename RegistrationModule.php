@@ -11,7 +11,7 @@
  *
  * @author Ahlam Alkhuzai
  */
-
+require_once '../DAL/AttendanceRepo.php';
 require_once '../DAL/UserRepo.php';
 require_once '../DAL/UserRoleRepo.php';
 require_once '../DAL/SysRoleRepo.php';
@@ -24,6 +24,7 @@ require_once '../DAL/RegistrationRepo.php';
 require_once '../DAL/BlockedUserRepo.php';
 require_once '../TrainingCourseModule.php';
 require_once '../DAL/TimetableRepo.php';
+
 class RegistrationModule {    
 
     //done
@@ -364,7 +365,8 @@ class RegistrationModule {
     public function closeTC($tt_id)
     {
         $ttMan = new TimetableRepo();
-        $result = $ttMan->fetchByID($tt_id);        
+        $result = $ttMan->fetchByID($tt_id);   
+
         $resultSave = $ttMan->save($tt_id, $result['tc_id'], $result['tr_id'], $result['start_date'], $result['end_date'], $result['duration'], $result['start_at'], $result['location'], $result['add_date'], $result['capacity'], 9 , $result['available_seat'], $result['tc_total_avg_rate'],$result['type']);
         if($resultSave)
             return true;
@@ -376,18 +378,26 @@ class RegistrationModule {
     public function calcMissed($tt_id)
     {
         $attMan = new AttendanceRepo();
+        $regMan = new RegistrationRepo();
         $result=$this->getTraineeRegisteredInTC($tt_id);
-        $attResult=$attMan->fetchByTt_id($tt_id);
-        
-        for($i=0;$i<count($result);$i++)
+        if($result)
         {
-           $user_id=$result[$i]['usr_id'];
-           $resultAtt = $attMan->fetchByQuery("SELECT * FROM attendance WHERE usr_id=$user_id and timetable_id=$tt_id"); 
-           if($resultAtt)
-           {
-               
-           }
+            for($i=0;$i<count($result);$i++)
+            {
+               $user_id=$result[$i]['usr_id'];
+               $resultAtt = $attMan->fetchByQuery("SELECT * FROM attendance WHERE usr_id=$user_id and timetable_id=$tt_id"); 
+               if(!$resultAtt[0])
+               {
+                    $regResult= $regMan->fetchByID($result[$i]['rid']);
+                       if($regResult['attendance_status']!=5)
+                            $res=$regMan->save($regResult['id'], $regResult['usr_id'], $regResult['tt_id'], $regResult['registration_status'],4, $regResult['certificate_approved'], $regResult['rate_flag']);  
+               }
+            }
+            return true;
         }
+        else 
+            return flse;
+
     }
     
     //done 

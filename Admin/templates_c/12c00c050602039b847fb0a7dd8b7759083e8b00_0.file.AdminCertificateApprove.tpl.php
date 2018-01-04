@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-01-02 09:02:44
+/* Smarty version 3.1.30, created on 2018-01-04 06:48:43
   from "C:\xampp\htdocs\rtp\Admin\templates\AdminCertificateApprove.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a4b3ca4380113_57404138',
+  'unifunc' => 'content_5a4dc03b1377c4_31479412',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '12c00c050602039b847fb0a7dd8b7759083e8b00' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rtp\\Admin\\templates\\AdminCertificateApprove.tpl',
-      1 => 1514879733,
+      1 => 1515044870,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a4b3ca4380113_57404138 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a4dc03b1377c4_31479412 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
 <?php $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('title'=>'بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'), 0, false);
@@ -32,6 +32,12 @@ function content_5a4b3ca4380113_57404138 (Smarty_Internal_Template $_smarty_tpl)
 <?php echo '<script'; ?>
  type="text/javascript" src="js/AdminCertificateApprove.js"><?php echo '</script'; ?>
 >
+<nav id="nav">
+	<ul>
+		<li><a href="AdminCertificateApprove.php">اعتماد الشهادات</a></li>
+		<li><a href="AdminCertificatePrint.php">طباعة الشهادات</a></li>                       
+    </ul>
+</nav>
 <!-- Introduction -->
     <section id="intro" class="main">
         <div class="spotlight">

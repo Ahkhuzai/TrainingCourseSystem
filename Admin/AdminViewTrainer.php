@@ -8,7 +8,18 @@ if (!isset($_SESSION['user_id'])) {
     $smarty->display("unAuthorized.tpl");
 } else {
     if(isset($_POST['back']))
-        header('Location:AdminMain.php');
-    $smarty->display("AdminViewTrainer.tpl");
+        header('Location:Trainer.php');
+    $user_id=$_SESSION['user_id'];
+    $isAdmin=$user->isAdmin($user_id);           
+    if($isAdmin)
+    {   $info = $user->getUserInfo($user_id);
+        $smarty->assign('username',$info['username']);
+        $smarty->display("AdminViewTrainer.tpl");
+    } 
+    else
+    {
+    	header("Location:AdminLogin.php");
+    }
+    
 }
 ?>

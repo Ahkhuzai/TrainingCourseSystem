@@ -5,48 +5,57 @@ require_once '../TrainingCourseModule.php';
 $smarty=new Smarty();
 error_reporting(0);
 session_start(); 
+$tcMan=new TrainingCourseModule();
+$trMan=new RegistrationModule();
+
 if (!isset($_SESSION['user_id'])) {
     
     $smarty->assign('msg','غير مصرح لك بالدخول للنظام');
     $smarty->display("unAuthorized.tpl");
 } else {
+    	$user_id=$_SESSION['user_id'];
+	$isAdmin=$user->isAdmin($user_id);           
+    if($isAdmin)
+    {   
+        $ho_id=$_SESSION['ho_id'];
+        
+        $result=$tcMan->getHandoutRequestInfo($ho_id);
+        $smarty->assign('teurl',$result['ho_trainee_dir']);
+        $smarty->assign('trurl',$result['ho_trainer_dir']);
+        $smarty->assign('prurl',$result['presentation_dir']);
+        $smarty->assign('scurl',$result['scientific_chapter']);
+        $smarty->assign('trname',$result['tr_ar_name']);
 
-    $ho_id=$_SESSION['ho_id'];
-    $tcMan=new TrainingCourseModule();
-    $trMan=new RegistrationModule();
+        if(isset($_POST['reject']))
+        {
+            // 1 means rejected
 
-    $result=$tcMan->getHandoutRequestInfo($ho_id);
-    $smarty->assign('teurl',$result['ho_trainee_dir']);
-    $smarty->assign('trurl',$result['ho_trainer_dir']);
-    $smarty->assign('prurl',$result['presentation_dir']);
-    $smarty->assign('scurl',$result['scientific_chapter']);
-    $smarty->assign('trname',$result['tr_ar_name']);
-   
-    if(isset($_POST['reject']))
+            $result= $trMan->HandleHORequest($ho_id,1);
+            if($result)
+                echo '<script>alert("تم رفض عن الطلب بنجاح"); window.location = "AdminViewRequest.php";</script>';       
+             else
+                echo '<script>alert("لم يتم رفض الطلب, الرجاء المحاولة في وقت لاحق")</script>';
+        }
+
+        if(isset($_POST['accept']))
+        {
+            // 2 means accepted
+
+            $result= $trMan->HandleHORequest($ho_id,2);
+            if($result)
+                echo '<script>alert(" تم قبول عن الطلب بنجاح وسيتم ابلاغ مقدم الطلب بذلك"); window.location = "AdminViewRequest.php";</script>';
+             else
+                echo '<script>alert("لم يتم قبول الطلب, الرجاء المحاولة في وقت لاحق")</script>';
+        }
+
+        if(isset($_POST['back']))
+            header('Location:AdminViewRequest.php');
+
+        $smarty->display("Single_Admin_hoRequest.tpl");
+    } 
+    else
     {
-        // 1 means rejected
-
-        $result= $trMan->HandleHORequest($ho_id,1);
-        if($result)
-            echo '<script>alert("تم رفض عن الطلب بنجاح"); window.location = "AdminViewRequest.php";</script>';       
-         else
-            echo '<script>alert("لم يتم رفض الطلب, الرجاء المحاولة في وقت لاحق")</script>';
+    	header("Location:AdminLogin.php");
     }
-    
-    if(isset($_POST['accept']))
-    {
-        // 2 means accepted
-
-        $result= $trMan->HandleHORequest($ho_id,2);
-        if($result)
-            echo '<script>alert(" تم قبول عن الطلب بنجاح وسيتم ابلاغ مقدم الطلب بذلك"); window.location = "AdminViewRequest.php";</script>';
-         else
-            echo '<script>alert("لم يتم قبول الطلب, الرجاء المحاولة في وقت لاحق")</script>';
-    }
-    
-    if(isset($_POST['back']))
-        header('Location:AdminViewRequest.php');
-    
-    $smarty->display("Single_Admin_hoRequest.tpl");
 }
 ?>

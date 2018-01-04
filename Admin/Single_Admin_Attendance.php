@@ -7,8 +7,12 @@ session_start();
 $tcMan = new TrainingCourseModule();
 
 if(isset($_SESSION['user_id']))
-{
-    if(isset($_POST['back']))
+{   
+    	$user_id=$_SESSION['user_id'];
+	$isAdmin=$user->isAdmin($user_id);           
+    if($isAdmin)
+    {   
+        if(isset($_POST['back']))
         header('Location:AdminviewAttendance.php');
     
     
@@ -19,6 +23,11 @@ if(isset($_SESSION['user_id']))
         $smarty->assign('end_date',$result['end_date']);
         $smarty->assign('trname',$result['tr_ar_name']);
         $smarty->display("Single_Admin_Attendance.tpl");
+    } 
+    else
+    {
+    	header("Location:AdminLogin.php");
+    }
 }
 else 
 {

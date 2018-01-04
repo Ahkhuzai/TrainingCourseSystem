@@ -7,8 +7,18 @@ if (!isset($_SESSION['user_id'])) {
     $smarty->assign('msg','غير مصرح لك بالدخول للنظام');
     $smarty->display("unAuthorized.tpl");
 } else {
-    if(isset($_POST['back']))
-        header('Location:AdminMain.php');
-    $smarty->display("closeTC.tpl");
+    	$user_id=$_SESSION['user_id'];
+	$isAdmin=$user->isAdmin($user_id);           
+        if($isAdmin)
+        {   
+            if(isset($_POST['back']))
+                header('Location:AdminMain.php');
+            $smarty->display("closeTC.tpl");
+        } 
+        else
+        {
+            header("Location:AdminLogin.php");
+        }
+    
 }
 ?>

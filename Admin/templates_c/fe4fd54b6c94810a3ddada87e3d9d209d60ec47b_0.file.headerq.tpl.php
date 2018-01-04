@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-01-03 09:01:18
+/* Smarty version 3.1.30, created on 2018-01-04 06:48:33
   from "C:\xampp\htdocs\rtp\Admin\templates\headerq.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a4c8dce9bfc30_56651119',
+  'unifunc' => 'content_5a4dc0317a1468_29525656',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'fe4fd54b6c94810a3ddada87e3d9d209d60ec47b' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rtp\\Admin\\templates\\headerq.tpl',
-      1 => 1514966341,
+      1 => 1515044611,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a4c8dce9bfc30_56651119 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a4dc0317a1468_29525656 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE HTML>
 <!--
@@ -179,7 +179,8 @@ function content_5a4c8dce9bfc30_56651119 (Smarty_Internal_Template $_smarty_tpl)
                             <li><a href="AdminMain.php">الرئيسية </a></li>
                         </ul>
                 	</nav>
-				<!-- Main -->
+			
+                                <!-- Main -->
 					<div id="main">
 						<header>
 							<center><img src='../images/logo.png' width='100%'/></center>

@@ -36,8 +36,8 @@ $date_eng=$eng_date_string.' the '.$result_tc['start_date'];
 $hours=$result_tc['duration'];
 $tr_name_ar=$result_tr['ar_name'];
 $tr_name_eng=$result_tr['eng_name'];
-//$tr_sig='../'.$result_tr['signature'];
-$tr_sig='../images/template/sig.png;';
+$tr_sig=$result_tr['signature'];
+//$tr_sig='../images/template/sig.png;';
 
 
 if($regResult['certificate_approved']==1)

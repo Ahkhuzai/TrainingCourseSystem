@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-01-02 09:02:23
+/* Smarty version 3.1.30, created on 2018-01-04 07:02:50
   from "C:\xampp\htdocs\rtp\Admin\templates\AdminAddTrainingCourse.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a4b3c8fb3c1e4_64471311',
+  'unifunc' => 'content_5a4dc38a5b1904_67682593',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'f5ca1d245c5f0bf639af0cbcf13effa1a3553fdd' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rtp\\Admin\\templates\\AdminAddTrainingCourse.tpl',
-      1 => 1514880139,
+      1 => 1515045765,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a4b3c8fb3c1e4_64471311 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a4dc38a5b1904_67682593 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('title'=>'بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'), 0, false);
 ?>
 
@@ -30,6 +30,16 @@ $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_s
 <?php echo '<script'; ?>
  type="text/javascript" src="js/AdminAddTrainingCourse.js"><?php echo '</script'; ?>
 >
+<nav id="nav">
+	<ul>
+		<li><a href="AdminCertificate.php">الشهادات</a></li>
+		<li><a href="rePresentTC.php">اعادة تقديم دورة سابقة</a></li>
+ 	    <li><a href="AdminAddTrainingCourse.php"> اضافة دورة تدريبية</a></li>
+        <li><a href="AdminAddProgram.php"> اضافة برنامج تدريبي</a></li>
+        <li><a href="ApproveTrainingCourse.php">اعتماد الدورات والبرامج التدريبية</a></li>
+        <li><a href="AdminviewTC.php"> استعراض الدورات</a></li>                          
+    </ul>
+</nav>
 <!-- Introduction -->
     <section id="intro" class="main">
         <div class="spotlight">

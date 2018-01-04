@@ -8,7 +8,7 @@ $tcMan= new TrainingCourseModule();
 $trMan= new RegistrationModule();
 $ttMan= new TimetableRepo();
 
-$resultTT=$ttMan->fetchByQuery("SELECT * FROM Timetable WHERE (status=10 or status = 11) AND end_date <=CURDATE()");
+$resultTT=$ttMan->fetchByQuery("SELECT * FROM timetable WHERE (status=10 or status = 11) AND end_date <=CURDATE()");
 
 if($resultTT)
 {    

@@ -8,9 +8,12 @@ $tcMan = new TrainingCourseModule();
 
 if(isset($_SESSION['user_id']))
 {
-    if(isset($_POST['back']))
+    $user_id=$_SESSION['user_id'];
+    $isAdmin=$user->isAdmin($user_id);           
+    if($isAdmin)
+    {  
+        if(isset($_POST['back']))
         header('Location:AdminCompleteTCPrint.php');
-    
     
         $tt_id=$_SESSION['tt_id'];
         $result=$tcMan->getSingleTrainingCourseInfo($tt_id);
@@ -25,6 +28,12 @@ if(isset($_SESSION['user_id']))
         $smarty->assign('url',$result['url']);
         $smarty->assign('trname',$result['tr_ar_name']);
         $smarty->display("Single_Admin_tcComplete_print.tpl");
+    } 
+    else
+    {
+    	header("Location:AdminLogin.php");
+    }
+    
 }
 else 
 {

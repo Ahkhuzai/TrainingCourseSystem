@@ -1,6 +1,13 @@
 {include file='headerq.tpl' title='بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'}
 
 <script type="text/javascript" src="js/AdminSingleTrainer.js"></script>
+<nav id="nav">
+	<ul>
+        <li><a href="AdminViewTrainer.php"> استعراض المدربين</a></li>
+        <li><a href="AdminAddTrainer.php"> اضافة مدرب</a></li>                       
+          
+    </ul>
+</nav>
 <!-- Introduction -->
     <section id="intro" class="main">
         <div class="spotlight">

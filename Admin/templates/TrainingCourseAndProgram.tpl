@@ -15,9 +15,6 @@
             <div class="content align-right">
                 <section class="main">
                     <p> Welcome {$username} </p>
-                      
-      
-                
                 </section>   
             </div>
     </div>

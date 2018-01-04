@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-01-02 07:12:03
+/* Smarty version 3.1.30, created on 2018-01-04 07:05:43
   from "C:\xampp\htdocs\rtp\Admin\templates\SingleCompletetcView.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a4b22b30eeed6_42816110',
+  'unifunc' => 'content_5a4dc4379d0141_05734749',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ca2e1e4cfc95e1b41c264347ecbeb5fb8a5cc7f9' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rtp\\Admin\\templates\\SingleCompletetcView.tpl',
-      1 => 1514617556,
+      1 => 1515045911,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a4b22b30eeed6_42816110 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a4dc4379d0141_05734749 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('title'=>'بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'), 0, false);
 ?>
 
@@ -30,6 +30,16 @@ $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_s
 <?php echo '<script'; ?>
  type="text/javascript" src="js/SingleCompletetcView.js"><?php echo '</script'; ?>
 >
+<nav id="nav">
+	<ul>
+		<li><a href="AdminCertificate.php">الشهادات</a></li>
+		<li><a href="rePresentTC.php">اعادة تقديم دورة سابقة</a></li>
+ 	    <li><a href="AdminAddTrainingCourse.php"> اضافة دورة تدريبية</a></li>
+        <li><a href="AdminAddProgram.php"> اضافة برنامج تدريبي</a></li>
+        <li><a href="ApproveTrainingCourse.php">اعتماد الدورات والبرامج التدريبية</a></li>
+        <li><a href="AdminviewTC.php"> استعراض الدورات</a></li>                          
+    </ul>
+</nav>
 <!-- Introduction -->
     <section id="intro" class="main">
         <div class="spotlight">
@@ -78,7 +88,7 @@ $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_s
     </br>
     </br> 
     <center>
-    <h3>قائمة المسجلين</h3>
+    <h3>قائمة الحاضرين</h3>
     <div  id='tcRegisterTrainee'>      
     </div>
     <br>
@@ -121,7 +131,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
         <input type="submit" value='طباعة'  name = "print" id='print' class='btn'/>
     </form>
 </center>
-</section>          
+</section>    
+            </div></div>
 </section>              
   <?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>

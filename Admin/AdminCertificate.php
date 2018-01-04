@@ -1,4 +1,4 @@
-u<?php
+<?php
 include '../libs/smarty/libs/Smarty.class.php';
 $smarty=new Smarty();
 session_start(); 
@@ -7,8 +7,18 @@ if (!isset($_SESSION['user_id'])) {
     $smarty->assign('msg','غير مصرح لك بالدخول للنظام');
     $smarty->display("unAuthorized.tpl");
 } else {
-    if(isset($_POST['back']))
-        header('Location:TrainingCourseAndProgram.php');
-    $smarty->display("AdminCertificate.tpl");
+    	$user_id=$_SESSION['user_id'];
+	$isAdmin=$user->isAdmin($user_id);           
+    if($isAdmin)
+    {       
+        if(isset($_POST['back']))
+            header('Location:TrainingCourseAndProgram.php');
+        $smarty->display("AdminCertificate.tpl");
+    } 
+    else
+    {
+    	header("Location:AdminLogin.php");
+    }
+
 }
 ?>

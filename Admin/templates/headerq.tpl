@@ -78,7 +78,8 @@
                             <li><a href="AdminMain.php">الرئيسية </a></li>
                         </ul>
                 	</nav>
-				<!-- Main -->
+			
+                                <!-- Main -->
 					<div id="main">
 						<header>
 							<center><img src='../images/logo.png' width='100%'/></center>

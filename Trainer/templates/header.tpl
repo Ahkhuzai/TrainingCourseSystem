@@ -76,8 +76,8 @@
                             <li><a href="approveCertificate.php"> اعتماد الشهادات</a></li>
                             <li><a href="oldTrainingCourse.php">الدورات السابقة</a></li>
                             <li><a href="viewRequest.php">استعراض الطلبات</a></li>
-                            <li><a href="addHandoutOnly.php"> طلب تقديم الحقيبة التدريبية</a></li>
-                            <li><a href="addTrainingCourse.php">طلب تقديم دورة</a></li>
+                            <li><a href="hoContract.php"> طلب تقديم الحقيبة التدريبية</a></li>
+                            <li><a href="tcContract.php">طلب تقديم دورة</a></li>
                             <li><a href="index.php">الرئيسية </a>
                             </li>
                              <li ><a href="../main/index.php">البوابة الرئيسية </a>

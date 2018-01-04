@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-01-01 10:11:06
+/* Smarty version 3.1.30, created on 2018-01-04 07:37:08
   from "C:\xampp\htdocs\rtp\Trainer\templates\header.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a49fb2a279916_24536337',
+  'unifunc' => 'content_5a4dcb9491c858_70876742',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '72479b8c95ab4739e8029e4e02394bd0c2307908' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rtp\\Trainer\\templates\\header.tpl',
-      1 => 1514797743,
+      1 => 1515047586,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a49fb2a279916_24536337 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a4dcb9491c858_70876742 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE HTML>
 <!--
@@ -179,8 +179,8 @@ function content_5a49fb2a279916_24536337 (Smarty_Internal_Template $_smarty_tpl)
                             <li><a href="approveCertificate.php"> اعتماد الشهادات</a></li>
                             <li><a href="oldTrainingCourse.php">الدورات السابقة</a></li>
                             <li><a href="viewRequest.php">استعراض الطلبات</a></li>
-                            <li><a href="addHandoutOnly.php"> طلب تقديم الحقيبة التدريبية</a></li>
-                            <li><a href="addTrainingCourse.php">طلب تقديم دورة</a></li>
+                            <li><a href="hoContract.php"> طلب تقديم الحقيبة التدريبية</a></li>
+                            <li><a href="tcContract.php">طلب تقديم دورة</a></li>
                             <li><a href="index.php">الرئيسية </a>
                             </li>
                              <li ><a href="../main/index.php">البوابة الرئيسية </a>
