@@ -60,7 +60,8 @@
             { name: 'pname'},
             { name: 'start_date'},
             { name: 'location',type: 'string' },
- 
+            { name: 'attendance_status',type: 'string' },
+            { name: 'attendance_id',type: 'number' },
             { name: 'r_id',type: 'number' },
             
         ],
@@ -72,7 +73,7 @@
         rtl:true,
         autorowheight: true,
         autoheight: true,
-        width:'75%',                                                         
+        width:'100%',                                                         
         columns: [
             { text: 'اسم الدورة', datafield: 'tc_ar_name',columntype: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer }, 
             { text: 'اسم البرنامج', datafield: 'pname',columntype: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer }, 
@@ -82,29 +83,33 @@
             { text: 'المدة ', datafield: 'duration',cellsformat: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'المكان ', datafield: 'location',cellsformat: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'النوع ', datafield: 'type',cellsformat: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'حالة الحضور ', datafield: 'attendance_status',cellsformat: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             
         ]
     }); 
     $("#CompleteTC").on('rowselect', function (event) {
         var tt_ID = event.args.row.id; 
-        var r_id=event.args.row.r_id; 
-        $.ajax({
-        type : 'GET',
-        url : 'setSession.php',
-        data: {
-            tt_id :tt_ID,
-            r_id:r_id,
-            page: 'SingleTCCompleteTrainee'
-              },
-        success : function(data){
+        var r_id=event.args.row.r_id;
+        var attendance_id=event.args.row.attendance_id; 
+        if(attendance_id==12)
+        {
+            $.ajax({
+            type : 'GET',
+            url : 'setSession.php',
+            data: {
+                tt_id :tt_ID,
+                r_id:r_id,
+                page: 'SingleTCCompleteTrainee'
+                  },
+            success : function(data){
 
-        },
-        error : function(XMLHttpRequest, textStatus, errorThrown) 
-        {alert ("Error Occured");}
-            });  
-            var url="SinglePrevTrainingCourseView.php";
-            window.location=url;    
-      
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown) 
+            {alert ("Error Occured");}
+                });  
+                var url="SinglePrevTrainingCourseView.php";
+                window.location=url; 
+        }
         });
 });
 var cellsrenderer = function (row, column, value) {

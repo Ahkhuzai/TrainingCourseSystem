@@ -1,9 +1,11 @@
 <?php
+error_reporting(0);
 include '../libs/smarty/libs/Smarty.class.php';
 require_once '../RegistrationModule.php';
 require_once '../TrainingCourseModule.php';
 $smarty=new Smarty();
-error_reporting(0);
+$tcMan=new TrainingCourseModule();
+$trMan=new RegistrationModule();
 session_start(); 
 if (!isset($_SESSION['user_id'])) {
     
@@ -11,12 +13,11 @@ if (!isset($_SESSION['user_id'])) {
     $smarty->display("unAuthorized.tpl");
 } else {
     $user_id=$_SESSION['user_id'];
-    $isAdmin=$user->isAdmin($user_id);           
+    $isAdmin=$trMan->isAdmin($user_id);           
     if($isAdmin)
     {   
         $ho_id=$_SESSION['ho_id'];
-        $tcMan=new TrainingCourseModule();
-        $trMan=new RegistrationModule();
+        
 
         $result=$tcMan->getHandoutRequestInfo($ho_id);
         $smarty->assign('teurl',$result['ho_trainee_dir']);

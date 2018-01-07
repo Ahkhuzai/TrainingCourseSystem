@@ -185,7 +185,7 @@ class RegistrationModule {
         $resultReg=$registration->fetchByTt_id($tt_id);
         if($resultReg)
         {
-            for($i=0;$i<count($registration);$i++)
+            for($i=0;$i<count($resultReg);$i++)
             {
                 if($resultReg[$i]['registration_status']==2)
                 {
@@ -455,6 +455,7 @@ class RegistrationModule {
         $bMan = new BlockedUserRepo();
         $qr = "SELECT * FROM blockeduser where user_id = $user_id and end_date > CURDATE()";
         $result = $bMan->fetchByQuery($qr);
+
         if($result)
             return true;
         else 

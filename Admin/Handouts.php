@@ -1,6 +1,7 @@
 <?php
 include '../libs/smarty/libs/Smarty.class.php';
 require_once '../RegistrationModule.php';
+
 error_reporting(0);
 session_start(); 
 $smarty=new Smarty();

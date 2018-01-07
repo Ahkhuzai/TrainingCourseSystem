@@ -1,11 +1,13 @@
 <?php
 include '../libs/smarty/libs/Smarty.class.php';
 require_once '../TrainingCourseModule.php';
+require_once '../RegistrationModule.php';
 $smarty=new Smarty();
 error_reporting(0);
 session_start();
 $tcMan = new TrainingCourseModule();
 
+$user = new RegistrationModule();
 if(isset($_SESSION['user_id']))
 {
     $user_id=$_SESSION['user_id'];
@@ -13,7 +15,7 @@ if(isset($_SESSION['user_id']))
     if($isAdmin)
     {  
         if(isset($_POST['back']))
-        header('Location:AdminCompleteTCPrint.php');
+        header('Location:AdminCertificatePrint.php');
     
         $tt_id=$_SESSION['tt_id'];
         $result=$tcMan->getSingleTrainingCourseInfo($tt_id);

@@ -11,7 +11,7 @@ $trMan = new RegistrationModule();
 if(isset($_SESSION['user_id']))
 {
     $user_id=$_SESSION['user_id'];
-    $isAdmin=$user->isAdmin($user_id);           
+    $isAdmin=$trMan->isAdmin($user_id);           
     if($isAdmin)
     {   
         if(isset($_POST['back']))

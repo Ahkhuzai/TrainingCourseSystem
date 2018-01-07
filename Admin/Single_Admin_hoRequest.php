@@ -14,7 +14,7 @@ if (!isset($_SESSION['user_id'])) {
     $smarty->display("unAuthorized.tpl");
 } else {
     	$user_id=$_SESSION['user_id'];
-	$isAdmin=$user->isAdmin($user_id);           
+	$isAdmin=$trMan->isAdmin($user_id);           
     if($isAdmin)
     {   
         $ho_id=$_SESSION['ho_id'];

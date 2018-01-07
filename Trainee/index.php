@@ -16,7 +16,7 @@ if (!isset($_SESSION['user_id'])) {
     else
     {
         echo '<script>alert("انت غير مسجل كمتدرب في النظام");</script>';
-        header('Location:main/index.php');
+        header('Location:../index.php');
     } 
 }
 ?>

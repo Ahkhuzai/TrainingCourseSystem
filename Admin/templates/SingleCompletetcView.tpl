@@ -47,13 +47,30 @@
     </br> 
     <center>
     <h3>قائمة الحاضرين</h3>
+
     <div  id='tcRegisterTrainee'>      
     </div>
     <br>
+    <h3>احصائيات الحاضرين</h3>
     <br>
+    <div id='chartRank' style="width: 850px; height: 500px;">
+	</div>
+    </br>
+    <br>
+    <div id='chartGender' style="width: 850px; height: 500px;">
+	</div>
+    </br>
+    <br>
+        <div style='height: 100%; width: 100%;'>
+        <div id='host' style="margin: 0 auto; width:850px; height:500px;">
+        <div id='chartDepartment' style="width:850px; height:500px; position: relative; left: 0px; top: 0px;">
+        </div>
+            </div>
+        </div>
+    </br>
     <div style='height: 100%; width: 100%;'>
-        <div id='host' style="margin: 0 auto; width:600px; height:300px;">
-        <div id='jqxChart' style="width:600px; height:300px; position: relative; left: 0px; top: 0px;">
+        <div id='host' style="margin: 0 auto; width:850px; height:500px;">
+        <div id='jqxChart' style="width:850px; height:500px; position: relative; left: 0px; top: 0px;">
         </div>
             </div>
         </div>
@@ -76,6 +93,7 @@
         </div>
         <br>
     <br>
+    
     <form action="Single_Admin_tcView.php" method="POST">
         <input type="submit" value="عودة"  name = "back" id='back' class='btn' /> 
         <input type="submit" value='طباعة'  name = "print" id='print' class='btn'/>

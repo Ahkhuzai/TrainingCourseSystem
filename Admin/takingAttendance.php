@@ -5,7 +5,7 @@ require_once '../RegistrationModule.php';
 
 
 $smarty=new Smarty();
-//error_reporting(0);
+error_reporting(0);
 session_start();
 $tcMan = new TrainingCourseModule();
 $trMan = new RegistrationModule();

@@ -1,6 +1,8 @@
 <?php
 include '../libs/smarty/libs/Smarty.class.php';
 require_once '../TrainingCourseModule.php';
+require_once '../RegistrationModule.php';
+$user = new RegistrationModule();
 $smarty=new Smarty();
 session_start(); 
 error_reporting(0);

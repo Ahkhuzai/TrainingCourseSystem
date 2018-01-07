@@ -44,7 +44,7 @@ class BlockedUserRepo {
     {       
         try {
             $user = R::getAll( 'select * from blockeduser where user_id = '.$userID );
-            if (!$user['id'])
+            if (!$user)
                 return false;
             else
                 return $user;

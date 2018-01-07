@@ -31,7 +31,12 @@ switch($dayofweek)
     case 5: {$ar_date_string='الجمعة';$eng_date_string='Friday';break;}
     case 6: {$ar_date_string='السبت';$eng_date_string='Saterday';break;}
 }
-$date_ar=$ar_date_string.' الموافق '.$result_tc['start_date'];
+include "../libs/HijriDate/uCal.class.php";
+$d = new uCal;
+$d->setLang("ar");
+$day=$result_tc['start_date'];
+$date_ar= $d->date($day." l");
+//$date_ar=$ar_date_string.' الموافق '.$result_tc['start_date'];
 $date_eng=$eng_date_string.' the '.$result_tc['start_date'];
 $hours=$result_tc['duration'];
 $tr_name_ar=$result_tr['ar_name'];

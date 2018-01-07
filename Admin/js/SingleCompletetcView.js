@@ -18,7 +18,7 @@ $(document).ready(function () {
             { name: 'rid',type: 'number' },
             { name: 'missed',type: 'number' },
             { name: 'excused',type: 'number' }],
-        id: 'id',
+        
         url: "getTCAttenTrainee.php",
                        };
                        
@@ -114,4 +114,174 @@ $(document).ready(function () {
             $('#jqxChart').jqxChart(settings);
             
         });
+       $(document).ready(function () {
+            // prepare chart data as an array
+            var source =
+            {
+                datatype: "json",
+                datafields: [
+                    { name: 'Gender' },
+                    { name: 'Total' }
+                ],
+                url: 'getTCGender.php'
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
+            // prepare jqxChart settings
+            var settings = {
+                title: $('#nameOfTC').text(),
+                description: "معدل الحضور من الجنسين في الدورة التدريبية",
+                enableAnimations: true,
+                showLegend: true,
+                showBorderLine: true,
+                legendLayout: { left: 700, top: 160, width: 300, height: 200, flow: 'vertical' },
+                padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                titlePadding: { left: 0, top: 0, right: 0, bottom: 10 },
+                source: dataAdapter,
+                colorScheme: 'scheme03',
+                seriesGroups:
+                    [
+                        {
+                            type: 'pie',
+                            showLabels: true,
+                            series:
+                                [
+                                    { 
+                                        dataField: 'Total',
+                                        displayText: 'Gender',
+                                        labelRadius: 170,
+                                        initialAngle: 15,
+                                        radius: 145,
+                                        centerOffset: 0,
+                                        formatFunction: function (value) {
+                                            if (isNaN(value))
+                                                return value;
+                                            return parseFloat(value) + '%';
+                                        },
+                                    }
+                                ]
+                        }
+                    ]
+            };
+            
+            // setup the chart
+            $('#chartGender').jqxChart(settings);
+        });
         
+               $(document).ready(function () {
+            // prepare chart data as an array
+            var source =
+            {
+                datatype: "json",
+                datafields: [
+                    { name: 'Rank' },
+                    { name: 'Total' }
+                ],
+                url: 'getTCRank.php'
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
+            // prepare jqxChart settings
+            var settings = {
+                title: $('#nameOfTC').text(),
+                description: "معدل الحضور حسب الرتبة العلمية في الدورة التدريبية",
+                enableAnimations: true,
+                showLegend: true,
+                showBorderLine: true,
+                legendLayout: { left: 700, top: 160, width: 300, height: 200, flow: 'vertical' },
+                padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                titlePadding: { left: 0, top: 0, right: 0, bottom: 10 },
+                source: dataAdapter,
+                colorScheme: 'scheme03',
+                seriesGroups:
+                    [
+                        {
+                            type: 'pie',
+                            showLabels: true,
+                            series:
+                                [
+                                    { 
+                                        dataField: 'Total',
+                                        displayText: 'Rank',
+                                        labelRadius: 170,
+                                        initialAngle: 15,
+                                        radius: 145,
+                                        centerOffset: 0,
+                                        formatFunction: function (value) {
+                                            if (isNaN(value))
+                                                return value;
+                                            return parseFloat(value)+ '%';
+                                        },
+                                    }
+                                ]
+                        }
+                    ]
+            };
+            
+            // setup the chart
+            $('#chartRank').jqxChart(settings);
+        });
+$(document).ready(function () {
+            var source =
+		{
+                    datatype: "json",
+                    datafields: [
+                    { name: 'department'},
+                    { name: 'total'}
+                    ],
+		url: "getTCDepartment.php"
+		};
+	   var dataAdapter = new $.jqx.dataAdapter(source,
+		{
+			autoBind: true,
+			async: false,
+			downloadComplete: function () { },
+			loadComplete: function () { },
+			loadError: function () { }
+		});
+
+            // prepare jqxChart settings
+            var settings = {
+                title: $('#nameOfTC').text(),
+                description: "معدل الحضور حسب الكلية",
+                
+		enableAnimations: true,
+                showLegend: true,
+                padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
+                source: dataAdapter,
+                xAxis:
+                    {
+                        dataField: 'department',
+                        showGridLines: true
+                    },
+                colorScheme: 'scheme13',
+                seriesGroups:
+                    [
+                        {
+                            type: 'column',
+                            columnsGapPercent: 50,
+                            seriesGapPercent: 0,
+                            valueAxis:
+                            {
+                                unitInterval: 10,
+                                showGridLines: false,
+                                minValue: 0,
+                                maxValue:100,
+                                displayValueAxis: true,
+                                description: 'عدد الحاضرين',
+                                axisSize: 'auto',
+                                tickMarksColor: '#888888'
+                            },
+                            series: [
+                                    { dataField: 'total', displayText: 'العدد',labels:
+                                    {
+                                        visible: true
+                                    }}
+                                ]
+                        }
+                    ]
+            };
+           
+            // setup the chart
+            $('#chartDepartment').jqxChart(settings);
+            
+        });     

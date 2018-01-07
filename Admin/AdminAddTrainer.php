@@ -8,7 +8,7 @@ session_start();
 if(isset($_SESSION['user_id']))
 {
     $user_id=$_SESSION['user_id'];
-    $isAdmin=$user->isAdmin($user_id);           
+    $isAdmin=$regMan->isAdmin($user_id);           
     if($isAdmin)
     {   
         $smarty->assign('display','none');

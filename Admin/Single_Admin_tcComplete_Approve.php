@@ -1,6 +1,8 @@
 <?php
 include '../libs/smarty/libs/Smarty.class.php';
 require_once '../TrainingCourseModule.php';
+require_once '../RegistrationModule.php';
+$user = new RegistrationModule();
 $smarty=new Smarty();
 error_reporting(0);
 session_start();
@@ -13,7 +15,7 @@ if(isset($_SESSION['user_id']))
     if($isAdmin)
     {   
         if(isset($_POST['back']))
-        header('Location:AdminCompleteTCApprove.php');
+        header('Location:AdminCertificateApprove.php');
     
     
         $tt_id=$_SESSION['tt_id'];

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-01-04 07:05:43
+/* Smarty version 3.1.30, created on 2018-01-07 11:10:40
   from "C:\xampp\htdocs\rtp\Admin\templates\SingleCompletetcView.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a4dc4379d0141_05734749',
+  'unifunc' => 'content_5a51f220db7410_08046573',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ca2e1e4cfc95e1b41c264347ecbeb5fb8a5cc7f9' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rtp\\Admin\\templates\\SingleCompletetcView.tpl',
-      1 => 1515045911,
+      1 => 1515319744,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a4dc4379d0141_05734749 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a51f220db7410_08046573 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('title'=>'بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'), 0, false);
 ?>
 
@@ -89,13 +89,30 @@ $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_s
     </br> 
     <center>
     <h3>قائمة الحاضرين</h3>
+
     <div  id='tcRegisterTrainee'>      
     </div>
     <br>
+    <h3>احصائيات الحاضرين</h3>
     <br>
+    <div id='chartRank' style="width: 850px; height: 500px;">
+	</div>
+    </br>
+    <br>
+    <div id='chartGender' style="width: 850px; height: 500px;">
+	</div>
+    </br>
+    <br>
+        <div style='height: 100%; width: 100%;'>
+        <div id='host' style="margin: 0 auto; width:850px; height:500px;">
+        <div id='chartDepartment' style="width:850px; height:500px; position: relative; left: 0px; top: 0px;">
+        </div>
+            </div>
+        </div>
+    </br>
     <div style='height: 100%; width: 100%;'>
-        <div id='host' style="margin: 0 auto; width:600px; height:300px;">
-        <div id='jqxChart' style="width:600px; height:300px; position: relative; left: 0px; top: 0px;">
+        <div id='host' style="margin: 0 auto; width:850px; height:500px;">
+        <div id='jqxChart' style="width:850px; height:500px; position: relative; left: 0px; top: 0px;">
         </div>
             </div>
         </div>
@@ -126,6 +143,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
         </div>
         <br>
     <br>
+    
     <form action="Single_Admin_tcView.php" method="POST">
         <input type="submit" value="عودة"  name = "back" id='back' class='btn' /> 
         <input type="submit" value='طباعة'  name = "print" id='print' class='btn'/>

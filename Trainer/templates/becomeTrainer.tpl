@@ -1,4 +1,4 @@
-{include file='header.tpl' title='بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'}
+{include file='headerq.tpl' title='بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'}
 
 <script type="text/javascript" src="js/becomeTrainer.js"></script>
 

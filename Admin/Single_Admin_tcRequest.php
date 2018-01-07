@@ -2,6 +2,8 @@
 include '../libs/smarty/libs/Smarty.class.php';
 require_once '../TrainingCourseModule.php';
 require_once '../RegistrationModule.php';
+$trMan=new RegistrationModule();
+$tcMan=new TrainingCourseModule();
 $smarty=new Smarty();
 error_reporting(0);
 session_start(); 
@@ -12,12 +14,12 @@ if (!isset($_SESSION['user_id'])) {
 } else {
     
     $user_id=$_SESSION['user_id'];
-    $isAdmin=$user->isAdmin($user_id);           
+    $isAdmin=$trMan->isAdmin($user_id);           
     if($isAdmin)
     {   
         $tt_id=$_SESSION['tt_id'];
-        $tcMan=new TrainingCourseModule();
-        $trMan=new RegistrationModule();
+
+
         $result=$tcMan->getSingleTrainingCourseInfo($tt_id);
         $smarty->assign('name',$result['tc_ar_name']);
         $smarty->assign('start_date',$result['start_date']);
