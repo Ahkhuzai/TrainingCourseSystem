@@ -2,14 +2,16 @@
 session_start();
 require_once '../DAL/RegistrationRepo.php';
 require_once '../TrainingCourseModule.php';
+ require_once '../libs/tcpdf/tcpdf.php';
+ require_once '../RegistrationModule.php';
 error_reporting(0);
 $tcMan=new TrainingCourseModule();
-require_once '../RegistrationModule.php';
+
 error_reporting(0);
 $trMan=new RegistrationModule();
 if($_SESSION['user_id'])
 {
-    require_once '../libs/tcpdf/tcpdf.php';
+   
 
     // Extend the TCPDF class to create custom Header and Footer
     class MYPDF extends TCPDF {
@@ -96,46 +98,93 @@ if($_SESSION['user_id'])
     $usrInfo=$trMan->getTraineeInfo($user_id);
     $tename=$usrInfo['ar_name'];
     $teuqu=$usrInfo['uqu_id'];
+    $email = $usrInfo['email'];
+    $phone = $usrInfo['contact_phone'];
     $department=$usrInfo['department'];
-    //$barcode=$tt_id.'-'.$user_id;
+  
     $barcode = "http://dsr.uqu.edu.sa/rtp/Admin/takingAttendance.php?usr_id=$user_id&tt_id=$tt_id";
     // set font
     $pdf->SetFont('Sakkal_Majalla', '', 14, '', false);
     $pdf->Image('../images/logo_dsr.png', 130, 15, 40, 20, 'PNG', '', '', true, 150, '', false, false, 1, false, false, false);
     
     $pdf->SetXY(15, 40);
-    $pdf->writeHTML("<hr>", true, false, false, false, '');
 
-    $pdf->Cell(0, 50, '(( نموذج طلب التسجيل ))',0, $ln=0, 'R', 0, '', 0, false, 'D', 'C');
-    $pdf->SetXY(15, 50);
-    $pdf->Cell(0, 0, 'اسم الدورة :'.$tcname,0, $ln=0, 'R', 0, '', 0, false, 'D', 'C');
-    $pdf->SetXY(15, 60);
-    $pdf->Cell(0, 0, 'اسم المدرب :'.$trname,0, $ln=0, 'R', 0, '', 0, false, 'D', 'C');
-    $pdf->SetXY(15, 70);
-    $pdf->Cell(0, 0, 'تاريخها  :'.$date_ar,0, $ln=0, 'R', 0, '', 0, false, 'D', 'C');
-    $pdf->SetXY(15, 80);
-    $pdf->Cell(0, 0, 'مكان إقامة الدورة  :'.$location,0, $ln=0, 'R', 0, '', 0, false, 'D', 'C');
     $pdf->writeHTML("<hr>", true, false, false, false, '');
-    $pdf->SetXY(15, 90);
-    $pdf->Cell(0, 0, 'اسم المتدرب :'.$tename,0, $ln=0, 'R', 0, '', 0, false, 'D', 'C');
-    $pdf->SetXY(15, 100);
-    $pdf->Cell(0, 0, 'رقم المنسوب  :'.$teuqu,0, $ln=0, 'R', 0, '', 0, false, 'D', 'C');
-    $pdf->SetXY(15, 110);
-    $pdf->Cell(0, 0, 'الكلية:'.$department,0, $ln=0, 'R', 0, '', 0, false, 'D', 'C');
-    $pdf->writeHTML("<hr>", true, false, false, false, '');
-    $pdf->SetXY(15, 120);
-    $pdf->SetFont('Sakkal_Majalla', '', 12, '', false);
-    $pdf->Cell(0, 0, '**لتسجيل حضورك في الدورة .. الرجاء احضاء طلب التسجيل مع مراعاة وضوح الbarcode',0, $ln=0, 'R', 0, '', 0, false, 'D', 'C');
-    // new style
-    $style = array(
-    'border' => 2,
-    'padding' => 'auto',
-    'fgcolor' => array(0,0,0),
-    'bgcolor' => array(255,255,255)
-    );
-    // QRCODE,H : QR-CODE Best error correction
-    $pdf->write2DBarcode($barcode, 'QRCODE,H', 140, 150, 50, 50, $style, 'N');
+    $html = '<div style="text-align:center"><h1>اشعار قبول </h1></div>';
+$pdf->writeHTML($html, true, false, true, false, '');
+    
   
+      $tbl = <<<EOD
+<table border="1" cellpadding="2" cellspacing="2" nobr="true">
+ <tr>
+  <th colspan="2" align="center">بيانات الدورة</th>
+ </tr>
+ <tr>
+  <td>اسم الدورة</td>
+  <td>$tcname</td>
+ </tr>
+ <tr>
+  <td>اسم الدرب</td>
+  <td>$trname</td>
+ </tr>
+ <tr>
+  <td>تاريخها</td>
+  <td>$date_ar</td>
+ </tr>
+<tr>
+  <td>مكان اقامة الدورة</td>
+  <td>$location</td>
+ </tr>
+</table>
+EOD;
+
+$pdf->writeHTML($tbl, true, false, false, false, '');
+$pdf->writeHTML("<hr>", true, false, false, false, '');
+      $tbl = <<<EOD
+<table border="1" cellpadding="2" cellspacing="2" nobr="true">
+ <tr>
+  <th colspan="2" align="center">بيانات المتدرب</th>
+ </tr>
+ <tr>
+  <td>اسم المتدرب</td>
+  <td>$tename</td>
+ </tr>
+ <tr>
+  <td>رقم المنسوب</td>
+  <td>$teuqu</td>
+ </tr>
+ <tr>
+  <td>الكلية</td>
+  <td>$department</td>
+ </tr>
+<tr>
+  <td>البريد الالكتروني</td>
+  <td>$email</td>
+ </tr>
+<tr>
+  <td>رقم الهاتف</td>
+  <td>$phone</td>
+ </tr>
+</table>
+EOD;
+
+$pdf->writeHTML($tbl, true, false, false, false, '');
+   
+$pdf->writeHTML("<hr>", true, false, false, false, '');
+
+$pdf->SetFont('Sakkal_Majalla', '', 12, '', false);
+$pdf->writeHTML( '**لتسجيل حضورك في الدورة .. الرجاء احضاء طلب التسجيل مع مراعاة وضوح الbarcode', true, false, false, false, '');
+
+// new style
+$style = array(
+'border' => 2,
+'padding' => 'auto',
+'fgcolor' => array(0,0,0),
+'bgcolor' => array(255,255,255)
+);
+    // QRCODE,H : QR-CODE Best error correction
+    $pdf->write2DBarcode($barcode, 'QRCODE,H', 140, 210, 50, 50, $style, 'N');
+
 //Close and output PDF document
     $pdf->Output('RegistrationRequest.pdf', 'I');
 

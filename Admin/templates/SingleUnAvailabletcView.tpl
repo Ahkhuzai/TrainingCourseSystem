@@ -24,6 +24,7 @@
     </center>
     <br>
     <br>
+    <div id="pr_content">
     <h3>مقدم الدورة </h3> 
     <p>{$trname}</p>   
     <h3>اسم الدورة</h3> 
@@ -31,6 +32,7 @@
     <h3> تاريخها </h3>
     <p>{$start_date} من  <br>
     {$end_date} الى </p>
+    </div>
     <h3>عدد ساعات الدورة </h3>
     <p> {$hours} </p>
     <h3>وقت بداية الدورة </h3>
@@ -55,7 +57,7 @@
     <br>
     <form action="Single_Admin_tcView.php" method="POST">
         <input type="submit" value="عودة"  name = "back" id='back' class='btn' /> 
-        <input type="submit" value='طباعة'  name = "print" id='print' class='btn'/>
+        <input type="button" value='طباعة'  name = "print" id='print' class='btn'/>
     </form>
                     </center>
                 </section>      

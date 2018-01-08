@@ -16,7 +16,7 @@ $result_tr=$trMan->getUserInfo($result_tc['tr_id']);
 
 $name_ar=$result_persona['ar_name'];
 $rank =$result_persona['rank'];
-$name_ar='ال'.$rank.'/ة '.$name_ar;
+$name_ar='ال'.$rank.' /ة '.$name_ar;
 $name_eng=$result_persona['eng_name'];
 $tcname_ar=$result_tc['tc_ar_name'];
 $tcname_eng=$result_tc['tc_eng_name'];
@@ -31,13 +31,15 @@ switch($dayofweek)
     case 5: {$ar_date_string='الجمعة';$eng_date_string='Friday';break;}
     case 6: {$ar_date_string='السبت';$eng_date_string='Saterday';break;}
 }
-include "../libs/HijriDate/uCal.class.php";
-$d = new uCal;
-$d->setLang("ar");
-$day=$result_tc['start_date'];
-$date_ar= $d->date($day." l");
-//$date_ar=$ar_date_string.' الموافق '.$result_tc['start_date'];
+include "../libs/HijriDate/HijriDate.php";
+$hijri = new HijriDate();
+$hijri = new HijriDate( strtotime($result_tc['start_date']) );
+
+$day =$ar_date_string." الموافق ".$hijri->get_day()."  ".$hijri->get_month_name( $hijri->get_month() )." ".$hijri->get_year();
+
+$date_ar=$day;
 $date_eng=$eng_date_string.' the '.$result_tc['start_date'];
+$date_eng=date('l jS \of F Y ', strtotime($result_tc['start_date']));
 $hours=$result_tc['duration'];
 $tr_name_ar=$result_tr['ar_name'];
 $tr_name_eng=$result_tr['eng_name'];

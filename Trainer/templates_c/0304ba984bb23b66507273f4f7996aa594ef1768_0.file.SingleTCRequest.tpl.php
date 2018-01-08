@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-01-01 06:44:41
+/* Smarty version 3.1.30, created on 2018-01-08 12:19:15
   from "C:\xampp\htdocs\rtp\Trainer\templates\SingleTCRequest.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a49cac97779f1_50634021',
+  'unifunc' => 'content_5a5353b3e7adc6_05889897',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0304ba984bb23b66507273f4f7996aa594ef1768' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rtp\\Trainer\\templates\\SingleTCRequest.tpl',
-      1 => 1514617584,
+      1 => 1515405013,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a49cac97779f1_50634021 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a5353b3e7adc6_05889897 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('title'=>'بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'), 0, false);
 ?>
 
@@ -30,10 +30,14 @@ $_smarty_tpl->_subTemplateRender("file:header.tpl", $_smarty_tpl->cache_id, $_sm
 <?php echo '<script'; ?>
  type="text/javascript" src="js/SingleTCRequest.js"><?php echo '</script'; ?>
 >
-    <center>
-    <fieldset style="width:70%; margin:0 auto;">      
-   <legend align="right">بيانات الدورة</legend>
+<!-- Introduction -->
+<section id="intro" class="main">
+        <div class="spotlight">
+                <div class="content align-right">
+                <section class="main">     
+ 
    <center>
+         <h3>بيانات الدورة</h3>
     <h3><font color="green"><?php echo $_smarty_tpl->tpl_vars['added']->value;?>
 </font></h3>
     <p><font color="red"><?php echo $_smarty_tpl->tpl_vars['msg']->value;?>
@@ -66,22 +70,18 @@ $_smarty_tpl->_subTemplateRender("file:header.tpl", $_smarty_tpl->cache_id, $_sm
 " >من هنا</a> </p>
     <br>
     <br>
+    <center>
     <form action="SingleTCRequest.php" method="POST">
         <input type="submit" value="عودة"  name = "back" id='back' class='btn' /> 
-        <input type="submit" value='طباعة'  name = "print" id='print' class='btn'/>
+    
     </form>
-    </br>
-    </fieldset>
-    </br>
-    </br>
-</div>
-    <br>
-<?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+    </center>
+                    </section>
+                </div>
+        </div>
+</section>				
+  <?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
-
-
-
-
 
 
 <?php }

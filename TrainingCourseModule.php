@@ -41,7 +41,7 @@ class TrainingCourseModule {
         $result['abstract']=$tcRsult['abstract'];
         $result['pid']=$tcRsult['pid'];       
         $result['tr_ar_name'] = $personaResult['ar_name'];
-        $result['url'] = $hoResult[0]['presentation_dir'];       
+        $result['url'] = $hoResult[0]['ho_trainee_dir'];       
         return $result;    
     }
 
@@ -66,7 +66,7 @@ class TrainingCourseModule {
             $hoMan = new HandoutTcRepo();
             $tc_Id = $tcMan->save(0, $Tname, $Teng_name, $Tgoals, $Tabstract, $pid);
             $tt_id=$ttMan->save($tt_id, $tc_Id, $usrId, $Tstart, $Tend, $Thours, $startAt, $location, $addDate, $Tcapacity, $Tstatus, $Tavailable_seat, $tc_avg, $type);
-            $ho_id = $hoMan->save(0, null, null, $handoutDir, null, $tt_id);
+            $ho_id = $hoMan->save(0,$handoutDir,$tt_id);
             if($ho_id>0)
                 return true; 
             else {return false;}
@@ -79,7 +79,7 @@ class TrainingCourseModule {
             $tc_Id = $tcMan->save($result['tc_id'], $Tname, $Teng_name, $Tgoals, $Tabstract, $pid);
             $ttresult=$ttMan->save($tt_id, $result['tc_id'], $usrId, $Tstart, $Tend, $Thours, $startAt, $location, $addDate, $Tcapacity, $Tstatus, $Tavailable_seat, $tc_avg, $type);
             $result=$hoMan->fetchByTt_id($tt_id);
-            $ho_id = $hoMan->save($result[0]['id'], $result[0]['ho_trainer_dir'], $result[0]['ho_trainee_dir'], $handoutDir, $result[0]['scientific_chapter_dir'], $tt_id);
+            $ho_id = $hoMan->save($result[0]['id'],  $result[0]['ho_trainee_dir'],$tt_id);
             if($ho_id>0)
                 return true; 
             else{return false; 
@@ -94,7 +94,7 @@ class TrainingCourseModule {
         $ttMan = new TimetableRepo();
         $hoMan = new HandoutTcRepo();
         $tt=$ttMan->save($tt_id, $tc_id, $usrId, $Tstart, $Tend, $Thours, $startAt, $location, $addDate, $Tcapacity, $Tstatus, $Tavailable_seat, $tc_avg, $type);
-        $ho_id = $hoMan->save(0, null, null, $handoutDir, null, $tt);
+        $ho_id = $hoMan->save(0,$handoutDir,$tt);
         if($ho_id>0)
             return true; 
         else 
@@ -420,85 +420,5 @@ class TrainingCourseModule {
     }
     
     //////////////////////////////////////////
-    public function getAvailableProgram($te_id)
-    {
-        //the program available if one training course of it is available 
-       $ttMan=new TimetableRepo();
-       $program= new ProgramRepo();
-       $availableTC=$this->getTrainingCourseAvailableForTrainee($te_id);
-       //get pid from available Training course 
-       $x=0;
-       for($i=0;$i<count($availableTC);$i++)
-       {
-           if ($availableTC[$i]['pid'] != NULL) {
-                $pid[$x] = $availableTC[$i]['pid'];
-                $x++;
-            }
-        }
-        
-        $resultOfAvailableProgram = $program->fetchBystatus_id(11);
-        for($i=0;$i<count($resultOfAvailableProgram);$i++)
-           $pidProgram[$i]=$resultOfAvailableProgram[$i]['id'];
-       
-       $resultUnique = array_unique($pid);
-    
-       foreach($pidProgram as $key=>$val){
-            if(in_array($val,$resultUnique)){
-                $result[] = $val;
-            }
-        }
-        
-       for($i=0;$i<count($result);$i++)
-            $programResult[$i]=$this->getProgramInfo($result[$i]);
-       return $programResult;
-    }
-    
-    public function getTrainingCourseInProgram($pid)
-    {
-        $tcMan = new TrainingCourseRepo();
-        $ttMan = new TimetableRepo();
-        
-        $tcResult=$tcMan->fetchByProgramId($pid);
-        
-        for ($i = 0; $i < count($tcResult); $i++) {
-            $tcTimetable[$i] = $ttMan->fetchByQuery("SELECT id from timetable where (timetable.status = 11 or timetable.status = 13) and tc_id=" . $tcResult[$i]['id']);
-        }
-        
-        $x=0;
-        for ($i = 0; $i < count($tcResult); $i++) {
-            for ($j = 0; $j < count($tcTimetable[$i]); $j++) {
-                $tcFinalTimeTable[$x] = $tcTimetable[$i][$j];
-            $x++;
-            }    
-        }
-        for($i=0;$i<count($tcFinalTimeTable);$i++)
-            $tcInfo[$i]=$this->getSingleTrainingCourseInfo($tcFinalTimeTable[$i]['id']);
-        return $tcInfo;
-    }
-    
-    public function registerForProgram($userId,$pid)
-    {
-        $ProgranTC= $this->getTrainingCourseInProgram($pid);
-        
-        for($i=0;$i<count($ProgranTC);$i++)
-        {
-           
-            if (!$this->IsTraineeRegistered($userId, $ProgranTC[$i]['id'])) {
-                $result[$i] = $this->RegisterTraineeInTC($userId, $ProgranTC[$i]['id'], 1);
-            } else {
-                $result[$i] = '-1';
-            }
-        }
-        $register=-1;
-        for($i=0;$i<count($result);$i++)
-            if ($result[$i] == 1) {
-                $register = 'true';
-            }
-        return $register;
-    }
-    
-
-    
-    
 }
             

@@ -34,10 +34,10 @@ if(isset($_SESSION['user_id']))
     $smarty->assign('abstract',$result['abstract']);
     $smarty->assign('goals',$result['goals']);
     $smarty->assign('trname',$result['tr_ar_name']);
-    if ($sid == 2) {
+    if ($sid == 2 && $result['status']!=9) {
         $smarty->assign('url',$result['url']);
         $smarty->display("SingleRegisterAccepted.tpl");
-    } else
+    } else 
         $smarty->display("SingleRegister.tpl");
 }
 else 

@@ -39,6 +39,7 @@
     <script type="text/javascript" src="../libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxgrid.selection.js"></script>
     <script type="text/javascript" src="../libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxgrid.sort.js"></script>
     <script type="text/javascript" src="../libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxgrid.filter.js"></script>
+       <script type="text/javascript" src="../libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxgrid.aggregates.js"></script> 
     <script type="text/javascript" src="../libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxcalendar.js"></script>
     <script type="text/javascript" src="../libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxdatetimeinput.js"></script>
     <script type="text/javascript" src="../libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxcheckbox.js"></script>

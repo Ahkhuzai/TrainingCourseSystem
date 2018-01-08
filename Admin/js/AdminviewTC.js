@@ -10,7 +10,10 @@ $(document).ready(function () {
             { name: 'sid',type: 'number' },
             { name: 'start_date' },
             { name: 'counts',type: 'number' }],
-        url: "getTCView.php"
+        url: "getTCView.php",
+        pager: function (pagenum, pagesize, oldpagenum) {
+                    // callback called when a page or page size is changed.
+                }
     };
     $("#tcList").jqxGrid({
         source: source,
@@ -19,6 +22,9 @@ $(document).ready(function () {
         autoheight: true,
         showfilterrow: true,
         filterable: true,
+        sortable: true,
+        pageable: true,
+
         width:'75%',                                                         
         columns: [
             { text: 'اسم الدورة', datafield: 'tc_ar_name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
@@ -26,7 +32,7 @@ $(document).ready(function () {
             { text: 'مقدم الدورة', datafield: 'tr_ar_name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'حالة الدورة', datafield: 'status',columntype: 'textbox', filtertype: 'checkedlist',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'تاريخ بدء الدورة',datafield: 'start_date',filtertype: 'range',cellsformat: 'dd.MM.yyyy',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'عدد الحاضرين/المسجلين', datafield: 'counts',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },   
+            { text: 'عدد الحاضرين/المسجلين', datafield: 'counts',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer},   
         ]
     });
         $("#tcList").on('rowselect', function (event) {

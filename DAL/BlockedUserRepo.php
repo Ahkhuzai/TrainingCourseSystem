@@ -92,7 +92,7 @@ class BlockedUserRepo {
         }          
     }  
     
-    public function save($id,$userid,$startDate,$endDate,$sid)
+    public function save($id,$userid,$startDate,$endDate)
     {      
         if($id>0)
         { 
@@ -101,7 +101,7 @@ class BlockedUserRepo {
                 $user['user_id'] = $userid;
                 $user['start_date'] = $startDate;
                 $user['end_date'] = $endDate;
-                $user['status']=$sid;
+    
                 $id = R::store($user);
                 if ($id){
                     return true;
@@ -121,7 +121,6 @@ class BlockedUserRepo {
                 $user['user_id'] = $userid;
                 $user['start_date'] = $startDate;
                 $user['end_date'] = $endDate;
-                $user['status']=$sid;
                 $result = R::store($user);
                 if ($result){
                     return $result;

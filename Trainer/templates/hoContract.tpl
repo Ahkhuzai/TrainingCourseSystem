@@ -27,8 +27,8 @@
       </li>
     </ul>
   <center>
-          <input type='submit' id='notAgree' name='notAgree'  value="تراجع "  >
-    <input type='submit' id='agree' name='agree'  value="متابعة"  >
+          <input type='submit' id='notAgree' name='notAgree'  value="غير موافق "  >
+    <input type='submit' id='agree' name='agree'  value="موافق"  >
 
             </br>
             </br>

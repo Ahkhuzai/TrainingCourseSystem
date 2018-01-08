@@ -3,8 +3,9 @@
 <script type="text/javascript" src="js/Single_Admin_Trainee.js"></script>
 <nav id="nav">
 	<ul>
+            <li><a href="AdminViewBlocked.php"> استعراض قائمة الحظر</a></li>
  	   <li><a href="AdminViewTrainee.php"> استعراض المتدربين</a></li>
-       <li><a href="AdminRegisterTrainee.php"> تسجيل متدرب في دورة</a></li>                          
+       <li><a href="AdminRegisterTrainee.php"> تسجيل متدرب في دورة</a></li>                         
     </ul>
 </nav>
  <!-- Introduction -->

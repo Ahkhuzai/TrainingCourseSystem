@@ -23,10 +23,12 @@ if($result)
    
     $rank[$i]['Total']=0;
  }
+    $count=0;
     for($i=0;$i<count($result);$i++)
     {
         if($result[$i]['sid']==12)
         {
+            $count++;
             for($j=0;$j<count($rank);$j++)
                 if($result[$i]['rank']==$rank[$j]['Rank'])
                     $rank[$j]['Total']=$rank[$j]['Total']+1;
@@ -34,7 +36,7 @@ if($result)
     }  
     
     for($j=0;$j<count($rank);$j++)
-        $rank[$j]['Total']=($rank[$j]['Total']*100)/count($result);
+        $rank[$j]['Total']=($rank[$j]['Total']*100)/$count;
    
     
 }

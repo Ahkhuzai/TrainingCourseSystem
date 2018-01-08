@@ -41,7 +41,7 @@ $(document).ready(function () {
             page: 'Admin_tcComplete'
               },
         success : function(data){
-          alert(data);
+          ;
         },
         error : function(XMLHttpRequest, textStatus, errorThrown) 
         {alert ("Error Occured");}

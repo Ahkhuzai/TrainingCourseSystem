@@ -132,7 +132,7 @@ class PersonaRepo {
         }
             
     }        
-    public function save($id,$uquId,$arName,$enName,$phone,$department,$resumeDir,$signDir,$qualification,$major,$special,$isTrainer,$rank,$gender,$nationality)
+    public function save($id,$uquId,$arName,$enName,$phone,$department,$resumeDir,$signDir,$qualification,$major,$special,$rank,$gender,$nationality)
     {             
         if($id>0)
         {
@@ -148,8 +148,7 @@ class PersonaRepo {
                 $user['resume'] = $resumeDir;
                 $user['qualification'] = $qualification;
                 $user['major'] = $major;
-                $user['special'] = $special;
-                $user['is_trainer'] = $isTrainer;               
+                $user['special'] = $special;              
                 $user['signature'] = $signDir;
                 $user['gender'] = $gender;
                 $id = R::store($user);
@@ -176,7 +175,6 @@ class PersonaRepo {
             $user['qualification'] = $qualification;
             $user['major'] = $major;
             $user['special'] = $special;
-            $user['is_trainer'] = $isTrainer;
             $user['signature'] = $signDir;
             $user['gender'] = $gender;
             $result = R::store($user);

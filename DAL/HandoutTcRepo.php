@@ -81,16 +81,13 @@ class HandoutTcRepo {
         }
             
     }        
-    public function save($id,$trainer,$trainee,$presentation,$scientific_chapter,$tt_id)
+    public function save($id,$trainee,$tt_id)
     {             
         if($id>0)
         {
             try {
                 $ho = R::findOne('tchandout', 'id = ?', array($id));
-                $ho['ho_trainer_dir'] = $trainer;
                 $ho['ho_trainee_dir'] = $trainee;
-                $ho['presentation_dir'] = $presentation;
-                $ho['scientific_chapter_dir'] = $scientific_chapter;
                 $ho['tt_id'] = $tt_id;               
                 $id = R::store($ho);
                 if($id)
@@ -105,10 +102,7 @@ class HandoutTcRepo {
         {
         try {
             $ho = R::dispense('tchandout');
-            $ho['ho_trainer_dir'] = $trainer;
             $ho['ho_trainee_dir'] = $trainee;
-            $ho['presentation_dir'] = $presentation;
-            $ho['scientific_chapter_dir'] = $scientific_chapter;
             $ho['tt_id'] = $tt_id;               
             $result = R::store($ho);
             if ($result)

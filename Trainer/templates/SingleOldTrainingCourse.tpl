@@ -14,6 +14,7 @@
     </center>
     <br>
     <br>
+    <div id="pr_content" >
     <h3>مقدم الدورة </h3> 
     <p>{$trname}</p>   
     <h3 >اسم الدورة</h3> 
@@ -31,6 +32,7 @@
     <p>{$abstract}</p>
     <h3>اهداف الدورة</h3>
     <p>{$goals}</p>  
+    </div>
     <h3>الحقيبة التدريبية</h3>
     <p><a href="{$url}" >  من هنا</a> </p>
     </br>

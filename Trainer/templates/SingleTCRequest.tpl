@@ -34,7 +34,7 @@
     <center>
     <form action="SingleTCRequest.php" method="POST">
         <input type="submit" value="عودة"  name = "back" id='back' class='btn' /> 
-        <input type="submit" value='طباعة'  name = "print" id='print' class='btn'/>
+    
     </form>
     </center>
                     </section>

@@ -54,6 +54,8 @@ if (isset($_GET['update']))
     if($close==1)
         $result = $trMan->closeTC($tt_id);
     if($result)
-        $trMan->calcMissed($tt_id);
+        $calcMissed=$trMan->calcMissed($tt_id);
+    if($calcMissed)
+        $res = $trMan->calcBlocked($tt_id);
 }
 ?>

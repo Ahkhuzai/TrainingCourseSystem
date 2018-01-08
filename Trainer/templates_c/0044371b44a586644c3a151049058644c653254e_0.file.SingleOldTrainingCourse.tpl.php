@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-01-02 10:02:10
+/* Smarty version 3.1.30, created on 2018-01-08 10:55:01
   from "C:\xampp\htdocs\rtp\Trainer\templates\SingleOldTrainingCourse.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a4b4a9210aac7_36500122',
+  'unifunc' => 'content_5a533ff55e5849_80733209',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0044371b44a586644c3a151049058644c653254e' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rtp\\Trainer\\templates\\SingleOldTrainingCourse.tpl',
-      1 => 1514883193,
+      1 => 1515405287,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a4b4a9210aac7_36500122 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a533ff55e5849_80733209 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('title'=>'بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'), 0, false);
 ?>
 
@@ -45,6 +45,7 @@ $_smarty_tpl->_subTemplateRender("file:header.tpl", $_smarty_tpl->cache_id, $_sm
     </center>
     <br>
     <br>
+    <div id="pr_content" >
     <h3>مقدم الدورة </h3> 
     <p><?php echo $_smarty_tpl->tpl_vars['trname']->value;?>
 </p>   
@@ -71,6 +72,7 @@ $_smarty_tpl->_subTemplateRender("file:header.tpl", $_smarty_tpl->cache_id, $_sm
     <h3>اهداف الدورة</h3>
     <p><?php echo $_smarty_tpl->tpl_vars['goals']->value;?>
 </p>  
+    </div>
     <h3>الحقيبة التدريبية</h3>
     <p><a href="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
 " >  من هنا</a> </p>

@@ -22,10 +22,12 @@
     </center>
     <br>
     <br>
+    <div id="pr_content">
     <h3>مقدم الدورة </h3> 
     <p>{$trname}</p>   
     <h3 >اسم الدورة</h3> 
     <p id="nameOfTC">{$name}</p>
+     </div>
     <h3> تاريخها </h3>
     <p>{$start_date} من  <br>
     {$end_date} الى </p>
@@ -33,14 +35,17 @@
     <p> {$hours} </p>
     <h3>وقت بداية الدورة </h3>
     <p> {$start_at} </p>
+      <h3>مكان اقامة الدورة</h3>
+    <p> {$location} </p>
+   
     <h3>العدد الاجمالي للمقاعد</h3>
     <p> {$capacity} </p>
-    <h3>مكان اقامة الدورة</h3>
-    <p> {$location} </p>
+  
     <h3> ملخص الدورة</h3>
     <p>{$abstract}</p>
     <h3>اهداف الدورة</h3>
     <p>{$goals}</p>  
+  
     <h3>الحقيبة التدريبية</h3>
     <p><a href="{$url}" >  من هنا</a> </p>
     </br>
@@ -96,7 +101,7 @@
     
     <form action="Single_Admin_tcView.php" method="POST">
         <input type="submit" value="عودة"  name = "back" id='back' class='btn' /> 
-        <input type="submit" value='طباعة'  name = "print" id='print' class='btn'/>
+        <input type="button" value='طباعة'  name = "print" id='print' class='btn'/>
     </form>
 </center>
 </section>    

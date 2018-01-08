@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-12-31 07:30:46
+/* Smarty version 3.1.30, created on 2018-01-08 10:38:03
   from "C:\xampp\htdocs\rtp\Admin\templates\header.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a48841690a7f1_96256252',
+  'unifunc' => 'content_5a533bfbcc1277_69598200',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '3f76fe61944341d806b824e87aa8980371707136' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rtp\\Admin\\templates\\header.tpl',
-      1 => 1514617556,
+      1 => 1515404265,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a48841690a7f1_96256252 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a533bfbcc1277_69598200 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE HTML>
 <!--
@@ -107,6 +107,9 @@ function content_5a48841690a7f1_96256252 (Smarty_Internal_Template $_smarty_tpl)
     <?php echo '<script'; ?>
  type="text/javascript" src="../libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxgrid.filter.js"><?php echo '</script'; ?>
 >
+       <?php echo '<script'; ?>
+ type="text/javascript" src="../libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxgrid.aggregates.js"><?php echo '</script'; ?>
+> 
     <?php echo '<script'; ?>
  type="text/javascript" src="../libs/jq_libs/jqwidgets-ver5.3.2/jqwidgets/jqxcalendar.js"><?php echo '</script'; ?>
 >

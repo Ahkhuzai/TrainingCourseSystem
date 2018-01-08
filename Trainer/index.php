@@ -10,13 +10,25 @@ if (!isset($_SESSION['user_id'])) {
     $smarty->display("unAuthorized.tpl");
 } else {
     $user_id=$_SESSION['user_id'];
-    $isTrainer = $tRegMan->isTrainer($user_id);
-    if($isTrainer)
-        $smarty->display("index.tpl");   
+    $isTrainee= $tRegMan->isTrainee($user_id);
+    if($isTrainee)
+    {
+        $isTrainer = $tRegMan->isTrainer($user_id);
+        if($isTrainer)
+            $smarty->display("index.tpl");   
+        else
+        {
+            echo '<script>alert("انت غير مسجل كمدرب في النظام");</script>';
+            echo '<script>window.location="becomeTrainer.php"</script>';
+        }
+    }   
     else
     {
-        echo '<script>alert("انت غير مسجل كمدرب في النظام");</script>';
-        echo '<script>window.location="becomeTrainer.php"</script>';
-    }
+        echo '<script>alert("انت غير مسجل  في النظام");</script>';
+        echo '<script>window.location="../index.php"</script>';
+    } 
+    
+    
+    
 }
 ?>

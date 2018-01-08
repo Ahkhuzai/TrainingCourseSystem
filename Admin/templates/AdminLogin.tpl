@@ -16,12 +16,11 @@
 			<br>
 			<input type="submit" value="تسجيل الدخول" name="login" id='login'/>
 			</form>   
-			</div>
-			    </br>
-                </section>   
-            </div>
-        </div>
-            </section>              
+			</br>
+        </section>   
+    </div>
+</div>
+</section>              
   {include file='footer.tpl'}
 
 

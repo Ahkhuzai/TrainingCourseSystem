@@ -22,8 +22,9 @@ if($result)
                 $female++;
         }
     }
-    $femalePer = ($female * 100 )/count($result);
-    $malePer = ($male * 100)/count($result);
+    $totalAttend = $female+$male;
+    $femalePer = ($female * 100 )/$totalAttend;
+    $malePer = ($male * 100)/$totalAttend;
     $gender[0]['Gender']='ذكر';
     $gender[0]['Total']=$malePer;
     $gender[1]['Gender']='انثى';

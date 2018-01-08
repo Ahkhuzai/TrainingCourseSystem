@@ -396,8 +396,38 @@ class RegistrationModule {
             return true;
         }
         else 
-            return flse;
-
+            return false;
+    }
+    
+    //done
+    public function calcBlocked($tt_id)
+    {
+        $blcMan = new BlockedUserRepo();
+        $result=$this->getTraineeRegisteredInTC($tt_id);
+  
+        if($result)
+        {
+            for($i=0;$i<count($result);$i++)
+            {
+                $user_id=$result[$i]['usr_id'];
+    
+                $totalMissed= $this->gettotalMissed($user_id);
+                
+                //get total blocked time 
+                $blocked = $blcMan->fetchByUserId($user_id);
+                if($blocked)
+                    $total = count($blocked);
+                else 
+                    $total =0;
+                if($total==floor($totalMissed/3))
+                    ;
+                else if($total<floor($totalMissed/3)) 
+                    $res=$blcMan->save (0, $user_id, date('Y-m-d'), date('Y-m-d', strtotime("+16 week")), 7);  
+            } 
+            return true;
+        }
+        else 
+            return false;
     }
     
     //done 
@@ -457,7 +487,7 @@ class RegistrationModule {
         $result = $bMan->fetchByQuery($qr);
 
         if($result)
-            return true;
+            return $result;
         else 
             return false;
     }
@@ -525,7 +555,7 @@ class RegistrationModule {
         $userResult= $user->fetchById($usrID);
         $personaMan= new PersonaRepo();
         $result=$personaMan->fetchById($userResult['persona_id']);
-        $saveResult=$personaMan->save($result['id'], $result['uqu_id'], $result['ar_name'], $result['eng_name'], $result['contact_phone'], $result['department'], $resumeDir, $signtureDir, $result['qualification'], $result['major'], $result['special'], 1, $result['rank'],$result['gender'],$result['nationality']);
+        $saveResult=$personaMan->save($result['id'], $result['uqu_id'], $result['ar_name'], $result['eng_name'], $result['contact_phone'], $result['department'], $resumeDir, $signtureDir, $result['qualification'], $result['major'], $result['special'], $result['rank'],$result['gender'],$result['nationality']);
         if($saveResult)
         {
             $isTrainer = $this->isTrainer($usrID);

@@ -57,8 +57,8 @@ if(isset($_SESSION['user_id']))
                 break;
             } 
         }
-        if(isset($_POST['print']))
-            print_r ($_SESSION);
+//        if(isset($_POST['print']))
+  //          print_r ($_SESSION);
     } 
     else
     {
