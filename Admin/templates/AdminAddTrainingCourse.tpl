@@ -21,6 +21,8 @@
     <center>
         <p><font color="green">{$added}</font></p>
         <form action='AdminAddTrainingCourse.php' method='POST' enctype="multipart/form-data">
+                <p><font color="red">{$msg}</font></p>
+                <br>
              <label> مقدم الدورة</label>
             <div id='trainer'>
             </div>
@@ -90,7 +92,7 @@
             </form>
         
             <br>
-               <p><font color="red">{$msg}</font></p>
+           
     </center>
     
                 </section>   

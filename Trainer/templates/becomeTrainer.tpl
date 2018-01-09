@@ -24,7 +24,7 @@
             <input type="file" name="sign" id="sign"  accept='image/*' > 
         </br>
         </br>
-         
+        <p>حجم الملفات المسموح به  5 ميغابايت</p>
         </div>
            <p><font color="red">{$msg}</font></p> 
         <input type='submit' id='AddTrainer' name='AddTrainer'  value="تسجيل"  >

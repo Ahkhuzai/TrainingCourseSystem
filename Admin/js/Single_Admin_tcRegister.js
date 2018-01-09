@@ -18,6 +18,7 @@ $(document).ready(function () {
             { name: 'sid',type: 'number' },
             { name: 'status',type: 'string' },
             { name: 'boolstatus' },
+            { name: 'boolstatus_reject' },
             { name: 'rid',type: 'number' },
             { name: 'missed',type: 'number' },
             { name: 'excused',type: 'number' }],
@@ -31,6 +32,7 @@ $(document).ready(function () {
                         data: {
                             update:true,
                             boolstatus:rowdata.boolstatus,
+                            boolstatusReject:rowdata.boolstatus_reject,
                             rid:rowdata.rid
                               },
                         success : function(data){
@@ -42,7 +44,7 @@ $(document).ready(function () {
                             }); 
                    
                     }
-                       };
+    };
                        
     var dataAdapter = new $.jqx.dataAdapter(source);
     $("#tcRegisterTrainee").jqxGrid({
@@ -61,7 +63,8 @@ $(document).ready(function () {
             { text: 'عدد مرات الغياب',editable:false, datafield: 'missed',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'عدد مرات الاعتذار', editable:false,datafield: 'excused',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'حالة الطلب', editable:false,datafield: 'status',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'قبول الطلب',datafield: 'boolstatus',columntype:'checkbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer }
+            { text: 'قبول الطلب',datafield: 'boolstatus',columntype:'checkbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'رفض الطلب',datafield: 'boolstatus_reject',columntype:'checkbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer }
         ]
     });
     $("#tcRegisterTrainee").on('cellendedit', function (event) 

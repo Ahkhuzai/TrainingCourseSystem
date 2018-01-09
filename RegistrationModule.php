@@ -476,6 +476,7 @@ class RegistrationModule {
         $personaResult['excused']= $this->gettotalExcused($user_id);
         $personaResult['attend']= $this->gettotalAttend($user_id);
         $personaResult['request']= $this->gettotalUnderProcessing($user_id);
+        $personaResult['user_id']=$user_id;
         return $personaResult;
     } 
 
@@ -702,6 +703,20 @@ class RegistrationModule {
             else 
                 return -1;
         }
+    }
+    
+    //done 
+    public function removeBlock($te_id)
+    {
+        $user = new BlockedUserRepo();
+        $blockedResult = $this->isBlock($te_id);
+        
+        if($blockedResult)
+            $result = $user->save($blockedResult[0]['id'], $blockedResult[0]['user_id'], $blockedResult[0]['start_date'], date('Y-m-d'));
+        if($result)
+            return true;
+        else 
+            return false;
     }
 }
 ?>

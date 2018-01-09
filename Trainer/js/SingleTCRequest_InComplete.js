@@ -50,7 +50,9 @@ $(document).ready(function () {
     }); 
        $('#datee').on('change', function (event) 
     {     
-        $("#etime").val($('#datee').val());  
+         var endDate= $('#datee').val();
+      
+            $("#etime").val(endDate);   
     }); 
    
    

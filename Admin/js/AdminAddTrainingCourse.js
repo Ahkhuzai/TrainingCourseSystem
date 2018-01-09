@@ -86,7 +86,7 @@ $(document).ready(function () {
                 $("#program").jqxDropDownList({
                     disabled: true, source: dataAdapter, displayMember: "name", valueMember: "id", width: '70%',autoDropDownHeight: true,rtl:true
                 });
-                    $("#program").jqxDropDownList({placeHolder: "مقدم الدورة"});
+                    $("#program").jqxDropDownList({placeHolder: "اسم البرنامج "});
                 // subscribe to the select event.
                 $("#program").on('select', function (event) {
                     if (event.args) {
@@ -121,11 +121,13 @@ $(document).ready(function () {
     $("#datee").jqxDateTimeInput({ width: '70%', height: '25px',formatString:'yyyy-M-dd' });
     $('#dates').on('change', function (event) 
     {    
+        
         $("#stime").val($('#dates').val());
     }); 
        $('#datee').on('change', function (event) 
-    {     
-        $("#etime").val($('#datee').val());  
+    {
+        var endDate= $('#datee').val();
+        $("#etime").val(endDate);  
     }); 
    
    

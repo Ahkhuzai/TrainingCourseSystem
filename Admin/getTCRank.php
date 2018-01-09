@@ -9,7 +9,7 @@ $tt_id = $_SESSION['tt_id'];
 
 $result= $trMan->getTraineeAcceptedInTC($tt_id);
 if($result)
-{    for($i=0;$i<count($result);$i++)
+{   for($i=0;$i<count($result);$i++)
     {
         if($result[$i]['sid']==12)
         {

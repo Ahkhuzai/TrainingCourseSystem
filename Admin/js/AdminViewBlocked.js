@@ -19,7 +19,7 @@ $(document).ready(function () {
             { name: 'end_date' }
         ],
         id: 'id',
-        url: "getBlockedTrainee.php",
+        url: "getBlockedTrainee.php"
 
                        };               
     var dataAdapter = new $.jqx.dataAdapter(source);
@@ -44,8 +44,28 @@ $(document).ready(function () {
             { text: 'الحضور ', editable:false,width:'5%',datafield: 'attend',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'تاريخ نهاية الحظر', editable:false,datafield: 'end_date',filtertype: 'range',cellsformat: 'dd.MM.yyyy',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
         ]
+        
+        
     });
-
+        $("#teList").on('rowselect', function (event) {
+        var user_id = event.args.row.user_id; 
+     
+        $.ajax({
+        type : 'GET',
+        url : 'setSession.php',
+        data: {
+            te_id :user_id,
+            page: 'Admin_SingleBlocked'
+              },
+        success : function(data){
+          ;
+        },
+        error : function(XMLHttpRequest, textStatus, errorThrown) 
+        {alert ("Error Occured");}
+            });       
+        var url="Single_Admin_BlockedUser.php";
+        window.location=url;     
+        });   
 });
 var cellsrenderer = function (row, column, value) {
     return '<div style="text-align: center; margin:5px;">' + value + '</div>';

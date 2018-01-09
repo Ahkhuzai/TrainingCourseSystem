@@ -18,6 +18,7 @@
     <h3>قائمة المتدربين</h3>
     <div  id='teList'>      
     </div>
+    <p>لإزالة الحظر عن متدرب - الرجاء الضغط على اسم المتدرب</p>
     <br>
     <form action="AdminViewBlocked.php" method="POST">
         <input type="submit" value="عودة"  name = "back" id='back' class='btn' /> 

@@ -1,6 +1,6 @@
 {include file='headerq.tpl' title='بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'}
 
-<script type="text/javascript" src="js/Single_Admin_Trainee.js"></script>
+<script type="text/javascript" src="js/Single_Admin_BlockedUser.js"></script>
 <nav id="nav">
 	<ul>
             <li><a href="AdminViewBlocked.php"> استعراض قائمة الحظر</a></li>
@@ -13,8 +13,12 @@
         <div class="spotlight">
             <div class="content align-right">
                 <section class="main">
-  
-                    <center><h3>بيانات المتدرب</h3></center>
+                    <center>
+                    <h2>بيانات المتدرب</h2>
+                    </center>
+                    <br>
+                    <br>
+                    
         <h3>اسم المتدرب</h3>
         <p>{$name}</p>
         <h3>الكلية </h3>
@@ -34,8 +38,9 @@
     <div  id='tcList'>      
     </div>
     <br>
-    <form action="Single_Admin_Trainee.php" method="POST">
+    <form action="Single_Admin_BlockedUser.php" method="POST">
         <input type="submit" value="عودة"  name = "back" id='back' class='btn' /> 
+        <input type="submit" value="ازالة الحظر"  name = "removeBlock" id='removeBlock' class='btn' />
     </form>
     </center>
                 </section>      
@@ -52,3 +57,4 @@
 
 
  
+

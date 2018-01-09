@@ -2,18 +2,19 @@
 
 <script type="text/javascript" src="js/SingleAvailable_Un_TC.js"></script>
 <!-- Introduction -->
-<section id="intro" class="main">
+    <section id="intro" class="main">
         <div class="spotlight">
-                <div class="content align-right">
-                <section class="main">  
-  
+            <div class="content align-right">
+                <section class="main">    
+
    <center>
-        <h3>بيانات الدورة</h3>
+          <h2>بيانات الدورة</h2>
     <h3><font color="green">{$added}</font></h3>
     <p><font color="red">{$msg}</font></p>
     </center>
     <br>
     <br>
+    <div id="pr_content">
     <h3>مقدم الدورة </h3> 
     <p>{$trname}</p>   
     <h3>اسم الدورة</h3> 
@@ -21,8 +22,11 @@
     <h3> تاريخها </h3>
     <p>{$start_date} من  <br>
     {$end_date} الى </p>
+    </div>
     <h3>عدد ساعات الدورة </h3>
     <p> {$hours} </p>
+    <h3>وقت بداية الدورة </h3>
+    <p> {$start_at} </p>
     <h3>العدد الاجمالي للمقاعد</h3>
     <p> {$capacity} </p>
     <h3>مكان اقامة الدورة</h3>
@@ -33,11 +37,17 @@
     <p>{$goals}</p>  
     <h3>الحقيبة التدريبية</h3>
     <p><a href="{$url}" >  من هنا</a> </p>
-    <br>
+    </br>
+    </br> 
+    <center>
+    <h3>قائمة المسجلين</h3>
+    <div  id='tcRegisterTrainee'>      
+    </div>
     <br>
     <center>
     <form action="SingleTCRequest.php" method="POST">
         <input type="submit" value="عودة"  name = "back" id='back' class='btn' /> 
+        <input type="button" value="طباعة"  name = "print" id='print' class='btn' /> 
 
     </form>
     </center>

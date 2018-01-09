@@ -12,6 +12,5 @@ if($trainee)
     {
         $result[$i]=$trMan->getTraineeInfo($trainee[$i]['usr_id']);
     }
-
 echo json_encode($result);
 ?>

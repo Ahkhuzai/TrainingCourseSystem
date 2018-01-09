@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-01-08 10:37:58
+/* Smarty version 3.1.30, created on 2018-01-09 10:19:47
   from "C:\xampp\htdocs\rtp\Admin\templates\headerq.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a533bf69bb8f3_53048500',
+  'unifunc' => 'content_5a548933d069e9_79122998',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'fe4fd54b6c94810a3ddada87e3d9d209d60ec47b' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rtp\\Admin\\templates\\headerq.tpl',
-      1 => 1515404267,
+      1 => 1515489582,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5a533bf69bb8f3_53048500 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a548933d069e9_79122998 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE HTML>
 <!--
@@ -172,7 +172,7 @@ function content_5a533bf69bb8f3_53048500 (Smarty_Internal_Template $_smarty_tpl)
 					<nav id="nav">
 						<ul>
                             <li><a href="http://www.uqu.edu.sa">تسجيل الخروج  </a></li>
-                             <li><a href="#">الاحصائيات</a></li>                       
+                             <li><a href="statistic.php">الاحصائيات</a></li>                       
                              <li><a href="attendanceMain.php">الحضور</a></li>                  
                             <li><a href="Trainer.php"> المدربين </a></li>           
                             <li><a href="Trainee.php"> المتدربين </a></li>

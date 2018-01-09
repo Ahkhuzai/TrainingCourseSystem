@@ -1,8 +1,7 @@
 $(document).ready(function () {
     $("#print").jqxButton({ width: '10%', height: '35px'});
     $("#back").jqxButton({ width: '10%', height: '35px'});
-    });
-    $("#print").click(function () {
+     $("#print").click(function () {
                 var contents = $("#pr_content").html();
                 var gridContent = $("#tcRegisterTrainee").jqxGrid('exportdata', 'html');
                 var newWindow = window.open('', ''),
@@ -21,6 +20,8 @@ $(document).ready(function () {
                 document.close();
                 newWindow.print();
             });
+    });
+   
     $(document).ready(function () {
     var source ={
         datatype: "json",

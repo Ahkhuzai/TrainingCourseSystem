@@ -5,7 +5,8 @@
 		<li><a href="rePresentTC.php">اعادة تقديم دورة سابقة</a></li>
  	    <li><a href="AdminAddTrainingCourse.php"> اضافة دورة تدريبية</a></li>
         <li><a href="AdminAddProgram.php"> اضافة برنامج تدريبي</a></li>
-        <li><a href="ApproveTrainingCourse.php">اعتماد الدورات والبرامج التدريبية</a></li>
+        <li><a href="CloseTrainingCourse.php">اغلاق التسجيل  </a></li>
+        <li><a href="ApproveTrainingCourse.php">اعتماد الدورات </a></li>
         <li><a href="AdminviewTC.php"> استعراض الدورات</a></li>                          
     </ul>
 </nav>

@@ -45,5 +45,9 @@ else if ($page=='Admin_tcApprove')
 {
     $_SESSION['tt_id']=$_GET['tt_id'];
 }
+else if ($page=='Admin_SingleBlocked')
+{
+    $_SESSION['te_id']=$_GET['te_id'];
+}
 
 ?>

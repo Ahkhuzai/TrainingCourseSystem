@@ -69,7 +69,7 @@
 					<nav id="nav">
 						<ul>
                             <li><a href="http://www.uqu.edu.sa">تسجيل الخروج  </a></li>
-                             <li><a href="#">الاحصائيات</a></li>                       
+                             <li><a href="statistic.php">الاحصائيات</a></li>                       
                              <li><a href="attendanceMain.php">الحضور</a></li>                  
                             <li><a href="Trainer.php"> المدربين </a></li>           
                             <li><a href="Trainee.php"> المتدربين </a></li>

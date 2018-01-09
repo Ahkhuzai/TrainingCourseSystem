@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-01-04 07:02:50
+/* Smarty version 3.1.30, created on 2018-01-09 11:13:44
   from "C:\xampp\htdocs\rtp\Admin\templates\AdminAddTrainingCourse.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a4dc38a5b1904_67682593',
+  'unifunc' => 'content_5a5495d852a465_62396972',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'f5ca1d245c5f0bf639af0cbcf13effa1a3553fdd' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rtp\\Admin\\templates\\AdminAddTrainingCourse.tpl',
-      1 => 1515045765,
+      1 => 1515492597,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a4dc38a5b1904_67682593 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a5495d852a465_62396972 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('title'=>'بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'), 0, false);
 ?>
 
@@ -51,6 +51,9 @@ $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_s
         <p><font color="green"><?php echo $_smarty_tpl->tpl_vars['added']->value;?>
 </font></p>
         <form action='AdminAddTrainingCourse.php' method='POST' enctype="multipart/form-data">
+                <p><font color="red"><?php echo $_smarty_tpl->tpl_vars['msg']->value;?>
+</font></p>
+                <br>
              <label> مقدم الدورة</label>
             <div id='trainer'>
             </div>
@@ -120,8 +123,7 @@ $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_s
             </form>
         
             <br>
-               <p><font color="red"><?php echo $_smarty_tpl->tpl_vars['msg']->value;?>
-</font></p>
+           
     </center>
     
                 </section>   
