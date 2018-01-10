@@ -239,7 +239,8 @@ class TrainingCourseModule {
         $rdMan=new RateDRepo();
         $rateD=$rdMan->fetchByTt_id($tt_id);
         $rateD = array_values($rateD);
-
+        if($rateD)
+        {
         //Create array for chart 
         $total_voter= count($rateD);
         $total_place=0;
@@ -273,6 +274,9 @@ class TrainingCourseModule {
         );
        
         return $rate;
+        }
+        else 
+            return false;
     }
     
     //done but need more look

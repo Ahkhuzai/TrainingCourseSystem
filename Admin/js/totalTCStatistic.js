@@ -1,7 +1,9 @@
 $(document).ready(function () {
     $("#print").jqxButton({ width: '10%', height: '35px'});
-    $("#print").click(function () { 
-                var gridContent = $("#teList").jqxGrid('exportdata', 'html');
+    $("#print").click(function () {
+                var contents = $("#pr_content").html();
+                var gridContent = $("#tcRegisterTrainee").jqxGrid('exportdata', 'html');
+                var contentRate = $('#jqxChart')[0].outerHTML;
                 var contentRank = $('#chartRank')[0].outerHTML;
                 var contentGrnder = $('#chartGender')[0].outerHTML;
                 var contentDepartment = $('#chartDepartment')[0].outerHTML;
@@ -14,12 +16,12 @@ $(document).ready(function () {
                     '<meta charset="utf-8" />\n' +
                     '<title>Complete Tc</title>\n' +
                     '</head>\n' +
-                   
-                    '<br><br><br><br><br><br><h3>قائمة المتدربين  </h3> \n' + gridContent +
-                    '<br><br><br><br><br><br><h3>معدل المتدربين حسب الرتبة العلمية</h3>\n' + contentRank +
-                    '<br><br><br><br><br><br><br><h3>معدل المتدربين من الجنسين</h3>\n' + contentGrnder +
-                    '<br><br><br><br><br><br><h3>معدل المتدريبن حسب الكلية </h3>\n' + contentDepartment +
-                   
+                    '<body><center>'+ contents+
+                    '<br><br><br><br><br><br><h3>قائمة المسجلين في الدورة </h3> \n' + gridContent +
+                    '<br><br><br><br><br><br><h3>معدل الحضور حسب الرتبة العلميةفي الدورة التدريبية</h3>\n' + contentRank +
+                    '<br><br><br><br><br><br><br><h3>معدل الحضور من الجنسين في الدورة التدريبية</h3>\n' + contentGrnder +
+                    '<br><br><br><br><br><br><h3>معدل الحضور حسب الكلية في الدورة التدريبية</h3>\n' + contentDepartment +
+                    '<br><br><br><br><br><br><h3>معدل الرضى عن الدورة التدريبية</h3>\n' + contentRate +
                     '</center></body>\n</html>';
             
                 document.write(pageContent);
@@ -27,7 +29,49 @@ $(document).ready(function () {
                 newWindow.print();
             });
             
-var source ={
+    $("#back").jqxButton({ width: '10%', height: '35px'});
+    });
+    
+    $(document).ready(function () {
+    var source ={
+        datatype: "json",
+        datafields: [{ name: 'id',type: 'number' },
+            { name: 'tc_ar_name',type: 'string' },
+            { name: 'pname',type: 'string' },
+            { name: 'tr_ar_name',type: 'string' },
+            { name: 'status',type: 'string' },
+            { name: 'sid',type: 'number' },
+            { name: 'start_date' },
+            { name: 'counts',type: 'number' }],
+        url: "getStaTC.php",
+        pager: function (pagenum, pagesize, oldpagenum) {
+                    // callback called when a page or page size is changed.
+                }
+    };
+    $("#tcList").jqxGrid({
+        source: source,
+        rtl:true,
+        autorowheight: true,
+        autoheight: true,
+        showfilterrow: true,
+        filterable: true,
+        sortable: true,
+        pageable: true,
+
+        width:'75%',                                                         
+        columns: [
+            { text: 'اسم الدورة', datafield: 'tc_ar_name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'اسم البرنامج', datafield: 'pname',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'مقدم الدورة', datafield: 'tr_ar_name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'حالة الدورة', datafield: 'status',columntype: 'textbox', filtertype: 'checkedlist',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'تاريخ بدء الدورة',datafield: 'start_date',filtertype: 'range',cellsformat: 'dd.MM.yyyy',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'عدد الحاضرين/المسجلين', datafield: 'counts',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer},   
+        ]
+    });
+               
+});
+    $(document).ready(function () {
+    var source ={
         datatype: "json",
         datafields: [{ name: 'id',type: 'number' },
             { name: 'user_id',type: 'number' },
@@ -38,48 +82,106 @@ var source ={
             { name: 'nationality',type: 'string' },
             { name: 'sid',type: 'number' },
             { name: 'status',type: 'string' },
-            { name: 'reg_status',type: 'string' },
             { name: 'rid',type: 'number' },
-            { name: 'missed',type:'string'},
-            { name: 'excused',type:'string' },
-            { name: 'attend',type:'string' },
-           ],
-        id: 'id',
-        url: "getStatistic.php?type=1",
-
-                       };               
+            { name: 'missed',type: 'number' },
+            { name: 'excused',type: 'number' }],
+        id:'id',
+        url: "getStaTCRegister.php",
+                       };
+                       
     var dataAdapter = new $.jqx.dataAdapter(source);
-    $("#teList").jqxGrid({
+    $("#tcRegisterTrainee").jqxGrid({
         source: dataAdapter,
         rtl:true,
         autorowheight: true,
-        width:'90%',
         autoheight: true,
-        showfilterrow: true,
-        filterable: true,
-                                                            
+
+        width:'75%',                                                         
         columns: [
             { text: 'اسم المتدرب',editable:false, datafield: 'ar_name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'الرتبة العلمية',editable:false,datafield: 'rank',columntype: 'textbox', filtertype: 'checkedlist',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'الكلية ',editable:false, datafield: 'department',columntype: 'textbox', filtertype: 'checkedlist',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'التخصص ',editable:false, datafield: 'major',columntype: 'textbox', filtertype: 'checkedlist',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'الجنسية ',editable:false, datafield: 'nationality',columntype: 'textbox', filtertype: 'checkedlist',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'حالة التسجيل',editable:false, datafield: 'reg_status',columntype: 'textbox', filtertype: 'checkedlist',renderer: columnsrenderer, cellsrenderer: cellsrenderer },            
-            { text: 'الغياب',editable:false,width:'5%' ,datafield: 'missed',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: ' الاعتذار', editable:false,width:'5%',datafield: 'excused',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'الحضور ', editable:false,width:'5%',datafield: 'attend',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-             ]
+            { text: 'الرتبة العلمية',editable:false,datafield: 'rank',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'التخصص العام',editable:false,datafield: 'major',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'الكلية التابع لها',editable:false, datafield: 'department',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: '  الجنسية',editable:false, datafield: 'nationality',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'عدد مرات الغياب',editable:false, datafield: 'missed',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'عدد مرات الاعتذار', editable:false,datafield: 'excused',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'حالة الحضور', editable:false,datafield: 'status',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            ]
     });
-   
 });
+
 var cellsrenderer = function (row, column, value) {
     return '<div style="text-align: center; margin:5px;">' + value + '</div>';
 }
 var columnsrenderer = function (value) {
     return '<div style="text-align: center; margin:5px;">' + value + '</div>';
 }
+$(document).ready(function () {
+            var source =
+		{
+                    datatype: "json",
+                    datafields: [
+                    { name: 'criteria'},
+                    { name: 'score'}
+                    ],
+		url: "getStaTCRate.php"
+		};
+	   var dataAdapter = new $.jqx.dataAdapter(source,
+		{
+			autoBind: true,
+			async: false,
+			downloadComplete: function () { },
+			loadComplete: function () { },
+			loadError: function () { }
+		});
 
-       $(document).ready(function () {
+            // prepare jqxChart settings
+            var settings = {
+                title: $('#nameOfTC').text(),
+                description: "معدل رضى المستفيدين عن الدورة التدريبية",
+                
+		enableAnimations: true,
+                showLegend: true,
+                padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
+                source: dataAdapter,
+                xAxis:
+                    {
+                        dataField: 'criteria',
+                        showGridLines: true
+                    },
+                colorScheme: 'scheme13',
+                seriesGroups:
+                    [
+                        {
+                            type: 'column',
+                            columnsGapPercent: 50,
+                            seriesGapPercent: 0,
+                            valueAxis:
+                            {
+                                unitInterval: 5,
+                                minValue: 0,
+                                maxValue:100,
+                                displayValueAxis: true,
+                                description: 'متوسط الدرجة المستحقة',
+                                axisSize: 'auto',
+                                tickMarksColor: '#888888'
+                            },
+                            series: [
+                                    { dataField: 'score', displayText: 'الدرجة',labels:
+                                    {
+                                        visible: true
+                                    }}
+                                ]
+                        }
+                    ]
+            };
+           
+            // setup the chart
+            $('#jqxChart').jqxChart(settings);
+            
+        });
+$(document).ready(function () {
             // prepare chart data as an array
             var source =
             {
@@ -88,13 +190,13 @@ var columnsrenderer = function (value) {
                     { name: 'Gender' },
                     { name: 'Total' }
                 ],
-                url: 'getGender.php?type=1'
+                url: 'getStaTCGender.php'
             };
             var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
             // prepare jqxChart settings
             var settings = {
                 title: $('#nameOfTC').text(),
-                description: "معدل المتدربين من الجنسين ",
+                description: "معدل الحضور من الجنسين في الدورة التدريبية",
                 enableAnimations: true,
                 showLegend: true,
                 showBorderLine: true,
@@ -132,7 +234,7 @@ var columnsrenderer = function (value) {
             $('#chartGender').jqxChart(settings);
         });
         
-               $(document).ready(function () {
+$(document).ready(function () {
             // prepare chart data as an array
             var source =
             {
@@ -141,13 +243,13 @@ var columnsrenderer = function (value) {
                     { name: 'Rank' },
                     { name: 'Total' }
                 ],
-                url: 'getRank.php?type=1'
+                url: 'getStaTCRank.php'
             };
             var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
             // prepare jqxChart settings
             var settings = {
                 title: $('#nameOfTC').text(),
-                description: "معدل المتدربين حسب الرتبة العلمية ",
+                description: "معدل الحضور حسب الرتبة العلمية في الدورة التدريبية",
                 enableAnimations: true,
                 showLegend: true,
                 showBorderLine: true,
@@ -192,7 +294,7 @@ $(document).ready(function () {
                     { name: 'department'},
                     { name: 'total'}
                     ],
-		url: "getDepartment.php?type=1"
+		url: "getStaTCDepartment.php"
 		};
 	   var dataAdapter = new $.jqx.dataAdapter(source,
 		{
@@ -206,7 +308,7 @@ $(document).ready(function () {
             // prepare jqxChart settings
             var settings = {
                 title: $('#nameOfTC').text(),
-                description: "معدل المتدريبن حسب الكلية",
+                description: "معدل الحضور حسب الكلية",
                 
 		enableAnimations: true,
                 showLegend: true,
@@ -245,6 +347,7 @@ $(document).ready(function () {
                         }
                     ]
             };
+           
             // setup the chart
             $('#chartDepartment').jqxChart(settings);
             

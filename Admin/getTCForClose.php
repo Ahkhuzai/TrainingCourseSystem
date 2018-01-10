@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-//error_reporting(0);
+error_reporting(0);
 
 require_once '../RegistrationModule.php';
 require_once '../TrainingCourseModule.php';
@@ -13,7 +13,6 @@ $result=array();
 $sid=10;
 $result=$RM_Man->getTCRegister($sid);
 
-
 for($i=0;$i<count($result);$i++)
 {
 	$count = $RM_Man->getTraineeRegisteredInTC($result[$i]['id']);
@@ -24,7 +23,7 @@ for($i=0;$i<count($result);$i++)
 	else
 		$trainingInfo[$i]['counts']=0;
 
-            $trainingInfo[$i]['close']=0;
+        $trainingInfo[$i]['close']=0;
 
 }
 

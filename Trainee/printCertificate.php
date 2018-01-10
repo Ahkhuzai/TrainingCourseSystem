@@ -3,7 +3,7 @@ session_start();
 require_once '../DAL/RegistrationRepo.php';
 require_once '../TrainingCourseModule.php';
 require_once '../RegistrationModule.php';
-error_reporting(0);
+//error_reporting(0);
 $reg=new RegistrationRepo();
 
 $tcMan=new TrainingCourseModule();

@@ -150,7 +150,7 @@ class RegistrationModule {
         $registration = new RegistrationRepo();
         
         $resultReg=$registration->fetchByTt_id($tt_id);
-
+       
         if($resultReg)
         {
             for($i=0;$i<count($resultReg);$i++)

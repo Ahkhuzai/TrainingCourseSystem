@@ -1,14 +1,15 @@
 <?php
-session_start();
 require_once '../TrainingCourseModule.php';
 require_once '../RegistrationModule.php';
-error_reporting(0);
-$tcMan= new TrainingCourseModule();
-$trMan= new RegistrationModule();
-$result= $tcMan->getTcBySid(9);
-for($i=0;$i<count($result);$i++)
+session_start();
+$tcMan = new TrainingCourseModule();
+$trMan = new RegistrationModule();
+$ids=array();
+$ids=$_SESSION['ids'];
+
+for($i=0;$i<count($ids);$i++)
 {
-     $result[$i]['select'] = false;
+    $result[$i]=$tcMan->getSingleTrainingCourseInfo($ids[$i]);
     if ($result[$i]['pid'] == NULL) {
 
         $result[$i]['pname'] = 'لا تتبع برنامج محدد';
@@ -23,6 +24,7 @@ for($i=0;$i<count($result);$i++)
             $result[$i]['counts']=0;
   
     } else {
+
         $Presult = $tcMan->getProgramInfo($result[$i]['pid']);
         $result[$i]['pname'] = $Presult['name'];
         $result[$i]['sid'] = $result[$i]['status'];
@@ -35,6 +37,6 @@ for($i=0;$i<count($result);$i++)
             $result[$i]['counts']=0;
     }   
 }
-echo json_encode($result);
 
+echo json_encode($result);
 ?>

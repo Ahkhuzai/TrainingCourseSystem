@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-12-31 08:16:03
+/* Smarty version 3.1.30, created on 2018-01-10 07:33:03
   from "C:\xampp\htdocs\rtp\Admin\templates\Single_Admin_tcRegister.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a488eb30c5ac3_21055124',
+  'unifunc' => 'content_5a55b39ff38b52_07325465',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1089d3571f54dee2eee706b797cc34dc955f2e2c' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rtp\\Admin\\templates\\Single_Admin_tcRegister.tpl',
-      1 => 1514617556,
+      1 => 1515323304,
       2 => 'file',
     ),
   ),
@@ -22,10 +22,13 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a488eb30c5ac3_21055124 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a55b39ff38b52_07325465 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('title'=>'بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'), 0, false);
 ?>
 
+<?php echo '<script'; ?>
+ type="text/javascript" src="js/Single_Admin_tcRegister.js"><?php echo '</script'; ?>
+>   
 <!-- Introduction -->
     <section id="intro" class="main">
         <div class="spotlight">
@@ -33,12 +36,13 @@ $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_s
                 <section class="main">
 
     <center>
+           <h2>بيانات الدورة</h2>
     <h3><font color="green"><?php echo $_smarty_tpl->tpl_vars['added']->value;?>
 </font></h3>
     <p><font color="red"><?php echo $_smarty_tpl->tpl_vars['msg']->value;?>
 </font></p>
     </center>
-    <h2>بيانات الدورة</h2>
+ 
     <br>
     <br>
     <h3>مقدم الدورة </h3> 
@@ -69,9 +73,9 @@ $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_s
 " >  من هنا</a> </p>
     </br>
     </br> 
-    
-    <h3>قائمة المسجلين</h3>
     <center>
+    <h3>قائمة المسجلين</h3>
+
     <div  id='tcRegisterTrainee'>      
     </div>
     <br>
@@ -82,11 +86,12 @@ $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_s
         <input type="submit" value="اغلاق التسجيل  "  name = "close" id='close' class='btn' onclick="return confirm('هل انت متأكدمن رغبتك بإغلاق التسجيل')"/>
     </form>
 </center>
-                </section>          
+          </section>       
+      </div>
+        </div>
+                
             </section>   
-<?php echo '<script'; ?>
- type="text/javascript" src="js/Single_Admin_tcRegister.js"><?php echo '</script'; ?>
->           
+        
   <?php $_smarty_tpl->_subTemplateRender("file:footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 

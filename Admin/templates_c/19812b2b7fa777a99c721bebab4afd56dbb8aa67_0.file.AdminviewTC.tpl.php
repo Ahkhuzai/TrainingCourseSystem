@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2018-01-04 07:03:51
+/* Smarty version 3.1.30, created on 2018-01-10 07:33:49
   from "C:\xampp\htdocs\rtp\Admin\templates\AdminviewTC.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5a4dc3c75b5317_00705077',
+  'unifunc' => 'content_5a55b3cd3ca134_92971381',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '19812b2b7fa777a99c721bebab4afd56dbb8aa67' => 
     array (
       0 => 'C:\\xampp\\htdocs\\rtp\\Admin\\templates\\AdminviewTC.tpl',
-      1 => 1515045827,
+      1 => 1515323304,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_5a4dc3c75b5317_00705077 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5a55b3cd3ca134_92971381 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:headerq.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('title'=>'بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'), 0, false);
 ?>
 

@@ -1,5 +1,5 @@
 <?php
-//error_reporting(0);
+error_reporting(0);
 session_start();
 require_once '../TrainingCourseModule.php';
 $tcMan = new TrainingCourseModule();
@@ -18,4 +18,5 @@ for($i=0;$i<count($result);$i++)
     }   
 }
 echo json_encode($result);
+
 ?>

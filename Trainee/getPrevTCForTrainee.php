@@ -8,10 +8,15 @@ $trMan= new RegistrationModule();
 
 $result = $tcMan->getTraineeRegister($_SESSION['user_id'],2);
 if($result)
-{
+{   $j=0;
     for ($i = 0; $i < count($result); $i++) {
-        $resultTC[$i] = $tcMan->getSingleTrainingCourseInfo($result[$i]['tt_id']);
-        $resultTC[$i]['r_id']=$result[$i]['id'];
+        //ONLY COMPLETE TRAINING COURSE 
+        $res=$tcMan->getSingleTrainingCourseInfo($result[$i]['tt_id']);
+        if ($res['status']==9) {
+            $resultTC[$j] = $res;
+            $resultTC[$j]['r_id']=$result[$i]['id'];
+            $j++;
+        }
     }
     for($i=0;$i<count($resultTC);$i++)
     {

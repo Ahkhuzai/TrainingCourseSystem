@@ -23,5 +23,4 @@ for($i=0;$i<count($result);$i++)
 }
 
 echo json_encode($trainingInfo);
-
 ?>
