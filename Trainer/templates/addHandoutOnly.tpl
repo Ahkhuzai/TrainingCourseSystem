@@ -17,22 +17,22 @@
         </br>
         </br>
         <div id="handout_tr" name='handout_tr'> 
-    الحقيبة التدريبية للمدرب      
+            <h3> الحقيبة التدريبية للمدرب </h3>    
         <input type='file' id='handout[]' name='handout[]'  accept='application/pdf , application/vnd.wordperfect , application/msword'/>
         </div>
         </br>
         <div id="handout_te" name='handout_te'> 
-    الحقيبة التدريبية للمتدرب       
+        <h3>    الحقيبة التدريبية للمتدرب     </h3> 
         <input type='file' id='handout[]' name='handout[]'  accept='application/pdf , application/vnd.wordperfect , application/msword'/>
         </div>
         </br>
         <div id="handout_pr" name='handout_pr'> 
-    العرض التقديمي     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <h3>  العرض التقديمي  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   </h3> 
         <input type='file' id='handout[]' name='handout[]'  accept="application/vnd.openxmlformats-officedocument.presentationml.presentation, application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,text/plain, application/pdf, image/*"/>
         </div>
         </br>
         <div id="handout_sci" name='handout_sci'> 
-    المادة العلمية      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <h3> المادة العلمية    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   </h3> 
         <input type='file' id='handout[]' name='handout[]'  accept='application/pdf , application/vnd.wordperfect , application/msword'/>
         </div>
         </br>             

@@ -1,46 +1,4 @@
 
-        
-//    $(document).ready(function () {
-//    var source ={
-//        datatype: "json",
-//        datafields: [{ name: 'id',type: 'number' },
-//            { name: 'name',type: 'string' },
-//            { name: 'hours',type: 'number' }],
-//        url: "getAvailableProgram.php"
-//    };
-//    $("#AvailableProgram").jqxGrid({
-//        source: source,
-//        rtl:true,
-//        autorowheight: true,
-//        autoheight: true,
-//        showfilterrow: true,
-//        filterable: true,
-//        width:'75%',                                                         
-//        columns: [
-//            { text: 'اسم البرنامج', datafield: 'name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-//            { text: ' عدد الساعات الكلية للبرنامج', datafield: 'hours',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },        
-//        ]
-//    });
-//        $("#AvailableProgram").on('rowselect', function (event) {
-//        var PID = event.args.row.id;   
-//        $.ajax({
-//        type : 'GET',
-//        url : 'setSession.php',
-//        data: {
-//            program_id :PID,
-//            page: 'SingleProgram'
-//              },
-//        success : function(data){
-//          ;
-//        },
-//        error : function(XMLHttpRequest, textStatus, errorThrown) 
-//        {alert ("Error Occured");}
-//            });       
-//        var url="SingleProgram.php";
-//        window.location=url;     
-//        });              
-//});
-
 //////////////////////////////
 
     $(document).ready(function () {
@@ -66,18 +24,22 @@
         rtl:true,
         autorowheight: true,
         autoheight: true,
-        width:'75%',                                                         
+        showfilterrow: true,
+        filterable: true,
+        sortable: true,
+        pageable: true,
+        width:'100%',                                                         
         columns: [
-            { text: 'اسم الدورة', datafield: 'tc_ar_name',columntype: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer }, 
-            { text: 'اسم البرنامج', datafield: 'pname',columntype: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer }, 
-            { text: 'مقدم الدورة', datafield: 'tr_ar_name',columntype: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'تاريخ الدورة ', datafield: 'start_date',cellsformat: 'dd.MM.yyyy',renderer: columnsrenderer, cellsrenderer: cellsrenderer }, 
-            { text: 'الزمان ', datafield: 'start_at',cellsformat: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'المدة ', datafield: 'duration',cellsformat: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'المكان ', datafield: 'location',cellsformat: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'النوع ', datafield: 'type',cellsformat: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'العدد ', datafield: 'capacity',cellsformat: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer }, 
-            { text: 'حالة التسجيل ', datafield: 'status',cellsformat: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer }, 
+            { text: 'اسم الدورة', datafield: 'tc_ar_name',columntype: 'textbox',filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer }, 
+            { text: 'اسم البرنامج', datafield: 'pname',columntype: 'textbox',filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer }, 
+            { text: 'مقدم الدورة', datafield: 'tr_ar_name',columntype: 'textbox',filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'تاريخ الدورة ', datafield: 'start_date',filtertype: 'range',cellsformat: 'dd.MM.yyyy',renderer: columnsrenderer, cellsrenderer: cellsrenderer }, 
+            { text: 'الزمان ', datafield: 'start_at',cellsformat: 'textbox',filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'المدة ', datafield: 'duration',cellsformat: 'textbox',filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'المكان ', datafield: 'location',cellsformat: 'textbox',filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'النوع ', datafield: 'type',cellsformat: 'textbox',filtertype: 'checkedlist',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'العدد ', datafield: 'capacity',cellsformat: 'textbox',filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer }, 
+            { text: 'حالة التسجيل ', datafield: 'status',cellsformat: 'textbox',filtertype: 'checkedlist',renderer: columnsrenderer, cellsrenderer: cellsrenderer }, 
             
         ]
     }); 
@@ -96,7 +58,7 @@
         error : function(XMLHttpRequest, textStatus, errorThrown) 
         {alert ("Error Occured");}
             });      
-        if(event.args.row.sid==13 )
+        if(event.args.row.sid==11 )
             alert("تم اغلاق التسجيل في الدورة");
         else
         {

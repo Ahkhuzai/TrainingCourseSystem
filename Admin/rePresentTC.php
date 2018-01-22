@@ -67,7 +67,7 @@ if (!isset($_SESSION['user_id'])) {
                 }
             }  
             if(isset($_POST['back']))
-                header('Location:TrainingCourseAndProgram.php');
+                header('Location:AdminTCandProgram.php');
             $smarty->display("rePresentTC.tpl");
         } 
         else

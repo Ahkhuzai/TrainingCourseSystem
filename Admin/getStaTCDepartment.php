@@ -18,8 +18,10 @@ for($i=0;$i<count($ids);$i++)
 	$result= array_merge($result,$trainee);
 }
 
-if($result)
-{    for($i=0;$i<count($result);$i++)
+if($result)   
+{   
+    $result=super_unique($result,'id');
+    for($i=0;$i<count($result);$i++)
     {
         if($result[$i]['sid']==12)
         {
@@ -27,7 +29,7 @@ if($result)
         }
     }
     $res = array_unique($departmentRes);
-    
+     $res= array_values($res);
     for ($i = 0; $i < count($res); $i++) {
         $department[$i]['department'] = $res[$i];
         $department[$i]['total']=0;
@@ -44,5 +46,15 @@ if($result)
 }
 
 echo json_encode($department);
+function super_unique($array,$key)
+{
+   $temp_array = [];
+   foreach ($array as &$v) {
+       if (!isset($temp_array[$v[$key]]))
+       $temp_array[$v[$key]] =& $v;
+   }
+   $array = array_values($temp_array);
+   return $array;
 
+}
 ?>

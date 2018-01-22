@@ -14,25 +14,32 @@ $result=array();
 for($i=0;$i<count($ids);$i++)
 {
         $trainee=$trMan->getTraineeAcceptedInTC($ids[$i]);
+
         if($trainee)
 	$result= array_merge($result,$trainee);
 }
 
 if($result)
-{   for($i=0;$i<count($result);$i++)
+{   
+	for($i=0;$i<count($result);$i++)
     {
         if($result[$i]['sid']==12)
         {
             $rankRes[$i] = $result[$i]['rank'];   
+            
         }
     }
-    $res = array_unique($rankRes);
     
+    $res = array_unique($rankRes);
+
+    $res= array_values($res);
+  
     for ($i = 0; $i < count($res); $i++) {
         $rank[$i]['Rank'] = $res[$i];
-   
-    $rank[$i]['Total']=0;
- }
+    	$rank[$i]['Total']=0;
+ 	}
+
+
     $count=0;
     for($i=0;$i<count($result);$i++)
     {

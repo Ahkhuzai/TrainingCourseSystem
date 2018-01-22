@@ -9,20 +9,20 @@
 
   
             <center>
-                    <h2>بيانات البرنامج</h2>
+                    <h1>بيانات البرنامج</h1>
             <h3><font color="green">{$added}</font></h3>
             <p><font color="red">{$msg}</font></p>
             </center>
 
     
-    <p> اسم البرنامج </p>
-    {$name}
-     <p> عدد الساعات </p>
-    {$hour}
-     <p> اهداف البرنامج</p>
-    {$goals}
-     <p> ملخص البرنامج </p>
-    {$abstract}
+    <h3> اسم البرنامج </h3>
+    <p>{$name}</p>
+     <h3> عدد الساعات </h3>
+    <p>{$hours}</p>
+     <h3> اهداف البرنامج</h3>
+    <p>{$goals}</p>
+     <h3> ملخص البرنامج </h3>
+    <p>{$abstract}</p>
     
    
     <center>
@@ -32,8 +32,9 @@
     <br>
     <br>
     <form action="SingleProgram.php" method="POST" >
-    <input type="submit" value="التسجيل في البرنامج"  name = "register" id='register' class='btn'/>
-    <input type="submit" value="عودة"  name = "back" id='back' class='btn'/> 
+        <input type="submit" value="عودة"  name = "back" id='back' class='btn'/> 
+    <input type="submit" value='طباعة الشهادة'  name = "print" id='print' class='btn'/>
+ 
     </form>      
     </center>
                 </section>

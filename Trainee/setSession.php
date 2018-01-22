@@ -10,10 +10,6 @@ else if ($page=='SingleTCCompleteTrainee')
     $_SESSION['tt_id']=$_GET['tt_id'];
     $_SESSION['r_id']=$_GET['r_id'];
 }
-else if ($page=='SingleProgram')
-{
-    $_SESSION['program_id']=$_GET['program_id'];
-}
 else if ($page=='tcForRate')
 {
     $_SESSION['tt_id']=$_GET['tt_id'];
@@ -28,5 +24,11 @@ else if ($page=='SingleRegistration')
 else if ($page=='SingleOldTC')
 {
     $_SESSION['tt_id']=$_GET['tt_id'];
+}
+else if ($page=='SingleProgram')
+{
+    $_SESSION['tt_ids']=$_GET['tt_ids'];
+    $_SESSION['p_id']=$_GET['p_id'];
+    $_SESSION['sdate']=$_GET['sdate'];
 }
 ?>

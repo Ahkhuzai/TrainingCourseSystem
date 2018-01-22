@@ -1,12 +1,13 @@
 {include file='headerq.tpl' title='بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'}
 <script type="text/javascript" src="js/rePresentTC.js"></script>
 <nav id="nav">
-	<ul>
-		<li><a href="AdminCertificate.php">الشهادات</a></li>
-		<li><a href="rePresentTC.php">اعادة تقديم دورة سابقة</a></li>
- 	    <li><a href="AdminAddTrainingCourse.php"> اضافة دورة تدريبية</a></li>
-        <li><a href="AdminAddProgram.php"> اضافة برنامج تدريبي</a></li>
-        <li><a href="ApproveTrainingCourse.php">اعتماد الدورات والبرامج التدريبية</a></li>
+    <ul>
+    <li><a href="rePresentTC.php">اعادة تقديم دورة </a></li>
+    <li><a href="AdminAddTrainingCourse.php"> اضافة دورة </a></li>
+        <li><a href="AdminAddProgram.php"> اضافة برنامج </a></li>
+        <li><a href="CloseTrainingCourse.php">اغلاق التسجيل  </a></li>
+        <li><a href="ApproveTrainingCourse.php">اعتماد الدورات </a></li>
+        <li><a href="AdminProgramView.php"> استعراض البرامج</a></li>     
         <li><a href="AdminviewTC.php"> استعراض الدورات</a></li>                          
     </ul>
 </nav>
@@ -26,9 +27,9 @@
                     <center>
                         <label>ملخص الدورة</label>
 
-                        <input type='text' id='abstract' name='abstract' />
+                        <textarea  type='text' id='abstract' name='abstract'></textarea >
                         <label>اهداف الدورة</label>
-                        <input type='text' id='Goals' name='Goals' />
+                        <textarea  type='text' id='Goals' name='Goals'></textarea>
 
                         <br>
                         <div id='trainer'>

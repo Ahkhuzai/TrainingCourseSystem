@@ -1,5 +1,6 @@
 @import url(font-awesome.min.css);
 @import "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400";
+@import url(https://fonts.googleapis.com/earlyaccess/amiri.css);
 
 /*
 	Stellar by HTML5 UP
@@ -2792,6 +2793,7 @@
 		border-top-right-radius: 0.25em;
 		cursor: default;
 		text-align: center;
+                font-family:'Amiri', serif;
 	}
 
 		#nav input, #nav select, #nav textarea {
@@ -2903,6 +2905,7 @@
 		background-color: #ffffff;
 		color: #636363;
 		border-radius: 0.25em;
+		font-family:'Amiri', serif;
 	}
 
 		#main input, #main select, #main textarea {
@@ -2914,11 +2917,12 @@
 		}
 
 		#main strong, #main b {
-			color: #636363;
+			color: #577389;
 		}
 
 		#main h1, #main h2, #main h3, #main h4, #main h5, #main h6 {
-			color: #636363;
+			color: #577389;
+			font-family:'Amiri', serif;
 		}
 
 		#main blockquote {
@@ -3007,7 +3011,7 @@
 				}
 
 		#main label {
-			color: #636363;
+			color: #577389;
 		}
 
 		#main input[type="text"],

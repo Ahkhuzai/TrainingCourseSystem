@@ -80,7 +80,7 @@
                             </li>
                             <li><a href="registrationRequest.php">استعراض الطلبات </a>
                             </li>
-                            <li ><a href="AvailableTrainingCourse.php">الدورات المتاحة </a>
+                            <li ><a href="AvailableTrainingCourseContract.php">الدورات المتاحة </a>
                             </li>
                             <li ><a href="index.php">الرئيسية </a>
                             </li>

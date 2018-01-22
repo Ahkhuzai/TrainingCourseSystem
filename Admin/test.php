@@ -1,10 +1,11 @@
 <?php
-	require_once '../TrainingCourseModule.php';
-require_once '../RegistrationModule.php';
-require_once '../DAL/TimetableRepo.php';
-//error_reporting(0);
-$tcMan= new TrainingCourseModule();
-$trMan= new RegistrationModule();
 
-echo $trMan->calcMissed(1);
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+require_once '../RegistrationModule.php';
+$rMan = new RegistrationModule();
+echo $rMan->TCFinalAttendance(16);
 ?>

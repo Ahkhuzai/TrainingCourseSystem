@@ -9,8 +9,7 @@ $tcMan = new TrainingCourseModule();
 $reg = new RegistrationRepo();
 if(isset($_SESSION['user_id']))
 {
-    if(isset($_POST['print']))
-        header('Location:printCertificate.php');
+
     if(isset($_POST['back']))
         header('Location:prevTrainingCourse.php');
         $tt_id=$_SESSION['tt_id'];
@@ -33,9 +32,12 @@ if(isset($_SESSION['user_id']))
         $cer_status = "لم يتم اعتماد الشهادة";
         $smarty->assign('btn_status', 'disabled');
     }
-
+    if(isset($_POST['print'])&& $resultReg['certificate_approved'] == 1)
+            header('Location:printCertificate.php');
+    else if(isset($_POST['print'])&& $resultReg['certificate_approved'] == 0)
+        echo "<script>alert('لم يتم اعتمادالشهادة بعد')</script>";
     $smarty->assign('cer_status',$cer_status);
-        $smarty->display("SinglePrevTrainingCourseView.tpl");
+    $smarty->display("SinglePrevTrainingCourseView.tpl");
 
 }
 else 

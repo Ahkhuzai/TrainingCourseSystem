@@ -14,9 +14,7 @@ if(isset($_GET['usr_id']))
 {
     $_SESSION['USR']=$_GET['usr_id'];
     $_SESSION['TT']=$_GET['tt_id'];
-    $today=date('Y-m-d H:i:s');
-    $now =date('y-m-d H:i:s', strtotime($today. " +3 hours"));
-    $_SESSION['TIME']=$now;
+    $_SESSION['TIME']=date('Y-m-d');
 }
 if(isset($_POST['in'])&& !empty($_POST['pass']))
 {   if($_POST['pass']==3124)
@@ -26,11 +24,11 @@ if(isset($_POST['in'])&& !empty($_POST['pass']))
         if($isOpen =="open")
         {
             //check if registered and accepted 
-            $isRegistred = $tcMan->getTraineeAccepted($_SESSION['TT'],2);
-            if($isRegistred)
+            $isRegistred = $trMan->IsTraineeRegistered($_SESSION['USR'],$_SESSION['TT']);
+           
+            if($isRegistred[0]['registration_status']==2)
             {   
-                
-                $attendance = $trMan->takeAttendance($_SESSION['USR'], $_SESSION['TT'], $_SESSION['TIME'],$isRegistred[0]['id']);
+                $attendance = $trMan->takeAttendance($_SESSION['USR'], $_SESSION['TT'], $_SESSION['TIME']);
                 if ($attendance==0) {
                     $smarty->assign('added', " تم التحضير ");
                     unset($_SESSION);
@@ -71,6 +69,4 @@ else {
     $smarty->assign('trainer',$tc['tc_ar_name']);
     $smarty->display("takingAttendance.tpl");   
 }
-        
-
 ?>

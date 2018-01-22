@@ -1,8 +1,9 @@
 $(document).ready(function () {
     $("#print").jqxButton({ width: '10%', height: '35px'});
     $("#print").click(function () {
-                var contents = $("#pr_content").html();
-                var gridContent = $("#tcRegisterTrainee").jqxGrid('exportdata', 'html');
+         
+                var gridtc = $("#tcRegisterTrainee").jqxGrid('exportdata', 'html');
+                var gridContent = $("#tcList").jqxGrid('exportdata', 'html');
                 var contentRate = $('#jqxChart')[0].outerHTML;
                 var contentRank = $('#chartRank')[0].outerHTML;
                 var contentGrnder = $('#chartGender')[0].outerHTML;
@@ -16,7 +17,8 @@ $(document).ready(function () {
                     '<meta charset="utf-8" />\n' +
                     '<title>Complete Tc</title>\n' +
                     '</head>\n' +
-                    '<body><center>'+ contents+
+                   
+                    '<h3>قائمةالدورات  </h3> \n' + gridtc +
                     '<br><br><br><br><br><br><h3>قائمة المسجلين في الدورة </h3> \n' + gridContent +
                     '<br><br><br><br><br><br><h3>معدل الحضور حسب الرتبة العلميةفي الدورة التدريبية</h3>\n' + contentRank +
                     '<br><br><br><br><br><br><br><h3>معدل الحضور من الجنسين في الدورة التدريبية</h3>\n' + contentGrnder +

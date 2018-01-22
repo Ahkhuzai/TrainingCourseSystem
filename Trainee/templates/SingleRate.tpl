@@ -167,8 +167,9 @@
     <input type="hidden"   name = "presentation_rate" id='presentation_rate' class='btn'/>
     <input type="hidden"   name = "Presenter_rate" id='Presenter_rate' class='btn'/>
     <input type="hidden"   name = "Program_rate" id='Program_rate' class='btn'/>
-    <input type="submit" value="إرسال"  name = "send" id='send' class='btn'/>
     <input type="submit" value="عودة"  name = "back" id='back' class='btn'/> 
+    <input type="submit" value="إرسال"  name = "send" id='send' class='btn'/>
+    
     </form>
     </center>
                 </section>

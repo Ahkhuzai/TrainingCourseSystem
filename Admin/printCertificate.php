@@ -14,10 +14,28 @@ $result_persona=$trMan->getUserInfo($regResult['usr_id']);
 $result_tc=$tcMan->getSingleTrainingCourseInfo($regResult['tt_id']);
 $result_tr=$trMan->getUserInfo($result_tc['tr_id']);
 
+
 $name_ar=$result_persona['ar_name'];
-$rank =$result_persona['rank'];
-$name_ar='ال'.$rank.'/ة '.$name_ar;
 $name_eng=$result_persona['eng_name'];
+$rank =$result_persona['rank'];
+switch($rank)
+{
+    case 'أستاذ مشارك':
+    case'أستاذ مساعد':
+    case'أستاذ': { 
+        $name_ar='الدكتور/ة '.$name_ar;
+        $name_eng='Dr.'.$name_eng;
+        break;
+    }
+    case'مدرس لغة':
+    case'أستاذ':
+    case'معيد': { 
+        $name_ar='الاستاذ/ة '.$name_ar;
+        $name_eng='A.'.$name_eng;
+        break;
+    }            
+}
+
 $tcname_ar=$result_tc['tc_ar_name'];
 $tcname_eng=$result_tc['tc_eng_name'];
 $dayofweek = date('w', strtotime($result_tc['start_date']));

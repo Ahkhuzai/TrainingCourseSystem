@@ -2,12 +2,13 @@
 
 <script type="text/javascript" src="js/ApproveTrainingCourse.js"></script>
 <nav id="nav">
-	<ul>
-		<li><a href="AdminCertificate.php">الشهادات</a></li>
-		<li><a href="rePresentTC.php">اعادة تقديم دورة سابقة</a></li>
- 	    <li><a href="AdminAddTrainingCourse.php"> اضافة دورة تدريبية</a></li>
-        <li><a href="AdminAddProgram.php"> اضافة برنامج تدريبي</a></li>
-        <li><a href="ApproveTrainingCourse.php">اعتماد الدورات والبرامج التدريبية</a></li>
+    <ul>
+    <li><a href="rePresentTC.php">اعادة تقديم دورة </a></li>
+    <li><a href="AdminAddTrainingCourse.php"> اضافة دورة </a></li>
+        <li><a href="AdminAddProgram.php"> اضافة برنامج </a></li>
+        <li><a href="CloseTrainingCourse.php">اغلاق التسجيل  </a></li>
+        <li><a href="ApproveTrainingCourse.php">اعتماد الدورات </a></li>
+        <li><a href="AdminProgramView.php"> استعراض البرامج</a></li>     
         <li><a href="AdminviewTC.php"> استعراض الدورات</a></li>                          
     </ul>
 </nav>

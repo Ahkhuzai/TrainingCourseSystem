@@ -155,7 +155,15 @@ class TrainingCourseModule {
         return $result;
     }
     
-    
+    public function getTcInProgram($pid)
+    {
+        $tcMan = new TrainingCourseRepo();
+        $result = $tcMan->fetchByProgramId($pid);
+        if($result)
+            return $result;
+        else 
+            return false;
+    }
 
     //done
     public function getProgram()
@@ -164,6 +172,131 @@ class TrainingCourseModule {
         $result=$pMan->fetchAll();
         $result=array_values($result);
         return $result;
+    }
+    
+    public function getProgramVersionByYear($pid)
+    {
+        $ttMan = new TimetableRepo();
+        $qr = "SELECT year(start_date) as year FROM timetable join trainingcourse WHERE trainingcourse.id= timetable.tc_id and trainingcourse.pid = $pid group by year(start_date)";
+        $result = $ttMan->fetchByQuery($qr);
+        
+        if($result)
+        {    
+            $result= array_values($result);
+            return $result;}
+        else 
+            return false;
+    }
+    
+    public function getSingleProgramByYear($year,$pid)
+    {
+        
+        $ttMan = new TimetableRepo();
+        $qr = "select timetable.id,timetable.start_date,timetable.end_date,timetable.type,timetable.status FROM timetable join trainingcourse WHERE trainingcourse.pid = $pid and trainingcourse.id= timetable.tc_id and year(start_date) like ". $year['year'];
+        $result = $ttMan->fetchByQuery($qr);
+        if($result)
+        {      
+            return $result;
+        }
+        else 
+            return false;
+    }
+    
+    //to remove when finish
+    public function getSingleProgram($pid,$sid)
+    {
+        if($sid==0)
+        {
+        $ttMan = new TimetableRepo();
+        $qr = "SELECT timetable.id,timetable.start_date,timetable.end_date,timetable.type,timetable.status FROM timetable join trainingcourse  WHERE trainingcourse.id= timetable.tc_id and trainingcourse.pid = ".$pid." order by start_date";
+        $result = $ttMan->fetchByQuery($qr);
+       
+        if($result)
+            return $result;
+        else 
+            return false;
+        }
+        else
+        {
+            $ttMan = new TimetableRepo();
+            $qr = "SELECT timetable.id,timetable.start_date,timetable.end_date,timetable.type,timetable.status FROM timetable join trainingcourse  WHERE trainingcourse.id= timetable.tc_id and trainingcourse.status = ".$sid." and trainingcourse.pid = ".$pid." order by start_date";
+            $result = $ttMan->fetchByQuery($qr);
+           
+            if($result)
+                return $result;
+            else 
+                return false;
+        }
+    }
+
+    public function getTraineeRegisteredProgram($ids)
+    {
+        $RMan= new RegistrationRepo();
+        $trMan= new RegistrationModule();
+        $qr = "select usr_id from registration where registration_status=2 and tt_id=".$ids[0];
+        $result = $RMan->fetchByQuery($qr);
+
+        if($result)
+        {
+            for($i=0;$i<count($result);$i++)
+                $userIds[$i]=$result[$i]['usr_id'];
+
+            for($i=1;$i<count($ids);$i++)
+            {
+                $qr = "select usr_id from registration where registration_status=2 and tt_id=".$ids[$i];
+                $Newresult = $RMan->fetchByQuery($qr);
+                if($Newresult)
+                {
+                    for($i=0;$i<count($Newresult);$i++)
+                        $NewUserIds[$i]=$Newresult[$i]['usr_id'];
+                    $userIds=array_intersect($userIds, $NewUserIds);
+                }
+                else 
+                    return false;
+            }
+
+            for($i=0;$i<count($userIds);$i++)
+                $Trainees[$i]=$trMan->getTraineeInfo($userIds[$i]);
+
+            return $Trainees;
+        }
+        else
+            return false;   
+    }
+
+    public function getTraineeAttendProgram($ids)
+    {
+                $RMan= new RegistrationRepo();
+        $trMan= new RegistrationModule();
+        $qr = "select usr_id from registration where attendance_status=12 and tt_id=".$ids[0];
+        $result = $RMan->fetchByQuery($qr);
+
+        if($result)
+        {
+            for($i=0;$i<count($result);$i++)
+                $userIds[$i]=$result[$i]['usr_id'];
+
+            for($i=1;$i<count($ids);$i++)
+            {
+                $qr = "select usr_id from registration where attendance_status=12 and tt_id=".$ids[$i];
+                $Newresult = $RMan->fetchByQuery($qr);
+                if($Newresult)
+                {
+                    for($i=0;$i<count($Newresult);$i++)
+                        $NewUserIds[$i]=$Newresult[$i]['usr_id'];
+                    $userIds=array_intersect($userIds, $NewUserIds);
+                }
+                else 
+                    return false;
+            }
+            if($userIds)
+            { for($i=0;$i<count($userIds);$i++)
+                $Trainees[$i]=$trMan->getTraineeInfo($userIds[$i]);
+
+            return $Trainees;}
+        }
+        else
+            return false; 
     }
     
     //done
@@ -190,8 +323,10 @@ class TrainingCourseModule {
             $alltotal+=$result['presenter_total_rate'];
             $allvoter+=$result['voter_count'];
         }
-
-        return round($alltotal/$allvoter, 2);
+        if($allvoter>0)
+            return round($alltotal/$allvoter, 2);
+        else
+            return 0;
     }
 
     //done
@@ -299,9 +434,17 @@ class TrainingCourseModule {
            $result_TC_ID[$i]=$result[$i]['id'];
 
         $resultID = array_values(array_diff($result_TC_ID, $Trainee_TC_ID));
-
+        $j=0;
         for($i=0;$i<count($resultID);$i++)
-            $resultTC[$i]=$this->getSingleTrainingCourseInfo($resultID[$i]);
+        {
+            $res=$this->getSingleTrainingCourseInfo($resultID[$i]);
+            if($res['start_date'] >= date('Y-m-d'))
+            {
+                $resultTC[$j]=$res;
+                $j++;
+                
+            }
+        }
         
         return $resultTC;
     }
@@ -412,11 +555,25 @@ class TrainingCourseModule {
             return false;
     }
     
+    public function getTrainingCourseTorePresent()
+    {
+        $ttMan = new TimetableRepo();
+        $result = $ttMan->fetchByQuery('SELECT DISTINCT trainingcourse.id , trainingcourse.name ,trainingcourse.pid,trainingcourse.abstract,trainingcourse.goals FROM `timetable`join trainingcourse WHERE trainingcourse.id= timetable.tc_id and(`status`=9 or `status`=2 or `status`=11 or `status`=10 )');
+        $result=array_values($result);
+        if($result)
+            return $result;
+        else 
+            return false;
+    }
+
+
     //done
     public function getTotalTCPresent($tc_id)
     {
         $ttMan = new TimetableRepo();
-        $result = $ttMan->fetchByQuery("SELECT * FROM Timetable where tc_id = $tc_id and status = 9");
+        $qr="SELECT * FROM timetable where tc_id = ".$tc_id." and status = 9";
+        $result = $ttMan->fetchByQuery($qr);
+        
         if($result)
             return count($result);
         else 

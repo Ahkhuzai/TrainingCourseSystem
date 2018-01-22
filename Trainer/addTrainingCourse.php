@@ -16,7 +16,7 @@ if(isset($_SESSION['user_id']))
             if ($_FILES['hout']['error'] == 0) {
                 $uploaddir = '../uploads/handouts/tc/';
                 $FileType = pathinfo($_FILES["hout"]["name"], PATHINFO_EXTENSION);
-                $uploadfile = $uploaddir . md5($_FILES['hout']['tmp_name']). date("Y-m-d") . '.' . $FileType;
+                $uploadfile = $uploaddir . md5($_FILES['hout']['tmp_name']). date("Y-m-d H:S:i") . '.' . $FileType;
                 if (file_exists($uploadfile))
                     $smarty->assign('msg', 'الملف تم تحميلة مسبقا');
                 else {
@@ -56,7 +56,7 @@ if(isset($_SESSION['user_id']))
             $result=$tcMan->addTrainingCourse($tt_id,$usrId,$pid,$Tname,$eng_name,$Tabstract,$Tgoals,$Thours,$Tstart,$Tend,$Tcapacity,$Tstatus,$Tavailable_seat,$handoutDir,$addDate,$startAt,$location,$tc_avg,$type);                                  
             if ($result)
             {
-                echo '<script>alert(تم اضافة الطلب بنجاح لمتابعة الطلب , الرجاء التوجه الى صفحة استعراض الطلبات)</script>';
+                 echo '<script>alert("تم حفظ الطلب بنجاح لمتابعة الطلب , الرجاء التوجه الى صفحة استعراض الطلبات")</script>';
                 echo '<script>window.location="index.php"; </script>';
             }
             else 
@@ -102,7 +102,7 @@ if(isset($_SESSION['user_id']))
                                 $result=$tcMan->addTrainingCourse($tt_id,$usrId,$pid,$Tname,$eng_name,$Tabstract,$Tgoals,$Thours,$Tstart,$Tend,$Tcapacity,$Tstatus,$Tavailable_seat,$handoutDir,$addDate,$startAt,$location,$tc_avg,$type);                                  
                                 if ($result)
                                 {
-                                    echo '<script>alert(تم اضافة الطلب بنجاح لمتابعة الطلب , الرجاء التوجه الى صفحة استعراض الطلبات)</script>';
+                                   echo '<script>alert("تم اضافة الطلب بنجاح لمتابعة الطلب , الرجاء التوجه الى صفحة استعراض الطلبات")</script>';
                                     echo '<script>window.location="index.php"; </script>';
                                 }
                                 else 

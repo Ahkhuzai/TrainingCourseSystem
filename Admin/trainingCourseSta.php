@@ -21,6 +21,7 @@ if (!isset($_SESSION['user_id'])) {
                     unset($_SESSION['ids']);
                 for($i=0;$i<count($ids)-1;$i++)
                     $_SESSION['ids'][$i]=$ids[$i];
+              
                 header('Location:totalTCStatistic.php');
             }
             else 

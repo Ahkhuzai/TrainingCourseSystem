@@ -2,7 +2,7 @@
 include '../libs/smarty/libs/Smarty.class.php';
 require_once '../TrainingCourseModule.php';
 $smarty=new Smarty();
-//error_reporting(0);
+error_reporting(0);
 session_start(); 
 if (!isset($_SESSION['user_id'])) {
     

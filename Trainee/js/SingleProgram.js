@@ -9,7 +9,7 @@
              { name: 'duration' },
             { name: 'start_date' },
             { name: 'location',type: 'string' },
-            { name: 'capacity',type: 'string' },
+    
         ],
         url: "getProgramTC.php"
     };
@@ -27,7 +27,7 @@
             { text: 'الزمان ', datafield: 'start_at',cellsformat: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'المدة ', datafield: 'duration',cellsformat: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'المكان ', datafield: 'location',cellsformat: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'العدد ', datafield: 'capacity',cellsformat: 'textbox',renderer: columnsrenderer, cellsrenderer: cellsrenderer },       
+    
         ]
     });      
 });
@@ -40,6 +40,6 @@ var columnsrenderer = function (value) {
 }
 
   $(document).ready(function () {
-    $("#register").jqxButton({ width: '120px', height: '35px'});
-    $("#back").jqxButton({ width: '120px', height: '35px'});
+    $("#print").jqxButton({ width: '15%'});
+    $("#back").jqxButton({ width: '15%', height: '35px'});
         });

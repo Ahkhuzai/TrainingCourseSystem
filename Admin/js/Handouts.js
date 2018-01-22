@@ -24,7 +24,7 @@ $(document).ready(function () {
         columns: [
             { text: 'اسم الدورة', datafield: 'name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'مقدم الحقيبة التدريبية', datafield: 'ar_name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'حالة الحقيبة التدريبية', datafield: 'status',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'حالة الحقيبة التدريبية', datafield: 'status',columntype: 'textbox', filtertype: 'checkedlist',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             
               
         ]

@@ -1,5 +1,5 @@
     $(document).ready(function () {
-            $('#tabs').jqxTabs({ width:'75%',height:600, position: 'top', theme:'office', rtl:'true'});     
+            $('#tabs').jqxTabs({ width:'75%',height:600, position: 'top',  rtl:'true'});     
         });
 ////////////////////////
 //Tab2

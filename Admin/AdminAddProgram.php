@@ -15,7 +15,7 @@ if(isset($_SESSION['user_id']))
     if($isAdmin)
     {   
         if(isset($_POST['back']))
-        header('Location:TrainingCourseAndProgram.php');
+        header('Location:AdminTCandProgram.php');
     
         if(isset($_POST['addProgram']))
         {

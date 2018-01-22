@@ -49,6 +49,7 @@ $(document).ready(function () {
         if(row.select==true)
           result += row.id +"-";        
     }
+  
      $("#ids").val(result);
  });
     

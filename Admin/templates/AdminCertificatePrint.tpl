@@ -21,6 +21,11 @@
     <div  id='tcCompleteList'>      
     </div>
     <br>
+    <h3>قائمة البرامج  المكتملة</h3>
+    <div  id='ProgramCompleteList'>      
+    </div>
+    <br>
+    <br>
     <form action="AdminCertificatePrint.php" method="POST">
         <input type="submit" value="عودة"  name = "back" id='back' class='btn' /> 
     </form>

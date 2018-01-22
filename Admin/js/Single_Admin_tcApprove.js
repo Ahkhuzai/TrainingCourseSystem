@@ -11,8 +11,8 @@ $(document).ready(function () {
     $("#engname").jqxInput({placeHolder: "اسم الدورة باللغة الانجليزية", height: 25, width: '70%', minLength: 1, rtl : true }); 
     $("#Location").jqxInput({placeHolder: "مكان الدورة", height: 25, width: '70%', minLength: 1, rtl : true }); 
     $("#Hours").jqxInput({placeHolder: "عدد ساعات الدورة في اليوم الواحد", height: 25, width: '70%', minLength: 1, rtl : true }); 
-    $("#abstract").jqxInput({width: '70%', height: 80, placeHolder: 'ملخص الدورة',rtl : true }); 
-    $("#Goals").jqxInput({width: '70%', height: 200, placeHolder: 'أهداف الدورة',rtl : true });  
+    $("#abstract").jqxTextArea({width: '70%', height: 80, placeHolder: 'ملخص الدورة',rtl : true }); 
+    $("#Goals").jqxTextArea({width: '70%', height: 200, placeHolder: 'أهداف الدورة',rtl : true });  
     $("#stime").jqxInput({placeHolder: "تاريخ البداية", height: 25, width: '70%', minLength: 1, rtl : true }); 
     $("#etime").jqxInput({placeHolder: "تاريخ النهاية", height: 25, width: '70%', minLength: 1, rtl : true }); 
     $("#type").jqxInput({placeHolder: "مكان الدورة", height: 25, width: '70%', minLength: 1, rtl : true }); 

@@ -11,7 +11,8 @@ $tRegMan = new RegistrationRepo();
 $userId=$_SESSION['user_id'];
 
 $result=$tRegMan->fetchByQuery('SELECT * FROM `registration` WHERE `usr_id`='.$userId);
-
+if($result)
+{
 for ($i = 0; $i < count($result); $i++) {
     $res=$tcMan->getSingleTrainingCourseInfo($result[$i]['tt_id']);
     $tcResult[$i] = $res;
@@ -52,6 +53,7 @@ for ($i = 0; $i < count($result); $i++) {
         else 
              $tcResult[$i]['attendance_status'] = "لا يوجد حالة بعد";
         }
-    }  
+    }
+}  
 echo json_encode($tcResult);
 ?>

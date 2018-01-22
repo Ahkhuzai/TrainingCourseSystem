@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 else 
 {
     if(isset($_POST['agree']))
-        header("Location:addHORequestOnly.php");
+        header("Location:addHandoutOnly.php");
 
     if(isset($_POST['notAgree']))
         header("Location:index.php");

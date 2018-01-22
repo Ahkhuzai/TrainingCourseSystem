@@ -5,5 +5,6 @@ require_once '../TrainingCourseModule.php';
 $RM_Man = new TrainingCourseModule();
 
 $result=$RM_Man->getProgram();
+if($result)
 echo json_encode($result);
 ?>

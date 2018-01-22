@@ -19,8 +19,8 @@ for($i=0;$i<count($result);$i++)
 {
     if ($result[$i]['pid'] == NULL) {
         $result[$i]['pname'] = 'لا تتبع برنامج محدد';
-        $rate=$tcMan->getSingleTCRate($result[$i]['id']);
-        $result[$i]['rate'] = $rate['totalRate'];
+      
+        $result[$i]['rate'] =  $result[$i]['tc_total_avg_rate'];
         $result[$i]['sid'] = $result[$i]['status'];
         $result[$i]['status'] = $status['status_arabic'];
         $trainee=$trMan->getTraineeRegisteredInTC($result[$i]['id']);
@@ -32,8 +32,7 @@ for($i=0;$i<count($result);$i++)
     } else {
         $Presult = $tcMan->getProgramInfo($result[$i]['pid']);
         $result[$i]['pname'] = $Presult['name'];
-        $rate=$tcMan->getSingleTCRate($result[$i]['id']);
-        $result[$i]['rate'] = $rate['totalRate'];
+        $result[$i]['rate'] =  $result[$i]['tc_total_avg_rate'];
         $result[$i]['sid'] = $result[$i]['status'];
         $result[$i]['status'] = $status['status_arabic'];
         $trainee=$trMan->getTraineeRegisteredInTC($result[$i]['id']);

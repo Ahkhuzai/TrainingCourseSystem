@@ -12,7 +12,8 @@ $tcMan = new TrainingCourseModule();
 $result=array();
 $sid=10;
 $result=$RM_Man->getTCRegister($sid);
-
+if($result)
+{
 for($i=0;$i<count($result);$i++)
 {
 	$count = $RM_Man->getTraineeRegisteredInTC($result[$i]['id']);
@@ -26,7 +27,7 @@ for($i=0;$i<count($result);$i++)
         $trainingInfo[$i]['close']=0;
 
 }
-
+}
 echo json_encode($trainingInfo);
 
 if (isset($_GET['update']))

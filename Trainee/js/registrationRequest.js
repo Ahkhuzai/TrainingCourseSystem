@@ -8,6 +8,7 @@ $(document).ready(function () {
             { name: 'pname',type: 'string' },
             { name: 'start_date' },
             { name: 'registration_status',type: 'string' },
+            { name: 'attendance_status',type: 'string' },
             { name: 'tc_status',type: 'string' },
             { name: 'rid',type: 'number' },
             { name: 'sid',type: 'number' },
@@ -30,7 +31,9 @@ $(document).ready(function () {
             { text: 'مقدم الدورة', datafield: 'tr_ar_name',columntype: 'textbox', filtertype: 'input',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'تاريخ انعقاد الدورة',datafield: 'start_date',filtertype: 'range',cellsformat: 'dd.MM.yyyy',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
             { text: 'حالة الدورة', datafield: 'tc_status',columntype: 'textbox', filtertype: 'checkedlist',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
-            { text: 'حالة التسجيل', datafield: 'registration_status',columntype: 'textbox', filtertype: 'checkedlist',renderer: columnsrenderer, cellsrenderer: cellsrenderer }, 
+            { text: 'حالة التسجيل', datafield: 'registration_status',columntype: 'textbox', filtertype: 'checkedlist',renderer: columnsrenderer, cellsrenderer: cellsrenderer },
+            { text: 'حالة الحضور', datafield: 'attendance_status',columntype: 'textbox', filtertype: 'checkedlist',renderer: columnsrenderer, cellsrenderer: cellsrenderer }, 
+       
         ]
     });
     

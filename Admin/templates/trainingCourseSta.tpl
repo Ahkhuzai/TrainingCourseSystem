@@ -2,9 +2,10 @@
 <script type="text/javascript" src="js/trainingCourseSta.js"></script>
 <nav id="nav">
 	<ul>
-            <li><a href="trainerSta.php"> احصائيات المدربين</a></li>
- 	   <li><a href="traineeSta.php"> احصائيات المتدربين</a></li>
-       <li><a href="trainingCourseSta.php"> احصائيات الدورات التدريبية</a></li>                          
+ <li><a href="trainerSta.php"> احصائيات المدربين</a></li>
+ 	   <li><a href="traineeSta.php"> احصائيات المتدربين</a></li> 
+        <li><a href="ProgramSta.php"> احصائيات البرامج التدريبية</a></li> 
+       <li><a href="trainingCourseSta.php"> احصائيات الدورات التدريبية</a></li>                            
     </ul>
 </nav>
 <!-- Introduction -->

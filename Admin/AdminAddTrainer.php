@@ -14,7 +14,7 @@ if(isset($_SESSION['user_id']))
         $smarty->assign('display','none');
         if (isset($_POST['back']))
         {
-            header('Location:AdminMain.php');
+            header('Location:Trainer.php');
         }
          if(isset($_POST['search']))
         {

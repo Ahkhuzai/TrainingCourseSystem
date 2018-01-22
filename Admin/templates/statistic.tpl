@@ -1,8 +1,9 @@
 {include file='headerq.tpl' title='بوابة التدريب لتطوير مهارات أعضاء هيئة التدريس بجامعة ام القرى'}
 <nav id="nav">
 	<ul>
-            <li><a href="trainerSta.php"> احصائيات المدربين</a></li>
- 	   <li><a href="traineeSta.php"> احصائيات المتدربين</a></li>
+       <li><a href="trainerSta.php"> احصائيات المدربين</a></li>
+ 	   <li><a href="traineeSta.php"> احصائيات المتدربين</a></li> 
+        <li><a href="ProgramSta.php"> احصائيات البرامج التدريبية</a></li> 
        <li><a href="trainingCourseSta.php"> احصائيات الدورات التدريبية</a></li>                          
     </ul>
 </nav>

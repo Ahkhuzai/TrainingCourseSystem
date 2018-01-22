@@ -12,6 +12,7 @@ for ($i = 0; $i < count($result); $i++) {
     
     if ($result[$i]['pid'] == NULL) {
         $result[$i]['pname'] = 'لا تتبع برنامج محدد';
+        $result[$i]['sid'] =$result[$i]['status'];
         $status =$trMan->getStatus($result[$i]['status']);
         $result[$i]['status'] = $status['status_arabic'];
    
@@ -19,6 +20,7 @@ for ($i = 0; $i < count($result); $i++) {
     } else {
         $Presult = $tcMan->getProgramInfo($result[$i]['pid']);
         $result[$i]['pname'] = $Presult['name'];
+        $result[$i]['sid'] = $result[$i]['status'];
         $status =$trMan->getStatus($result[$i]['status']);
         $result[$i]['status'] = $status['status_arabic'];
    

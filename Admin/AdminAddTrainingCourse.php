@@ -15,14 +15,14 @@ if(isset($_SESSION['user_id']))
     if($isAdmin)
     {   
         if(isset($_POST['back']))
-            header('Location:TrainingCourseAndProgram.php');
+            header('Location:AdminTCandProgram.php');
         if(isset($_POST['addTraining']))
         {   
             if (!empty(trim($_POST['Tname'])) && !empty(trim($_POST['tr_id'])) && !empty(trim($_POST['abstract'])) && !empty(trim($_POST['Goals'])) && !empty(trim($_POST['Hours'])) && !empty(trim($_POST['stime'])) && !empty(trim($_POST['etime'])) && !empty(trim($_POST['type'])) && !empty(trim($_POST['start_at'])) && !empty(trim($_POST['capacity'])) && !empty(trim($_POST['Location']))) {
                 if ($_FILES['hout']['error'] == 0) {
                     $uploaddir = '../uploads/handouts/tc/';
                     $FileType = pathinfo($_FILES["hout"]["name"], PATHINFO_EXTENSION);
-                    $uploadfile = $uploaddir . md5($_FILES['hout']['tmp_name']). date("Y-m-d") . '.' . $FileType;
+                    $uploadfile = $uploaddir . md5($_FILES['hout']['tmp_name']). date("Y-m-d H:S:i") . '.' . $FileType;
                     if (file_exists($uploadfile))
                         $smarty->assign('msg', 'الملف تم تحميلة مسبقا');
                     else {

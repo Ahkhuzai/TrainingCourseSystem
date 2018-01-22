@@ -8,6 +8,7 @@
 	<div class="content">
 		<section class="main">
 			<br>
+                        <center><h3>تسجيل الدخول إلى لوحة التحكم</h3></center>
 			 <p><font color="red">{$error}</font></p>        
 			<form action='AdminLogin.php' method='POST' > 
 			<input type="text" id="usrName" name='usrName' />

@@ -49,5 +49,28 @@ else if ($page=='Admin_SingleBlocked')
 {
     $_SESSION['te_id']=$_GET['te_id'];
 }
+else if ($page=='Admin_ProgramView')
+{
+    $_SESSION['tt_ids']=$_GET['tt_ids'];
+    $_SESSION['p_id']=$_GET['p_id'];
+    $_SESSION['psid']=$_GET['psid'];
+}
+else if ($page=='Admin_ProgramSta')
+{
+    $_SESSION['tt_ids']=$_GET['tt_ids'];
+    $_SESSION['p_id']=$_GET['p_id'];
+    $_SESSION['psid']=$_GET['psid'];
+}
+else if ($page=='Admin_ProgramComplete')
+{
+    $_SESSION['tt_ids']=$_GET['tt_ids'];
+    $_SESSION['p_id']=$_GET['p_id'];
+}
+else if ($page=='Certificate_print_program')
+{
+    $_SESSION['trainee']=$_GET['trainee'];
+ 
+}
+
 
 ?>

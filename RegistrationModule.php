@@ -373,30 +373,74 @@ class RegistrationModule {
         else
             return false;
     }
-    
+    public function getTcTotalDays($tt_id)
+    {
+        $ttMan = new TimetableRepo();
+        $result= $ttMan->fetchByID($tt_id);
+        if($result)
+        {
+            $date2= date('Y-m-d', strtotime($result['end_date']. " +1 Days"));
+            $datetime1 = date_create($result['start_date']);
+            $datetime2 = date_create($date2);
+            $differenceFormat = '%a';
+
+            $interval = date_diff($datetime1, $datetime2);
+
+            return $interval->format($differenceFormat);
+        }
+        else 
+            return false;
+    }
     //done
-    public function calcMissed($tt_id)
+    public function TCFinalAttendance($tt_id)
     {
         $attMan = new AttendanceRepo();
         $regMan = new RegistrationRepo();
         $result=$this->getTraineeRegisteredInTC($tt_id);
+        $tcDates = $this->getTcTotalDays($tt_id);
         if($result)
         {
             for($i=0;$i<count($result);$i++)
             {
                $user_id=$result[$i]['usr_id'];
-               $resultAtt = $attMan->fetchByQuery("SELECT * FROM attendance WHERE usr_id=$user_id and timetable_id=$tt_id"); 
+               $resultAtt = $attMan->fetchByQuery("SELECT * FROM attendance WHERE usr_id=$user_id and timetable_id=$tt_id");
+               
                if(!$resultAtt[0])
                {
                     $regResult= $regMan->fetchByID($result[$i]['rid']);
                        if($regResult['attendance_status']!=5)
                             $res=$regMan->save($regResult['id'], $regResult['usr_id'], $regResult['tt_id'], $regResult['registration_status'],4, $regResult['certificate_approved'], $regResult['rate_flag']);  
                }
+               else{ 
+                 
+                   if (count($resultAtt)==1 && $tcDates==1)
+                   {
+                       $regResult= $regMan->fetchByID($result[$i]['rid']);
+                       $res=$regMan->save($regResult['id'], $regResult['usr_id'], $regResult['tt_id'], $regResult['registration_status'],12, $regResult['certificate_approved'], $regResult['rate_flag']);  
+                   }
+                   else if(count($resultAtt)>=1&& $tcDates>1) 
+                   {
+                       echo $tcDates;
+                       echo ($tcDates/2);
+                       echo count($resultAtt);
+                       if(count($resultAtt)>=($tcDates/2))
+                       {
+                           $regResult= $regMan->fetchByID($result[$i]['rid']);
+                           $res=$regMan->save($regResult['id'], $regResult['usr_id'], $regResult['tt_id'], $regResult['registration_status'],12, $regResult['certificate_approved'], $regResult['rate_flag']);  
+                       }
+                       else 
+                        {
+                           $regResult= $regMan->fetchByID($result[$i]['rid']);
+                           if($regResult['attendance_status']!=5)
+                                $res=$regMan->save($regResult['id'], $regResult['usr_id'], $regResult['tt_id'], $regResult['registration_status'],4, $regResult['certificate_approved'], $regResult['rate_flag']);  
+                        }
+                   }
+                }
             }
             return true;
         }
         else 
-            return false;
+           return false;
     }
     
     //done
@@ -435,13 +479,17 @@ class RegistrationModule {
     {
         $userMan =new UserRoleRepo();
         $result = $userMan->fetchByRole_id(3);
-        for($i=0;$i<count($result);$i++)
+        if($result)
+        {for($i=0;$i<count($result);$i++)
         {    
             $userInfo[$i] = $this->getUserInfo($result[$i]['user_id']);
             $userInfo[$i]['user_id']=$result[$i]['user_id'];
             
         }
         return $userInfo;
+        }
+        else
+            return false;
     }
 
     //done
@@ -510,11 +558,16 @@ class RegistrationModule {
                     $result = $this->getUserInfo($result[0]['id']);
                     return $result;
                 }
-                
                 else
                 {
-                    ;
-                //need to be implemnted - when user has more than one account
+                   for($i=0;$i<count($result);$i++)
+                   {
+                       if($this->isTrainee($result[$i]['id']))
+                       {
+                            $result = $this->getUserInfo($result[$i]['id']);
+                            return $result;
+                       }
+                   }
                 }
             }
         }
@@ -543,7 +596,7 @@ class RegistrationModule {
         $tReg=new RegistrationRepo();
         $result=$tReg->fetchByQuery('SELECT * FROM `registration` WHERE `usr_id`='.$te_id.' AND `tt_id`='.$tt_id);
         if($result)
-            return true;
+            return $result;
         else
             return false;
     }
@@ -658,8 +711,8 @@ class RegistrationModule {
         $result = $ttMan->fetchByQuery("SELECT * FROM timetable WHERE id=$tt_id and (`status`=10 or `status` = 11)");
       
         if($result)
-        {     
-            if( $result[0]['start_date']==date("Y-m-d"))
+        {   
+            if( $result[0]['start_date']<=date("Y-m-d") && $result[0]['end_date']>=date("Y-m-d"))
             {   
                 $start_at = $result[0]['start_at'];
                 $duration = $result[0]['duration'];
@@ -669,7 +722,7 @@ class RegistrationModule {
                 
                 $today=date('Y-m-d H:i:s');
                 $now =date('H:i:s', strtotime($today. " +3 hours"));
-                
+            
                 if ($now > $start_at && $now <$endAt)
                     return "open"; 
                 else if ($now > $endAt)
@@ -685,19 +738,17 @@ class RegistrationModule {
     }
     
     //done 
-    public function takeAttendance($UsrId, $ttId, $attend_time,$rid)
+    public function takeAttendance($UsrId, $ttId, $attend_time)
     {
         require_once '../DAL/AttendanceRepo.php';
         $attMan = new AttendanceRepo();
-        $trMan= new RegistrationRepo();
         //check if already attended 
-        $result = $attMan->fetchByQuery("SELECT * FROM attendance where usr_id = $UsrId and timetable_id= $ttId");
-        if (is_array($result)) {
+        $qr="SELECT * FROM attendance where attend_time = '$attend_time' and usr_id = $UsrId and timetable_id= $ttId";
+        $result = $attMan->fetchByQuery($qr);
+        if ($result) {
             return 1;
         } else {
             $result = $attMan->save(0, $UsrId, $ttId, $attend_time);
-            $resultReg = $trMan->fetchByID($rid);
-            $result=$trMan->save($rid, $UsrId, $ttId, $resultReg['registration_status'], 12, $resultReg['certificate_approved'], $resultReg['rate_flag']);
             if($result)
                 return 0;
             else 

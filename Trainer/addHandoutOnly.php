@@ -20,7 +20,7 @@ if (isset($_SESSION['user_id'])) {
                 for ($i = 0; $i < 4; $i++)
                 {   
                     $FileType = pathinfo($_FILES["handout"]["name"][$i],PATHINFO_EXTENSION);
-                    $uploadfile = $uploaddir . md5($_FILES['handout']['tmp_name'][$i]). date("Y-m-d") . '.' . $FileType;  
+                    $uploadfile = $uploaddir . md5($_FILES['handout']['tmp_name'][$i]). date("Y-m-d H:S:i") . '.' . $FileType;  
                     if (file_exists($uploadfile))
                         $smarty->assign('msg', 'الملف محمل مسبقا'); 
                     else

@@ -74,9 +74,9 @@
                             <li><a href="Trainer.php"> المدربين </a></li>           
                             <li><a href="Trainee.php"> المتدربين </a></li>
                             <li><a href="Handouts.php"> الحقائب التدريبية</a></li>
-                            <li><a href="TrainingCourseAndProgram.php"> الدورات والبرامج التدريبية </a></li>
+                            <li><a href="TrainingCourseAndProgram.php"> الدورات والبرامج  </a></li>
                             <li><a href="AdminViewRequest.php"> استعراض الطلبات </a></li>  
-                            <li><a href="AdminMain.php">الرئيسية </a></li>
+                          
                         </ul>
                 	</nav>
 			
